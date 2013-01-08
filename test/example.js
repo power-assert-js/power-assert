@@ -1,5 +1,4 @@
 var q = require('qunitjs'),
-    passert = require('../lib/power-assert'),
     util = require('util');
 
 (function (qunitObject) {
