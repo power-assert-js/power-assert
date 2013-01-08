@@ -17,25 +17,32 @@ var __assert__ = function (result, line) {
         __current__ = [];
         return;
     }
-    var buffers = [];
-    for(var i = 0; i < __current__.length; i += 1) {
+    var buffers = (function () {
+        var buffers = [], i, j;
+        for(i = 0; i < __current__.length; i += 1) {
+            buffers.push([]);
+        }
         buffers.push([]);
-    }
-    buffers.push([]);
-    for(var i = 0; i < line.length; i += 1) {
-        buffers.forEach(function (buffer) {
-            buffer.push(' ');
-        });
-        //buffer.push(line.charAt(i));
-    }
-    __current__.forEach(function (tok) {
+        for(j = 0; j < line.length; j += 1) {
+            buffers.forEach(function (buffer) {
+                buffer.push(' ');
+            });
+        }
+        return buffers;
+    }());
+
+    __current__.sort(function (a, b) {
+        return b.start - a.start;
+    });
+
+    __current__.forEach(function (tok, index) {
         for(var j = tok.start; j < tok.end; j += 1) {
             buffers[0].splice(j, 1, '^');
         }
         var val = String(tok.value);
         buffers[1].splice(tok.start, 1, '|');
-        //buffers[2].splice(tok.start, val.length, val);
-        buffers[2].splice(tok.start, (tok.end - tok.start), '*');
+        buffers[2].splice(tok.start, val.length, val);
+        //buffers[2].splice(tok.start, (tok.end - tok.start), '*');
     });
 
     q.tap.note(line);
