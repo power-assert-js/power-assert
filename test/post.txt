@@ -1,0 +1,100 @@
+{
+    "type": "BinaryExpression",
+    "operator": "===",
+    "left": {
+        "type": "CallExpression",
+        "callee": {
+            "type": "Identifier",
+            "name": "look",
+            "loc": {
+                "start": {
+                    "line": 18,
+                    "column": 14
+                },
+                "end": {
+                    "line": 18,
+                    "column": 18
+                }
+            }
+        },
+        "arguments": [
+            {
+                "type": "Identifier",
+                "name": "hoge",
+                "loc": {
+                    "start": {
+                        "line": 18,
+                        "column": 19
+                    },
+                    "end": {
+                        "line": 18,
+                        "column": 23
+                    }
+                }
+            }
+        ],
+        "loc": {
+            "start": {
+                "line": 18,
+                "column": 14
+            },
+            "end": {
+                "line": 18,
+                "column": 24
+            }
+        }
+    },
+    "right": {
+        "type": "CallExpression",
+        "callee": {
+            "type": "Identifier",
+            "name": "look",
+            "loc": {
+                "start": {
+                    "line": 18,
+                    "column": 29
+                },
+                "end": {
+                    "line": 18,
+                    "column": 33
+                }
+            }
+        },
+        "arguments": [
+            {
+                "type": "Identifier",
+                "name": "fuga",
+                "loc": {
+                    "start": {
+                        "line": 18,
+                        "column": 34
+                    },
+                    "end": {
+                        "line": 18,
+                        "column": 38
+                    }
+                }
+            }
+        ],
+        "loc": {
+            "start": {
+                "line": 18,
+                "column": 29
+            },
+            "end": {
+                "line": 18,
+                "column": 39
+            }
+        }
+    },
+    "loc": {
+        "start": {
+            "line": 18,
+            "column": 14
+        },
+        "end": {
+            "line": 18,
+            "column": 39
+        }
+    }
+}

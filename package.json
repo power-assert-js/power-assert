@@ -1,0 +1,28 @@
+{
+    "name": "power-assert",
+    "description": "Power Assert in JS",
+    "version": "0.0.1pre",
+    "author": {
+        "name": "Takuto Wada",
+        "email": "takuto.wada@gmail.com",
+        "url": "http://github.com/twada"
+    },
+    "main": "./lib/power-assert",
+    "directories": {
+        "lib": "./lib"
+    },
+    "dependencies": {
+        "esprima": "1.0.2",
+        "escodegen": "0.0.15"
+    },
+    "devDependencies": {
+        "qunitjs": "1.10.0",
+        "qunit-tap": "1.2.2"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://www.opensource.org/licenses/mit-license.php"
+        }
+    ]
+}
