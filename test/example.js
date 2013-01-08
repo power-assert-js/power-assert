@@ -1,6 +1,8 @@
 var q = require('qunitjs');
 
 q.test('spike', function (assert) {
+    assert.ok(true);
+
     var hoge = 'foo';
     var fuga = 'bar';
     assert.ok(hoge === fuga, 'comment');
@@ -21,4 +23,8 @@ q.test('spike', function (assert) {
 
     var falsyNum = 0;
     assert.ok(falsyNum);
+
+    var ary1 = ['foo', 'bar'];
+    var ary2 = ['aaa', 'bbb', 'ccc'];
+    assert.ok(ary1.length === ary2.length);
 });
