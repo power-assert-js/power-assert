@@ -1,6 +1,5 @@
 /*jslint node:true */
-var fs = require('fs'),
-    gen = require('./lib/power-assert-gen'),
+var generate = require('./lib/power-assert-gen'),
+    fs = require('fs'),
     file = process.argv[2];
-var content = fs.readFileSync(file, 'utf-8');
-gen(content);
+generate(fs.readFileSync(file, 'utf-8'));
