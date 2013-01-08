@@ -2,6 +2,10 @@ var assert = require('assert');
 
 var hoge = 'foo';
 var fuga = 'bar';
+var piyo = hoge;
+
+assert(fuga === piyo);
+
 assert.ok(hoge === fuga);
 
 var piyo = 3;
