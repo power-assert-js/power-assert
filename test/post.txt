@@ -19,8 +19,8 @@
         },
         "arguments": [
             {
-                "type": "Identifier",
-                "name": "hoge",
+                "type": "Literal",
+                "value": "hoge",
                 "loc": {
                     "start": {
                         "line": 18,
@@ -28,7 +28,21 @@
                     },
                     "end": {
                         "line": 18,
-                        "column": 23
+                        "column": 25
+                    }
+                }
+            },
+            {
+                "type": "Identifier",
+                "name": "hoge",
+                "loc": {
+                    "start": {
+                        "line": 18,
+                        "column": 27
+                    },
+                    "end": {
+                        "line": 18,
+                        "column": 31
                     }
                 }
             }
@@ -40,7 +54,7 @@
             },
             "end": {
                 "line": 18,
-                "column": 24
+                "column": 32
             }
         }
     },
@@ -52,26 +66,40 @@
             "loc": {
                 "start": {
                     "line": 18,
-                    "column": 29
+                    "column": 37
                 },
                 "end": {
                     "line": 18,
-                    "column": 33
+                    "column": 41
                 }
             }
         },
         "arguments": [
+            {
+                "type": "Literal",
+                "value": "fuga",
+                "loc": {
+                    "start": {
+                        "line": 18,
+                        "column": 42
+                    },
+                    "end": {
+                        "line": 18,
+                        "column": 48
+                    }
+                }
+            },
             {
                 "type": "Identifier",
                 "name": "fuga",
                 "loc": {
                     "start": {
                         "line": 18,
-                        "column": 34
+                        "column": 50
                     },
                     "end": {
                         "line": 18,
-                        "column": 38
+                        "column": 54
                     }
                 }
             }
@@ -79,11 +107,11 @@
         "loc": {
             "start": {
                 "line": 18,
-                "column": 29
+                "column": 37
             },
             "end": {
                 "line": 18,
-                "column": 39
+                "column": 55
             }
         }
     },
@@ -94,7 +122,7 @@
         },
         "end": {
             "line": 18,
-            "column": 39
+            "column": 55
         }
     }
 }
