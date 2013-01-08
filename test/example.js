@@ -15,4 +15,10 @@ q.test('spike', function (assert) {
     assert.ok(4 === piyo);
 
     assert.ok(4 !== 4);
+
+    var falsyStr = '';
+    assert.ok(falsyStr);
+
+    var falsyNum = 0;
+    assert.ok(falsyNum);
 });

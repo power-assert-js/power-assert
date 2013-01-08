@@ -3,6 +3,9 @@ var assert = require('assert');
 var hoge = 'foo';
 var fuga = 'bar';
 var piyo = hoge;
+var falsy = '';
+
+assert(falsy);
 
 assert(fuga === piyo);
 
