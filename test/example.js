@@ -16,12 +16,18 @@ var __assert__ = function (result, line) {
     if (!result) {
         //q.tap.note('failed: ' + line);
         q.tap.note(line);
-        var str = '';
+        var buffer = [];
         for(var i = 0; i < line.length; i += 1) {
-            str += line.charAt(i);
+            //buffer.push(line.charAt(i));
+            buffer.push(' ');
         }
-        // line.length
-        q.tap.note(q.tap.explain(__current__));
+        __current__.forEach(function (tok) {
+            for(var j = tok.start; j < tok.end; j += 1) {
+                buffer.splice(j, 1, '^');
+            }
+        });
+        q.tap.note(buffer.join(''));
+        //q.tap.note(q.tap.explain(__current__));
     }
     __current__ = [];
 };
