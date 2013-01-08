@@ -13,22 +13,36 @@ var __save__ = function (name, value, start, end) {
     return value;
 };
 var __assert__ = function (result, line) {
-    if (!result) {
-        //q.tap.note('failed: ' + line);
-        q.tap.note(line);
-        var buffer = [];
-        for(var i = 0; i < line.length; i += 1) {
-            //buffer.push(line.charAt(i));
-            buffer.push(' ');
-        }
-        __current__.forEach(function (tok) {
-            for(var j = tok.start; j < tok.end; j += 1) {
-                buffer.splice(j, 1, '^');
-            }
-        });
-        q.tap.note(buffer.join(''));
-        //q.tap.note(q.tap.explain(__current__));
+    if (result) {
+        __current__ = [];
+        return;
     }
+    var buffers = [];
+    for(var i = 0; i < __current__.length; i += 1) {
+        buffers.push([]);
+    }
+    buffers.push([]);
+    for(var i = 0; i < line.length; i += 1) {
+        buffers.forEach(function (buffer) {
+            buffer.push(' ');
+        });
+        //buffer.push(line.charAt(i));
+    }
+    __current__.forEach(function (tok) {
+        for(var j = tok.start; j < tok.end; j += 1) {
+            buffers[0].splice(j, 1, '^');
+        }
+        var val = String(tok.value);
+        buffers[1].splice(tok.start, 1, '|');
+        //buffers[2].splice(tok.start, val.length, val);
+        buffers[2].splice(tok.start, (tok.end - tok.start), '*');
+    });
+
+    q.tap.note(line);
+    q.tap.note(buffers[0].join(''));
+    q.tap.note(buffers[1].join(''));
+    q.tap.note(buffers[2].join(''));
+    //q.tap.note(q.tap.explain(__current__));
     __current__ = [];
 };
 
