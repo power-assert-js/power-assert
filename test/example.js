@@ -19,19 +19,21 @@ var __assert__ = function (result, line) {
         return;
     }
 
-    var buffers = (function () {
-        var buffers = [], i, j;
-        for(i = 0; i <= __current__.length; i += 1) {
-            buffers.push([]);
+    var createBuffers = function (numRows, numCols) {
+        var bufs = [], i, j;
+        for(i = 0; i <= numRows; i += 1) {
+            bufs.push([]);
         }
-        buffers.push([]);
-        for(j = 0; j < line.length; j += 1) {
-            buffers.forEach(function (buffer) {
+        bufs.push([]);
+        for(j = 0; j < numCols; j += 1) {
+            bufs.forEach(function (buffer) {
                 buffer.push(' ');
             });
         }
-        return buffers;
-    }());
+        return bufs;
+    };
+
+    var buffers = createBuffers(__current__.length, line.length);
 
     __current__.sort(function (a, b) {
         return b.start - a.start;
@@ -42,6 +44,7 @@ var __assert__ = function (result, line) {
             buffers[0].splice(j, 1, '^');
         }
     });
+
     __current__.forEach(function (tok, index) {
         //var val = String(tok.value),
         var val = q.tap.explain(tok.value),
@@ -67,6 +70,7 @@ var __assert__ = function (result, line) {
     qunitObject.init();
     qunitObject.config.updateRate = 0;
 })(q);
+
 
 q.test('spike', function (assert) {
     var hoge = 'foo';
