@@ -1,16 +1,14 @@
 var q = require('qunitjs'),
     util = require('util');
 
-
 var __current__ = [];
 
-var __save__ = function (name, value, start, end) {
+var __ident__ = function (name, value, start, end) {
     __current__.push({
         name: name,
         value: value,
         start: start,
         end: end
-        //loc: loc
     });
     return value;
 };
@@ -45,7 +43,8 @@ var __assert__ = function (result, line) {
         }
     });
     __current__.forEach(function (tok, index) {
-        var val = String(tok.value),
+        //var val = String(tok.value),
+        var val = q.tap.explain(tok.value),
             offset = index + 2;
         for(var i = 1; i < offset; i += 1) {
             buffers[i].splice(tok.start, 1, '|');
