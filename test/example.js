@@ -11,4 +11,8 @@ q.test('spike', function (assert) {
     var longString = 'very very loooooooooooooooooooooooooooooooooooooooooooooooooooong message';
     var anotherLongString = 'yet another loooooooooooooooooooooooooooooooooooooooooooooooooooong message';
     assert.ok(longString === anotherLongString);
+
+    assert.ok(4 === piyo);
+
+    assert.ok(4 !== 4);
 });
