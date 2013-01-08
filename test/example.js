@@ -1,7 +1,9 @@
 var q = require('qunitjs'),
     util = require('util');
 
+
 var __current__ = [];
+
 var __save__ = function (name, value, start, end) {
     __current__.push({
         name: name,
@@ -12,14 +14,16 @@ var __save__ = function (name, value, start, end) {
     });
     return value;
 };
+
 var __assert__ = function (result, line) {
     if (result) {
         __current__ = [];
         return;
     }
+
     var buffers = (function () {
         var buffers = [], i, j;
-        for(i = 0; i < __current__.length; i += 1) {
+        for(i = 0; i <= __current__.length; i += 1) {
             buffers.push([]);
         }
         buffers.push([]);
@@ -39,17 +43,21 @@ var __assert__ = function (result, line) {
         for(var j = tok.start; j < tok.end; j += 1) {
             buffers[0].splice(j, 1, '^');
         }
-        var val = String(tok.value);
-        buffers[1].splice(tok.start, 1, '|');
-        buffers[2].splice(tok.start, val.length, val);
-        //buffers[2].splice(tok.start, (tok.end - tok.start), '*');
+    });
+    __current__.forEach(function (tok, index) {
+        var val = String(tok.value),
+            offset = index + 2;
+        for(var i = 1; i < offset; i += 1) {
+            buffers[i].splice(tok.start, 1, '|');
+        }
+        buffers[offset].splice(tok.start, val.length, val);
     });
 
     q.tap.note(line);
-    q.tap.note(buffers[0].join(''));
-    q.tap.note(buffers[1].join(''));
-    q.tap.note(buffers[2].join(''));
-    //q.tap.note(q.tap.explain(__current__));
+    buffers.forEach(function (buffer, index) {
+        q.tap.note(buffer.join(''));
+    });
+
     __current__ = [];
 };
 
