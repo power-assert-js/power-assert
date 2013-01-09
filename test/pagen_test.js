@@ -102,5 +102,5 @@ q.module('LogicalExpression');
 
 instr(
     'assert(2 > actual && actual < 13);',
-    ""
+    "assert(passert.__expr__(2 > passert.__ident__('actual', actual, 11, 17) && passert.__ident__('actual', actual, 21, 27) < 13, 'assert(2 > actual && actual < 13);'))"
 );
