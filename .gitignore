@@ -1,8 +1,8 @@
 /node_modules
 /.idea
 /sandbox/plain_node_empowered.js
-/sandbox/qunit_test_empowered.js
-/sandbox/qunit_test_rhino_empowered.js
+/sandbox/qunit_node_empowered.js
+/sandbox/qunit_rhino_empowered.js
 /repl.js
 /js.jar
 /TODO.txt
