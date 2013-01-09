@@ -12,17 +12,17 @@ power-assert.js is in alpha stage, so backward compatibility breaking changes ar
 HOW TO USE
 ---------------------------------------
 
-First, install power-assert code generator via `npm`.
+First, install power-assert via `npm`.
 
     $ npm install power-assert
 
-Second, generate power-asserted code using `empower` command.
+Second, generate empowered code using `empower` command.
 
-    $ empower your_test.js > your_test_powered.js
+    $ empower your_test.js > your_test_empowered.js
 
 Then run your test in your way (just using `node` in this example).
 
-    $ node your_test_powered.js
+    $ node your_test_empowered.js
 
 
 
