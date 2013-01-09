@@ -4,12 +4,10 @@
  * power-assert.js - Empower your assertions
  *
  * https://github.com/twada/power-assert.js
- * version: 0.0.1pre
  *
  * Copyright (c) 2013 Takuto Wada
  * Licensed under the MIT license.
  *   https://raw.github.com/twada/power-assert.js/master/MIT-LICENSE.txt
- *
  */
 var empower = require('../lib/empower'),
     fs = require('fs'),
