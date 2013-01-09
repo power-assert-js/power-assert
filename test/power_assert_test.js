@@ -30,27 +30,27 @@ q.test('Simple BinaryExpression', function (assert) {
     var piyo = 3;
     _pa_.expr(_pa_.ident('fuga', fuga, 14, 18) === _pa_.ident('piyo', piyo, 23, 27), '    assert.ok(fuga === piyo);', 31);
     assert.deepEqual(this.lines, [
-        "",
         "# at line: 31",
         "    assert.ok(fuga === piyo);",
         "              ^^^^     ^^^^  ",
         "              |        |     ",
         "              |        3     ",
-        "              \"bar\"          "
+        "              \"bar\"          ",
+        ""
     ]);
 });
 
 q.test('Simple BinaryExpression with comment', function (assert) {
     var hoge = 'foo';
     var fuga = 'bar';
-    _pa_.expr(_pa_.ident('hoge', hoge, 14, 18) === _pa_.ident('fuga', fuga, 23, 27), '    assert.ok(hoge === fuga, \'comment\');', 45);
+    _pa_.expr(_pa_.ident('hoge', hoge, 14, 18) === _pa_.ident('fuga', fuga, 23, 27), '    assert.ok(hoge === fuga, \'comment\');', 46);
     assert.deepEqual(this.lines, [
-        "",
         "# at line: 46",
         "    assert.ok(hoge === fuga, \'comment\');",
         "              ^^^^     ^^^^             ",
         "              |        |                ",
         "              |        \"bar\"            ",
-        "              \"foo\"                     "
+        "              \"foo\"                     ",
+        ""
     ]);
 });
