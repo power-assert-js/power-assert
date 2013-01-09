@@ -16,6 +16,6 @@ load('node_modules/qunit-tap/lib/qunit-tap.js');
 QUnit.init();
 QUnit.config.updateRate = 0;
 
-load('sandbox/qunit_test_empowered_rhino.js');
+load('sandbox/qunit_test_rhino_empowered.js');
 
 QUnit.start();

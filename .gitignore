@@ -2,7 +2,7 @@
 /.idea
 /sandbox/plain_node_empowered.js
 /sandbox/qunit_test_empowered.js
-/sandbox/qunit_test_empowered_rhino.js
+/sandbox/qunit_test_rhino_empowered.js
 /repl.js
 /js.jar
 /TODO.txt
