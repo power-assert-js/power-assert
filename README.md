@@ -1,4 +1,4 @@
-power-assert.js - Empower your assertion
+power-assert.js - Empower your assertions
 ================================
 
 
@@ -12,7 +12,16 @@ power-assert.js is in alpha stage, so backward compatibility breaking changes ar
 HOW TO USE
 ---------------------------------------
 
+First, install power-assert code generator via `npm`.
+
+    $ npm install power-assert
+
+Second, generate power-asserted code using `pagenerate` command.
+
     $ pagenerate your_test.js > your_test_powered.js
+
+Then run your test in your way (just using `node` in this example).
+
     $ node your_test_powered.js
 
 
