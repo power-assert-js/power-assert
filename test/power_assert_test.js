@@ -28,25 +28,27 @@ q.module('formatter & reporter', {
 q.test('Simple BinaryExpression', function (assert) {
     var fuga = 'bar';
     var piyo = 3;
-    _pa_.expr(_pa_.ident('fuga', fuga, 14, 18) === _pa_.ident('piyo', piyo, 23, 27), '    assert.ok(fuga === piyo);');
-    assert.equal(this.lines.length, 6);
+    _pa_.expr(_pa_.ident('fuga', fuga, 14, 18) === _pa_.ident('piyo', piyo, 23, 27), '    assert.ok(fuga === piyo);', 31);
+    assert.equal(this.lines.length, 7);
     assert.equal(this.lines[0], "");
-    assert.equal(this.lines[1], "    assert.ok(fuga === piyo);");
-    assert.equal(this.lines[2], "              ^^^^     ^^^^  ");
-    assert.equal(this.lines[3], "              |        |     ");
-    assert.equal(this.lines[4], "              |        3     ");
-    assert.equal(this.lines[5], "              \"bar\"          ");
+    assert.equal(this.lines[1], "# at line: 31");
+    assert.equal(this.lines[2], "    assert.ok(fuga === piyo);");
+    assert.equal(this.lines[3], "              ^^^^     ^^^^  ");
+    assert.equal(this.lines[4], "              |        |     ");
+    assert.equal(this.lines[5], "              |        3     ");
+    assert.equal(this.lines[6], "              \"bar\"          ");
 });
 
 q.test('Simple BinaryExpression with comment', function (assert) {
     var hoge = 'foo';
     var fuga = 'bar';
-    _pa_.expr(_pa_.ident('hoge', hoge, 14, 18) === _pa_.ident('fuga', fuga, 23, 27), '    assert.ok(hoge === fuga, \'comment\');');
-    assert.equal(this.lines.length, 6);
+    _pa_.expr(_pa_.ident('hoge', hoge, 14, 18) === _pa_.ident('fuga', fuga, 23, 27), '    assert.ok(hoge === fuga, \'comment\');', 45);
+    assert.equal(this.lines.length, 7);
     assert.equal(this.lines[0], "");
-    assert.equal(this.lines[1], "    assert.ok(hoge === fuga, \'comment\');");
-    assert.equal(this.lines[2], "              ^^^^     ^^^^             ");
-    assert.equal(this.lines[3], "              |        |                ");
-    assert.equal(this.lines[4], "              |        \"bar\"            ");
-    assert.equal(this.lines[5], "              \"foo\"                     ");
+    assert.equal(this.lines[1], "# at line: 45");
+    assert.equal(this.lines[2], "    assert.ok(hoge === fuga, \'comment\');");
+    assert.equal(this.lines[3], "              ^^^^     ^^^^             ");
+    assert.equal(this.lines[4], "              |        |                ");
+    assert.equal(this.lines[5], "              |        \"bar\"            ");
+    assert.equal(this.lines[6], "              \"foo\"                     ");
 });
