@@ -8,7 +8,7 @@
  *
  * Copyright (c) 2013 Takuto Wada
  * Licensed under the MIT license.
- *   https://raw.github.com/twada/qunit-tap/master/MIT-LICENSE.txt
+ *   https://raw.github.com/twada/power-assert.js/master/MIT-LICENSE.txt
  *
  */
 var empower = require('../lib/empower'),
