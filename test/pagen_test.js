@@ -114,6 +114,8 @@ instr(
 );
 
 
+q.module('MemberExpression Chain');
+
 q.test('member chain', function (assert) {
     var foo = {
         bar: {
@@ -132,3 +134,8 @@ q.test('member chain', function (assert) {
     };
     assert.ok(pa.cap(pa.cap(pa.cap(foo).bar).baz) === hoge.fuga.piyo);
 });
+
+instr(
+    'assert.ok(foo.bar.baz);',
+    "assert.ok(passert.__expr__(passert.__ident__('baz', passert.__ident__('bar', passert.__ident__('foo', foo, 10, 13).bar, 14, 17).baz, 18, 21), 'assert.ok(foo.bar.baz);'))"
+);

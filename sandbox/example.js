@@ -36,4 +36,12 @@ q.test('spike', function (assert) {
 
     actual = 10;
     assert.ok(actual < 5 || 13 < actual);
+
+
+    var foo = {
+        bar: {
+            baz: false
+        }
+    };
+    assert.ok(foo.bar.baz);
 });
