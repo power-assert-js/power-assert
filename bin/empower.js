@@ -14,8 +14,8 @@ var empower = require('../lib/empower'),
     fs = require('fs'),
     options = {};
 
-if (argv.node) {
-    options['module'] = 'CommonJS';
+if (argv.module) {
+    options['module'] = argv.module;
 }
 
 var file = argv._[0];
