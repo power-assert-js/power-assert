@@ -10,6 +10,14 @@
  *   https://raw.github.com/twada/power-assert.js/master/MIT-LICENSE.txt
  */
 var empower = require('../lib/empower'),
+    argv = require('optimist').argv,
     fs = require('fs'),
-    file = process.argv[2];
-empower(fs.readFileSync(file, 'utf-8'), {module: 'CommonJS'});
+    options = {};
+
+if (argv.node) {
+    options['module'] = 'CommonJS';
+}
+
+var file = argv._[0];
+
+empower(fs.readFileSync(file, 'utf-8'), options);
