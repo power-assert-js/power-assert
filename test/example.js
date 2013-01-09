@@ -27,4 +27,7 @@ q.test('spike', function (assert) {
     var ary1 = ['foo', 'bar'];
     var ary2 = ['aaa', 'bbb', 'ccc'];
     assert.ok(ary1.length === ary2.length);
+
+    var actual = 10;
+    assert(2 > actual && actual < 13);
 });
