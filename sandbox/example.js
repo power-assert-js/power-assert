@@ -44,4 +44,8 @@ q.test('spike', function (assert) {
         }
     };
     assert.ok(foo.bar.baz);
+
+
+    var truth = true;
+    assert.ok(!truth);
 });

@@ -38,10 +38,21 @@ instr(
     'assert(falsyStr);',
     "assert(passert.__expr__(passert.__ident__('falsyStr', falsyStr, 7, 15), 'assert(falsyStr);'))"
 );
-
 instr(
     'assert.ok(falsyStr);',
     "assert.ok(passert.__expr__(passert.__ident__('falsyStr', falsyStr, 10, 18), 'assert.ok(falsyStr);'))"
+);
+
+
+q.module('UnaryExpression');
+
+instr(
+    'assert(!truth);',
+    "assert(passert.__expr__(!passert.__ident__('truth', truth, 8, 13), 'assert(!truth);'))"
+);
+instr(
+    'assert.ok(!truth);',
+    "assert.ok(passert.__expr__(!passert.__ident__('truth', truth, 11, 16), 'assert.ok(!truth);'))"
 );
 
 
