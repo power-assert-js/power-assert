@@ -31,7 +31,7 @@ q.test('spike', function (assert) {
     var actual = 16;
     assert.ok(5 < actual && actual < 13);
 
-    actual = 1;
+    actual = 4;
     assert.ok(5 < actual && actual < 13);
 
     actual = 10;
