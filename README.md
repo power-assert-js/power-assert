@@ -66,7 +66,7 @@ OUTPUT EXAMPLE
                "very very loooooooooooooooooooooooooooooooooooooooooooooooooooong message"
     
 
-### With QUnit
+### With QUnit running under Node.js
     
     # at line: 8
         assert.ok(hoge === fuga, 'comment');
@@ -154,12 +154,6 @@ OUTPUT EXAMPLE
                    ^^^^^  
                    |      
                    true   
-    
-    # at line: 8
-    assert(falsy);
-           ^^^^^  
-           |      
-           ""    
     
 
 
