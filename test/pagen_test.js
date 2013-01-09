@@ -103,14 +103,6 @@ instr(
     "assert(passert.__expr__(passert.__ident__('length', passert.__ident__('ary1', ary1, 7, 11).length, 12, 18) === passert.__ident__('length', passert.__ident__('ary2', ary2, 23, 27).length, 28, 34), 'assert(ary1.length === ary2.length);'))"
 );
 
-// assert(
-//     passert.__expr__(
-//         passert.__ident__('length', passert.__ident__('ary1', ary1, 7, 11).length, 12, 18)
-//         ===
-//         passert.__ident__('length', passert.__ident__('ary2', ary2, 23, 27).length, 28, 34)
-//     )
-// );
-
 instr(
     'assert.ok(ary1.length === ary2.length);',
     "assert.ok(passert.__expr__(passert.__ident__('length', passert.__ident__('ary1', ary1, 10, 14).length, 15, 21) === passert.__ident__('length', passert.__ident__('ary2', ary2, 26, 30).length, 31, 37), 'assert.ok(ary1.length === ary2.length);'))"
