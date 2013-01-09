@@ -22,7 +22,8 @@
     },
     "dependencies": {
         "esprima": "1.0.2",
-        "escodegen": "0.0.15"
+        "escodegen": "0.0.15",
+        "optimist": "0.3.4"
     },
     "devDependencies": {
         "qunitjs": "1.10.0",
