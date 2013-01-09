@@ -4,9 +4,9 @@ power-assert.js - Empower your assertion
 
 DESCRIPTION
 ---------------------------------------
-power-assert.js is a implementation of "Power Assert" in JavaScript, powered by [Esprima](http://esprima.org/) and [Escodegen](https://github.com/Constellation/escodegen).
+power-assert.js is a experimental implementation of "Power Assert" in JavaScript, powered by [Esprima](http://esprima.org/) and [Escodegen](https://github.com/Constellation/escodegen).
 
-power-assert.js is not mature yet. So pull-requests, issue reports and patches are welcome.
+power-assert.js is in alpha stage, so backward compatibility breaking changes are occurred very often. Pull-requests, issue reports and patches are always welcome.
 
 
 OUTPUT EXAMPLE
