@@ -1,7 +1,9 @@
 {
     "name": "power-assert",
-    "description": "Power Assert in JS",
+    "description": "Power Assert in JavaScript",
     "version": "0.0.1pre",
+    "keywords": ["test", "assert", "testing"],
+    "homepage": "http://github.com/twada/power-assert.js",
     "author": {
         "name": "Takuto Wada",
         "email": "takuto.wada@gmail.com",
@@ -10,6 +12,10 @@
     "main": "./lib/power-assert",
     "directories": {
         "lib": "./lib"
+    },
+    "repository": {
+        "type": "git", 
+        "url": "http://github.com/twada/power-assert.js.git"
     },
     "dependencies": {
         "esprima": "1.0.2",
@@ -24,5 +30,8 @@
             "type": "MIT",
             "url": "http://www.opensource.org/licenses/mit-license.php"
         }
-    ]
+    ],
+    "bugs": {
+        "url" : "http://github.com/twada/power-assert.js/issues"
+    }
 }
