@@ -163,6 +163,12 @@ OUTPUT EXAMPLE
     
 
 
+TESTED ENVIRONMENTS
+---------------------------------------
+* [Node.js](http://nodejs.org/)
+* [Rhino](https://developer.mozilla.org/en/Rhino)
+
+
 AUTHOR
 ---------------------------------------
 * [Takuto Wada](http://github.com/twada)
