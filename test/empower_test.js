@@ -117,25 +117,6 @@ emtest(
 
 q.module('MemberExpression Chain');
 
-q.test('member chain', function (assert) {
-    var foo = {
-        bar: {
-            baz: 'Hi'
-        }
-    };
-    var hoge = {
-        fuga: {
-            piyo: 'Hi'
-        }
-    };
-    var pa = {
-        cap: function (val) {
-            return val;
-        }
-    };
-    assert.ok(pa.cap(pa.cap(pa.cap(foo).bar).baz) === hoge.fuga.piyo);
-});
-
 emtest(
     'assert.ok(foo.bar.baz);',
     "assert.ok(_pa_.expr(_pa_.ident('baz', _pa_.ident('bar', _pa_.ident('foo', foo, 10, 13).bar, 14, 17).baz, 18, 21), 'assert.ok(foo.bar.baz);', 1))"
