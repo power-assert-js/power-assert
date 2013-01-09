@@ -9,10 +9,18 @@ power-assert.js is a experimental implementation of "Power Assert" in JavaScript
 power-assert.js is in alpha stage, so backward compatibility breaking changes are occurred very often. Pull-requests, issue reports and patches are always welcome.
 
 
+HOW TO USE
+---------------------------------------
+
+    $ pagenerate your_test.js > your_test_powered.js
+    $ node your_test_powered.js
+
+
+
 OUTPUT EXAMPLE
 ---------------------------------------
 
-     assert.ok(hoge === fuga, 'comment');
+     assert.ok(hoge === fuga);
                ^^^^     ^^^^             
                |        |                
                |        "bar"            
