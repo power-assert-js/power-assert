@@ -92,6 +92,14 @@ instr(
     "assert(passert.__expr__(passert.__ident__('length', passert.__ident__('ary1', ary1, 7, 11).length, 12, 18) === passert.__ident__('length', passert.__ident__('ary2', ary2, 23, 27).length, 28, 34), 'assert(ary1.length === ary2.length);'))"
 );
 
+// assert(
+//     passert.__expr__(
+//         passert.__ident__('length', passert.__ident__('ary1', ary1, 7, 11).length, 12, 18)
+//         ===
+//         passert.__ident__('length', passert.__ident__('ary2', ary2, 23, 27).length, 28, 34)
+//     )
+// );
+
 instr(
     'assert.ok(ary1.length === ary2.length);',
     "assert.ok(passert.__expr__(passert.__ident__('length', passert.__ident__('ary1', ary1, 10, 14).length, 15, 21) === passert.__ident__('length', passert.__ident__('ary2', ary2, 26, 30).length, 31, 37), 'assert.ok(ary1.length === ary2.length);'))"
@@ -104,3 +112,23 @@ instr(
     'assert(2 > actual && actual < 13);',
     "assert(passert.__expr__(2 > passert.__ident__('actual', actual, 11, 17) && passert.__ident__('actual', actual, 21, 27) < 13, 'assert(2 > actual && actual < 13);'))"
 );
+
+
+q.test('member chain', function (assert) {
+    var foo = {
+        bar: {
+            baz: 'Hi'
+        }
+    };
+    var hoge = {
+        fuga: {
+            piyo: 'Hi'
+        }
+    };
+    var pa = {
+        cap: function (val) {
+            return val;
+        }
+    };
+    assert.ok(pa.cap(pa.cap(pa.cap(foo).bar).baz) === hoge.fuga.piyo);
+});
