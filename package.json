@@ -11,7 +11,7 @@
     },
     "main": "./lib/power-assert",
     "bin": {
-        "pagenerate": "./bin/pagenerate.js"
+        "empower": "./bin/empower.js"
     },
     "directories": {
         "lib": "./lib"

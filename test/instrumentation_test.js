@@ -1,4 +1,4 @@
-var pagen = require('../lib/power-assert-gen'),
+var empower = require('../lib/empower'),
     esprima = require('esprima'),
     escodegen = require('escodegen'),
     q = require('qunitjs'),
@@ -24,7 +24,7 @@ var testpa = (function () {
         q.test(before, function (assert) {
             var line = before,
                 expression = extractExpressionFrom(line);
-            pagen.instrument(expression, line);
+            empower.instrument(expression, line);
             assert.equal(escodegen.generate(expression), after);
         });
     };

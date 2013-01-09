@@ -16,9 +16,9 @@ First, install power-assert code generator via `npm`.
 
     $ npm install power-assert
 
-Second, generate power-asserted code using `pagenerate` command.
+Second, generate power-asserted code using `empower` command.
 
-    $ pagenerate your_test.js > your_test_powered.js
+    $ empower your_test.js > your_test_powered.js
 
 Then run your test in your way (just using `node` in this example).
 
