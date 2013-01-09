@@ -2,9 +2,7 @@ var empower = require('../lib/empower'),
     esprima = require('esprima'),
     escodegen = require('escodegen'),
     q = require('qunitjs'),
-    util = require('util'),
-    fs = require('fs'),
-    path = require('path');
+    util = require('util');
 
 (function (qu) {
     var qunitTap = require("qunit-tap").qunitTap;
