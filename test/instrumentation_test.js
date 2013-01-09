@@ -13,7 +13,7 @@ var pagen = require('../lib/power-assert-gen'),
     qu.config.updateRate = 0;
 })(q);
 
-var instr = (function () {
+var testpa = (function () {
     var extractExpressionFrom = function (string) {
         var tree = esprima.parse(string, {tolerant: true, loc: true}),
             expressionStatement = tree.body[0],
@@ -34,11 +34,11 @@ var instr = (function () {
 
 q.module('Identifier');
 
-instr(
+testpa(
     'assert(falsyStr);',
     "assert(_pa_.expr(_pa_.ident('falsyStr', falsyStr, 7, 15), 'assert(falsyStr);'))"
 );
-instr(
+testpa(
     'assert.ok(falsyStr);',
     "assert.ok(_pa_.expr(_pa_.ident('falsyStr', falsyStr, 10, 18), 'assert.ok(falsyStr);'))"
 );
@@ -46,11 +46,11 @@ instr(
 
 q.module('UnaryExpression');
 
-instr(
+testpa(
     'assert(!truth);',
     "assert(_pa_.expr(!_pa_.ident('truth', truth, 8, 13), 'assert(!truth);'))"
 );
-instr(
+testpa(
     'assert.ok(!truth);',
     "assert.ok(_pa_.expr(!_pa_.ident('truth', truth, 11, 16), 'assert.ok(!truth);'))"
 );
@@ -59,37 +59,37 @@ instr(
 
 q.module('BinaryExpression with Identifier');
 
-instr(
+testpa(
     'assert(fuga === piyo);',
     "assert(_pa_.expr(_pa_.ident('fuga', fuga, 7, 11) === _pa_.ident('piyo', piyo, 16, 20), 'assert(fuga === piyo);'))"
 );
-instr(
+testpa(
     'assert.ok(fuga === piyo);',
     "assert.ok(_pa_.expr(_pa_.ident('fuga', fuga, 10, 14) === _pa_.ident('piyo', piyo, 19, 23), 'assert.ok(fuga === piyo);'))"
 );
-instr(
+testpa(
     'assert(fuga !== piyo);',
     "assert(_pa_.expr(_pa_.ident('fuga', fuga, 7, 11) !== _pa_.ident('piyo', piyo, 16, 20), 'assert(fuga !== piyo);'))"
 );
-instr(
+testpa(
     'assert.ok(fuga !== piyo);',
     "assert.ok(_pa_.expr(_pa_.ident('fuga', fuga, 10, 14) !== _pa_.ident('piyo', piyo, 19, 23), 'assert.ok(fuga !== piyo);'))"
 );
 
-instr(
+testpa(
     'assert(fuga !== 4);',
     "assert(_pa_.expr(_pa_.ident('fuga', fuga, 7, 11) !== 4, 'assert(fuga !== 4);'))"
 );
-instr(
+testpa(
     'assert.ok(fuga !== 4);',
     "assert.ok(_pa_.expr(_pa_.ident('fuga', fuga, 10, 14) !== 4, 'assert.ok(fuga !== 4);'))"
 );
 
-instr(
+testpa(
     'assert(4 !== 4);',
     "assert(_pa_.expr(4 !== 4, 'assert(4 !== 4);'))"
 );
-instr(
+testpa(
     'assert.ok(4 !== 4);',
     "assert.ok(_pa_.expr(4 !== 4, 'assert.ok(4 !== 4);'))"
 );
@@ -98,12 +98,12 @@ instr(
 
 q.module('BinaryExpression with MemberExpression');
 
-instr(
+testpa(
     'assert(ary1.length === ary2.length);',
     "assert(_pa_.expr(_pa_.ident('length', _pa_.ident('ary1', ary1, 7, 11).length, 12, 18) === _pa_.ident('length', _pa_.ident('ary2', ary2, 23, 27).length, 28, 34), 'assert(ary1.length === ary2.length);'))"
 );
 
-instr(
+testpa(
     'assert.ok(ary1.length === ary2.length);',
     "assert.ok(_pa_.expr(_pa_.ident('length', _pa_.ident('ary1', ary1, 10, 14).length, 15, 21) === _pa_.ident('length', _pa_.ident('ary2', ary2, 26, 30).length, 31, 37), 'assert.ok(ary1.length === ary2.length);'))"
 );
@@ -111,7 +111,7 @@ instr(
 
 q.module('LogicalExpression');
 
-instr(
+testpa(
     'assert(2 > actual && actual < 13);',
     "assert(_pa_.expr(2 > _pa_.ident('actual', actual, 11, 17) && _pa_.ident('actual', actual, 21, 27) < 13, 'assert(2 > actual && actual < 13);'))"
 );
@@ -138,7 +138,7 @@ q.test('member chain', function (assert) {
     assert.ok(pa.cap(pa.cap(pa.cap(foo).bar).baz) === hoge.fuga.piyo);
 });
 
-instr(
+testpa(
     'assert.ok(foo.bar.baz);',
     "assert.ok(_pa_.expr(_pa_.ident('baz', _pa_.ident('bar', _pa_.ident('foo', foo, 10, 13).bar, 14, 17).baz, 18, 21), 'assert.ok(foo.bar.baz);'))"
 );
