@@ -11,7 +11,7 @@ var _pa_ = require('../lib/power-assert'),
 })(q);
 
 
-q.module('reporter', {
+q.module('formatter & reporter', {
     setup: function () {
         var that = this;
         that.lines = [];
@@ -25,7 +25,7 @@ q.module('reporter', {
 });
 
 
-q.test('simple', function (assert) {
+q.test('Simple BinaryExpression', function (assert) {
     var fuga = 'bar';
     var piyo = 3;
     _pa_.expr(_pa_.ident('fuga', fuga, 14, 18) === _pa_.ident('piyo', piyo, 23, 27), '    assert.ok(fuga === piyo);');
@@ -38,8 +38,7 @@ q.test('simple', function (assert) {
     assert.equal(this.lines[5], "              \"bar\"          ");
 });
 
-
-q.test('with comment', function (assert) {
+q.test('Simple BinaryExpression with comment', function (assert) {
     var hoge = 'foo';
     var fuga = 'bar';
     _pa_.expr(_pa_.ident('hoge', hoge, 14, 18) === _pa_.ident('fuga', fuga, 23, 27), '    assert.ok(hoge === fuga, \'comment\');');
