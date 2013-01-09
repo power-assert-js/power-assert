@@ -20,7 +20,7 @@ Second, generate empowered code using `empower` command.
 
     $ empower your_test.js > your_test_empowered.js
 
-Then run your test in your way (just using `node` in this example).
+Then run your test in your way (just using `node` in this example. But generated code does *NOT* depend on Node).
 
     $ node your_test_empowered.js
 
@@ -28,45 +28,64 @@ Then run your test in your way (just using `node` in this example).
 
 OUTPUT EXAMPLE
 ---------------------------------------
-    
-### With `assert` module on Node.js 
 
-    # at line: 9
-        assert(falsy);
-               ^^^^^  
-               |      
-               ""     
+### Target test code (using QUnit in this example)
+
+    var q = require('qunitjs');
     
-    # at line: 14
-        assert(fuga === piyo);
-               ^^^^     ^^^^  
-               |        |     
-               |        "foo" 
-               "bar"          
+    q.test('spike', function (assert) {
+        assert.ok(true);
     
-    # at line: 19
-        assert(hoge === fuga);
-               ^^^^     ^^^^  
-               |        |     
-               |        "bar" 
-               "foo"          
+        var hoge = 'foo';
+        var fuga = 'bar';
+        assert.ok(hoge === fuga, 'comment');
     
-    # at line: 25
-        assert(fuga === piyo);
-               ^^^^     ^^^^  
-               |        |     
-               |        3     
-               "bar"          
+        var piyo = 3;
+        assert.ok(fuga === piyo);
     
-    # at line: 32
-        assert(longString === anotherLongString);
-               ^^^^^^^^^^     ^^^^^^^^^^^^^^^^^  
-               |              |                  
-               |              "yet another loooooooooooooooooooooooooooooooooooooooooooooooooooong message"
-               "very very loooooooooooooooooooooooooooooooooooooooooooooooooooong message"
+        var longString = 'very very loooooooooooooooooooooooooooooooooooooooooooooooooooong message';
+        var anotherLongString = 'yet another loooooooooooooooooooooooooooooooooooooooooooooooooooong message';
+        assert.ok(longString === anotherLongString);
+    
+        assert.ok(4 === piyo);
+    
+        assert.ok(4 !== 4);
+    
+        var falsyStr = '';
+        assert.ok(falsyStr);
+    
+        var falsyNum = 0;
+        assert.ok(falsyNum);
+    
+        var ary1 = ['foo', 'bar'];
+        var ary2 = ['aaa', 'bbb', 'ccc'];
+        assert.ok(ary1.length === ary2.length);
+    
+        var actual = 16;
+        assert.ok(5 < actual && actual < 13);
+    
+        actual = 4;
+        assert.ok(5 < actual && actual < 13);
+    
+        actual = 10;
+        assert.ok(actual < 5 || 13 < actual);
+    
+    
+        var foo = {
+            bar: {
+                baz: false
+            }
+        };
+        assert.ok(foo.bar.baz);
+    
+    
+        var truth = true;
+        assert.ok(!truth);
+    });
     
 
-### With QUnit running under Node.js
+
+### `empower` code above then running under Node.js
     
     # at line: 8
         assert.ok(hoge === fuga, 'comment');
@@ -154,6 +173,44 @@ OUTPUT EXAMPLE
                    ^^^^^  
                    |      
                    true   
+    
+
+
+### (Another example) enpowering and running `assert` module on Node.js 
+
+    # at line: 9
+        assert(falsy);
+               ^^^^^  
+               |      
+               ""     
+    
+    # at line: 14
+        assert(fuga === piyo);
+               ^^^^     ^^^^  
+               |        |     
+               |        "foo" 
+               "bar"          
+    
+    # at line: 19
+        assert(hoge === fuga);
+               ^^^^     ^^^^  
+               |        |     
+               |        "bar" 
+               "foo"          
+    
+    # at line: 25
+        assert(fuga === piyo);
+               ^^^^     ^^^^  
+               |        |     
+               |        3     
+               "bar"          
+    
+    # at line: 32
+        assert(longString === anotherLongString);
+               ^^^^^^^^^^     ^^^^^^^^^^^^^^^^^  
+               |              |                  
+               |              "yet another loooooooooooooooooooooooooooooooooooooooooooooooooooong message"
+               "very very loooooooooooooooooooooooooooooooooooooooooooooooooooong message"
     
 
 
