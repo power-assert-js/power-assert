@@ -96,3 +96,11 @@ instr(
     'assert.ok(ary1.length === ary2.length);',
     "assert.ok(passert.__expr__(passert.__ident__('length', passert.__ident__('ary1', ary1, 10, 14).length, 15, 21) === passert.__ident__('length', passert.__ident__('ary2', ary2, 26, 30).length, 31, 37), 'assert.ok(ary1.length === ary2.length);'))"
 );
+
+
+q.module('LogicalExpression');
+
+instr(
+    'assert(2 > actual && actual < 13);',
+    ""
+);
