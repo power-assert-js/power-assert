@@ -5,3 +5,5 @@ node_modules/
 run.sh
 repl.js
 sandbox
+js.jar
+rhino.js
