@@ -28,6 +28,12 @@ q.test('spike', function (assert) {
     var ary2 = ['aaa', 'bbb', 'ccc'];
     assert.ok(ary1.length === ary2.length);
 
-    var actual = 10;
-    assert(2 > actual && actual < 13);
+    var actual = 16;
+    assert.ok(5 < actual && actual < 13);
+
+    actual = 1;
+    assert.ok(5 < actual && actual < 13);
+
+    actual = 10;
+    assert.ok(actual < 5 || 13 < actual);
 });
