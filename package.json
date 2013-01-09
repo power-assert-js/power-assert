@@ -10,6 +10,9 @@
         "url": "http://github.com/twada"
     },
     "main": "./lib/power-assert",
+    "bin": {
+        "pagenerate": "./bin/pagenerate.js"
+    },
     "directories": {
         "lib": "./lib"
     },

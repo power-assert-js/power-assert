@@ -1,4 +1,5 @@
-/*jslint node:true */
+#!/usr/bin/env node
+
 var generate = require('../lib/power-assert-gen'),
     fs = require('fs'),
     file = process.argv[2];
