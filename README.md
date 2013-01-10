@@ -6,7 +6,7 @@ DESCRIPTION
 ---------------------------------------
 power-assert.js is a experimental implementation of "Power Assert" in JavaScript, powered by [Esprima](http://esprima.org/) and [Escodegen](https://github.com/Constellation/escodegen).
 
-power-assert.js is in alpha stage, so backward compatibility breaking changes will be occurred very often. Pull-requests, issue reports and patches are always welcome.
+power-assert.js is an alpha version product, so backward compatibility breaking changes will be occurred very often. Pull-requests, issue reports and patches are always welcome.
 
 
 HOW TO USE
@@ -16,14 +16,13 @@ First, install power-assert via `npm`.
 
     $ npm install power-assert
 
-Second, generate empowered code using `empower` command.
+Second, generate empowered code using `empower` command (Add `--module=commonjs` option if you run generated code with Node).
 
-    $ empower your_test.js > your_test_empowered.js
+    $ empower --module=commonjs your_test.js > your_test_empowered.js
 
-Then run your test in your way (just using `node` in this example. But generated code does *NOT* depend on Node).
+Then run your test in your way (just using `node` in this example. However, without `--module=commonjs`, generated code does *NOT* depend on Node).
 
     $ node your_test_empowered.js
-
 
 
 OUTPUT EXAMPLE
