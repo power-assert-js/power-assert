@@ -92,8 +92,6 @@ q.test('Literal only', function (assert) {
     assert.deepEqual(this.lines, [
         "# at line: 19",
         "    assert.ok(4 !== 4);",
-        "                       ",
-        "                       ",
         ""
     ]);
 });
@@ -224,8 +222,6 @@ q.test('typeof operator', function (assert) {
     assert.deepEqual(this.lines, [
         "# at line: 1",
         "assert(typeof foo !== \"undefined\");",
-        "                                   ",
-        "                                   ",
         ""
     ]);
 });
@@ -255,7 +251,7 @@ q.test('delete operator', function (assert) {
 
 q.test('simple CallExpression', function (assert) {
     var func = function () { return false; };
-    _pa_.expr(_pa_.ident(func(), 7, 13), 'assert(func());', 1);
+    _pa_.expr(_pa_.funcall(func(), 7, 13), 'assert(func());', 1);
     assert.deepEqual(this.lines, [
         "# at line: 1",
         "assert(func());",
@@ -272,7 +268,7 @@ q.test('CallExpression with MemberExpression', function (assert) {
             return 0;
         }
     };
-    _pa_.expr(_pa_.ident(obj.age(), 7, 16), 'assert(obj.age());', 1);
+    _pa_.expr(_pa_.funcall(obj.age(), 7, 16), 'assert(obj.age());', 1);
     assert.deepEqual(this.lines, [
         "# at line: 1",
         "assert(obj.age());",
