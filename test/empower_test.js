@@ -64,6 +64,10 @@ emtest(
     '"typeof" operator is not supported'
 );
 
+emtest(
+    'assert(delete foo.bar);',
+    "assert(_pa_.expr(delete _pa_.ident('bar', _pa_.ident('foo', foo, 14, 17).bar, 18, 21), 'assert(delete foo.bar);', 1))"
+);
 
 
 q.module('BinaryExpression with Identifier');

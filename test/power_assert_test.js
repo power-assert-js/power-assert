@@ -245,6 +245,14 @@ q.test('double negative', function (assert) {
 });
 
 
+q.test('delete operator', function (assert) {
+    var foo = {bar: 'hoge'};
+    _pa_.expr(delete _pa_.ident('bar', _pa_.ident('foo', foo, 14, 17).bar, 18, 21), 'assert(delete foo.bar);', 1);
+    assert.deepEqual(this.lines, [
+    ], 'do nothing since delete operator returns true');
+});
+
+
 // q.test('', function (assert) {
 //     assert.deepEqual(this.lines, [
 //     ]);
