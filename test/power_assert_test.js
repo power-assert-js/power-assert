@@ -279,6 +279,28 @@ q.test('CallExpression with MemberExpression', function (assert) {
     ]);
 });
 
+q.test('CallExpression with arguments', function (assert) {
+    var isFalsy = function (arg) {
+        return !(arg);
+    };
+    var positiveInt = 50;
+    _pa_.expr(_pa_.funcall(isFalsy(_pa_.ident(positiveInt, 15, 26)), 7, 27), 'assert(isFalsy(positiveInt));', 1);
+    assert.deepEqual(this.lines, [
+        "# at line: 1",
+        "assert(isFalsy(positiveInt));",
+        "               ^^^^^^^^^^^   ",
+        "               |             ",
+        "               50            ",
+        "       ^^^^^^^^^^^^^^^^^^^^  ",
+        "       |                     ",
+        "       false                 ",
+        ""
+    ]);
+});
+
+
+
+
 // q.test('', function (assert) {
 //     assert.deepEqual(this.lines, [
 //     ]);

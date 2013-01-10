@@ -147,10 +147,10 @@ emtest(
     'assert(obj.age());',
     "assert(_pa_.expr(_pa_.funcall(obj.age(), 7, 16), 'assert(obj.age());', 1))"
 );
-// emtest(
-//     'assert(isFalsy(positiveInt));',
-//     ""
-// );
+emtest(
+    'assert(isFalsy(positiveInt));',
+    "assert(_pa_.expr(_pa_.funcall(isFalsy(_pa_.ident(positiveInt, 15, 26)), 7, 27), 'assert(isFalsy(positiveInt));', 1))"
+);
 
 // emtest(
 //     'assert(outer(inner()));',
