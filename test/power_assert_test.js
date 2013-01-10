@@ -299,6 +299,34 @@ q.test('CallExpression with arguments', function (assert) {
 });
 
 
+var sum = function () {
+    var result = 0;
+    for (var i = 0; i < arguments.length; i += 1) {
+        result += arguments[i];
+    }
+    return result;
+};
+
+q.test('CallExpression with many arguments', function (assert) {
+    var one = 1, two = 2, three = 3, seven = 7;
+    _pa_.expr(_pa_.funcall(sum(_pa_.ident(one, 11, 14), _pa_.ident(two, 16, 19), _pa_.ident(three, 21, 26)), 7, 27) === _pa_.ident(seven, 32, 37), 'assert(sum(one, two, three) === seven);', 1);
+    assert.deepEqual(this.lines, [
+        "# at line: 1",
+        "assert(sum(one, two, three) === seven);",
+        "           ^^^  ^^^  ^^^^^      ^^^^^  ",
+        "           |    |    |          |      ",
+        "           |    |    |          7      ",
+        "           |    |    3                 ",
+        "           |    2                      ",
+        "           1                           ",
+        "       ^^^^^^^^^^^^^^^^^^^^            ",
+        "       |                               ",
+        "       6                               ",
+        ""
+    ]);
+});
+
+
 
 
 // q.test('', function (assert) {

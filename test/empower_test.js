@@ -151,6 +151,10 @@ emtest(
     'assert(isFalsy(positiveInt));',
     "assert(_pa_.expr(_pa_.funcall(isFalsy(_pa_.ident(positiveInt, 15, 26)), 7, 27), 'assert(isFalsy(positiveInt));', 1))"
 );
+emtest(
+    'assert(sum(one, two, three) === seven);',
+    "assert(_pa_.expr(_pa_.funcall(sum(_pa_.ident(one, 11, 14), _pa_.ident(two, 16, 19), _pa_.ident(three, 21, 26)), 7, 27) === _pa_.ident(seven, 32, 37), 'assert(sum(one, two, three) === seven);', 1))"
+);
 
 // emtest(
 //     'assert(outer(inner()));',
