@@ -54,6 +54,11 @@ emtest(
 );
 
 emtest(
+    'assert(!!some);',
+    "assert(_pa_.expr(!!_pa_.ident('some', some, 9, 13), 'assert(!!some);', 1))"
+);
+
+emtest(
     'assert(typeof foo !== "undefined");',
     "assert(_pa_.expr(typeof foo !== 'undefined', 'assert(typeof foo !== \"undefined\");', 1))",
     '"typeof" operator is not supported'

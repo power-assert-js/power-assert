@@ -230,6 +230,21 @@ q.test('typeof operator', function (assert) {
     ]);
 });
 
+
+q.test('double negative', function (assert) {
+    var some = 0;
+    _pa_.expr(!!_pa_.ident('some', some, 9, 13), 'assert(!!some);', 1);
+    assert.deepEqual(this.lines, [
+        "# at line: 1",
+        "assert(!!some);",
+        "         ^^^^  ",
+        "         |     ",
+        "         0     ",
+        ""
+    ]);
+});
+
+
 // q.test('', function (assert) {
 //     assert.deepEqual(this.lines, [
 //     ]);
