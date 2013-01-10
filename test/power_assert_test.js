@@ -218,6 +218,18 @@ q.test('UnaryExpression', function (assert) {
     ]);
 });
 
+
+q.test('typeof operator', function (assert) {
+    _pa_.expr(typeof foo !== 'undefined', 'assert(typeof foo !== \"undefined\");', 1);
+    assert.deepEqual(this.lines, [
+        "# at line: 1",
+        "assert(typeof foo !== \"undefined\");",
+        "                                   ",
+        "                                   ",
+        ""
+    ]);
+});
+
 // q.test('', function (assert) {
 //     assert.deepEqual(this.lines, [
 //     ]);

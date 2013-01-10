@@ -18,12 +18,12 @@ var emtest = (function () {
             expression = expressionStatement.expression;
         return expression;
     };
-    return function (before, after) {
+    return function (before, after, comment) {
         q.test(before, function (assert) {
             var line = before,
                 expression = extractExpressionFrom(line);
             empower.instrument(expression, line, 1);
-            assert.equal(escodegen.generate(expression), after);
+            assert.equal(escodegen.generate(expression), after, comment);
         });
     };
 })();
@@ -51,6 +51,12 @@ emtest(
 emtest(
     'assert.ok(!truth);',
     "assert.ok(_pa_.expr(!_pa_.ident('truth', truth, 11, 16), 'assert.ok(!truth);', 1))"
+);
+
+emtest(
+    'assert(typeof foo !== "undefined");',
+    "assert(_pa_.expr(typeof foo !== 'undefined', 'assert(typeof foo !== \"undefined\");', 1))",
+    '"typeof" operator is not supported'
 );
 
 
