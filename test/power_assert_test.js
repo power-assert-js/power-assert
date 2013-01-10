@@ -253,6 +253,19 @@ q.test('delete operator', function (assert) {
 });
 
 
+q.test('simple CallExpression', function (assert) {
+    var func = function () { return false; };
+    _pa_.expr(_pa_.ident(func(), 7, 13), 'assert(func());', 1);
+    assert.deepEqual(this.lines, [
+        "# at line: 1",
+        "assert(func());",
+        "       ^^^^^^  ",
+        "       |       ",
+        "       false   ",
+        ""
+    ]);
+});
+
 // q.test('', function (assert) {
 //     assert.deepEqual(this.lines, [
 //     ]);

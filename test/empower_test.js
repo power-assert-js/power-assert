@@ -141,7 +141,7 @@ emtest(
 q.module('CallExpression');
 emtest(
     'assert(func());',
-    "assert(_pa_.expr(_pa_.ident(func(), 7, 11), 'assert(func());', 1))"
+    "assert(_pa_.expr(_pa_.ident(func(), 7, 13), 'assert(func());', 1))"
 );
 // emtest(
 //     'assert(obj.hello());',
