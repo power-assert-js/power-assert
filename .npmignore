@@ -3,7 +3,7 @@ test/
 .idea*
 node_modules/
 run.sh
-repl.js
+expr.js
 sandbox
 js.jar
 rhino.js
