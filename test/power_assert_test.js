@@ -28,7 +28,7 @@ q.module('formatter & reporter', {
 q.test('Simple BinaryExpression with comment', function (assert) {
     var hoge = 'foo';
     var fuga = 'bar';
-    _pa_.expr(_pa_.ident('hoge', hoge, 14, 18) === _pa_.ident('fuga', fuga, 23, 27), '    assert.ok(hoge === fuga, \'comment\');', 8);
+    _pa_.expr(_pa_.ident(hoge, 14, 18) === _pa_.ident(fuga, 23, 27), '    assert.ok(hoge === fuga, \'comment\');', 8);
     assert.deepEqual(this.lines, [
         "# at line: 8",
         "    assert.ok(hoge === fuga, \'comment\');",
@@ -44,7 +44,7 @@ q.test('Simple BinaryExpression with comment', function (assert) {
 q.test('Simple BinaryExpression', function (assert) {
     var fuga = 'bar';
     var piyo = 3;
-    _pa_.expr(_pa_.ident('fuga', fuga, 14, 18) === _pa_.ident('piyo', piyo, 23, 27), '    assert.ok(fuga === piyo);', 11);
+    _pa_.expr(_pa_.ident(fuga, 14, 18) === _pa_.ident(piyo, 23, 27), '    assert.ok(fuga === piyo);', 11);
     assert.deepEqual(this.lines, [
         "# at line: 11",
         "    assert.ok(fuga === piyo);",
@@ -60,7 +60,7 @@ q.test('Simple BinaryExpression', function (assert) {
 q.test('Looooong string', function (assert) {
     var longString = 'very very loooooooooooooooooooooooooooooooooooooooooooooooooooong message';
     var anotherLongString = 'yet another loooooooooooooooooooooooooooooooooooooooooooooooooooong message';
-    _pa_.expr(_pa_.ident('longString', longString, 14, 24) === _pa_.ident('anotherLongString', anotherLongString, 29, 46), '    assert.ok(longString === anotherLongString);', 15);
+    _pa_.expr(_pa_.ident(longString, 14, 24) === _pa_.ident(anotherLongString, 29, 46), '    assert.ok(longString === anotherLongString);', 15);
     assert.deepEqual(this.lines, [
         "# at line: 15",
         "    assert.ok(longString === anotherLongString);",
@@ -75,7 +75,7 @@ q.test('Looooong string', function (assert) {
 
 q.test('BinaryExpression with Literal and Identifier', function (assert) {
     var piyo = 3;
-    _pa_.expr(4 === _pa_.ident('piyo', piyo, 20, 24), '    assert.ok(4 === piyo);', 17);
+    _pa_.expr(4 === _pa_.ident(piyo, 20, 24), '    assert.ok(4 === piyo);', 17);
     assert.deepEqual(this.lines, [
         "# at line: 17",
         "    assert.ok(4 === piyo);",
@@ -101,7 +101,7 @@ q.test('Literal only', function (assert) {
 
 q.test('Identifier with empty string', function (assert) {
     var falsyStr = '';
-    _pa_.expr(_pa_.ident('falsyStr', falsyStr, 14, 22), '    assert.ok(falsyStr);', 22);
+    _pa_.expr(_pa_.ident(falsyStr, 14, 22), '    assert.ok(falsyStr);', 22);
     assert.deepEqual(this.lines, [
         "# at line: 22",
         "    assert.ok(falsyStr);",
@@ -115,7 +115,7 @@ q.test('Identifier with empty string', function (assert) {
 
 q.test('Identifier with falsy number', function (assert) {
     var falsyNum = 0;
-    _pa_.expr(_pa_.ident('falsyNum', falsyNum, 14, 22), '    assert.ok(falsyNum);', 25);
+    _pa_.expr(_pa_.ident(falsyNum, 14, 22), '    assert.ok(falsyNum);', 25);
     assert.deepEqual(this.lines, [
         "# at line: 25",
         "    assert.ok(falsyNum);",
@@ -130,7 +130,7 @@ q.test('Identifier with falsy number', function (assert) {
 q.test('MemberExpression', function (assert) {
     var ary1 = ['foo', 'bar'];
     var ary2 = ['aaa', 'bbb', 'ccc'];
-    _pa_.expr(_pa_.ident('length', _pa_.ident('ary1', ary1, 14, 18).length, 19, 25) === _pa_.ident('length', _pa_.ident('ary2', ary2, 30, 34).length, 35, 41), '    assert.ok(ary1.length === ary2.length);', 29);
+    _pa_.expr(_pa_.ident(_pa_.ident(ary1, 14, 18).length, 19, 25) === _pa_.ident(_pa_.ident(ary2, 30, 34).length, 35, 41), '    assert.ok(ary1.length === ary2.length);', 29);
     assert.deepEqual(this.lines, [
         "# at line: 29",
         "    assert.ok(ary1.length === ary2.length);",
@@ -147,7 +147,7 @@ q.test('MemberExpression', function (assert) {
 
 q.test('LogicalExpression', function (assert) {
     var actual = 16;
-    _pa_.expr(5 < _pa_.ident('actual', actual, 18, 24) && _pa_.ident('actual', actual, 28, 34) < 13, '    assert.ok(5 < actual && actual < 13);', 32);
+    _pa_.expr(5 < _pa_.ident(actual, 18, 24) && _pa_.ident(actual, 28, 34) < 13, '    assert.ok(5 < actual && actual < 13);', 32);
     assert.deepEqual(this.lines, [
         "# at line: 32",
         "    assert.ok(5 < actual && actual < 13);",
@@ -162,7 +162,7 @@ q.test('LogicalExpression', function (assert) {
 
 q.test('characterization test of LogicalExpression current spec', function (assert) {
     var actual = 4;
-    _pa_.expr(5 < _pa_.ident('actual', actual, 18, 24) && _pa_.ident('actual', actual, 28, 34) < 13, '    assert.ok(5 < actual && actual < 13);', 35);
+    _pa_.expr(5 < _pa_.ident(actual, 18, 24) && _pa_.ident(actual, 28, 34) < 13, '    assert.ok(5 < actual && actual < 13);', 35);
     assert.deepEqual(this.lines, [
         "# at line: 35",
         "    assert.ok(5 < actual && actual < 13);",
@@ -176,7 +176,7 @@ q.test('characterization test of LogicalExpression current spec', function (asse
 
 q.test('LogicalExpression OR', function (assert) {
     var actual = 10;
-    _pa_.expr(_pa_.ident('actual', actual, 14, 20) < 5 || 13 < _pa_.ident('actual', actual, 33, 39), '    assert.ok(actual < 5 || 13 < actual);', 38);
+    _pa_.expr(_pa_.ident(actual, 14, 20) < 5 || 13 < _pa_.ident(actual, 33, 39), '    assert.ok(actual < 5 || 13 < actual);', 38);
     assert.deepEqual(this.lines, [
         "# at line: 38",
         "    assert.ok(actual < 5 || 13 < actual);",
@@ -191,7 +191,7 @@ q.test('LogicalExpression OR', function (assert) {
 
 q.test('deep MemberExpression chain', function (assert) {
     var foo = { bar: { baz: false } };
-    _pa_.expr(_pa_.ident('baz', _pa_.ident('bar', _pa_.ident('foo', foo, 14, 17).bar, 18, 21).baz, 22, 25), '    assert.ok(foo.bar.baz);', 46);
+    _pa_.expr(_pa_.ident(_pa_.ident(_pa_.ident(foo, 14, 17).bar, 18, 21).baz, 22, 25), '    assert.ok(foo.bar.baz);', 46);
     assert.deepEqual(this.lines, [
         "# at line: 46",
         "    assert.ok(foo.bar.baz);",
@@ -207,7 +207,7 @@ q.test('deep MemberExpression chain', function (assert) {
 
 q.test('UnaryExpression', function (assert) {
     var truth = true;
-    _pa_.expr(!_pa_.ident('truth', truth, 15, 20), '    assert.ok(!truth);', 50);
+    _pa_.expr(!_pa_.ident(truth, 15, 20), '    assert.ok(!truth);', 50);
     assert.deepEqual(this.lines, [
         "# at line: 50",
         "    assert.ok(!truth);",
@@ -233,7 +233,7 @@ q.test('typeof operator', function (assert) {
 
 q.test('double negative', function (assert) {
     var some = 0;
-    _pa_.expr(!!_pa_.ident('some', some, 9, 13), 'assert(!!some);', 1);
+    _pa_.expr(!!_pa_.ident(some, 9, 13), 'assert(!!some);', 1);
     assert.deepEqual(this.lines, [
         "# at line: 1",
         "assert(!!some);",
@@ -247,7 +247,7 @@ q.test('double negative', function (assert) {
 
 q.test('delete operator', function (assert) {
     var foo = {bar: 'hoge'};
-    _pa_.expr(delete _pa_.ident('bar', _pa_.ident('foo', foo, 14, 17).bar, 18, 21), 'assert(delete foo.bar);', 1);
+    _pa_.expr(delete _pa_.ident(_pa_.ident(foo, 14, 17).bar, 18, 21), 'assert(delete foo.bar);', 1);
     assert.deepEqual(this.lines, [
     ], 'do nothing since delete operator returns true');
 });
