@@ -266,6 +266,23 @@ q.test('simple CallExpression', function (assert) {
     ]);
 });
 
+q.test('CallExpression with MemberExpression', function (assert) {
+    var obj = {
+        age: function () {
+            return 0;
+        }
+    };
+    _pa_.expr(_pa_.ident(obj.age(), 7, 16), 'assert(obj.age());', 1);
+    assert.deepEqual(this.lines, [
+        "# at line: 1",
+        "assert(obj.age());",
+        "       ^^^^^^^^^  ",
+        "       |          ",
+        "       0          ",
+        ""
+    ]);
+});
+
 // q.test('', function (assert) {
 //     assert.deepEqual(this.lines, [
 //     ]);

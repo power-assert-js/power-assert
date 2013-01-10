@@ -143,7 +143,7 @@ emtest(
     'assert(func());',
     "assert(_pa_.expr(_pa_.ident(func(), 7, 13), 'assert(func());', 1))"
 );
-// emtest(
-//     'assert(obj.hello());',
-//     ""
-// );
+emtest(
+    'assert(obj.age());',
+    "assert(_pa_.expr(_pa_.ident(obj.age(), 7, 16), 'assert(obj.age());', 1))"
+);
