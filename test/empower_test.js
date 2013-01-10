@@ -136,3 +136,14 @@ emtest(
     'assert.ok(foo.bar.baz);',
     "assert.ok(_pa_.expr(_pa_.ident('baz', _pa_.ident('bar', _pa_.ident('foo', foo, 10, 13).bar, 14, 17).baz, 18, 21), 'assert.ok(foo.bar.baz);', 1))"
 );
+
+
+q.module('CallExpression');
+emtest(
+    'assert(func());',
+    "assert(_pa_.expr(_pa_.ident('func', func(), 7, 11), 'assert(func());', 1))"
+);
+// emtest(
+//     'assert(obj.hello());',
+//     ""
+// );
