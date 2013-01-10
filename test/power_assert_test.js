@@ -327,6 +327,36 @@ q.test('CallExpression with many arguments', function (assert) {
 });
 
 
+q.test('CallExpression with CallExpressions as arguments', function (assert) {
+    var one = 1, two = 2, three = 3, seven = 7;
+    _pa_.expr(_pa_.funcall(sum(_pa_.funcall(sum(_pa_.ident(one, 15, 18), _pa_.ident(two, 20, 23)), 11, 24), _pa_.ident(three, 26, 31)), 7, 32) === _pa_.funcall(sum(_pa_.funcall(sum(_pa_.ident(two, 45, 48), _pa_.ident(three, 50, 55)), 41, 56), _pa_.ident(seven, 58, 63)), 37, 64), 'assert(sum(sum(one, two), three) === sum(sum(two, three), seven));', 1);
+    assert.deepEqual(this.lines, [
+        "# at line: 1",
+        "assert(sum(sum(one, two), three) === sum(sum(two, three), seven));",
+        "               ^^^  ^^^   ^^^^^              ^^^  ^^^^^   ^^^^^   ",
+        "               |    |     |                  |    |       |       ",
+        "               |    |     |                  |    |       7       ",
+        "               |    |     |                  |    3               ",
+        "               |    |     |                  2                    ",
+        "               |    |     3                                       ",
+        "               |    2                                             ",
+        "               1                                                  ",
+        "                                         ^^^^^^^^^^^^^^^          ",
+        "                                         |                        ",
+        "                                         5                        ",
+        "                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^  ",
+        "                                     |                            ",
+        "                                     12                           ",
+        "           ^^^^^^^^^^^^^                                          ",
+        "           |                                                      ",
+        "           3                                                      ",
+        "       ^^^^^^^^^^^^^^^^^^^^^^^^^                                  ",
+        "       |                                                          ",
+        "       6                                                          ",
+        ""
+    ]);
+});
+
 
 
 // q.test('', function (assert) {
