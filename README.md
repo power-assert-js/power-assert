@@ -217,6 +217,7 @@ TESTED ENVIRONMENTS
 ---------------------------------------
 * [Node.js](http://nodejs.org/)
 * [Rhino](https://developer.mozilla.org/en/Rhino)
+* [PhantomJS](http://phantomjs.org/)
 
 
 AUTHOR
