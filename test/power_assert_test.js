@@ -5,7 +5,7 @@ var _pa_ = require('../lib/power-assert'),
 
 (function (qu) {
     var qunitTap = require("qunit-tap").qunitTap;
-    qunitTap(qu, util.puts, {noPlan: true, showSourceOnFailure: false});
+    var tap = qunitTap(qu, util.puts, {showSourceOnFailure: false});
     qu.init();
     qu.config.updateRate = 0;
 })(q);
