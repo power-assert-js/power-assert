@@ -40,6 +40,10 @@ emtest(
     'assert.ok(falsyStr);',
     "assert.ok(_pa_.expr(_pa_.ident(falsyStr, 10, 18), 'assert.ok(falsyStr);', 1))"
 );
+emtest(
+    'console.assert(falsyStr);',
+    "console.assert(_pa_.expr(_pa_.ident(falsyStr, 15, 23), 'console.assert(falsyStr);', 1))"
+);
 
 
 q.module('UnaryExpression');

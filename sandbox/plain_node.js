@@ -3,17 +3,37 @@ var assert = require('assert');
 var hoge = 'foo';
 var fuga = 'bar';
 var piyo = hoge;
-var falsy = '';
+var falsyString = '';
 
-assert(falsy);
+try {
+    assert(falsyString);
+} catch (e) {
+}
 
-assert(fuga === piyo);
+try {
+    console.assert(falsyString);
+} catch (e) {
+}
 
-assert.ok(hoge === fuga);
+try {
+    assert(fuga === piyo);
+} catch (e) {
+}
 
-var piyo = 3;
-assert.ok(fuga === piyo);
+try {
+    assert(hoge === fuga);
+} catch (e) {
+}
 
-var longString = 'very very loooooooooooooooooooooooooooooooooooooooooooooooooooong message';
-var anotherLongString = 'yet another loooooooooooooooooooooooooooooooooooooooooooooooooooong message';
-assert.ok(longString === anotherLongString);
+try {
+    var piyo = 3;
+    assert(fuga === piyo);
+} catch (e) {
+}
+
+try {
+    var longString = 'very very loooooooooooooooooooooooooooooooooooooooooooooooooooong message';
+    var anotherLongString = 'yet another loooooooooooooooooooooooooooooooooooooooooooooooooooong message';
+    assert(longString === anotherLongString);
+} catch (e) {
+}
