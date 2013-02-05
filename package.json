@@ -11,7 +11,7 @@
     },
     "main": "./lib/power-assert",
     "bin": {
-        "empower": "./bin/empower.js"
+        "empower": "./bin/empower"
     },
     "directories": {
         "lib": "./lib"
