@@ -11,24 +11,12 @@ var empower = require('../lib/empower'),
     qu.config.updateRate = 0;
 })(q);
 
-var emtest = (function () {
-    var extractExpressionFrom = function (string) {
-        var tree = esprima.parse(string, {tolerant: true, loc: true}),
-            expressionStatement = tree.body[0],
-            expression = expressionStatement.expression;
-        return expression;
-    };
-    return function (before, after, comment) {
-        q.test(before, function (assert) {
-            var line = before,
-                tree = esprima.parse(line, {tolerant: true, loc: true});
-            empower.insertPowerAssertDeclaration(tree, {module: 'commonjs'});
-            assert.equal(escodegen.generate(tree), after, comment);
-        });
-    };
-})();
-
-
+var emtest = function (before, after, comment) {
+    q.test(before, function (assert) {
+        var actual = empower(before, {module: 'commonjs'});
+        assert.equal(actual, after, comment);
+    });
+};
 
 q.module('useDefaultFormatter');
 
@@ -37,6 +25,6 @@ emtest(
     [
         "var _pa_ = require('power-assert');",
         "_pa_.useDefaultFormatter();",
-        "assert(falsyStr);"
+        "assert(_pa_.expr(_pa_.ident(falsyStr, 7, 15), 'assert(falsyStr);', 1));"
     ].join("\n")
 );
