@@ -22,7 +22,7 @@ var emtest = (function () {
         q.test(before, function (assert) {
             var line = before,
                 expression = extractExpressionFrom(line);
-            empower.instrument(expression, line, 1);
+            empower.instrumentExpression(expression, line, 1);
             assert.equal(escodegen.generate(expression), after, comment);
         });
     };

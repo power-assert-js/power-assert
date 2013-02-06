@@ -20,4 +20,4 @@ if (argv.module) {
 
 var file = argv._[0];
 
-empower(fs.readFileSync(file, 'utf-8'), options);
+console.log(empower(fs.readFileSync(file, 'utf-8'), options));
