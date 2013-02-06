@@ -1,5 +1,5 @@
 var _pa_ = require('../lib/power-assert');
-_pa_.formatter(_pa_);
+_pa_.useDefaultFormatter();
 
 var q = require('qunitjs'),
     util = require('util'),
