@@ -18,13 +18,13 @@ var emtest = function (before, after, comment) {
     });
 };
 
-q.module('useDefaultFormatter');
+q.module('useDefault');
 
 emtest(
     'assert(falsyStr);',
     [
         "var _pa_ = require('power-assert');",
-        "_pa_.useDefaultFormatter();",
+        "_pa_.useDefault();",
         "assert(_pa_.expr(_pa_.ident(falsyStr, 7, 15), 'assert(falsyStr);', 1));"
     ].join("\n")
 );
