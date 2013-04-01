@@ -23,7 +23,6 @@
     "dependencies": {
         "esprima": "1.0.2",
         "escodegen": "0.0.19",
-        "estraverse": "0.0.4",
         "optimist": "0.3.5"
     },
     "devDependencies": {
