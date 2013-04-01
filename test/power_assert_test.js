@@ -137,9 +137,9 @@ q.test('MemberExpression', function (assert) {
         "              ^^^^ ^^^^^^     ^^^^ ^^^^^^  ",
         "              |    |          |    |       ",
         "              |    |          |    3       ",
-        "              |    |          aaa,bbb,ccc  ",
+        "              |    |          [\"aaa\",\"bbb\",\"ccc\"]",
         "              |    2                       ",
-        "              foo,bar                      ",
+        "              [\"foo\",\"bar\"]                ",
         ""
     ]);
 });
@@ -198,8 +198,8 @@ q.test('deep MemberExpression chain', function (assert) {
         "              ^^^ ^^^ ^^^  ",
         "              |   |   |    ",
         "              |   |   false",
-        "              |   [object Object]",
-        "              [object Object]",
+        "              |   {\"baz\":false}",
+        "              {\"bar\":{\"baz\":false}}",
         ""
     ]);
 });
