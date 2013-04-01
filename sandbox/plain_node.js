@@ -37,3 +37,49 @@ try {
     assert(longString === anotherLongString);
 } catch (e) {
 }
+
+
+var func = function () { return false; };
+try {
+    assert(func());
+} catch (e) {
+}
+
+
+var obj = {
+    age: function () {
+        return 0;
+    }
+};
+try {
+    assert(obj.age());
+} catch (e) {
+}
+
+
+var isFalsy = function (arg) {
+    return !(arg);
+};
+var positiveInt = 50;
+try {
+    assert(isFalsy(positiveInt));
+} catch (e) {
+}
+
+
+var sum = function () {
+    var result = 0;
+    for (var i = 0; i < arguments.length; i += 1) {
+        result += arguments[i];
+    }
+    return result;
+};
+var one = 1, two = 2, three = 3, seven = 7;
+try {
+    assert(sum(one, two, three) === seven);
+} catch (e) {
+}
+try {
+    assert(sum(sum(one, two), three) === sum(sum(two, three), seven));
+} catch (e) {
+}

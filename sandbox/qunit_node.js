@@ -48,4 +48,35 @@ q.test('spike', function (assert) {
 
     var truth = true;
     assert.ok(!truth);
+
+
+    var func = function () { return false; };
+    assert.ok(func());
+
+
+    var obj = {
+        age: function () {
+            return 0;
+        }
+    };
+    assert.ok(obj.age());
+
+
+    var isFalsy = function (arg) {
+        return !(arg);
+    };
+    var positiveInt = 50;
+    assert.ok(isFalsy(positiveInt));
+
+
+    var sum = function () {
+        var result = 0;
+        for (var i = 0; i < arguments.length; i += 1) {
+            result += arguments[i];
+        }
+        return result;
+    };
+    var one = 1, two = 2, three = 3, seven = 7;
+    assert.ok(sum(one, two, three) === seven);
+    assert.ok(sum(sum(one, two), three) === sum(sum(two, three), seven));
 });
