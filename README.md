@@ -135,9 +135,9 @@ OUTPUT EXAMPLE
                   ^^^^ ^^^^^^     ^^^^ ^^^^^^  
                   |    |          |    |       
                   |    |          |    3       
-                  |    |          aaa,bbb,ccc  
+                  |    |          ["aaa","bbb","ccc"]
                   |    2                       
-                  foo,bar                      
+                  ["foo","bar"]                
     
     # at line: 32
         assert.ok(5 < actual && actual < 13);
@@ -164,8 +164,8 @@ OUTPUT EXAMPLE
                   ^^^ ^^^ ^^^  
                   |   |   |    
                   |   |   false
-                  |   [object Object]
-                  [object Object]
+                  |   {"baz":false}
+                  {"bar":{"baz":false}}
     
     # at line: 50
         assert.ok(!truth);
