@@ -1,4 +1,4 @@
-load('lib/power-assert-core.js');
+load('lib/power-assert-event-bus.js');
 load('lib/power-assert-api.js');
 load('lib/power-assert-capturing.js');
 load('lib/power-assert-formatter.js');
