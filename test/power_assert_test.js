@@ -33,11 +33,9 @@ q.test('Simple BinaryExpression with comment', function (assert) {
     _pa_.expr(_pa_.ident(hoge, 14, 18) === _pa_.ident(fuga, 23, 27), '    assert.ok(hoge === fuga, \'comment\');', 8);
     assert.deepEqual(this.lines, [
         "# at line: 8",
-        "    assert.ok(hoge === fuga, \'comment\');",
-        "              ^^^^     ^^^^             ",
+        "    assert.ok(hoge === fuga, 'comment');",
         "              |        |                ",
-        "              |        \"bar\"            ",
-        "              \"foo\"                     ",
+        "              \"foo\"    \"bar\"            ",
         ""
     ]);
 });
@@ -50,10 +48,8 @@ q.test('Simple BinaryExpression', function (assert) {
     assert.deepEqual(this.lines, [
         "# at line: 11",
         "    assert.ok(fuga === piyo);",
-        "              ^^^^     ^^^^  ",
         "              |        |     ",
-        "              |        3     ",
-        "              \"bar\"          ",
+        "              \"bar\"    3     ",
         ""
     ]);
 });
@@ -66,7 +62,6 @@ q.test('Looooong string', function (assert) {
     assert.deepEqual(this.lines, [
         "# at line: 15",
         "    assert.ok(longString === anotherLongString);",
-        "              ^^^^^^^^^^     ^^^^^^^^^^^^^^^^^  ",
         "              |              |                  ",
         "              |              \"yet another loooooooooooooooooooooooooooooooooooooooooooooooooooong message\"",
         "              \"very very loooooooooooooooooooooooooooooooooooooooooooooooooooong message\"",
@@ -81,7 +76,6 @@ q.test('BinaryExpression with Literal and Identifier', function (assert) {
     assert.deepEqual(this.lines, [
         "# at line: 17",
         "    assert.ok(4 === piyo);",
-        "                    ^^^^  ",
         "                    |     ",
         "                    3     ",
         ""
@@ -105,7 +99,6 @@ q.test('Identifier with empty string', function (assert) {
     assert.deepEqual(this.lines, [
         "# at line: 22",
         "    assert.ok(falsyStr);",
-        "              ^^^^^^^^  ",
         "              |         ",
         "              \"\"        ",
         ""
@@ -119,7 +112,6 @@ q.test('Identifier with falsy number', function (assert) {
     assert.deepEqual(this.lines, [
         "# at line: 25",
         "    assert.ok(falsyNum);",
-        "              ^^^^^^^^  ",
         "              |         ",
         "              0         ",
         ""
@@ -134,11 +126,9 @@ q.test('MemberExpression', function (assert) {
     assert.deepEqual(this.lines, [
         "# at line: 29",
         "    assert.ok(ary1.length === ary2.length);",
-        "              ^^^^ ^^^^^^     ^^^^ ^^^^^^  ",
         "              |    |          |    |       ",
         "              |    |          |    3       ",
-        "              |    |          [\"aaa\",\"bbb\",\"ccc\"]",
-        "              |    2                       ",
+        "              |    2          [\"aaa\",\"bbb\",\"ccc\"]",
         "              [\"foo\",\"bar\"]                ",
         ""
     ]);
@@ -151,10 +141,8 @@ q.test('LogicalExpression', function (assert) {
     assert.deepEqual(this.lines, [
         "# at line: 32",
         "    assert.ok(5 < actual && actual < 13);",
-        "                  ^^^^^^    ^^^^^^       ",
         "                  |         |            ",
-        "                  |         16           ",
-        "                  16                     ",
+        "                  16        16           ",
         ""
     ]);
 });
@@ -166,7 +154,6 @@ q.test('characterization test of LogicalExpression current spec', function (asse
     assert.deepEqual(this.lines, [
         "# at line: 35",
         "    assert.ok(5 < actual && actual < 13);",
-        "                  ^^^^^^                 ",
         "                  |                      ",
         "                  4                      ",
         ""
@@ -180,10 +167,8 @@ q.test('LogicalExpression OR', function (assert) {
     assert.deepEqual(this.lines, [
         "# at line: 38",
         "    assert.ok(actual < 5 || 13 < actual);",
-        "              ^^^^^^             ^^^^^^  ",
         "              |                  |       ",
-        "              |                  10      ",
-        "              10                         ",
+        "              10                 10      ",
         ""
     ]);
 });
@@ -195,7 +180,6 @@ q.test('deep MemberExpression chain', function (assert) {
     assert.deepEqual(this.lines, [
         "# at line: 46",
         "    assert.ok(foo.bar.baz);",
-        "              ^^^ ^^^ ^^^  ",
         "              |   |   |    ",
         "              |   |   false",
         "              |   {\"baz\":false}",
@@ -211,7 +195,6 @@ q.test('UnaryExpression', function (assert) {
     assert.deepEqual(this.lines, [
         "# at line: 50",
         "    assert.ok(!truth);",
-        "               ^^^^^  ",
         "               |      ",
         "               true   ",
         ""
@@ -235,7 +218,6 @@ q.test('double negative', function (assert) {
     assert.deepEqual(this.lines, [
         "# at line: 1",
         "assert(!!some);",
-        "         ^^^^  ",
         "         |     ",
         "         0     ",
         ""
@@ -257,7 +239,6 @@ q.test('simple CallExpression', function (assert) {
     assert.deepEqual(this.lines, [
         "# at line: 1",
         "assert(func());",
-        "       ^^^^^^  ",
         "       |       ",
         "       false   ",
         ""
@@ -274,7 +255,6 @@ q.test('CallExpression with MemberExpression', function (assert) {
     assert.deepEqual(this.lines, [
         "# at line: 1",
         "assert(obj.age());",
-        "       ^^^^^^^^^  ",
         "       |          ",
         "       0          ",
         ""
@@ -290,12 +270,8 @@ q.test('CallExpression with arguments', function (assert) {
     assert.deepEqual(this.lines, [
         "# at line: 1",
         "assert(isFalsy(positiveInt));",
-        "               ^^^^^^^^^^^   ",
-        "               |             ",
-        "               50            ",
-        "       ^^^^^^^^^^^^^^^^^^^^  ",
-        "       |                     ",
-        "       false                 ",
+        "       |       |             ",
+        "       false   50            ",
         ""
     ]);
 });
@@ -315,15 +291,8 @@ q.test('CallExpression with many arguments', function (assert) {
     assert.deepEqual(this.lines, [
         "# at line: 1",
         "assert(sum(one, two, three) === seven);",
-        "           ^^^  ^^^  ^^^^^      ^^^^^  ",
-        "           |    |    |          |      ",
-        "           |    |    |          7      ",
-        "           |    |    3                 ",
-        "           |    2                      ",
-        "           1                           ",
-        "       ^^^^^^^^^^^^^^^^^^^^            ",
-        "       |                               ",
-        "       6                               ",
+        "       |   |    |    |          |      ",
+        "       6   1    2    3          7      ",
         ""
     ]);
 });
@@ -335,26 +304,8 @@ q.test('CallExpression with CallExpressions as arguments', function (assert) {
     assert.deepEqual(this.lines, [
         "# at line: 1",
         "assert(sum(sum(one, two), three) === sum(sum(two, three), seven));",
-        "               ^^^  ^^^   ^^^^^              ^^^  ^^^^^   ^^^^^   ",
-        "               |    |     |                  |    |       |       ",
-        "               |    |     |                  |    |       7       ",
-        "               |    |     |                  |    3               ",
-        "               |    |     |                  2                    ",
-        "               |    |     3                                       ",
-        "               |    2                                             ",
-        "               1                                                  ",
-        "                                         ^^^^^^^^^^^^^^^          ",
-        "                                         |                        ",
-        "                                         5                        ",
-        "                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^  ",
-        "                                     |                            ",
-        "                                     12                           ",
-        "           ^^^^^^^^^^^^^                                          ",
-        "           |                                                      ",
-        "           3                                                      ",
-        "       ^^^^^^^^^^^^^^^^^^^^^^^^^                                  ",
-        "       |                                                          ",
-        "       6                                                          ",
+        "       |   |   |    |     |          |   |   |    |       |       ",
+        "       6   3   1    2     3          12  5   2    3       7       ",
         ""
     ]);
 });
