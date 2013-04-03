@@ -149,7 +149,7 @@ emtest(
 );
 emtest(
     'assert(obj.age());',
-    "assert(_pa_.expr(_pa_.funcall(obj.age(), 7, 16), 'assert(obj.age());', 1))"
+    "assert(_pa_.expr(_pa_.funcall(_pa_.ident(obj, 7, 10).age(), 11, 14), 'assert(obj.age());', 1))"
 );
 emtest(
     'assert(isFalsy(positiveInt));',
@@ -162,6 +162,10 @@ emtest(
 emtest(
     'assert(sum(sum(one, two), three) === sum(sum(two, three), seven));',
     "assert(_pa_.expr(_pa_.funcall(sum(_pa_.funcall(sum(_pa_.ident(one, 15, 18), _pa_.ident(two, 20, 23)), 11, 24), _pa_.ident(three, 26, 31)), 7, 32) === _pa_.funcall(sum(_pa_.funcall(sum(_pa_.ident(two, 45, 48), _pa_.ident(three, 50, 55)), 41, 56), _pa_.ident(seven, 58, 63)), 37, 64), 'assert(sum(sum(one, two), three) === sum(sum(two, three), seven));', 1))"
+);
+emtest(
+    'assert(math.calc.sum(one, two, three) === seven);',
+    "assert(_pa_.expr(_pa_.funcall(_pa_.ident(_pa_.ident(math, 7, 11).calc, 12, 16).sum(_pa_.ident(one, 21, 24), _pa_.ident(two, 26, 29), _pa_.ident(three, 31, 36)), 17, 20) === _pa_.ident(seven, 42, 47), 'assert(math.calc.sum(one, two, three) === seven);', 1))"
 );
 
 // emtest(

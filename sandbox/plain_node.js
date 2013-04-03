@@ -83,3 +83,20 @@ try {
     assert(sum(sum(one, two), three) === sum(sum(two, three), seven));
 } catch (e) {
 }
+
+
+var math = {
+    calc: {
+        sum: function () {
+            var result = 0;
+            for (var i = 0; i < arguments.length; i += 1) {
+                result += arguments[i];
+            }
+            return result;
+        }
+    }
+};
+try {
+    assert(math.calc.sum(one, two, three) === seven);
+} catch (e) {
+}

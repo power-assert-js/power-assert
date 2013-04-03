@@ -251,12 +251,12 @@ q.test('CallExpression with MemberExpression', function (assert) {
             return 0;
         }
     };
-    _pa_.expr(_pa_.funcall(obj.age(), 7, 16), 'assert(obj.age());', 1);
+    _pa_.expr(_pa_.funcall(_pa_.ident(obj, 7, 10).age(), 11, 14), 'assert(obj.age());', 1);
     assert.deepEqual(this.lines, [
         "# at line: 1",
         "assert(obj.age());",
-        "       |          ",
-        "       0          ",
+        "       |   |      ",
+        "       {}  0      ",
         ""
     ]);
 });
