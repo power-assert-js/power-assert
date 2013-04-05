@@ -74,13 +74,17 @@ var sum = function () {
     }
     return result;
 };
-var one = 1, two = 2, three = 3, seven = 7;
+var one = 1, two = 2, three = 3, seven = 7, ten = 10;
 try {
     assert(sum(one, two, three) === seven);
 } catch (e) {
 }
 try {
     assert(sum(sum(one, two), three) === sum(sum(two, three), seven));
+} catch (e) {
+}
+try {
+    assert((three * (seven * ten)) === three);
 } catch (e) {
 }
 

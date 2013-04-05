@@ -64,7 +64,7 @@ emtest(
 
 emtest(
     'assert(typeof foo !== "undefined");',
-    "assert(_pa_.expr(typeof foo !== 'undefined', 'assert(typeof foo !== \"undefined\");', 1))",
+    "assert(_pa_.expr(_pa_.binary(typeof foo !== 'undefined', 18, 21), 'assert(typeof foo !== \"undefined\");', 1))",
     '"typeof" operator is not supported'
 );
 
@@ -78,37 +78,37 @@ q.module('BinaryExpression with Identifier');
 
 emtest(
     'assert(fuga === piyo);',
-    "assert(_pa_.expr(_pa_.ident(fuga, 7, 11) === _pa_.ident(piyo, 16, 20), 'assert(fuga === piyo);', 1))"
+    "assert(_pa_.expr(_pa_.binary(_pa_.ident(fuga, 7, 11) === _pa_.ident(piyo, 16, 20), 12, 15), 'assert(fuga === piyo);', 1))"
 );
 emtest(
     'assert.ok(fuga === piyo);',
-    "assert.ok(_pa_.expr(_pa_.ident(fuga, 10, 14) === _pa_.ident(piyo, 19, 23), 'assert.ok(fuga === piyo);', 1))"
+    "assert.ok(_pa_.expr(_pa_.binary(_pa_.ident(fuga, 10, 14) === _pa_.ident(piyo, 19, 23), 15, 18), 'assert.ok(fuga === piyo);', 1))"
 );
 emtest(
     'assert(fuga !== piyo);',
-    "assert(_pa_.expr(_pa_.ident(fuga, 7, 11) !== _pa_.ident(piyo, 16, 20), 'assert(fuga !== piyo);', 1))"
+    "assert(_pa_.expr(_pa_.binary(_pa_.ident(fuga, 7, 11) !== _pa_.ident(piyo, 16, 20), 12, 15), 'assert(fuga !== piyo);', 1))"
 );
 emtest(
     'assert.ok(fuga !== piyo);',
-    "assert.ok(_pa_.expr(_pa_.ident(fuga, 10, 14) !== _pa_.ident(piyo, 19, 23), 'assert.ok(fuga !== piyo);', 1))"
+    "assert.ok(_pa_.expr(_pa_.binary(_pa_.ident(fuga, 10, 14) !== _pa_.ident(piyo, 19, 23), 15, 18), 'assert.ok(fuga !== piyo);', 1))"
 );
 
 emtest(
     'assert(fuga !== 4);',
-    "assert(_pa_.expr(_pa_.ident(fuga, 7, 11) !== 4, 'assert(fuga !== 4);', 1))"
+    "assert(_pa_.expr(_pa_.binary(_pa_.ident(fuga, 7, 11) !== 4, 12, 15), 'assert(fuga !== 4);', 1))"
 );
 emtest(
     'assert.ok(fuga !== 4);',
-    "assert.ok(_pa_.expr(_pa_.ident(fuga, 10, 14) !== 4, 'assert.ok(fuga !== 4);', 1))"
+    "assert.ok(_pa_.expr(_pa_.binary(_pa_.ident(fuga, 10, 14) !== 4, 15, 18), 'assert.ok(fuga !== 4);', 1))"
 );
 
 emtest(
     'assert(4 !== 4);',
-    "assert(_pa_.expr(4 !== 4, 'assert(4 !== 4);', 1))"
+    "assert(_pa_.expr(_pa_.binary(4 !== 4, 9, 12), 'assert(4 !== 4);', 1))"
 );
 emtest(
     'assert.ok(4 !== 4);',
-    "assert.ok(_pa_.expr(4 !== 4, 'assert.ok(4 !== 4);', 1))"
+    "assert.ok(_pa_.expr(_pa_.binary(4 !== 4, 12, 15), 'assert.ok(4 !== 4);', 1))"
 );
 
 
@@ -117,12 +117,12 @@ q.module('BinaryExpression with MemberExpression');
 
 emtest(
     'assert(ary1.length === ary2.length);',
-    "assert(_pa_.expr(_pa_.ident(_pa_.ident(ary1, 7, 11).length, 12, 18) === _pa_.ident(_pa_.ident(ary2, 23, 27).length, 28, 34), 'assert(ary1.length === ary2.length);', 1))"
+    "assert(_pa_.expr(_pa_.binary(_pa_.ident(_pa_.ident(ary1, 7, 11).length, 12, 18) === _pa_.ident(_pa_.ident(ary2, 23, 27).length, 28, 34), 19, 22), 'assert(ary1.length === ary2.length);', 1))"
 );
 
 emtest(
     'assert.ok(ary1.length === ary2.length);',
-    "assert.ok(_pa_.expr(_pa_.ident(_pa_.ident(ary1, 10, 14).length, 15, 21) === _pa_.ident(_pa_.ident(ary2, 26, 30).length, 31, 37), 'assert.ok(ary1.length === ary2.length);', 1))"
+    "assert.ok(_pa_.expr(_pa_.binary(_pa_.ident(_pa_.ident(ary1, 10, 14).length, 15, 21) === _pa_.ident(_pa_.ident(ary2, 26, 30).length, 31, 37), 22, 25), 'assert.ok(ary1.length === ary2.length);', 1))"
 );
 
 
@@ -130,7 +130,7 @@ q.module('LogicalExpression');
 
 emtest(
     'assert(2 > actual && actual < 13);',
-    "assert(_pa_.expr(2 > _pa_.ident(actual, 11, 17) && _pa_.ident(actual, 21, 27) < 13, 'assert(2 > actual && actual < 13);', 1))"
+    "assert(_pa_.expr(_pa_.binary(2 > _pa_.ident(actual, 11, 17), 9, 10) && _pa_.binary(_pa_.ident(actual, 21, 27) < 13, 28, 29), 'assert(2 > actual && actual < 13);', 1))"
 );
 
 
@@ -157,18 +157,18 @@ emtest(
 );
 emtest(
     'assert(sum(one, two, three) === seven);',
-    "assert(_pa_.expr(_pa_.funcall(sum(_pa_.ident(one, 11, 14), _pa_.ident(two, 16, 19), _pa_.ident(three, 21, 26)), 7, 27) === _pa_.ident(seven, 32, 37), 'assert(sum(one, two, three) === seven);', 1))"
+    "assert(_pa_.expr(_pa_.binary(_pa_.funcall(sum(_pa_.ident(one, 11, 14), _pa_.ident(two, 16, 19), _pa_.ident(three, 21, 26)), 7, 27) === _pa_.ident(seven, 32, 37), 28, 31), 'assert(sum(one, two, three) === seven);', 1))"
 );
 emtest(
     'assert(sum(sum(one, two), three) === sum(sum(two, three), seven));',
-    "assert(_pa_.expr(_pa_.funcall(sum(_pa_.funcall(sum(_pa_.ident(one, 15, 18), _pa_.ident(two, 20, 23)), 11, 24), _pa_.ident(three, 26, 31)), 7, 32) === _pa_.funcall(sum(_pa_.funcall(sum(_pa_.ident(two, 45, 48), _pa_.ident(three, 50, 55)), 41, 56), _pa_.ident(seven, 58, 63)), 37, 64), 'assert(sum(sum(one, two), three) === sum(sum(two, three), seven));', 1))"
+    "assert(_pa_.expr(_pa_.binary(_pa_.funcall(sum(_pa_.funcall(sum(_pa_.ident(one, 15, 18), _pa_.ident(two, 20, 23)), 11, 24), _pa_.ident(three, 26, 31)), 7, 32) === _pa_.funcall(sum(_pa_.funcall(sum(_pa_.ident(two, 45, 48), _pa_.ident(three, 50, 55)), 41, 56), _pa_.ident(seven, 58, 63)), 37, 64), 33, 36), 'assert(sum(sum(one, two), three) === sum(sum(two, three), seven));', 1))"
 );
 emtest(
     'assert(math.calc.sum(one, two, three) === seven);',
-    "assert(_pa_.expr(_pa_.funcall(_pa_.ident(_pa_.ident(math, 7, 11).calc, 12, 16).sum(_pa_.ident(one, 21, 24), _pa_.ident(two, 26, 29), _pa_.ident(three, 31, 36)), 17, 20) === _pa_.ident(seven, 42, 47), 'assert(math.calc.sum(one, two, three) === seven);', 1))"
+    "assert(_pa_.expr(_pa_.binary(_pa_.funcall(_pa_.ident(_pa_.ident(math, 7, 11).calc, 12, 16).sum(_pa_.ident(one, 21, 24), _pa_.ident(two, 26, 29), _pa_.ident(three, 31, 36)), 17, 20) === _pa_.ident(seven, 42, 47), 38, 41), 'assert(math.calc.sum(one, two, three) === seven);', 1))"
 );
 
-// emtest(
-//     'assert(outer(inner()));',
-//     ""
-// );
+emtest(
+    'assert((three * (seven * ten)) === three);',
+    "assert(_pa_.expr(_pa_.binary(_pa_.binary(_pa_.ident(three, 8, 13) * _pa_.binary(_pa_.ident(seven, 17, 22) * _pa_.ident(ten, 25, 28), 23, 24), 14, 15) === _pa_.ident(three, 35, 40), 31, 34), 'assert((three * (seven * ten)) === three);', 1))"
+);

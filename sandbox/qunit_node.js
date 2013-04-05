@@ -76,9 +76,10 @@ q.test('spike', function (assert) {
         }
         return result;
     };
-    var one = 1, two = 2, three = 3, seven = 7;
+    var one = 1, two = 2, three = 3, seven = 7, ten = 10;
     assert.ok(sum(one, two, three) === seven);
     assert.ok(sum(sum(one, two), three) === sum(sum(two, three), seven));
+    assert.ok((three * (seven * ten)) === three);
 
 
     var math = {

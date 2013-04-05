@@ -30,12 +30,14 @@ q.module('formatter & reporter', {
 q.test('Simple BinaryExpression with comment', function (assert) {
     var hoge = 'foo';
     var fuga = 'bar';
-    _pa_.expr(_pa_.ident(hoge, 14, 18) === _pa_.ident(fuga, 23, 27), '    assert.ok(hoge === fuga, \'comment\');', 8);
+    _pa_.expr(_pa_.binary(_pa_.ident(hoge, 14, 18) === _pa_.ident(fuga, 23, 27), 19, 22), '    assert.ok(hoge === fuga, \'comment\');', 8);
     assert.deepEqual(this.lines, [
         "# at line: 8",
         "    assert.ok(hoge === fuga, 'comment');",
-        "              |        |                ",
-        "              \"foo\"    \"bar\"            ",
+        "              |    |   |                ",
+        "              |    |   \"bar\"            ",
+        "              |    false                ",
+        "              \"foo\"                     ",
         ""
     ]);
 });
@@ -44,12 +46,14 @@ q.test('Simple BinaryExpression with comment', function (assert) {
 q.test('Simple BinaryExpression', function (assert) {
     var fuga = 'bar';
     var piyo = 3;
-    _pa_.expr(_pa_.ident(fuga, 14, 18) === _pa_.ident(piyo, 23, 27), '    assert.ok(fuga === piyo);', 11);
+    _pa_.expr(_pa_.binary(_pa_.ident(fuga, 10, 14) === _pa_.ident(piyo, 19, 23), 15, 18), 'assert.ok(fuga === piyo);', 1);
     assert.deepEqual(this.lines, [
-        "# at line: 11",
-        "    assert.ok(fuga === piyo);",
-        "              |        |     ",
-        "              \"bar\"    3     ",
+        "# at line: 1",
+        "assert.ok(fuga === piyo);",
+        "          |    |   |     ",
+        "          |    |   3     ",
+        "          |    false     ",
+        "          \"bar\"          ",
         ""
     ]);
 });
@@ -58,12 +62,13 @@ q.test('Simple BinaryExpression', function (assert) {
 q.test('Looooong string', function (assert) {
     var longString = 'very very loooooooooooooooooooooooooooooooooooooooooooooooooooong message';
     var anotherLongString = 'yet another loooooooooooooooooooooooooooooooooooooooooooooooooooong message';
-    _pa_.expr(_pa_.ident(longString, 14, 24) === _pa_.ident(anotherLongString, 29, 46), '    assert.ok(longString === anotherLongString);', 15);
+    _pa_.expr(_pa_.binary(_pa_.ident(longString, 14, 24) === _pa_.ident(anotherLongString, 29, 46), 25, 28), '    assert.ok(longString === anotherLongString);', 15);
     assert.deepEqual(this.lines, [
         "# at line: 15",
         "    assert.ok(longString === anotherLongString);",
-        "              |              |                  ",
-        "              |              \"yet another loooooooooooooooooooooooooooooooooooooooooooooooooooong message\"",
+        "              |          |   |                  ",
+        "              |          |   \"yet another loooooooooooooooooooooooooooooooooooooooooooooooooooong message\"",
+        "              |          false                  ",
         "              \"very very loooooooooooooooooooooooooooooooooooooooooooooooooooong message\"",
         ""
     ]);
@@ -72,22 +77,25 @@ q.test('Looooong string', function (assert) {
 
 q.test('BinaryExpression with Literal and Identifier', function (assert) {
     var piyo = 3;
-    _pa_.expr(4 === _pa_.ident(piyo, 20, 24), '    assert.ok(4 === piyo);', 17);
+    _pa_.expr(_pa_.binary(4 === _pa_.ident(piyo, 20, 24), 16, 19), '    assert.ok(4 === piyo);', 17);
     assert.deepEqual(this.lines, [
         "# at line: 17",
         "    assert.ok(4 === piyo);",
-        "                    |     ",
-        "                    3     ",
+        "                |   |     ",
+        "                |   3     ",
+        "                false     ",
         ""
     ]);
 });
 
 
 q.test('Literal only', function (assert) {
-    _pa_.expr(4 !== 4, '    assert.ok(4 !== 4);', 19);
+    _pa_.expr(_pa_.binary(4 !== 4, 16, 19), '    assert.ok(4 !== 4);', 19);
     assert.deepEqual(this.lines, [
         "# at line: 19",
         "    assert.ok(4 !== 4);",
+        "                |      ",
+        "                false  ",
         ""
     ]);
 });
@@ -122,13 +130,14 @@ q.test('Identifier with falsy number', function (assert) {
 q.test('MemberExpression', function (assert) {
     var ary1 = ['foo', 'bar'];
     var ary2 = ['aaa', 'bbb', 'ccc'];
-    _pa_.expr(_pa_.ident(_pa_.ident(ary1, 14, 18).length, 19, 25) === _pa_.ident(_pa_.ident(ary2, 30, 34).length, 35, 41), '    assert.ok(ary1.length === ary2.length);', 29);
+    _pa_.expr(_pa_.binary(_pa_.ident(_pa_.ident(ary1, 14, 18).length, 19, 25) === _pa_.ident(_pa_.ident(ary2, 30, 34).length, 35, 41), 26, 29), '    assert.ok(ary1.length === ary2.length);', 29);
     assert.deepEqual(this.lines, [
         "# at line: 29",
         "    assert.ok(ary1.length === ary2.length);",
-        "              |    |          |    |       ",
-        "              |    |          |    3       ",
-        "              |    2          [\"aaa\",\"bbb\",\"ccc\"]",
+        "              |    |      |   |    |       ",
+        "              |    |      |   |    3       ",
+        "              |    |      |   [\"aaa\",\"bbb\",\"ccc\"]",
+        "              |    2      false            ",
         "              [\"foo\",\"bar\"]                ",
         ""
     ]);
@@ -137,12 +146,13 @@ q.test('MemberExpression', function (assert) {
 
 q.test('LogicalExpression', function (assert) {
     var actual = 16;
-    _pa_.expr(5 < _pa_.ident(actual, 18, 24) && _pa_.ident(actual, 28, 34) < 13, '    assert.ok(5 < actual && actual < 13);', 32);
+    _pa_.expr(_pa_.binary(5 < _pa_.ident(actual, 18, 24), 16, 17) && _pa_.binary(_pa_.ident(actual, 28, 34) < 13, 35, 36), '    assert.ok(5 < actual && actual < 13);', 32);
     assert.deepEqual(this.lines, [
         "# at line: 32",
         "    assert.ok(5 < actual && actual < 13);",
-        "                  |         |            ",
-        "                  16        16           ",
+        "                | |         |      |     ",
+        "                | 16        16     false ",
+        "                true                     ",
         ""
     ]);
 });
@@ -150,12 +160,13 @@ q.test('LogicalExpression', function (assert) {
 
 q.test('characterization test of LogicalExpression current spec', function (assert) {
     var actual = 4;
-    _pa_.expr(5 < _pa_.ident(actual, 18, 24) && _pa_.ident(actual, 28, 34) < 13, '    assert.ok(5 < actual && actual < 13);', 35);
+    _pa_.expr(_pa_.binary(5 < _pa_.ident(actual, 18, 24), 16, 17) && _pa_.binary(_pa_.ident(actual, 28, 34) < 13, 35, 36), '    assert.ok(5 < actual && actual < 13);', 35);
     assert.deepEqual(this.lines, [
         "# at line: 35",
         "    assert.ok(5 < actual && actual < 13);",
-        "                  |                      ",
-        "                  4                      ",
+        "                | |                      ",
+        "                | 4                      ",
+        "                false                    ",
         ""
     ]);
 });
@@ -163,12 +174,13 @@ q.test('characterization test of LogicalExpression current spec', function (asse
 
 q.test('LogicalExpression OR', function (assert) {
     var actual = 10;
-    _pa_.expr(_pa_.ident(actual, 14, 20) < 5 || 13 < _pa_.ident(actual, 33, 39), '    assert.ok(actual < 5 || 13 < actual);', 38);
+    _pa_.expr(_pa_.binary(_pa_.ident(actual, 14, 20) < 5, 21, 22) || _pa_.binary(13 < _pa_.ident(actual, 33, 39), 31, 32), '    assert.ok(actual < 5 || 13 < actual);', 38);
     assert.deepEqual(this.lines, [
         "# at line: 38",
         "    assert.ok(actual < 5 || 13 < actual);",
-        "              |                  |       ",
-        "              10                 10      ",
+        "              |      |         | |       ",
+        "              |      |         | 10      ",
+        "              10     false     false     ",
         ""
     ]);
 });
@@ -203,10 +215,12 @@ q.test('UnaryExpression', function (assert) {
 
 
 q.test('typeof operator', function (assert) {
-    _pa_.expr(typeof foo !== 'undefined', 'assert(typeof foo !== \"undefined\");', 1);
+    _pa_.expr(_pa_.binary(typeof foo !== 'undefined', 18, 21), 'assert(typeof foo !== \"undefined\");', 1);
     assert.deepEqual(this.lines, [
         "# at line: 1",
         "assert(typeof foo !== \"undefined\");",
+        "                  |                ",
+        "                  false            ",
         ""
     ]);
 });
@@ -287,12 +301,13 @@ var sum = function () {
 
 q.test('CallExpression with many arguments', function (assert) {
     var one = 1, two = 2, three = 3, seven = 7;
-    _pa_.expr(_pa_.funcall(sum(_pa_.ident(one, 11, 14), _pa_.ident(two, 16, 19), _pa_.ident(three, 21, 26)), 7, 27) === _pa_.ident(seven, 32, 37), 'assert(sum(one, two, three) === seven);', 1);
+    _pa_.expr(_pa_.binary(_pa_.funcall(sum(_pa_.ident(one, 11, 14), _pa_.ident(two, 16, 19), _pa_.ident(three, 21, 26)), 7, 27) === _pa_.ident(seven, 32, 37), 28, 31), 'assert(sum(one, two, three) === seven);', 1);
     assert.deepEqual(this.lines, [
         "# at line: 1",
         "assert(sum(one, two, three) === seven);",
-        "       |   |    |    |          |      ",
-        "       6   1    2    3          7      ",
+        "       |   |    |    |      |   |      ",
+        "       |   |    |    |      |   7      ",
+        "       6   1    2    3      false      ",
         ""
     ]);
 });
@@ -300,19 +315,29 @@ q.test('CallExpression with many arguments', function (assert) {
 
 q.test('CallExpression with CallExpressions as arguments', function (assert) {
     var one = 1, two = 2, three = 3, seven = 7;
-    _pa_.expr(_pa_.funcall(sum(_pa_.funcall(sum(_pa_.ident(one, 15, 18), _pa_.ident(two, 20, 23)), 11, 24), _pa_.ident(three, 26, 31)), 7, 32) === _pa_.funcall(sum(_pa_.funcall(sum(_pa_.ident(two, 45, 48), _pa_.ident(three, 50, 55)), 41, 56), _pa_.ident(seven, 58, 63)), 37, 64), 'assert(sum(sum(one, two), three) === sum(sum(two, three), seven));', 1);
+    _pa_.expr(_pa_.binary(_pa_.funcall(sum(_pa_.funcall(sum(_pa_.ident(one, 15, 18), _pa_.ident(two, 20, 23)), 11, 24), _pa_.ident(three, 26, 31)), 7, 32) === _pa_.funcall(sum(_pa_.funcall(sum(_pa_.ident(two, 45, 48), _pa_.ident(three, 50, 55)), 41, 56), _pa_.ident(seven, 58, 63)), 37, 64), 33, 36), 'assert(sum(sum(one, two), three) === sum(sum(two, three), seven));', 1);
     assert.deepEqual(this.lines, [
         "# at line: 1",
         "assert(sum(sum(one, two), three) === sum(sum(two, three), seven));",
-        "       |   |   |    |     |          |   |   |    |       |       ",
-        "       6   3   1    2     3          12  5   2    3       7       ",
+        "       |   |   |    |     |      |   |   |   |    |       |       ",
+        "       |   |   |    |     |      |   12  5   2    3       7       ",
+        "       6   3   1    2     3      false                            ",
         ""
     ]);
 });
 
 
-
-// q.test('', function (assert) {
-//     assert.deepEqual(this.lines, [
-//     ]);
-// });
+q.test('Nested CallExpression with BinaryExpression', function (assert) {
+    var one = 1, two = 2, three = 3, seven = 7, ten = 10;
+    _pa_.expr(_pa_.binary(_pa_.binary(_pa_.ident(three, 8, 13) * _pa_.binary(_pa_.ident(seven, 17, 22) * _pa_.ident(ten, 25, 28), 23, 24), 14, 15) === _pa_.ident(three, 35, 40), 31, 34), 'assert((three * (seven * ten)) === three);', 1);
+    assert.deepEqual(this.lines, [
+        "# at line: 1",
+        "assert((three * (seven * ten)) === three);",
+        "        |     |  |     | |     |   |      ",
+        "        |     |  |     | |     |   3      ",
+        "        |     |  |     | 10    false      ",
+        "        |     |  7     70                 ",
+        "        3     210                         ",
+        ""
+    ]);
+});
