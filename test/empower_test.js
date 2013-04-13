@@ -22,8 +22,9 @@ var emtest = (function () {
         q.test(before, function (assert) {
             var line = before,
                 expression = extractExpressionFrom(line);
-            empower.instrumentExpression(expression, line, 1);
-            assert.equal(escodegen.generate(expression), after, comment);
+            empower.instrumentExpression(expression, {module: 'commonjs', strategy: 'inline', source: line});
+            var actual = escodegen.generate(expression, {format: {compact: true}});
+            assert.equal(actual, after, comment);
         });
     };
 })();
@@ -31,144 +32,123 @@ var emtest = (function () {
 
 
 q.module('Identifier');
-
 emtest(
     'assert(falsyStr);',
-    "assert(_pa_.expr(_pa_.ident(falsyStr, 7, 15), 'assert(falsyStr);', 1))"
+    "assert(_pa_.expr(_pa_.ident(falsyStr,{start:{line:1,column:7},end:{line:1,column:15}}),{start:{line:1,column:7},end:{line:1,column:15}},'assert(falsyStr);'))"
 );
 emtest(
     'assert.ok(falsyStr);',
-    "assert.ok(_pa_.expr(_pa_.ident(falsyStr, 10, 18), 'assert.ok(falsyStr);', 1))"
+    "assert.ok(_pa_.expr(_pa_.ident(falsyStr,{start:{line:1,column:10},end:{line:1,column:18}}),{start:{line:1,column:10},end:{line:1,column:18}},'assert.ok(falsyStr);'))"
 );
 emtest(
     'console.assert(falsyStr);',
-    "console.assert(_pa_.expr(_pa_.ident(falsyStr, 15, 23), 'console.assert(falsyStr);', 1))"
+    "console.assert(_pa_.expr(_pa_.ident(falsyStr,{start:{line:1,column:15},end:{line:1,column:23}}),{start:{line:1,column:15},end:{line:1,column:23}},'console.assert(falsyStr);'))"
 );
-
 
 q.module('UnaryExpression');
-
 emtest(
     'assert(!truth);',
-    "assert(_pa_.expr(!_pa_.ident(truth, 8, 13), 'assert(!truth);', 1))"
+    "assert(_pa_.expr(!_pa_.ident(truth,{start:{line:1,column:8},end:{line:1,column:13}}),{start:{line:1,column:7},end:{line:1,column:13}},'assert(!truth);'))"
 );
-emtest(
-    'assert.ok(!truth);',
-    "assert.ok(_pa_.expr(!_pa_.ident(truth, 11, 16), 'assert.ok(!truth);', 1))"
-);
-
 emtest(
     'assert(!!some);',
-    "assert(_pa_.expr(!!_pa_.ident(some, 9, 13), 'assert(!!some);', 1))"
+    "assert(_pa_.expr(!!_pa_.ident(some,{start:{line:1,column:9},end:{line:1,column:13}}),{start:{line:1,column:7},end:{line:1,column:13}},'assert(!!some);'))"
 );
-
 emtest(
     'assert(typeof foo !== "undefined");',
-    "assert(_pa_.expr(_pa_.binary(typeof foo !== 'undefined', 18, 21), 'assert(typeof foo !== \"undefined\");', 1))",
+    "assert(_pa_.expr(_pa_.binary(typeof foo!=='undefined',{start:{line:1,column:18},end:{line:1,column:21}}),{start:{line:1,column:7},end:{line:1,column:33}},'assert(typeof foo !== \"undefined\");'))",
     '"typeof" operator is not supported'
 );
-
 emtest(
     'assert(delete foo.bar);',
-    "assert(_pa_.expr(delete _pa_.ident(_pa_.ident(foo, 14, 17).bar, 18, 21), 'assert(delete foo.bar);', 1))"
+    "assert(_pa_.expr(delete _pa_.ident(_pa_.ident(foo,{start:{line:1,column:14},end:{line:1,column:17}}).bar,{start:{line:1,column:18},end:{line:1,column:21}}),{start:{line:1,column:7},end:{line:1,column:21}},'assert(delete foo.bar);'))"
 );
-
 
 q.module('BinaryExpression with Identifier');
-
 emtest(
     'assert(fuga === piyo);',
-    "assert(_pa_.expr(_pa_.binary(_pa_.ident(fuga, 7, 11) === _pa_.ident(piyo, 16, 20), 12, 15), 'assert(fuga === piyo);', 1))"
+    "assert(_pa_.expr(_pa_.binary(_pa_.ident(fuga,{start:{line:1,column:7},end:{line:1,column:11}})===_pa_.ident(piyo,{start:{line:1,column:16},end:{line:1,column:20}}),{start:{line:1,column:12},end:{line:1,column:15}}),{start:{line:1,column:7},end:{line:1,column:20}},'assert(fuga === piyo);'))"
 );
 emtest(
-    'assert.ok(fuga === piyo);',
-    "assert.ok(_pa_.expr(_pa_.binary(_pa_.ident(fuga, 10, 14) === _pa_.ident(piyo, 19, 23), 15, 18), 'assert.ok(fuga === piyo);', 1))"
+    'assert(longString === anotherLongString);',
+    "assert(_pa_.expr(_pa_.binary(_pa_.ident(longString,{start:{line:1,column:7},end:{line:1,column:17}})===_pa_.ident(anotherLongString,{start:{line:1,column:22},end:{line:1,column:39}}),{start:{line:1,column:18},end:{line:1,column:21}}),{start:{line:1,column:7},end:{line:1,column:39}},'assert(longString === anotherLongString);'))"
 );
 emtest(
     'assert(fuga !== piyo);',
-    "assert(_pa_.expr(_pa_.binary(_pa_.ident(fuga, 7, 11) !== _pa_.ident(piyo, 16, 20), 12, 15), 'assert(fuga !== piyo);', 1))"
+    "assert(_pa_.expr(_pa_.binary(_pa_.ident(fuga,{start:{line:1,column:7},end:{line:1,column:11}})!==_pa_.ident(piyo,{start:{line:1,column:16},end:{line:1,column:20}}),{start:{line:1,column:12},end:{line:1,column:15}}),{start:{line:1,column:7},end:{line:1,column:20}},'assert(fuga !== piyo);'))"
 );
-emtest(
-    'assert.ok(fuga !== piyo);',
-    "assert.ok(_pa_.expr(_pa_.binary(_pa_.ident(fuga, 10, 14) !== _pa_.ident(piyo, 19, 23), 15, 18), 'assert.ok(fuga !== piyo);', 1))"
-);
-
 emtest(
     'assert(fuga !== 4);',
-    "assert(_pa_.expr(_pa_.binary(_pa_.ident(fuga, 7, 11) !== 4, 12, 15), 'assert(fuga !== 4);', 1))"
+    "assert(_pa_.expr(_pa_.binary(_pa_.ident(fuga,{start:{line:1,column:7},end:{line:1,column:11}})!==4,{start:{line:1,column:12},end:{line:1,column:15}}),{start:{line:1,column:7},end:{line:1,column:17}},'assert(fuga !== 4);'))"
 );
-emtest(
-    'assert.ok(fuga !== 4);',
-    "assert.ok(_pa_.expr(_pa_.binary(_pa_.ident(fuga, 10, 14) !== 4, 15, 18), 'assert.ok(fuga !== 4);', 1))"
-);
-
 emtest(
     'assert(4 !== 4);',
-    "assert(_pa_.expr(_pa_.binary(4 !== 4, 9, 12), 'assert(4 !== 4);', 1))"
-);
-emtest(
-    'assert.ok(4 !== 4);',
-    "assert.ok(_pa_.expr(_pa_.binary(4 !== 4, 12, 15), 'assert.ok(4 !== 4);', 1))"
+    "assert(_pa_.expr(_pa_.binary(4!==4,{start:{line:1,column:9},end:{line:1,column:12}}),{start:{line:1,column:7},end:{line:1,column:14}},'assert(4 !== 4);'))"
 );
 
+q.module('BinaryExpression with Comment');
+emtest(
+    "assert.ok(hoge === fuga, 'comment');",
+    "assert.ok(_pa_.expr(_pa_.binary(_pa_.ident(hoge,{start:{line:1,column:10},end:{line:1,column:14}})===_pa_.ident(fuga,{start:{line:1,column:19},end:{line:1,column:23}}),{start:{line:1,column:15},end:{line:1,column:18}}),{start:{line:1,column:10},end:{line:1,column:23}},'assert.ok(hoge === fuga, \\'comment\\');'),'comment')"
+);
 
 
 q.module('BinaryExpression with MemberExpression');
-
 emtest(
     'assert(ary1.length === ary2.length);',
-    "assert(_pa_.expr(_pa_.binary(_pa_.ident(_pa_.ident(ary1, 7, 11).length, 12, 18) === _pa_.ident(_pa_.ident(ary2, 23, 27).length, 28, 34), 19, 22), 'assert(ary1.length === ary2.length);', 1))"
+    "assert(_pa_.expr(_pa_.binary(_pa_.ident(_pa_.ident(ary1,{start:{line:1,column:7},end:{line:1,column:11}}).length,{start:{line:1,column:12},end:{line:1,column:18}})===_pa_.ident(_pa_.ident(ary2,{start:{line:1,column:23},end:{line:1,column:27}}).length,{start:{line:1,column:28},end:{line:1,column:34}}),{start:{line:1,column:19},end:{line:1,column:22}}),{start:{line:1,column:7},end:{line:1,column:34}},'assert(ary1.length === ary2.length);'))"
 );
-
-emtest(
-    'assert.ok(ary1.length === ary2.length);',
-    "assert.ok(_pa_.expr(_pa_.binary(_pa_.ident(_pa_.ident(ary1, 10, 14).length, 15, 21) === _pa_.ident(_pa_.ident(ary2, 26, 30).length, 31, 37), 22, 25), 'assert.ok(ary1.length === ary2.length);', 1))"
-);
-
 
 q.module('LogicalExpression');
-
 emtest(
     'assert(2 > actual && actual < 13);',
-    "assert(_pa_.expr(_pa_.binary(2 > _pa_.ident(actual, 11, 17), 9, 10) && _pa_.binary(_pa_.ident(actual, 21, 27) < 13, 28, 29), 'assert(2 > actual && actual < 13);', 1))"
+    "assert(_pa_.expr(_pa_.binary(2>_pa_.ident(actual,{start:{line:1,column:11},end:{line:1,column:17}}),{start:{line:1,column:9},end:{line:1,column:10}})&&_pa_.binary(_pa_.ident(actual,{start:{line:1,column:21},end:{line:1,column:27}})<13,{start:{line:1,column:28},end:{line:1,column:29}}),{start:{line:1,column:7},end:{line:1,column:32}},'assert(2 > actual && actual < 13);'))"
 );
+
+emtest(
+    'assert(5 < actual && actual < 13);',
+    "assert(_pa_.expr(_pa_.binary(5<_pa_.ident(actual,{start:{line:1,column:11},end:{line:1,column:17}}),{start:{line:1,column:9},end:{line:1,column:10}})&&_pa_.binary(_pa_.ident(actual,{start:{line:1,column:21},end:{line:1,column:27}})<13,{start:{line:1,column:28},end:{line:1,column:29}}),{start:{line:1,column:7},end:{line:1,column:32}},'assert(5 < actual && actual < 13);'))"
+);
+
+emtest(
+    'assert.ok(actual < 5 || 13 < actual);',
+    "assert.ok(_pa_.expr(_pa_.binary(_pa_.ident(actual,{start:{line:1,column:10},end:{line:1,column:16}})<5,{start:{line:1,column:17},end:{line:1,column:18}})||_pa_.binary(13<_pa_.ident(actual,{start:{line:1,column:29},end:{line:1,column:35}}),{start:{line:1,column:27},end:{line:1,column:28}}),{start:{line:1,column:10},end:{line:1,column:35}},'assert.ok(actual < 5 || 13 < actual);'))"
+);
+
 
 
 q.module('MemberExpression Chain');
-
 emtest(
-    'assert.ok(foo.bar.baz);',
-    "assert.ok(_pa_.expr(_pa_.ident(_pa_.ident(_pa_.ident(foo, 10, 13).bar, 14, 17).baz, 18, 21), 'assert.ok(foo.bar.baz);', 1))"
+    'assert(foo.bar.baz);',
+    "assert(_pa_.expr(_pa_.ident(_pa_.ident(_pa_.ident(foo,{start:{line:1,column:7},end:{line:1,column:10}}).bar,{start:{line:1,column:11},end:{line:1,column:14}}).baz,{start:{line:1,column:15},end:{line:1,column:18}}),{start:{line:1,column:7},end:{line:1,column:18}},'assert(foo.bar.baz);'))"
 );
-
 
 q.module('CallExpression');
 emtest(
     'assert(func());',
-    "assert(_pa_.expr(_pa_.funcall(func(), 7, 13), 'assert(func());', 1))"
+    "assert(_pa_.expr(_pa_.funcall(func(),{start:{line:1,column:7},end:{line:1,column:13}}),{start:{line:1,column:7},end:{line:1,column:13}},'assert(func());'))"
 );
 emtest(
     'assert(obj.age());',
-    "assert(_pa_.expr(_pa_.funcall(_pa_.ident(obj, 7, 10).age(), 11, 14), 'assert(obj.age());', 1))"
+    "assert(_pa_.expr(_pa_.funcall(_pa_.ident(obj,{start:{line:1,column:7},end:{line:1,column:10}}).age(),{start:{line:1,column:11},end:{line:1,column:14}}),{start:{line:1,column:7},end:{line:1,column:16}},'assert(obj.age());'))"
 );
 emtest(
     'assert(isFalsy(positiveInt));',
-    "assert(_pa_.expr(_pa_.funcall(isFalsy(_pa_.ident(positiveInt, 15, 26)), 7, 27), 'assert(isFalsy(positiveInt));', 1))"
+    "assert(_pa_.expr(_pa_.funcall(isFalsy(_pa_.ident(positiveInt,{start:{line:1,column:15},end:{line:1,column:26}})),{start:{line:1,column:7},end:{line:1,column:27}}),{start:{line:1,column:7},end:{line:1,column:27}},'assert(isFalsy(positiveInt));'))"
 );
 emtest(
     'assert(sum(one, two, three) === seven);',
-    "assert(_pa_.expr(_pa_.binary(_pa_.funcall(sum(_pa_.ident(one, 11, 14), _pa_.ident(two, 16, 19), _pa_.ident(three, 21, 26)), 7, 27) === _pa_.ident(seven, 32, 37), 28, 31), 'assert(sum(one, two, three) === seven);', 1))"
+    "assert(_pa_.expr(_pa_.binary(_pa_.funcall(sum(_pa_.ident(one,{start:{line:1,column:11},end:{line:1,column:14}}),_pa_.ident(two,{start:{line:1,column:16},end:{line:1,column:19}}),_pa_.ident(three,{start:{line:1,column:21},end:{line:1,column:26}})),{start:{line:1,column:7},end:{line:1,column:27}})===_pa_.ident(seven,{start:{line:1,column:32},end:{line:1,column:37}}),{start:{line:1,column:28},end:{line:1,column:31}}),{start:{line:1,column:7},end:{line:1,column:37}},'assert(sum(one, two, three) === seven);'))"
 );
 emtest(
     'assert(sum(sum(one, two), three) === sum(sum(two, three), seven));',
-    "assert(_pa_.expr(_pa_.binary(_pa_.funcall(sum(_pa_.funcall(sum(_pa_.ident(one, 15, 18), _pa_.ident(two, 20, 23)), 11, 24), _pa_.ident(three, 26, 31)), 7, 32) === _pa_.funcall(sum(_pa_.funcall(sum(_pa_.ident(two, 45, 48), _pa_.ident(three, 50, 55)), 41, 56), _pa_.ident(seven, 58, 63)), 37, 64), 33, 36), 'assert(sum(sum(one, two), three) === sum(sum(two, three), seven));', 1))"
+    "assert(_pa_.expr(_pa_.binary(_pa_.funcall(sum(_pa_.funcall(sum(_pa_.ident(one,{start:{line:1,column:15},end:{line:1,column:18}}),_pa_.ident(two,{start:{line:1,column:20},end:{line:1,column:23}})),{start:{line:1,column:11},end:{line:1,column:24}}),_pa_.ident(three,{start:{line:1,column:26},end:{line:1,column:31}})),{start:{line:1,column:7},end:{line:1,column:32}})===_pa_.funcall(sum(_pa_.funcall(sum(_pa_.ident(two,{start:{line:1,column:45},end:{line:1,column:48}}),_pa_.ident(three,{start:{line:1,column:50},end:{line:1,column:55}})),{start:{line:1,column:41},end:{line:1,column:56}}),_pa_.ident(seven,{start:{line:1,column:58},end:{line:1,column:63}})),{start:{line:1,column:37},end:{line:1,column:64}}),{start:{line:1,column:33},end:{line:1,column:36}}),{start:{line:1,column:7},end:{line:1,column:64}},'assert(sum(sum(one, two), three) === sum(sum(two, three), seven));'))"
 );
 emtest(
     'assert(math.calc.sum(one, two, three) === seven);',
-    "assert(_pa_.expr(_pa_.binary(_pa_.funcall(_pa_.ident(_pa_.ident(math, 7, 11).calc, 12, 16).sum(_pa_.ident(one, 21, 24), _pa_.ident(two, 26, 29), _pa_.ident(three, 31, 36)), 17, 20) === _pa_.ident(seven, 42, 47), 38, 41), 'assert(math.calc.sum(one, two, three) === seven);', 1))"
+    "assert(_pa_.expr(_pa_.binary(_pa_.funcall(_pa_.ident(_pa_.ident(math,{start:{line:1,column:7},end:{line:1,column:11}}).calc,{start:{line:1,column:12},end:{line:1,column:16}}).sum(_pa_.ident(one,{start:{line:1,column:21},end:{line:1,column:24}}),_pa_.ident(two,{start:{line:1,column:26},end:{line:1,column:29}}),_pa_.ident(three,{start:{line:1,column:31},end:{line:1,column:36}})),{start:{line:1,column:17},end:{line:1,column:20}})===_pa_.ident(seven,{start:{line:1,column:42},end:{line:1,column:47}}),{start:{line:1,column:38},end:{line:1,column:41}}),{start:{line:1,column:7},end:{line:1,column:47}},'assert(math.calc.sum(one, two, three) === seven);'))"
 );
-
 emtest(
     'assert((three * (seven * ten)) === three);',
-    "assert(_pa_.expr(_pa_.binary(_pa_.binary(_pa_.ident(three, 8, 13) * _pa_.binary(_pa_.ident(seven, 17, 22) * _pa_.ident(ten, 25, 28), 23, 24), 14, 15) === _pa_.ident(three, 35, 40), 31, 34), 'assert((three * (seven * ten)) === three);', 1))"
+    "assert(_pa_.expr(_pa_.binary(_pa_.binary(_pa_.ident(three,{start:{line:1,column:8},end:{line:1,column:13}})*_pa_.binary(_pa_.ident(seven,{start:{line:1,column:17},end:{line:1,column:22}})*_pa_.ident(ten,{start:{line:1,column:25},end:{line:1,column:28}}),{start:{line:1,column:23},end:{line:1,column:24}}),{start:{line:1,column:14},end:{line:1,column:16}})===_pa_.ident(three,{start:{line:1,column:35},end:{line:1,column:40}}),{start:{line:1,column:30},end:{line:1,column:34}}),{start:{line:1,column:7},end:{line:1,column:40}},'assert((three * (seven * ten)) === three);'))"
 );

@@ -13,7 +13,9 @@ var empower = require('../lib/empower'),
 
 var emtest = function (before, after, comment) {
     q.test(before, function (assert) {
-        var actual = empower(before, {module: 'commonjs'});
+        var tree = esprima.parse(before, {tolerant: true, loc: true});
+        empower.instrument(tree, {module: 'commonjs'});
+        var actual = escodegen.generate(tree, {format: {compact: true}});
         assert.equal(actual, after, comment);
     });
 };
@@ -23,8 +25,8 @@ q.module('useDefault');
 emtest(
     'assert(falsyStr);',
     [
-        "var _pa_ = require('power-assert');",
+        "var _pa_=require('power-assert');",
         "_pa_.useDefault();",
-        "assert(_pa_.expr(_pa_.ident(falsyStr, 7, 15), 'assert(falsyStr);', 1));"
-    ].join("\n")
+        "assert(_pa_.expr(_pa_.ident(falsyStr,{start:{line:1,column:7},end:{line:1,column:15}}),{start:{line:1,column:7},end:{line:1,column:15}}));"
+    ].join('')
 );
