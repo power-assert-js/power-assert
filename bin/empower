@@ -10,14 +10,18 @@
  *   https://raw.github.com/twada/power-assert.js/master/MIT-LICENSE.txt
  */
 var empower = require('../lib/empower'),
+    esprima = require('esprima'),
+    escodegen = require('escodegen'),
     argv = require('optimist').argv,
     fs = require('fs'),
-    options = {};
+    options = {},
+    file = argv._[0],
+    source = fs.readFileSync(file, 'utf-8'),
+    tree = esprima.parse(source, {tolerant: true, loc: true});
 
+options['source'] = source;
 if (argv.module) {
     options['module'] = argv.module;
 }
-
-var file = argv._[0];
-
-console.log(empower(fs.readFileSync(file, 'utf-8'), options));
+empower.instrument(tree, options);
+console.log(escodegen.generate(tree));
