@@ -1,17 +1,18 @@
 var empower = require('../lib/empower'),
     esprima = require('esprima'),
-    escodegen = require('escodegen');
+    escodegen = require('escodegen'),
+    tap;
 
 var _pa_ = require('../lib/power-assert');
 _pa_.useDefault();
 
 var q = require('qunitjs'),
-    util = require('util'),
     orig = _pa_.puts;
 
 (function (qu) {
-    var qunitTap = require("qunit-tap").qunitTap;
-    var tap = qunitTap(qu, util.puts, {showSourceOnFailure: false});
+    var qunitTap = require("qunit-tap").qunitTap,
+        util = require('util');
+    tap = qunitTap(qu, util.puts, {showSourceOnFailure: false});
     qu.init();
     qu.config.updateRate = 0;
 })(q);
@@ -44,7 +45,9 @@ var instrument = function () {
     return function (line) {
         var expression = extractExpressionFrom(line);
         empower.instrumentExpression(expression, {module: 'commonjs', strategy: 'inline', source: line});
-        return extractBodyOfAssertionAsCode(expression);
+        var instrumentedCode = extractBodyOfAssertionAsCode(expression);
+        //tap.note(instrumentedCode);
+        return instrumentedCode;
     };
 }();
 
