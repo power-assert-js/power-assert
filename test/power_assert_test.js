@@ -33,19 +33,23 @@ q.module('formatter & reporter', {
 
 
 var instrument = function () {
-    var extractExpressionFrom = function (string) {
-        var tree = esprima.parse(string, {tolerant: true, loc: true}),
-            expressionStatement = tree.body[0],
-            expression = expressionStatement.expression;
-        return expression;
+    var extractBodyFrom = function (source) {
+        var tree = esprima.parse(source, {tolerant: true, loc: true});
+        return tree.body[0];
     };
-    var extractBodyOfAssertionAsCode = function (expression) {
+    var extractBodyOfAssertionAsCode = function (node) {
+        var expression;
+        if (node.type === 'ExpressionStatement') {
+            expression = node.expression;
+        } else if (node.type === 'ReturnStatement') {
+            expression = node.argument;
+        }
         return escodegen.generate(expression.arguments[0], {format: {compact: true}});
     };
     return function (line) {
-        var expression = extractExpressionFrom(line);
-        empower.instrumentExpression(expression, {module: 'commonjs', strategy: 'inline', source: line});
-        var instrumentedCode = extractBodyOfAssertionAsCode(expression);
+        var tree = extractBodyFrom(line);
+        empower.instrumentTree(tree, {module: 'commonjs', strategy: 'inline', source: line});
+        var instrumentedCode = extractBodyOfAssertionAsCode(tree);
         //tap.note(instrumentedCode);
         return instrumentedCode;
     };
@@ -60,6 +64,19 @@ q.test('Identifier with empty string', function (assert) {
         "assert(falsyStr);",
         "       |         ",
         "       \"\"        ",
+        ""
+    ]);
+});
+
+
+q.test('ReturnStatement', function (assert) {
+    var falsyStr = '';
+    eval(instrument('return assert(falsyStr);'));
+    assert.deepEqual(this.lines, [
+        "# at line: 1",
+        "return assert(falsyStr);",
+        "              |         ",
+        "              \"\"        ",
         ""
     ]);
 });
