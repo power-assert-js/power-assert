@@ -21,11 +21,10 @@
         "url": "http://github.com/twada/power-assert.js.git"
     },
     "dependencies": {
-        "esprima": "1.0.2",
-        "escodegen": "0.0.20",
-        "esmangle": "0.0.12",
-        "optimist": "0.3.5",
-        "source-map": "0.1.21"
+        "esprima": "1.0.3",
+        "escodegen": "0.0.24",
+        "optimist": "0.6.0",
+        "source-map": "0.1.25"
     },
     "devDependencies": {
         "qunitjs": "1.10.0",
