@@ -32,7 +32,7 @@ q.module('formatter & reporter', {
 
 var instrument = function () {
     var extractBodyFrom = function (source) {
-        var tree = esprima.parse(source, {tolerant: true, loc: true});
+        var tree = esprima.parse(source, {tolerant: true, loc: true, range: true});
         return tree.body[0];
     };
     var extractBodyOfAssertionAsCode = function (node) {
@@ -398,9 +398,9 @@ q.test('Nested CallExpression with BinaryExpression: assert((three * (seven * te
     assert.deepEqual(this.lines, [
         "# at line: 1",
         "assert((three * (seven * ten)) === three);",
-        "        |     |  |     | |    |    |      ",
-        "        |     |  |     | |    |    3      ",
-        "        |     |  |     | 10   false       ",
+        "        |     |  |     | |     |   |      ",
+        "        |     |  |     | |     |   3      ",
+        "        |     |  |     | 10    false      ",
         "        |     |  7     70                 ",
         "        3     210                         ",
         ""

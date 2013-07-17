@@ -17,7 +17,7 @@ var empower = require('../lib/empower'),
     options = {},
     file = argv._[0],
     source = fs.readFileSync(file, 'utf-8'),
-    tree = esprima.parse(source, {tolerant: true, loc: true});
+    tree = esprima.parse(source, {tolerant: true, loc: true, range: true});
 
 options['source'] = source;
 if (argv.module) {
