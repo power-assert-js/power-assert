@@ -3,8 +3,7 @@ var empower = require('../lib/empower'),
     escodegen = require('escodegen'),
     q = require('qunitjs'),
     tap,
-    _pa_ = require('../lib/power-assert');
-_pa_.useDefault();
+    _pa_ = require('../lib/power-assert').useDefault();
 
 (function (qu) {
     var qunitTap = require("qunit-tap").qunitTap,
