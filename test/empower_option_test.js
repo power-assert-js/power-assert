@@ -36,7 +36,7 @@ var destructiveOptionTest = function (testName, option, callback) {
     q.test(testName, function (assert) {
         var tree = esprima.parse('assert(falsyStr);', {tolerant: true, loc: true, range: true}),
             saved = empower.deepCopy(tree),
-            result = empower.instrument(tree, option);
+            result = empower(tree, option);
         callback(assert, saved, tree, result);
     });
 };

@@ -23,7 +23,7 @@ q.test('with CoffeeScriptRedux toolchain', function (assert) {
     assert.ok(jsAST);
 
     //console.log(JSON.stringify(jsAST, null, 4));
-    var empoweredAst = empower.instrument(jsAST, {destructive: false, source: csCode});
+    var empoweredAst = empower(jsAST, {destructive: false, source: csCode});
 
     var jsGenerateOptions = {compact: true};
     var jsCode = CoffeeScript.js(empoweredAst, jsGenerateOptions);
