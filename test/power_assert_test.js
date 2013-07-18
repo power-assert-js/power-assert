@@ -1,17 +1,16 @@
 var empower = require('../lib/empower'),
     esprima = require('esprima'),
     escodegen = require('escodegen'),
+    _pa_ = require('../lib/power-assert').useDefault(),
     q = require('qunitjs'),
-    tap,
-    _pa_ = require('../lib/power-assert').useDefault();
-
-(function (qu) {
-    var qunitTap = require("qunit-tap").qunitTap,
-        util = require('util');
-    tap = qunitTap(qu, util.puts, {showSourceOnFailure: false});
-    qu.init();
-    qu.config.updateRate = 0;
-})(q);
+    tap = (function (qu) {
+        var qunitTap = require("qunit-tap").qunitTap,
+            util = require('util'),
+            tap = qunitTap(qu, util.puts, {showSourceOnFailure: false});
+        qu.init();
+        qu.config.updateRate = 0;
+        return tap;
+    })(q);
 
 
 q.module('formatter & reporter', {

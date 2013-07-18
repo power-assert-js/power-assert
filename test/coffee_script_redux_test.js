@@ -1,10 +1,10 @@
 var empower = require('../lib/empower'),
     CoffeeScript = require('coffee-script-redux'),
     q = require('qunitjs'),
-    util = require('util'),
     tap = (function (qu) {
-        var qunitTap = require("qunit-tap").qunitTap;
-        var tap = qunitTap(qu, util.puts, {showSourceOnFailure: false});
+        var qunitTap = require("qunit-tap").qunitTap,
+            util = require('util'),
+            tap = qunitTap(qu, util.puts, {showSourceOnFailure: false});
         qu.init();
         qu.config.updateRate = 0;
         return tap;
