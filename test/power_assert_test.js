@@ -46,7 +46,7 @@ var instrument = function () {
     };
     return function (line) {
         var tree = extractBodyFrom(line);
-        var result = empower.instrumentTree(tree, {destructive: false, module: 'commonjs', source: line});
+        var result = empower.instrumentTree(tree, {destructive: false, source: line});
         var instrumentedCode = extractBodyOfAssertionAsCode(result);
         //tap.note(instrumentedCode);
         return instrumentedCode;
