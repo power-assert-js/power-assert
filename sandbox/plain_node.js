@@ -1,4 +1,5 @@
 var assert = require('assert');
+var _pa_ = require('power-assert').useDefault();
 
 var hoge = 'foo';
 var fuga = 'bar';

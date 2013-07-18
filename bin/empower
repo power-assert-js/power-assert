@@ -20,8 +20,5 @@ var empower = require('../lib/empower'),
     tree = esprima.parse(source, {tolerant: true, loc: true, range: true});
 
 options['source'] = source;
-if (argv.module) {
-    options['module'] = argv.module;
-}
-empower.instrument(tree, options);
+tree = empower(tree, options);
 console.log(escodegen.generate(tree));

@@ -12,23 +12,6 @@ var empower = require('../lib/empower'),
     })(q);
 
 
-q.module('module option');
-
-q.test('module: commonjs', function (assert) {
-    var option = {module: 'commonjs'},
-        tree = esprima.parse('assert(falsyStr);', {tolerant: true, loc: true, range: true}),
-        result = empower.instrument(tree, option),
-        actual = escodegen.generate(result, {format: {compact: true}}),
-        expected = [
-            "var _pa_=require('power-assert');",
-            "_pa_.useDefault();",
-            "assert(_pa_.expr(_pa_.ident(falsyStr,{start:{line:1,column:7}}),{start:{line:1,column:7}}));"
-        ].join('');
-    assert.equal(actual, expected);
-});
-
-
-
 q.module('destructive option');
 
 var destructiveOptionTest = function (testName, option, callback) {

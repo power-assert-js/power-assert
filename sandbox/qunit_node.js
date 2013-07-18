@@ -1,4 +1,5 @@
 var q = require('qunitjs');
+var _pa_ = require('power-assert').useDefault();
 
 q.test('spike', function (assert) {
     assert.ok(true);
