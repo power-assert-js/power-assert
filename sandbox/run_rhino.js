@@ -1,4 +1,4 @@
-load('lib/power-assert.js');
+load('lib/power-assert-core.js');
 load('lib/power-assert-collector.js');
 load('lib/power-assert-formatter-compact.js');
 load('node_modules/qunitjs/qunit/qunit.js');
