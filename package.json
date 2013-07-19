@@ -9,7 +9,7 @@
         "email": "takuto.wada@gmail.com",
         "url": "http://github.com/twada"
     },
-    "main": "./lib/power-assert",
+    "main": "./lib/module",
     "bin": {
         "empower": "./bin/empower"
     },
