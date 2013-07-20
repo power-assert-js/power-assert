@@ -44,7 +44,7 @@ var instrument = function () {
     };
     return function (line) {
         var tree = extractBodyFrom(line);
-        var result = empower(tree, {destructive: false, source: line});
+        var result = empower(tree, {destructive: false, source: line, path: '/path/to/some_test.js'});
         var instrumentedCode = extractBodyOfAssertionAsCode(result);
         //tap.note(instrumentedCode);
         return instrumentedCode;
@@ -56,7 +56,7 @@ q.test('Identifier with empty string', function (assert) {
     var falsyStr = '';
     eval(instrument('assert(falsyStr);'));
     assert.deepEqual(this.lines, [
-        "# at line: 1",
+        "# /path/to/some_test.js:1",
         "assert(falsyStr);",
         "       |         ",
         "       \"\"        ",
@@ -69,7 +69,7 @@ q.test('ReturnStatement', function (assert) {
     var falsyStr = '';
     eval(instrument('return assert(falsyStr);'));
     assert.deepEqual(this.lines, [
-        "# at line: 1",
+        "# /path/to/some_test.js:1",
         "return assert(falsyStr);",
         "              |         ",
         "              \"\"        ",
@@ -82,7 +82,7 @@ q.test('Identifier with falsy number', function (assert) {
     var falsyNum = 0;
     eval(instrument('assert(falsyNum);'));
     assert.deepEqual(this.lines, [
-        "# at line: 1",
+        "# /path/to/some_test.js:1",
         "assert(falsyNum);",
         "       |         ",
         "       0         ",
@@ -95,7 +95,7 @@ q.test('UnaryExpression, negation', function (assert) {
     var truth = true;
     eval(instrument('assert(!truth);'));
     assert.deepEqual(this.lines, [
-        "# at line: 1",
+        "# /path/to/some_test.js:1",
         "assert(!truth);",
         "        |      ",
         "        true   ",
@@ -108,7 +108,7 @@ q.test('UnaryExpression, double negative', function (assert) {
     var some = '';
     eval(instrument('assert(!!some);'));
     assert.deepEqual(this.lines, [
-        "# at line: 1",
+        "# /path/to/some_test.js:1",
         "assert(!!some);",
         "         |     ",
         "         \"\"    ",
@@ -120,7 +120,7 @@ q.test('UnaryExpression, double negative', function (assert) {
 q.test('typeof operator: assert(typeof foo !== "undefined");', function (assert) {
     eval(instrument('assert(typeof foo !== \"undefined\");'));
     assert.deepEqual(this.lines, [
-        "# at line: 1",
+        "# /path/to/some_test.js:1",
         "assert(typeof foo !== \"undefined\");",
         "                  |                ",
         "                  false            ",
@@ -146,7 +146,7 @@ q.test('assert(fuga === piyo);', function (assert) {
         piyo = 8;
     eval(instrument('assert(fuga === piyo);'));
     assert.deepEqual(this.lines, [
-        "# at line: 1",
+        "# /path/to/some_test.js:1",
         "assert(fuga === piyo);",
         "       |    |   |     ",
         "       |    |   8     ",
@@ -162,7 +162,7 @@ q.test('assert(fuga !== piyo);', function (assert) {
         piyo = 'foo';
     eval(instrument('assert(fuga !== piyo);'));
     assert.deepEqual(this.lines, [
-        "# at line: 1",
+        "# /path/to/some_test.js:1",
         "assert(fuga !== piyo);",
         "       |    |   |     ",
         "       |    |   \"foo\" ",
@@ -177,7 +177,7 @@ q.test('BinaryExpression with Literal and Identifier: assert(fuga !== 4);', func
     var fuga = 4;
     eval(instrument('assert(fuga !== 4);'));
     assert.deepEqual(this.lines, [
-        "# at line: 1",
+        "# /path/to/some_test.js:1",
         "assert(fuga !== 4);",
         "       |    |      ",
         "       4    false  ",
@@ -189,7 +189,7 @@ q.test('BinaryExpression with Literal and Identifier: assert(fuga !== 4);', func
 q.test('assert(4 !== 4);', function (assert) {
     eval(instrument('assert(4 !== 4);'));
     assert.deepEqual(this.lines, [
-        "# at line: 1",
+        "# /path/to/some_test.js:1",
         "assert(4 !== 4);",
         "         |      ",
         "         false  ",
@@ -203,7 +203,7 @@ q.test('MemberExpression: assert(ary1.length === ary2.length);', function (asser
     var ary2 = ['aaa', 'bbb', 'ccc'];
     eval(instrument('assert(ary1.length === ary2.length);'));
     assert.deepEqual(this.lines, [
-        "# at line: 1",
+        "# /path/to/some_test.js:1",
         "assert(ary1.length === ary2.length);",
         "       |    |      |   |    |       ",
         "       |    |      |   |    3       ",
@@ -219,7 +219,7 @@ q.test('LogicalExpression: assert(5 < actual && actual < 13);', function (assert
     var actual = 16;
     eval(instrument('assert(5 < actual && actual < 13);'));
     assert.deepEqual(this.lines, [
-        "# at line: 1",
+        "# /path/to/some_test.js:1",
         "assert(5 < actual && actual < 13);",
         "         | |         |      |     ",
         "         | 16        16     false ",
@@ -233,7 +233,7 @@ q.test('LogicalExpression OR: assert.ok(actual < 5 || 13 < actual);', function (
     var actual = 10;
     eval(instrument('assert.ok(actual < 5 || 13 < actual);'));
     assert.deepEqual(this.lines, [
-        "# at line: 1",
+        "# /path/to/some_test.js:1",
         "assert.ok(actual < 5 || 13 < actual);",
         "          |      |         | |       ",
         "          |      |         | 10      ",
@@ -247,7 +247,7 @@ q.test('Characterization test of LogicalExpression current spec: assert(2 > actu
     var actual = 5;
     eval(instrument('assert(2 > actual && actual < 13);'));
     assert.deepEqual(this.lines, [
-        "# at line: 1",
+        "# /path/to/some_test.js:1",
         "assert(2 > actual && actual < 13);",
         "         | |                      ",
         "         | 5                      ",
@@ -265,7 +265,7 @@ q.test('Deep MemberExpression chain: assert(foo.bar.baz);', function (assert) {
     };
     eval(instrument('assert(foo.bar.baz);'));
     assert.deepEqual(this.lines, [
-        "# at line: 1",
+        "# /path/to/some_test.js:1",
         "assert(foo.bar.baz);",
         "       |   |   |    ",
         "       |   |   false",
@@ -280,7 +280,7 @@ q.test('assert(func());', function (assert) {
     var func = function () { return false; };
     eval(instrument('assert(func());'));
     assert.deepEqual(this.lines, [
-        "# at line: 1",
+        "# /path/to/some_test.js:1",
         "assert(func());",
         "       |       ",
         "       false   ",
@@ -297,7 +297,7 @@ q.test('assert(obj.age());', function (assert) {
     };
     eval(instrument('assert(obj.age());'));
     assert.deepEqual(this.lines, [
-        "# at line: 1",
+        "# /path/to/some_test.js:1",
         "assert(obj.age());",
         "       |   |      ",
         "       {}  0      ",
@@ -313,7 +313,7 @@ q.test('CallExpression with arguments: assert(isFalsy(positiveInt));', function 
     var positiveInt = 50;
     eval(instrument('assert(isFalsy(positiveInt));'));
     assert.deepEqual(this.lines, [
-        "# at line: 1",
+        "# /path/to/some_test.js:1",
         "assert(isFalsy(positiveInt));",
         "       |       |             ",
         "       false   50            ",
@@ -333,7 +333,7 @@ q.test('assert(sum(one, two, three) === seven);', function (assert) {
     var one = 1, two = 2, three = 3, seven = 7, ten = 10;
     eval(instrument('assert(sum(one, two, three) === seven);'));
     assert.deepEqual(this.lines, [
-        "# at line: 1",
+        "# /path/to/some_test.js:1",
         "assert(sum(one, two, three) === seven);",
         "       |   |    |    |      |   |      ",
         "       |   |    |    |      |   7      ",
@@ -354,7 +354,7 @@ q.test('CallExpression with CallExpressions as arguments: assert(sum(sum(one, tw
     var one = 1, two = 2, three = 3, seven = 7, ten = 10;
     eval(instrument('assert(sum(sum(one, two), three) === sum(sum(two, three), seven));'));
     assert.deepEqual(this.lines, [
-        "# at line: 1",
+        "# /path/to/some_test.js:1",
         "assert(sum(sum(one, two), three) === sum(sum(two, three), seven));",
         "       |   |   |    |     |      |   |   |   |    |       |       ",
         "       |   |   |    |     |      |   12  5   2    3       7       ",
@@ -379,7 +379,7 @@ q.test('assert(math.calc.sum(one, two, three) === seven);', function (assert) {
     var one = 1, two = 2, three = 3, seven = 7, ten = 10;
     eval(instrument('assert(math.calc.sum(one, two, three) === seven);'));
     assert.deepEqual(this.lines, [
-        "# at line: 1",
+        "# /path/to/some_test.js:1",
         "assert(math.calc.sum(one, two, three) === seven);",
         "       |    |    |   |    |    |      |   |      ",
         "       |    |    |   |    |    |      |   7      ",
@@ -394,7 +394,7 @@ q.test('Nested CallExpression with BinaryExpression: assert((three * (seven * te
     var one = 1, two = 2, three = 3, seven = 7, ten = 10;
     eval(instrument('assert((three * (seven * ten)) === three);'));
     assert.deepEqual(this.lines, [
-        "# at line: 1",
+        "# /path/to/some_test.js:1",
         "assert((three * (seven * ten)) === three);",
         "        |     |  |     | |     |   |      ",
         "        |     |  |     | |     |   3      ",
@@ -411,7 +411,7 @@ q.test('Simple BinaryExpression with comment', function (assert) {
     var fuga = 'bar';
     eval(instrument('assert.ok(hoge === fuga, \'comment\');'));
     assert.deepEqual(this.lines, [
-        "# at line: 1",
+        "# /path/to/some_test.js:1",
         "assert.ok(hoge === fuga, 'comment');",
         "          |    |   |                ",
         "          |    |   \"bar\"            ",
@@ -427,7 +427,7 @@ q.test('Looooong string', function (assert) {
     var anotherLongString = 'yet another loooooooooooooooooooooooooooooooooooooooooooooooooooong message';
     eval(instrument('assert(longString === anotherLongString);'));
     assert.deepEqual(this.lines, [
-        "# at line: 1",
+        "# /path/to/some_test.js:1",
         "assert(longString === anotherLongString);",
         "       |          |   |                  ",
         "       |          |   \"yet another loooooooooooooooooooooooooooooooooooooooooooooooooooong message\"",

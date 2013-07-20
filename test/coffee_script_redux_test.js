@@ -28,11 +28,11 @@ q.test('with CoffeeScriptRedux toolchain', function (assert) {
     assert.ok(jsAST);
 
     //console.log(JSON.stringify(jsAST, null, 4));
-    var empoweredAst = empower(jsAST, {destructive: false, source: csCode});
+    var empoweredAst = empower(jsAST, {destructive: false, source: csCode, path: '/path/to/foo_test.coffee'});
 
     var jsGenerateOptions = {compact: true};
     var jsCode = CoffeeScript.js(empoweredAst, jsGenerateOptions);
-    assert.equal(jsCode, "assert.ok(_pa_.expr(_pa_.binary(_pa_.funcall(_pa_.ident(dog,{start:{line:1,column:10}}).speak(),{start:{line:1,column:14}})===_pa_.ident(says,{start:{line:1,column:25}}),{start:{line:1,column:22}}),{start:{line:1,column:10}},'assert.ok dog.speak() == says'))");
+    assert.equal(jsCode, "assert.ok(_pa_.expr(_pa_.binary(_pa_.funcall(_pa_.ident(dog,{start:{line:1,column:10}}).speak(),{start:{line:1,column:14}})===_pa_.ident(says,{start:{line:1,column:25}}),{start:{line:1,column:22}}),{start:{line:1,column:10},path:'/path/to/foo_test.coffee'},'assert.ok dog.speak() == says'))");
 });
 
 
@@ -79,7 +79,7 @@ q.test('assert.ok dog.speak() == says', function () {
         says = 'meow';
     eval(empowerCoffee('assert.ok dog.speak() == says'));
     q.assert.deepEqual(this.lines, [
-        "# at line: 1",
+        "# /path/to/foo_test.coffee:1",
         "assert.ok dog.speak() == says",
         "          |   |       |  |   ",
         "          |   |       |  \"meow\"",

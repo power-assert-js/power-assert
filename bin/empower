@@ -16,9 +16,11 @@ var empower = require('../lib/empower'),
     fs = require('fs'),
     options = {},
     file = argv._[0],
+    path = fs.realpathSync(file),
     source = fs.readFileSync(file, 'utf-8'),
     tree = esprima.parse(source, {tolerant: true, loc: true, range: true});
 
+options['path'] = path;
 options['source'] = source;
 tree = empower(tree, options);
 console.log(escodegen.generate(tree));
