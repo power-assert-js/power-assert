@@ -1,5 +1,6 @@
 .git*
 test/
+test_helper.js
 .idea*
 node_modules/
 run.sh

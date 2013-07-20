@@ -1,15 +1,8 @@
-var empower = require('../lib/empower'),
-    esprima = require('esprima'),
-    escodegen = require('escodegen'),
-    q = require('qunitjs'),
-    tap = (function (qu) {
-        var qunitTap = require("qunit-tap").qunitTap,
-            util = require('util'),
-            tap = qunitTap(qu, util.puts, {showSourceOnFailure: false});
-        qu.init();
-        qu.config.updateRate = 0;
-        return tap;
-    })(q);
+var q = require('../test_helper').QUnit,
+    _pa_ = require('../lib/module').useDefault(),
+    instrument = require('../test_helper').instrument,
+    empower = require('../lib/empower'),
+    esprima = require('esprima');
 
 
 q.module('destructive option');

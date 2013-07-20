@@ -1,16 +1,6 @@
-var empower = require('../lib/empower'),
-    esprima = require('esprima'),
-    escodegen = require('escodegen'),
+var q = require('../test_helper').QUnit,
     _pa_ = require('../lib/module').useDefault(),
-    q = require('qunitjs'),
-    tap = (function (qu) {
-        var qunitTap = require("qunit-tap").qunitTap,
-            util = require('util'),
-            tap = qunitTap(qu, util.puts, {showSourceOnFailure: false});
-        qu.init();
-        qu.config.updateRate = 0;
-        return tap;
-    })(q);
+    instrument = require('../test_helper').instrument;
 
 
 q.module('formatter & reporter', {
@@ -26,30 +16,6 @@ q.module('formatter & reporter', {
         _pa_.puts = this.origPuts;
     }
 });
-
-
-var instrument = function () {
-    var extractBodyFrom = function (source) {
-        var tree = esprima.parse(source, {tolerant: true, loc: true, range: true});
-        return tree.body[0];
-    };
-    var extractBodyOfAssertionAsCode = function (node) {
-        var expression;
-        if (node.type === 'ExpressionStatement') {
-            expression = node.expression;
-        } else if (node.type === 'ReturnStatement') {
-            expression = node.argument;
-        }
-        return escodegen.generate(expression.arguments[0], {format: {compact: true}});
-    };
-    return function (line) {
-        var tree = extractBodyFrom(line);
-        var result = empower(tree, {destructive: false, source: line, path: '/path/to/some_test.js'});
-        var instrumentedCode = extractBodyOfAssertionAsCode(result);
-        //tap.note(instrumentedCode);
-        return instrumentedCode;
-    };
-}();
 
 
 q.test('Identifier with empty string', function (assert) {
