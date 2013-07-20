@@ -26,9 +26,10 @@ var instrument = function () {
         }
         return escodegen.generate(expression.arguments[0], {format: {compact: true}});
     };
-    return function (line) {
+    return function (line, options) {
+        options = options || {destructive: false, source: line, path: '/path/to/some_test.js'};
         var tree = extractBodyFrom(line);
-        var result = empower(tree, {destructive: false, source: line, path: '/path/to/some_test.js'});
+        var result = empower(tree, options);
         var instrumentedCode = extractBodyOfAssertionAsCode(result);
         //tap.note(instrumentedCode);
         return instrumentedCode;

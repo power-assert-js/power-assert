@@ -33,3 +33,43 @@ destructiveOptionTest('destructive: true', {destructive: true}, function (assert
     assert.notDeepEqual(after, before);
     assert.deepEqual(after, tree);
 });
+
+
+
+q.module('path option', {
+    setup: function () {
+        var that = this;
+        that.lines = [];
+        this.origPuts = _pa_.puts;
+        _pa_.puts = function (str) {
+            that.lines.push(str);
+        };
+    },
+    teardown: function () {
+        _pa_.puts = this.origPuts;
+    }
+});
+
+q.test('when path option is undefined', function (assert) {
+    var falsyStr = '';
+    eval(instrument('assert(falsyStr);', {destructive: false, source: 'assert(falsyStr);'}));
+    assert.deepEqual(this.lines, [
+        "# at line: 1",
+        "assert(falsyStr);",
+        "       |         ",
+        "       \"\"        ",
+        ""
+    ]);
+});
+
+q.test('when path option is provided', function (assert) {
+    var falsyStr = '';
+    eval(instrument('assert(falsyStr);', {destructive: false, source: 'assert(falsyStr);', path: '/path/to/source.js'}));
+    assert.deepEqual(this.lines, [
+        "# /path/to/source.js:1",
+        "assert(falsyStr);",
+        "       |         ",
+        "       \"\"        ",
+        ""
+    ]);
+});
