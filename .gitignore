@@ -5,6 +5,7 @@
 /sandbox/qunit_rhino_empowered.js
 /sandbox/dog.test.empowered.js
 /sandbox/dog.test.node.empowered.js
+/sandbox/mocha_node_empowered.js
 /expr.js
 /js.jar
 /TODO.txt
