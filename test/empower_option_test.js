@@ -73,3 +73,31 @@ q.test('when path option is provided', function (assert) {
         ""
     ]);
 });
+
+
+q.module('AST prerequisites. Error should be thrown if loc is missing.', {
+    setup: function () {
+        this.jsCode = 'assert(falsyStr);',
+        this.tree = esprima.parse(this.jsCode, {tolerant: true, loc: false});
+    }
+});
+
+q.test('Error content (without path)', function (assert) {
+    try {
+        empower(this.tree, {destructive: false, source: this.jsCode});
+        assert.ok(false, 'Error should be thrown');
+    } catch (e) {
+        assert.equal(e.name, 'Error');
+        assert.equal(e.message, "JavaScript AST should contain location information.");
+    }
+});
+
+q.test('Error content (with path)', function (assert) {
+    try {
+        empower(this.tree, {destructive: false, source: this.jsCode, path: '/path/to/baz_test.js'});
+        assert.ok(false, 'Error should be thrown');
+    } catch (e) {
+        assert.equal(e.name, 'Error');
+        assert.equal(e.message, "JavaScript AST should contain location information. path: /path/to/baz_test.js");
+    }
+});
