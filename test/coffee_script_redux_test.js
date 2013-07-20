@@ -57,7 +57,7 @@ var empowerCoffee = function () {
             csAST = CoffeeScript.parse(csCode, parseOptions),
             compileOptions = {bare: false},
             jsAST = CoffeeScript.compile(csAST, compileOptions),
-            empoweredAst = empower(jsAST, {destructive: false, source: csCode}),
+            empoweredAst = empower(jsAST, {destructive: false, source: csCode, path: '/path/to/bar_test.coffee'}),
             expression = empoweredAst.body[0],
             instrumentedCode = extractBodyOfAssertionAsCode(expression);
         //tap.note(instrumentedCode);
@@ -71,7 +71,7 @@ q.test('assert.ok dog.speak() == says', function () {
         says = 'meow';
     eval(empowerCoffee('assert.ok dog.speak() == says'));
     q.assert.deepEqual(this.lines, [
-        "# /path/to/foo_test.coffee:1",
+        "# /path/to/bar_test.coffee:1",
         "assert.ok dog.speak() == says",
         "          |   |       |  |   ",
         "          |   |       |  \"meow\"",
