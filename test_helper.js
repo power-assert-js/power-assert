@@ -30,6 +30,15 @@ var instrument = function () {
         options = options || {destructive: false, source: line, path: '/path/to/some_test.js'};
         var tree = extractBodyFrom(line);
         var result = empower(tree, options);
+
+        empower.traverse(result, function (node) {
+            if (typeof node.type === 'undefined') {
+                return;
+            }
+            q.assert.ok(typeof node.loc !== 'undefined', 'type: ' + node.type);
+            q.assert.ok(typeof node.range !== 'undefined', 'type: ' + node.type);
+        });
+
         var instrumentedCode = extractBodyOfAssertionAsCode(result);
         //tap.note(instrumentedCode);
         return instrumentedCode;

@@ -75,6 +75,7 @@ q.test('when path option is provided', function (assert) {
 });
 
 
+
 q.module('AST prerequisites. Error should be thrown if loc is missing.', {
     setup: function () {
         this.jsCode = 'assert(falsyStr);',
@@ -101,3 +102,21 @@ q.test('Error content (with path)', function (assert) {
         assert.equal(e.message, 'JavaScript AST should contain location information. path: /path/to/baz_test.js');
     }
 });
+
+
+
+q.module('preserve location information');
+
+q.test('preserve location of instrumented nodes', function (assert) {
+    var tree = esprima.parse('assert((three * (seven * ten)) === three);', {tolerant: true, loc: true, range: true}),
+        saved = empower.deepCopy(tree),
+        result = empower(tree, {destructive: false, source: this.jsCode, path: '/path/to/baz_test.js'});
+    empower.traverse(result, function (node) {
+        if (typeof node.type === 'undefined') {
+            return;
+        }
+        assert.ok(typeof node.loc !== 'undefined', 'type: ' + node.type);
+        assert.ok(typeof node.range !== 'undefined', 'type: ' + node.type);
+    });
+});
+
