@@ -402,3 +402,42 @@ q.test('Looooong string', function (assert) {
         ""
     ]);
 });
+
+
+q.test('double byte character width', function (assert) {
+    var fuga = 'あい',
+        piyo = 'うえお';
+    var concat = function (a, b) {
+        return a + b;
+    };
+    eval(instrument('assert(!concat(fuga, piyo));'));
+    assert.deepEqual(this.lines, [
+        '# /path/to/some_test.js:1',
+        'assert(!concat(fuga, piyo));',
+        '        |      |     |      ',
+        '        |      |     "うえお"',
+        '        |      "あい"       ',
+        '        "あいうえお"        ',
+        ''
+    ]);
+
+});
+
+
+q.test('Japanese hankaku width', function (assert) {
+    var fuga = 'ｱｲ',
+        piyo = 'ｳｴｵ';
+    var concat = function (a, b) {
+        return a + b;
+    };
+    eval(instrument('assert(!concat(fuga, piyo));'));
+    assert.deepEqual(this.lines, [
+        '# /path/to/some_test.js:1',
+        'assert(!concat(fuga, piyo));',
+        '        |      |     |      ',
+        '        |      "ｱｲ"  "ｳｴｵ"  ',
+        '        "ｱｲｳｴｵ"             ',
+        ''
+    ]);
+
+});
