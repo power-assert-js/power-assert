@@ -71,11 +71,11 @@ q.test('assert.ok dog.speak() == says', function () {
         says = 'meow';
     eval(empowerCoffee('assert.ok dog.speak() == says'));
     q.assert.deepEqual(this.lines, [
-        "# /path/to/bar_test.coffee:1",
-        "assert.ok dog.speak() == says",
-        "          |   |       |  |   ",
-        "          |   |       |  \"meow\"",
-        "          {}  \"woof\"  false  ",
-        ""
+        '# /path/to/bar_test.coffee:1',
+        'assert.ok dog.speak() == says',
+        '          |   |       |  |   ',
+        '          |   |       |  "meow"',
+        '          {}  "woof"  false  ',
+        ''
     ]);
 });

@@ -54,11 +54,11 @@ q.test('when path option is undefined', function (assert) {
     var falsyStr = '';
     eval(instrument('assert(falsyStr);', {destructive: false, source: 'assert(falsyStr);'}));
     assert.deepEqual(this.lines, [
-        "# at line: 1",
-        "assert(falsyStr);",
-        "       |         ",
-        "       \"\"        ",
-        ""
+        '# at line: 1',
+        'assert(falsyStr);',
+        '       |         ',
+        '       ""        ',
+        ''
     ]);
 });
 
@@ -66,11 +66,11 @@ q.test('when path option is provided', function (assert) {
     var falsyStr = '';
     eval(instrument('assert(falsyStr);', {destructive: false, source: 'assert(falsyStr);', path: '/path/to/source.js'}));
     assert.deepEqual(this.lines, [
-        "# /path/to/source.js:1",
-        "assert(falsyStr);",
-        "       |         ",
-        "       \"\"        ",
-        ""
+        '# /path/to/source.js:1',
+        'assert(falsyStr);',
+        '       |         ',
+        '       ""        ',
+        ''
     ]);
 });
 
@@ -88,7 +88,7 @@ q.test('Error content (without path)', function (assert) {
         assert.ok(false, 'Error should be thrown');
     } catch (e) {
         assert.equal(e.name, 'Error');
-        assert.equal(e.message, "JavaScript AST should contain location information.");
+        assert.equal(e.message, 'JavaScript AST should contain location information.');
     }
 });
 
@@ -98,6 +98,6 @@ q.test('Error content (with path)', function (assert) {
         assert.ok(false, 'Error should be thrown');
     } catch (e) {
         assert.equal(e.name, 'Error');
-        assert.equal(e.message, "JavaScript AST should contain location information. path: /path/to/baz_test.js");
+        assert.equal(e.message, 'JavaScript AST should contain location information. path: /path/to/baz_test.js');
     }
 });
