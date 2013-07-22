@@ -1,5 +1,7 @@
 .git*
 test/
+mocha_tests/
+empowered_tests/
 test_helper.js
 .idea*
 node_modules/
