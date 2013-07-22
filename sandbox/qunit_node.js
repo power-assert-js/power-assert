@@ -1,5 +1,12 @@
-var q = require('qunitjs');
-var _pa_ = require('power-assert').useDefault();
+var q = require('power-assert').empowerQUnit(require('qunitjs')),
+    tap = (function (qu) {
+        var qunitTap = require("qunit-tap").qunitTap,
+            util = require('util'),
+            tap = qunitTap(qu, util.puts, {showSourceOnFailure: false});
+        qu.init();
+        qu.config.updateRate = 0;
+        return tap;
+    })(q);
 
 q.test('spike', function (assert) {
     assert.ok(true);

@@ -1,5 +1,7 @@
-q = require 'qunitjs'
-_pa_ = require('power-assert').useDefault();
+q = require('power-assert').empowerQUnit(require 'qunitjs')
+require("qunit-tap").qunitTap(q, require('util').puts, {showSourceOnFailure: false})
+q.init()
+q.config.updateRate = 0
 
 class Dog
     speak: -> "woof"
