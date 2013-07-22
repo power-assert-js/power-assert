@@ -2,7 +2,7 @@ var assert = require('../lib/module'),
     expect = require('expect.js');
 
 describe('power-assert message', function () {
-    before(function () {
+    beforeEach(function () {
         this.expectPowerAssertMessage = function (body, expectedLines) {
             try {
                 body();
