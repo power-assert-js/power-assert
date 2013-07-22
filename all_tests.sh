@@ -9,3 +9,4 @@ do
 done
 
 prove --exec='./node_modules/.bin/mocha --reporter tap' empowered_tests/*
+prove --exec=node test/*
