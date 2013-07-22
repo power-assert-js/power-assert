@@ -72,6 +72,7 @@ q.test('assert.ok dog.speak() == says', function () {
     eval(empowerCoffee('assert.ok dog.speak() == says'));
     q.assert.deepEqual(this.lines, [
         '# /path/to/bar_test.coffee:1',
+        '',
         'assert.ok dog.speak() == says',
         '          |   |       |  |   ',
         '          |   |       |  "meow"',

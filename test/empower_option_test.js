@@ -55,6 +55,7 @@ q.test('when path option is undefined', function (assert) {
     eval(instrument('assert(falsyStr);', {destructive: false, source: 'assert(falsyStr);'}));
     assert.deepEqual(this.lines, [
         '# at line: 1',
+        '',
         'assert(falsyStr);',
         '       |         ',
         '       ""        ',
@@ -67,6 +68,7 @@ q.test('when path option is provided', function (assert) {
     eval(instrument('assert(falsyStr);', {destructive: false, source: 'assert(falsyStr);', path: '/path/to/source.js'}));
     assert.deepEqual(this.lines, [
         '# /path/to/source.js:1',
+        '',
         'assert(falsyStr);',
         '       |         ',
         '       ""        ',
