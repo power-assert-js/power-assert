@@ -1,5 +1,5 @@
 var q = require('../test_helper').QUnit,
-    _pa_ = require('../lib/module').useDefault(),
+    _pa_ = require('../lib/module').useEvents(),
     instrument = require('../test_helper').instrument,
     empower = require('../lib/empower'),
     esprima = require('esprima');
@@ -52,7 +52,7 @@ q.module('path option', {
 
 q.test('when path option is undefined', function (assert) {
     var falsyStr = '';
-    eval(instrument('assert(falsyStr);', {destructive: false, source: 'assert(falsyStr);'}));
+    eval(instrument('assert(falsyStr);', {destructive: false, source: 'assert(falsyStr);', powerAssertVariableName: '_pa_'}));
     assert.deepEqual(this.lines, [
         '# at line: 1',
         '',
@@ -65,7 +65,7 @@ q.test('when path option is undefined', function (assert) {
 
 q.test('when path option is provided', function (assert) {
     var falsyStr = '';
-    eval(instrument('assert(falsyStr);', {destructive: false, source: 'assert(falsyStr);', path: '/path/to/source.js'}));
+    eval(instrument('assert(falsyStr);', {destructive: false, source: 'assert(falsyStr);', path: '/path/to/source.js', powerAssertVariableName: '_pa_'}));
     assert.deepEqual(this.lines, [
         '# /path/to/source.js:1',
         '',
@@ -87,7 +87,7 @@ q.module('AST prerequisites. Error should be thrown if loc is missing.', {
 
 q.test('Error content (without path)', function (assert) {
     try {
-        empower(this.tree, {destructive: false, source: this.jsCode});
+        empower(this.tree, {destructive: false, source: this.jsCode, powerAssertVariableName: '_pa_'});
         assert.ok(false, 'Error should be thrown');
     } catch (e) {
         assert.equal(e.name, 'Error');
@@ -97,7 +97,7 @@ q.test('Error content (without path)', function (assert) {
 
 q.test('Error content (with path)', function (assert) {
     try {
-        empower(this.tree, {destructive: false, source: this.jsCode, path: '/path/to/baz_test.js'});
+        empower(this.tree, {destructive: false, source: this.jsCode, path: '/path/to/baz_test.js', powerAssertVariableName: '_pa_'});
         assert.ok(false, 'Error should be thrown');
     } catch (e) {
         assert.equal(e.name, 'Error');

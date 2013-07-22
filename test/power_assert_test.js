@@ -1,5 +1,5 @@
 var q = require('../test_helper').QUnit,
-    _pa_ = require('../lib/module').useDefault(),
+    _pa_ = require('../lib/module').useEvents(),
     instrument = require('../test_helper').instrument;
 
 

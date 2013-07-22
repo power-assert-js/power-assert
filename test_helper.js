@@ -27,7 +27,7 @@ var instrument = function () {
         return escodegen.generate(expression.arguments[0], {format: {compact: true}});
     };
     return function (line, options) {
-        options = options || {destructive: false, source: line, path: '/path/to/some_test.js'};
+        options = options || {destructive: false, source: line, path: '/path/to/some_test.js', powerAssertVariableName: '_pa_'};
         var tree = extractBodyFrom(line);
         var result = empower(tree, options);
 

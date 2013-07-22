@@ -1,5 +1,5 @@
 var q = require('../test_helper').QUnit,
-    _pa_ = require('../lib/module').useDefault(),
+    _pa_ = require('../lib/module').useEvents(),
     empower = require('../lib/empower'),
     esprima = require('esprima'),
     escodegen = require('escodegen'),
@@ -20,7 +20,7 @@ q.test('with CoffeeScriptRedux toolchain', function (assert) {
     assert.ok(jsAST);
 
     //console.log(JSON.stringify(jsAST, null, 4));
-    var empoweredAst = empower(jsAST, {destructive: false, source: csCode, path: '/path/to/foo_test.coffee'});
+    var empoweredAst = empower(jsAST, {destructive: false, source: csCode, path: '/path/to/foo_test.coffee', powerAssertVariableName: '_pa_'});
 
     var jsGenerateOptions = {compact: true};
     var jsCode = CoffeeScript.js(empoweredAst, jsGenerateOptions);
@@ -57,7 +57,7 @@ var empowerCoffee = function () {
             csAST = CoffeeScript.parse(csCode, parseOptions),
             compileOptions = {bare: false},
             jsAST = CoffeeScript.compile(csAST, compileOptions),
-            empoweredAst = empower(jsAST, {destructive: false, source: csCode, path: '/path/to/bar_test.coffee'}),
+            empoweredAst = empower(jsAST, {destructive: false, source: csCode, path: '/path/to/bar_test.coffee', powerAssertVariableName: '_pa_'}),
             expression = empoweredAst.body[0],
             instrumentedCode = extractBodyOfAssertionAsCode(expression);
         //tap.note(instrumentedCode);
