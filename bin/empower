@@ -20,6 +20,9 @@ var empower = require('../lib/empower'),
     source = fs.readFileSync(file, 'utf-8'),
     tree = esprima.parse(source, {tolerant: true, loc: true, range: true});
 
+if (argv.powerAssertVariableName) {
+  options['powerAssertVariableName'] = argv.powerAssertVariableName;
+}
 options['path'] = path;
 options['source'] = source;
 tree = empower(tree, options);
