@@ -1,4 +1,5 @@
-q = require('power-assert').empowerQUnit(require 'qunitjs')
+q = require 'qunitjs'
+require('power-assert').empowerQUnit(q)
 require("qunit-tap").qunitTap(q, require('util').puts, {showSourceOnFailure: false})
 q.init()
 q.config.updateRate = 0
