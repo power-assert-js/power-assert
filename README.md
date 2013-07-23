@@ -36,7 +36,7 @@ OUTPUT EXAMPLE
     var assert = require('power-assert');
     
     describe('Array', function(){
-        before(function(){
+        beforeEach(function(){
             this.ary = [1,2,3];
         });
         describe('#indexOf()', function(){
