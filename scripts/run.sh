@@ -31,14 +31,14 @@ echo '##################################'
 echo '##################################'
 echo '##### coffee script redux ########'
 echo '##################################'
-node ./coffee_redux.js sandbox/dog.test.coffee > sandbox/dog.test.empowered.js && ./sandbox/phantomjs_coffee.sh
+node ./scripts/coffee_redux.js sandbox/dog.test.coffee > sandbox/dog.test.empowered.js && ./sandbox/phantomjs_coffee.sh
 
 echo '#######################################'
 echo '##### coffee script redux Node ########'
 echo '#######################################'
-node ./coffee_redux.js sandbox/dog.test.node.coffee > sandbox/dog.test.node.empowered.js && node sandbox/dog.test.node.empowered.js
+node ./scripts/coffee_redux.js sandbox/dog.test.node.coffee > sandbox/dog.test.node.empowered.js && node sandbox/dog.test.node.empowered.js
 
 echo '###############################################'
 echo '##### coffee script redux Node & Mocha ########'
 echo '###############################################'
-node ./coffee_redux.js sandbox/mocha_node.coffee > sandbox/mocha_node.coffee.empowered.js && ./node_modules/.bin/mocha --reporter tap sandbox/mocha_node.coffee.empowered.js
+node ./scripts/coffee_redux.js sandbox/mocha_node.coffee > sandbox/mocha_node.coffee.empowered.js && ./node_modules/.bin/mocha --reporter tap sandbox/mocha_node.coffee.empowered.js

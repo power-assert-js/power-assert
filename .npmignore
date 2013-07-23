@@ -5,10 +5,9 @@ empowered_tests/
 test_helper.js
 .idea*
 node_modules/
-run.sh
+scripts/run.sh
 expr.js
 sandbox
 js.jar
 TODO.txt
-all_tests.sh
-coffee_redux.js
+scripts/all_tests.sh
