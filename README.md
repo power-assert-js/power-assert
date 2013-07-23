@@ -135,12 +135,12 @@ MORE OUTPUT EXAMPLES
 ### Target test code (using QUnit in this example)
 
     var q = require('power-assert').empowerQUnit(require('qunitjs')),
-        tap = (function (qu) {
+        tap = (function (qunit) {
             var qunitTap = require("qunit-tap").qunitTap,
-                tap = qunitTap(qu, require('util').puts, {showSourceOnFailure: false});
-            qu.init();
-            qu.config.updateRate = 0;
-            return tap;
+                tapObj = qunitTap(qunit, require('util').puts, {showSourceOnFailure: false});
+            qunit.init();
+            qunit.config.updateRate = 0;
+            return tapObj;
         })(q);
     
     q.test('spike', function (assert) {
