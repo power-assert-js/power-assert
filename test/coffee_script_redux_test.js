@@ -1,5 +1,9 @@
 var q = require('../test_helper').QUnit,
-    _pa_ = require('../lib/module').useEvents(),
+    enhancer = require('../lib/power-assert-core'),
+    powerAssertTextLines = [],
+    _pa_ = enhancer(null, function (powerOk, context, message, powerAssertText) {
+        powerAssertTextLines = powerAssertText.split('\n');
+    }),
     empower = require('../lib/empower'),
     esprima = require('esprima'),
     escodegen = require('escodegen'),
@@ -30,15 +34,7 @@ q.test('with CoffeeScriptRedux toolchain', function (assert) {
 
 q.module('CoffeeScriptRedux integration', {
     setup: function () {
-        var that = this;
-        that.lines = [];
-        this.origPuts = _pa_.puts;
-        _pa_.puts = function (str) {
-            that.lines.push(str);
-        };
-    },
-    teardown: function () {
-        _pa_.puts = this.origPuts;
+        powerAssertTextLines.length = 0;
     }
 });
 
@@ -69,8 +65,8 @@ var empowerCoffee = function () {
 q.test('assert.ok dog.speak() == says', function () {
     var dog = { speak: function () { return 'woof'; } },
         says = 'meow';
-    eval(empowerCoffee('assert.ok dog.speak() == says'));
-    q.assert.deepEqual(this.lines, [
+    _pa_.ok(eval(empowerCoffee('assert.ok dog.speak() == says')));
+    q.assert.deepEqual(powerAssertTextLines, [
         '# /path/to/bar_test.coffee:1',
         '',
         'assert.ok dog.speak() == says',

@@ -1,9 +1,12 @@
 var q = require('../test_helper').QUnit,
-    _pa_ = require('../lib/module').useEvents(),
     instrument = require('../test_helper').instrument,
+    enhancer = require('../lib/power-assert-core'),
+    powerAssertTextLines = [],
+    _pa_ = enhancer(null, function (powerOk, context, message, powerAssertText) {
+        powerAssertTextLines = powerAssertText.split('\n');
+    }),
     empower = require('../lib/empower'),
     esprima = require('esprima');
-
 
 q.module('destructive option');
 
@@ -35,25 +38,16 @@ destructiveOptionTest('destructive: true', {destructive: true}, function (assert
 });
 
 
-
 q.module('path option', {
     setup: function () {
-        var that = this;
-        that.lines = [];
-        this.origPuts = _pa_.puts;
-        _pa_.puts = function (str) {
-            that.lines.push(str);
-        };
-    },
-    teardown: function () {
-        _pa_.puts = this.origPuts;
+        powerAssertTextLines.length = 0;
     }
 });
 
 q.test('when path option is undefined', function (assert) {
     var falsyStr = '';
-    eval(instrument('assert(falsyStr);', {destructive: false, source: 'assert(falsyStr);', powerAssertVariableName: '_pa_'}));
-    assert.deepEqual(this.lines, [
+    _pa_.ok(eval(instrument('assert(falsyStr);', {destructive: false, source: 'assert(falsyStr);', powerAssertVariableName: '_pa_'})));
+    assert.deepEqual(powerAssertTextLines, [
         '# at line: 1',
         '',
         'assert(falsyStr);',
@@ -65,8 +59,8 @@ q.test('when path option is undefined', function (assert) {
 
 q.test('when path option is provided', function (assert) {
     var falsyStr = '';
-    eval(instrument('assert(falsyStr);', {destructive: false, source: 'assert(falsyStr);', path: '/path/to/source.js', powerAssertVariableName: '_pa_'}));
-    assert.deepEqual(this.lines, [
+    _pa_.ok(eval(instrument('assert(falsyStr);', {destructive: false, source: 'assert(falsyStr);', path: '/path/to/source.js', powerAssertVariableName: '_pa_'})));
+    assert.deepEqual(powerAssertTextLines, [
         '# /path/to/source.js:1',
         '',
         'assert(falsyStr);',
