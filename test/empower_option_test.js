@@ -1,8 +1,9 @@
 var q = require('../test_helper').QUnit,
     instrument = require('../test_helper').instrument,
+    formatter = require('../lib/power-assert-formatter-compact'),
     enhancer = require('../lib/power-assert-core'),
     powerAssertTextLines = [],
-    _pa_ = enhancer(null, function (powerOk, context, message, powerAssertText) {
+    _pa_ = enhancer(null, formatter, function (powerOk, context, message, powerAssertText) {
         powerAssertTextLines = powerAssertText.split('\n');
     }),
     empower = require('../lib/empower'),
