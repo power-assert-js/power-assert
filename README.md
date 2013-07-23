@@ -1,33 +1,19 @@
-power-assert - Empower your assertions
+power-assert : Empower your assertions
 ================================
 
 
 DESCRIPTION
 ---------------------------------------
-`power-assert` is an implementation of "Power Assert" in JavaScript, powered by [Esprima](http://esprima.org/) and [Escodegen](https://github.com/Constellation/escodegen).
+`power-assert` is an implementation of "Power Assert" in JavaScript.
 
-`power-assert` is a standard `assert` compatible library.
+`power-assert` provides standard `assert` compatible interface (best fit with [Mocha](http://visionmedia.github.io/mocha/)), and also supports [QUnit](http://qunitjs.com/) as well.
 
-Please note that power-assert is an alpha version product, so backward compatibility breaking changes will be occurred very often. Pull-requests, issue reports and patches are always welcome.
+`power-assert` provides `empower` command to make the magic happen. Internally, `empower` command (and its main body `empower.js`) manipulates assertion expression (JavaScript Code) represented as [Mozilla JavaScript AST](https://developer.mozilla.org/en-US/docs/SpiderMonkey/Parser_API), to instrument power-assert feature into the code. The magic is done by using [Esprima](http://esprima.org/) and [Escodegen](https://github.com/Constellation/escodegen).
 
-
-HOW TO USE
----------------------------------------
-
-First, install power-assert via `npm`.
-
-    $ npm install -g power-assert
-
-Second, generate empowered code using `empower` command.
-
-    $ empower your_test.js > your_test_empowered.js
-
-Then run your test in your way.
-
-    $ node your_test_empowered.js
+Please note that `power-assert` is an alpha version product. Pull-requests, issue reports and patches are always welcomed.
 
 
-OUTPUT EXAMPLE
+EXAMPLE
 ---------------------------------------
 
 ### Target test code (using Mocha in this example)
@@ -52,7 +38,7 @@ OUTPUT EXAMPLE
     });
 
 
-### `empower` code above then run
+### `empower` code above then run. See the power-assert output happen.
 
 
       $ mocha /path/to/examples/mocha_node_empowered.js
@@ -103,6 +89,21 @@ OUTPUT EXAMPLE
 
 
 
+HOW TO USE
+---------------------------------------
+
+First, install power-assert via `npm`.
+
+    $ npm install -g power-assert
+
+Second, generate empowered code using `empower` command.
+
+    $ empower your_test.js > your_test_empowered.js
+
+Then run your test in your way.
+
+    $ node your_test_empowered.js
+
 
 TESTED FRAMEWORKS
 ---------------------------------------
@@ -136,8 +137,7 @@ MORE OUTPUT EXAMPLES
     var q = require('power-assert').empowerQUnit(require('qunitjs')),
         tap = (function (qu) {
             var qunitTap = require("qunit-tap").qunitTap,
-                util = require('util'),
-                tap = qunitTap(qu, util.puts, {showSourceOnFailure: false});
+                tap = qunitTap(qu, require('util').puts, {showSourceOnFailure: false});
             qu.init();
             qu.config.updateRate = 0;
             return tap;
