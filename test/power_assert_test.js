@@ -1,6 +1,6 @@
 var q = require('../test_helper').QUnit,
     instrument = require('../test_helper').instrument,
-    formatter = require('../lib/power-assert-formatter-compact'),
+    formatter = require('../lib/power-assert-formatter'),
     enhancer = require('../lib/power-assert-core'),
     powerAssertTextLines = [],
     _pa_ = enhancer(null, formatter, function (powerOk, context, message, powerAssertText) {
