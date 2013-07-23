@@ -3,7 +3,7 @@
     "description": "Power Assert in JavaScript",
     "version": "0.0.1pre",
     "keywords": ["test", "assert", "testing"],
-    "homepage": "http://github.com/twada/power-assert.js",
+    "homepage": "http://github.com/twada/power-assert",
     "author": {
         "name": "Takuto Wada",
         "email": "takuto.wada@gmail.com",
@@ -18,7 +18,7 @@
     },
     "repository": {
         "type": "git", 
-        "url": "http://github.com/twada/power-assert.js.git"
+        "url": "http://github.com/twada/power-assert.git"
     },
     "dependencies": {
         "esprima": "1.0.3",
@@ -40,6 +40,6 @@
         }
     ],
     "bugs": {
-        "url" : "http://github.com/twada/power-assert.js/issues"
+        "url" : "http://github.com/twada/power-assert/issues"
     }
 }

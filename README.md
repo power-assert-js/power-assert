@@ -245,7 +245,7 @@ MORE OUTPUT EXAMPLES
     
     # test: spike
     ok 1
-    not ok 2 - comment # /Users/takuto/work/git-sandbox/github/power-assert.js/sandbox/qunit_node.js:16
+    not ok 2 - comment # /path/to/examples/qunit_node.js:16
     #
     #     assert.ok(hoge === fuga, 'comment');
     #               |    |   |
@@ -253,7 +253,7 @@ MORE OUTPUT EXAMPLES
     #               |    false
     #               "foo"
     # , test: spike
-    not ok 3 - # /Users/takuto/work/git-sandbox/github/power-assert.js/sandbox/qunit_node.js:19
+    not ok 3 - # /path/to/examples/qunit_node.js:19
     #
     #     assert.ok(fuga === piyo);
     #               |    |   |
@@ -261,7 +261,7 @@ MORE OUTPUT EXAMPLES
     #               |    false
     #               "bar"
     # , test: spike
-    not ok 4 - # /Users/takuto/work/git-sandbox/github/power-assert.js/sandbox/qunit_node.js:23
+    not ok 4 - # /path/to/examples/qunit_node.js:23
     #
     #     assert.ok(longString === anotherLongString);
     #               |          |   |
@@ -269,32 +269,32 @@ MORE OUTPUT EXAMPLES
     #               |          false
     #               "very very loooooooooooooooooooooooooooooooooooooooooooooooooooong message"
     # , test: spike
-    not ok 5 - # /Users/takuto/work/git-sandbox/github/power-assert.js/sandbox/qunit_node.js:25
+    not ok 5 - # /path/to/examples/qunit_node.js:25
     #
     #     assert.ok(4 === piyo);
     #                 |   |
     #                 |   3
     #                 false
     # , test: spike
-    not ok 6 - # /Users/takuto/work/git-sandbox/github/power-assert.js/sandbox/qunit_node.js:27
+    not ok 6 - # /path/to/examples/qunit_node.js:27
     #
     #     assert.ok(4 !== 4);
     #                 |
     #                 false
     # , test: spike
-    not ok 7 - # /Users/takuto/work/git-sandbox/github/power-assert.js/sandbox/qunit_node.js:30
+    not ok 7 - # /path/to/examples/qunit_node.js:30
     #
     #     assert.ok(falsyStr);
     #               |
     #               ""
     # , test: spike
-    not ok 8 - # /Users/takuto/work/git-sandbox/github/power-assert.js/sandbox/qunit_node.js:33
+    not ok 8 - # /path/to/examples/qunit_node.js:33
     #
     #     assert.ok(falsyNum);
     #               |
     #               0
     # , test: spike
-    not ok 9 - # /Users/takuto/work/git-sandbox/github/power-assert.js/sandbox/qunit_node.js:37
+    not ok 9 - # /path/to/examples/qunit_node.js:37
     #
     #     assert.ok(ary1.length === ary2.length);
     #               |    |      |   |    |
@@ -303,28 +303,28 @@ MORE OUTPUT EXAMPLES
     #               |    2      false
     #               ["foo","bar"]
     # , test: spike
-    not ok 10 - # /Users/takuto/work/git-sandbox/github/power-assert.js/sandbox/qunit_node.js:40
+    not ok 10 - # /path/to/examples/qunit_node.js:40
     #
     #     assert.ok(5 < actual && actual < 13);
     #                 | |         |      |
     #                 | 16        16     false
     #                 true
     # , test: spike
-    not ok 11 - # /Users/takuto/work/git-sandbox/github/power-assert.js/sandbox/qunit_node.js:43
+    not ok 11 - # /path/to/examples/qunit_node.js:43
     #
     #     assert.ok(5 < actual && actual < 13);
     #                 | |
     #                 | 4
     #                 false
     # , test: spike
-    not ok 12 - # /Users/takuto/work/git-sandbox/github/power-assert.js/sandbox/qunit_node.js:46
+    not ok 12 - # /path/to/examples/qunit_node.js:46
     #
     #     assert.ok(actual < 5 || 13 < actual);
     #               |      |         | |
     #               |      |         | 10
     #               10     false     false
     # , test: spike
-    not ok 13 - # /Users/takuto/work/git-sandbox/github/power-assert.js/sandbox/qunit_node.js:54
+    not ok 13 - # /path/to/examples/qunit_node.js:54
     #
     #     assert.ok(foo.bar.baz);
     #               |   |   |
@@ -332,45 +332,45 @@ MORE OUTPUT EXAMPLES
     #               |   {"baz":false}
     #               {"bar":{"baz":false}}
     # , test: spike
-    not ok 14 - # /Users/takuto/work/git-sandbox/github/power-assert.js/sandbox/qunit_node.js:58
+    not ok 14 - # /path/to/examples/qunit_node.js:58
     #
     #     assert.ok(!truth);
     #                |
     #                true
     # , test: spike
-    not ok 15 - # /Users/takuto/work/git-sandbox/github/power-assert.js/sandbox/qunit_node.js:62
+    not ok 15 - # /path/to/examples/qunit_node.js:62
     #
     #     assert.ok(func());
     #               |
     #               false
     # , test: spike
-    not ok 16 - # /Users/takuto/work/git-sandbox/github/power-assert.js/sandbox/qunit_node.js:70
+    not ok 16 - # /path/to/examples/qunit_node.js:70
     #
     #     assert.ok(obj.age());
     #               |   |
     #               {}  0
     # , test: spike
-    not ok 17 - # /Users/takuto/work/git-sandbox/github/power-assert.js/sandbox/qunit_node.js:77
+    not ok 17 - # /path/to/examples/qunit_node.js:77
     #
     #     assert.ok(isFalsy(positiveInt));
     #               |       |
     #               false   50
     # , test: spike
-    not ok 18 - # /Users/takuto/work/git-sandbox/github/power-assert.js/sandbox/qunit_node.js:88
+    not ok 18 - # /path/to/examples/qunit_node.js:88
     #
     #     assert.ok(sum(one, two, three) === seven);
     #               |   |    |    |      |   |
     #               |   |    |    |      |   7
     #               6   1    2    3      false
     # , test: spike
-    not ok 19 - # /Users/takuto/work/git-sandbox/github/power-assert.js/sandbox/qunit_node.js:89
+    not ok 19 - # /path/to/examples/qunit_node.js:89
     #
     #     assert.ok(sum(sum(one, two), three) === sum(sum(two, three), seven));
     #               |   |   |    |     |      |   |   |   |    |       |
     #               |   |   |    |     |      |   12  5   2    3       7
     #               6   3   1    2     3      false
     # , test: spike
-    not ok 20 - # /Users/takuto/work/git-sandbox/github/power-assert.js/sandbox/qunit_node.js:90
+    not ok 20 - # /path/to/examples/qunit_node.js:90
     #
     #     assert.ok((three * (seven * ten)) === three);
     #                |     |  |     | |     |   |
@@ -379,7 +379,7 @@ MORE OUTPUT EXAMPLES
     #                |     |  7     70
     #                3     210
     # , test: spike
-    not ok 21 - # /Users/takuto/work/git-sandbox/github/power-assert.js/sandbox/qunit_node.js:104
+    not ok 21 - # /path/to/examples/qunit_node.js:104
     #
     #     assert.ok(math.calc.sum(one, two, three) === seven);
     #               |    |    |   |    |    |      |   |
