@@ -1,13 +1,10 @@
 .git*
-test/
-mocha_tests/
-empowered_tests/
-test_helper.js
 .idea*
+empowered_tests/
 node_modules/
-scripts/run.sh
 expr.js
 sandbox
 js.jar
 TODO.txt
-scripts/all_tests.sh
+scripts/run_examples.sh
+scripts/example_runners/*

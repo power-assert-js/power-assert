@@ -1,5 +1,6 @@
 #!/bin/sh
 
+mkdir -p empowered_tests
 rm empowered_tests/*
 
 for i in $(find mocha_tests -name '*_test.js' -type f)
