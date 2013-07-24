@@ -92,17 +92,28 @@ EXAMPLE
 HOW TO USE
 ---------------------------------------
 
-First, install power-assert via `npm`.
+First, declare power-assert as devDependencies in your package.json, then run `npm install`.
+
+    {
+        . . .
+        "devDependencies": {
+            "power-assert": "0.0.1",
+            . . .
+        },
+        . . .
+    }
+
+Or install power-assert globally.
 
     $ npm install -g power-assert
 
 Second, generate empowered code using `empower` command.
 
-    $ empower your_test.js > your_test_empowered.js
+    $ ./node_modules/.bin/empower your_test.js > your_test_empowered.js
 
 Then run your test in your way.
 
-    $ node your_test_empowered.js
+    $ mocha your_test_empowered.js
 
 
 TESTED FRAMEWORKS
@@ -134,14 +145,13 @@ MORE OUTPUT EXAMPLES
 
 ### Target test code (using QUnit in this example)
 
-    var q = require('power-assert').empowerQUnit(require('qunitjs')),
-        tap = (function (qunit) {
-            var qunitTap = require("qunit-tap").qunitTap,
-                tapObj = qunitTap(qunit, require('util').puts, {showSourceOnFailure: false});
-            qunit.init();
-            qunit.config.updateRate = 0;
-            return tapObj;
-        })(q);
+    var q = require('power-assert').empowerQUnit(require('qunitjs'));
+    (function () {
+        var qunitTap = require("qunit-tap").qunitTap;
+        qunitTap(q, require('util').puts, {showSourceOnFailure: false});
+        q.init();
+        q.config.updateRate = 0;
+    })();
     
     q.test('spike', function (assert) {
         assert.ok(true);
