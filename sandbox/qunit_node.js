@@ -1,11 +1,10 @@
-var q = require('power-assert').empowerQUnit(require('qunitjs')),
-    tap = (function (qunit) {
-        var qunitTap = require("qunit-tap").qunitTap,
-            tapObj = qunitTap(qunit, require('util').puts, {showSourceOnFailure: false});
-        qunit.init();
-        qunit.config.updateRate = 0;
-        return tapObj;
-    })(q);
+var q = require('power-assert').empowerQUnit(require('qunitjs'));
+(function () {
+    var qunitTap = require("qunit-tap").qunitTap;
+    qunitTap(q, require('util').puts, {showSourceOnFailure: false});
+    q.init();
+    q.config.updateRate = 0;
+})();
 
 q.test('spike', function (assert) {
     assert.ok(true);
