@@ -38,7 +38,7 @@ EXAMPLE
     });
 
 
-### `empower` code above then run. See the power-assert output happen.
+### `empower` code above then run. See the power-assert output appears.
 
 
       $ mocha /path/to/examples/mocha_node_empowered.js
@@ -92,6 +92,9 @@ EXAMPLE
 HOW TO USE
 ---------------------------------------
 
+
+### on Node with Mocha
+
 First, declare power-assert as devDependencies in your package.json, then run `npm install`.
 
     {
@@ -103,17 +106,28 @@ First, declare power-assert as devDependencies in your package.json, then run `n
         . . .
     }
 
-Or install power-assert globally.
+First, install power-assert globally.
 
     $ npm install -g power-assert
 
 Second, generate empowered code using `empower` command.
 
-    $ ./node_modules/.bin/empower your_test.js > your_test_empowered.js
+    $ empower your_test.js > your_test_empowered.js
 
 Then run your test in your way.
 
     $ mocha your_test_empowered.js
+
+
+### on Browser (or PhantomJS) with QUnit
+
+
+
+### on Browser (or PhantomJS)
+
+Jxck/assert
+
+
 
 
 TESTED FRAMEWORKS
