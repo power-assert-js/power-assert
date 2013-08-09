@@ -9,7 +9,7 @@
  * Licensed under the MIT license.
  *   https://raw.github.com/twada/power-assert/master/MIT-LICENSE.txt
  */
-var empower = require('../lib/empower'),
+var espower = require('../lib/espower'),
     esprima = require('esprima'),
     escodegen = require('escodegen'),
     argv = require('optimist').argv,
@@ -25,5 +25,5 @@ if (argv.powerAssertVariableName) {
 }
 options['path'] = path;
 options['source'] = source;
-tree = empower(tree, options);
+tree = espower(tree, options);
 console.log(escodegen.generate(tree));

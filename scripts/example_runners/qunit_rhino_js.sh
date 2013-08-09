@@ -1,3 +1,3 @@
 #!/bin/sh
 
-./bin/empower sandbox/qunit_rhino.js > sandbox/qunit_rhino_empowered.js && java -jar js.jar sandbox/run_rhino.js
+./bin/espower sandbox/qunit_rhino.js > sandbox/qunit_rhino_espowered.js && java -jar js.jar sandbox/run_rhino.js

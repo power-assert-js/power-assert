@@ -1,4 +1,4 @@
-var empower = require('./lib/empower'),
+var espower = require('./lib/espower'),
     esprima = require('esprima'),
     escodegen = require('escodegen'),
     q = require('qunitjs');
@@ -31,9 +31,9 @@ var instrument = function () {
     return function (line, options) {
         options = options || {destructive: false, source: line, path: '/path/to/some_test.js', powerAssertVariableName: '_pa_'};
         var tree = extractBodyFrom(line);
-        var result = empower(tree, options);
+        var result = espower(tree, options);
 
-        // empower.traverse(result, function (node) {
+        // espower.traverse(result, function (node) {
         //     if (typeof node.type === 'undefined') {
         //         return;
         //     }

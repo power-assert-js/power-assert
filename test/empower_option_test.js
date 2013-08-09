@@ -6,7 +6,7 @@ var q = require('../test_helper').QUnit,
     _pa_ = enhancer(q.assert, formatter, function (context, message) {
         powerAssertTextLines = formatter.format(context);
     }),
-    empower = require('../lib/empower'),
+    espower = require('../lib/espower'),
     esprima = require('esprima');
 
 q.module('destructive option');
@@ -14,8 +14,8 @@ q.module('destructive option');
 var destructiveOptionTest = function (testName, option, callback) {
     q.test(testName, function (assert) {
         var tree = esprima.parse('assert(falsyStr);', {tolerant: true, loc: true, range: true}),
-            saved = empower.deepCopy(tree),
-            result = empower(tree, option);
+            saved = espower.deepCopy(tree),
+            result = espower(tree, option);
         callback(assert, saved, tree, result);
     });
 };
@@ -82,7 +82,7 @@ q.module('AST prerequisites. Error should be thrown if loc is missing.', {
 
 q.test('Error content (without path)', function (assert) {
     try {
-        empower(this.tree, {destructive: false, source: this.jsCode, powerAssertVariableName: '_pa_'});
+        espower(this.tree, {destructive: false, source: this.jsCode, powerAssertVariableName: '_pa_'});
         assert.ok(false, 'Error should be thrown');
     } catch (e) {
         assert.equal(e.name, 'Error');
@@ -92,7 +92,7 @@ q.test('Error content (without path)', function (assert) {
 
 q.test('Error content (with path)', function (assert) {
     try {
-        empower(this.tree, {destructive: false, source: this.jsCode, path: '/path/to/baz_test.js', powerAssertVariableName: '_pa_'});
+        espower(this.tree, {destructive: false, source: this.jsCode, path: '/path/to/baz_test.js', powerAssertVariableName: '_pa_'});
         assert.ok(false, 'Error should be thrown');
     } catch (e) {
         assert.equal(e.name, 'Error');
@@ -106,9 +106,9 @@ q.module('preserve location information');
 
 q.test('preserve location of instrumented nodes', function (assert) {
     var tree = esprima.parse('assert((three * (seven * ten)) === three);', {tolerant: true, loc: true, range: true}),
-        saved = empower.deepCopy(tree),
-        result = empower(tree, {destructive: false, source: this.jsCode, path: '/path/to/baz_test.js'});
-    empower.traverse(result, function (node) {
+        saved = espower.deepCopy(tree),
+        result = espower(tree, {destructive: false, source: this.jsCode, path: '/path/to/baz_test.js'});
+    espower.traverse(result, function (node) {
         if (typeof node.type === 'undefined') {
             return;
         }

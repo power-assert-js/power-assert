@@ -13,7 +13,7 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: pkg,
         ver: '<%= pkg.version %>',
-        destDir: 'empowered_tests',
+        destDir: 'espowered_tests',
         clean: {
             dist: ['<%= destDir %>/']
         },
@@ -35,7 +35,7 @@ module.exports = function(grunt) {
                 command: 'mkdir <%= destDir %>'
             }
         },
-        empower: {
+        espower: {
             powerAssertVariableName: 'assert',
             dest: '<%= destDir %>',
             dir: ['mocha_tests/*']
@@ -44,7 +44,7 @@ module.exports = function(grunt) {
             dir: ['test/**/*.js']
         },
         mochaTest: {
-            empowered: {
+            espowered: {
                 options: {
                     reporter: 'dot'
                 },
@@ -110,15 +110,15 @@ module.exports = function(grunt) {
     });
 
 
-    grunt.registerTask('empower', function() {
+    grunt.registerTask('espower', function() {
         var done = this.async();
-        var empower = require('./lib/empower'),
+        var espower = require('./lib/espower'),
             esprima = require('esprima'),
             escodegen = require('escodegen'),
             fs = require('fs'),
             path = require('path');
 
-        grunt.config.get('empower.dir').forEach(function (pattern) {
+        grunt.config.get('espower.dir').forEach(function (pattern) {
             grunt.log.write('searching for ' + pattern + '...').ok();
             grunt.file.glob(pattern, function (err, files) {
                 if (err) {
@@ -126,16 +126,16 @@ module.exports = function(grunt) {
                     return;
                 }
                 files.forEach(function (file) {
-                    grunt.log.write('empower ' + file + '...').ok();
+                    grunt.log.write('espower ' + file + '...').ok();
                     var source = fs.readFileSync(file, 'utf-8'),
                         tree = esprima.parse(source, {tolerant: true, loc: true, range: true}),
                         options = {
-                            powerAssertVariableName: grunt.config.get('empower.powerAssertVariableName'),
+                            powerAssertVariableName: grunt.config.get('espower.powerAssertVariableName'),
                             path: fs.realpathSync(file),
                             source: source
                         },
-                        modified = empower(tree, options);
-			        grunt.file.write(path.join(grunt.config.get('empower.dest'), path.basename(file)), escodegen.generate(modified));
+                        modified = espower(tree, options);
+			        grunt.file.write(path.join(grunt.config.get('espower.dest'), path.basename(file)), escodegen.generate(modified));
                 });
                 done(files.length);
             });
@@ -143,9 +143,9 @@ module.exports = function(grunt) {
     });
 
 
-    grunt.registerTask('default', ['clean:dist', 'shell:mkdir', 'qunit-test', 'copy:no_inst', 'empower', 'mochaTest:empowered']);
+    grunt.registerTask('default', ['clean:dist', 'shell:mkdir', 'qunit-test', 'copy:no_inst', 'espower', 'mochaTest:espowered']);
 
     grunt.registerTask('unit', ['qunit-test']);
 
-    grunt.registerTask('functional', ['clean:dist', 'shell:mkdir', 'copy:no_inst', 'empower', 'mochaTest:empowered']);
+    grunt.registerTask('functional', ['clean:dist', 'shell:mkdir', 'copy:no_inst', 'espower', 'mochaTest:espowered']);
 };

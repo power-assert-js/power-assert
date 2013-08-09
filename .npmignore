@@ -1,6 +1,6 @@
 .git*
 .idea*
-empowered_tests/
+espowered_tests/
 node_modules/
 expr.js
 sandbox

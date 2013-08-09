@@ -8,7 +8,7 @@ DESCRIPTION
 
 `power-assert` provides standard `assert` compatible interface (best fit with [Mocha](http://visionmedia.github.io/mocha/)), and also supports [QUnit](http://qunitjs.com/) as well.
 
-`power-assert` provides `empower` command to make the magic happen. Internally, `empower` command (and its main body `empower.js`) manipulates assertion expression (JavaScript Code) represented as [Mozilla JavaScript AST](https://developer.mozilla.org/en-US/docs/SpiderMonkey/Parser_API), to instrument power-assert feature into the code. The magic is done by using [Esprima](http://esprima.org/) and [Escodegen](https://github.com/Constellation/escodegen).
+`power-assert` provides `espower` command to make the magic happen. Internally, `espower` command (and its main body `espower.js`) manipulates assertion expression (JavaScript Code) represented as [Mozilla JavaScript AST](https://developer.mozilla.org/en-US/docs/SpiderMonkey/Parser_API), to instrument power-assert feature into the code. The magic is done by using [Esprima](http://esprima.org/) and [Escodegen](https://github.com/Constellation/escodegen).
 
 Please note that `power-assert` is an alpha version product. Pull-requests, issue reports and patches are always welcomed.
 
@@ -38,10 +38,10 @@ EXAMPLE
     });
 
 
-### `empower` code above then run. See the power-assert output appears.
+### `espower` code above then run. See the power-assert output appears.
 
 
-      $ mocha /path/to/examples/mocha_node_empowered.js
+      $ mocha /path/to/examples/mocha_node_espowered.js
     
       ․․
     
@@ -58,7 +58,7 @@ EXAMPLE
                             [1,2,3]
     
           at powerAssert (/path/to/node_modules/power-assert/lib/power-assert.js:32:17)
-          at Context.<anonymous> (/path/to/examples/mocha_node_empowered.js:13:13)
+          at Context.<anonymous> (/path/to/examples/mocha_node_espowered.js:13:13)
           at Test.Runnable.run (/path/to/node_modules/mocha/lib/runnable.js:211:32)
           at Runner.runTest (/path/to/node_modules/mocha/lib/runner.js:355:10)
           at /path/to/node_modules/mocha/lib/runner.js:401:12
@@ -77,7 +77,7 @@ EXAMPLE
                                |   1       2    false
                                [1,2,3]
     
-          at Context.<anonymous> (/path/to/examples/mocha_node_empowered.js:48:20)
+          at Context.<anonymous> (/path/to/examples/mocha_node_espowered.js:48:20)
           at Test.Runnable.run (/path/to/node_modules/mocha/lib/runnable.js:211:32)
           at Runner.runTest (/path/to/node_modules/mocha/lib/runner.js:355:10)
           at /path/to/node_modules/mocha/lib/runner.js:401:12
@@ -110,13 +110,13 @@ First, install power-assert globally.
 
     $ npm install -g power-assert
 
-Second, generate empowered code using `empower` command.
+Second, generate espowered code using `espower` command.
 
-    $ empower your_test.js > your_test_empowered.js
+    $ espower your_test.js > your_test_espowered.js
 
 Then run your test in your way.
 
-    $ mocha your_test_empowered.js
+    $ mocha your_test_espowered.js
 
 
 ### on Browser (or PhantomJS) with QUnit
@@ -265,7 +265,7 @@ MORE OUTPUT EXAMPLES
 
 
 
-### `empower` code above then running under Node.js
+### `espower` code above then running under Node.js
     
     # test: spike
     ok 1

@@ -15,7 +15,7 @@
   },
   "main": "./lib/module",
   "bin": {
-    "empower": "./bin/empower"
+    "espower": "./bin/espower"
   },
   "directories": {
     "lib": "./lib"

@@ -5,7 +5,7 @@ var q = require('../test_helper').QUnit,
     _pa_ = enhancer(q.assert, formatter, function (context, message) {
         powerAssertTextLines = formatter.format(context);
     }),
-    empower = require('../lib/empower'),
+    espower = require('../lib/espower'),
     esprima = require('esprima'),
     escodegen = require('escodegen'),
     CoffeeScript = require('coffee-script-redux');
@@ -25,10 +25,10 @@ q.test('with CoffeeScriptRedux toolchain', function (assert) {
     assert.ok(jsAST);
 
     //console.log(JSON.stringify(jsAST, null, 4));
-    var empoweredAst = empower(jsAST, {destructive: false, source: csCode, path: '/path/to/foo_test.coffee', powerAssertVariableName: '_pa_'});
+    var espoweredAst = espower(jsAST, {destructive: false, source: csCode, path: '/path/to/foo_test.coffee', powerAssertVariableName: '_pa_'});
 
     var jsGenerateOptions = {compact: true};
-    var jsCode = CoffeeScript.js(empoweredAst, jsGenerateOptions);
+    var jsCode = CoffeeScript.js(espoweredAst, jsGenerateOptions);
     assert.equal(jsCode, "assert.ok(_pa_.expr(_pa_.capture(_pa_.capture(_pa_.capture(dog,'ident',{start:{line:1,column:10}}).speak(),'funcall',{start:{line:1,column:14}})===_pa_.capture(says,'ident',{start:{line:1,column:25}}),'binary',{start:{line:1,column:22}}),{start:{line:1,column:10},path:'/path/to/foo_test.coffee'},'assert.ok dog.speak() == says'))");
 });
 
@@ -39,7 +39,7 @@ q.module('CoffeeScriptRedux integration', {
     }
 });
 
-var empowerCoffee = function () {
+var espowerCoffee = function () {
     var extractBodyOfAssertionAsCode = function (node) {
         var expression;
         if (node.type === 'ExpressionStatement') {
@@ -54,8 +54,8 @@ var empowerCoffee = function () {
             csAST = CoffeeScript.parse(csCode, parseOptions),
             compileOptions = {bare: false},
             jsAST = CoffeeScript.compile(csAST, compileOptions),
-            empoweredAst = empower(jsAST, {destructive: false, source: csCode, path: '/path/to/bar_test.coffee', powerAssertVariableName: '_pa_'}),
-            expression = empoweredAst.body[0],
+            espoweredAst = espower(jsAST, {destructive: false, source: csCode, path: '/path/to/bar_test.coffee', powerAssertVariableName: '_pa_'}),
+            expression = espoweredAst.body[0],
             instrumentedCode = extractBodyOfAssertionAsCode(expression);
         //tap.note(instrumentedCode);
         return instrumentedCode;
@@ -66,7 +66,7 @@ var empowerCoffee = function () {
 q.test('assert.ok dog.speak() == says', function () {
     var dog = { speak: function () { return 'woof'; } },
         says = 'meow';
-    _pa_.ok(eval(empowerCoffee('assert.ok dog.speak() == says')));
+    _pa_.ok(eval(espowerCoffee('assert.ok dog.speak() == says')));
     q.assert.deepEqual(powerAssertTextLines, [
         '# /path/to/bar_test.coffee:1',
         '',
