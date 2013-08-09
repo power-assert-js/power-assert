@@ -14,9 +14,6 @@
     "url": "http://github.com/twada"
   },
   "main": "./lib/power-assert",
-  "bin": {
-    "espower": "./bin/espower"
-  },
   "directories": {
     "lib": "./lib"
   },
@@ -25,13 +22,13 @@
     "url": "http://github.com/twada/power-assert.git"
   },
   "dependencies": {
-    "esprima": "1.0.3",
-    "escodegen": "0.0.24",
-    "optimist": "0.6.0"
+    "empower": "0.0.1"
   },
   "devDependencies": {
+    "espower": "0.0.1",
+    "esprima": "1.0.3",
+    "escodegen": "0.0.24",
     "coffee-script-redux": "2.0.0-beta6",
-    "esmangle": "0.0.15",
     "mocha": "1.12.0",
     "expect.js": "0.2.0",
     "qunitjs": "1.10.0",

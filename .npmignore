@@ -8,3 +8,4 @@ js.jar
 TODO.txt
 scripts/run_examples.sh
 scripts/example_runners/*
+npm-debug.log
