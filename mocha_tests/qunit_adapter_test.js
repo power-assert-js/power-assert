@@ -1,15 +1,17 @@
-var q = require('../lib/module').empowerQUnit(require('qunitjs')),
+var q = require('qunitjs'),
+    empower = require('../lib/module'),
     output = [],
     puts = function (str) {
         output.push(str);
     },
     tap = (function (qu) {
-        var qunitTap = require("qunit-tap").qunitTap,
-            tap = qunitTap(qu, puts, {showSourceOnFailure: false});
-        qu.config.updateRate = 0;
-        return tap;
+        var qunitTap = require("qunit-tap");
+        //qu.config.updateRate = 0;
+        return qunitTap(qu, puts, {showSourceOnFailure: false});
     })(q),
     expect = require('expect.js');
+
+q.assert = empower(q.assert);
 
 
 function doQUnitTest (testName, body, expectedLines) {

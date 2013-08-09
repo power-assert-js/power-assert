@@ -1,4 +1,4 @@
-var assert = require('../lib/module'),
+var assert = require('../lib/power-assert'),
     expect = require('expect.js');
 
 describe('power-assert message', function () {
