@@ -13,7 +13,7 @@
     "email": "takuto.wada@gmail.com",
     "url": "http://github.com/twada"
   },
-  "main": "./lib/module",
+  "main": "./lib/power-assert",
   "bin": {
     "espower": "./bin/espower"
   },

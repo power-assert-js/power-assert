@@ -12,14 +12,16 @@
   <script>
     qunitTap(QUnit, function() { console.log.apply(console, arguments); }, {showSourceOnFailure: false});
   </script>
+
   <script type="text/javascript" src="../lib/power-assert-core.js"></script>
   <script type="text/javascript" src="../lib/power-assert-formatter.js"></script>
-  <script type="text/javascript" src="../lib/power-assert-qunit.js"></script>
+  <script type="text/javascript" src="../lib/power-assert-object.js"></script>
+  <script type="text/javascript" src="../lib/empower.js"></script>
   <script>
-    empowerQUnit(QUnit);
+    empower(QUnit.assert);
   </script>
 
-  <script type="text/javascript" src="./qunit_rhino_empowered.js"></script>
+  <script type="text/javascript" src="./qunit_rhino_espowered.js"></script>
 </head>
 <body>
   <h1 id="qunit-header">QUnit Test Suite</h1>

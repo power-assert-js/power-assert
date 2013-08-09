@@ -1,5 +1,5 @@
 var q = require('qunitjs'),
-    empower = require('../lib/module'),
+    empower = require('../lib/empower'),
     output = [],
     puts = function (str) {
         output.push(str);

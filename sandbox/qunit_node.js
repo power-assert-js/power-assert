@@ -1,6 +1,9 @@
-var q = require('power-assert').empowerQUnit(require('qunitjs'));
+var q = require('qunitjs');
+
 (function () {
-    var qunitTap = require("qunit-tap").qunitTap;
+    var empower = require('empower'),
+        qunitTap = require("qunit-tap");
+    empower(q.assert);
     qunitTap(q, require('util').puts, {showSourceOnFailure: false});
     q.init();
     q.config.updateRate = 0;

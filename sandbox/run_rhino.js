@@ -2,7 +2,8 @@ load('node_modules/qunitjs/qunit/qunit.js');
 load('node_modules/qunit-tap/lib/qunit-tap.js');
 load('lib/power-assert-core.js');
 load('lib/power-assert-formatter.js');
-load('lib/power-assert-qunit.js');
+load('lib/power-assert-object.js');
+load('lib/empower.js');
 
 (function () {
     qunitTap(QUnit, print, {
@@ -11,12 +12,12 @@ load('lib/power-assert-qunit.js');
         showExpectationOnFailure: true,
         showSourceOnFailure: false
     });
-    empowerQUnit(QUnit);
+    empower(QUnit.assert);
 })();
 
 QUnit.init();
 QUnit.config.updateRate = 0;
 
-load('sandbox/qunit_rhino_empowered.js');
+load('sandbox/qunit_rhino_espowered.js');
 
 QUnit.start();
