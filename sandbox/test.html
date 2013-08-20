@@ -13,10 +13,10 @@
     qunitTap(QUnit, function() { console.log.apply(console, arguments); }, {showSourceOnFailure: false});
   </script>
 
-  <script type="text/javascript" src="../lib/power-assert-formatter.js"></script>
-  <script type="text/javascript" src="../lib/empower.js"></script>
+  <script type="text/javascript" src="../node_modules/empower/lib/power-assert-formatter.js"></script>
+  <script type="text/javascript" src="../node_modules/empower/lib/empower.js"></script>
   <script>
-    empower(QUnit.assert);
+    empower(QUnit.assert, {destructive: true});
   </script>
 
   <script type="text/javascript" src="./qunit_rhino_espowered.js"></script>

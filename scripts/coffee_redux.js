@@ -1,4 +1,4 @@
-var espower = require('../lib/espower'),
+var espower = require('espower'),
     CoffeeScript = require('coffee-script-redux'),
     argv = require('optimist').argv,
     fs = require('fs'),

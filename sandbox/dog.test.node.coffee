@@ -1,7 +1,7 @@
 q = require 'qunitjs'
 empower = require 'empower'
 qunitTap = require 'qunit-tap'
-empower(q.assert)
+empower(q.assert, {destructive: true})
 qunitTap(q, require('util').puts, {showSourceOnFailure: false})
 q.init()
 q.config.updateRate = 0

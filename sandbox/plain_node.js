@@ -1,4 +1,4 @@
-var assert = require('power-assert');
+var assert = require('../lib/power-assert');
 
 var hoge = 'foo';
 var fuga = 'bar';
