@@ -11,7 +11,7 @@ var q = require('qunitjs'),
     })(q),
     expect = require('expect.js');
 
-empower(q.assert);
+empower(q.assert, {destructive: true});
 
 
 function doQUnitTest (testName, body, expectedLines) {
