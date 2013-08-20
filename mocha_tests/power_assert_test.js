@@ -8,10 +8,9 @@ describe('power-assert message', function () {
                 body();
                 expect().fail("AssertionError should be thrown");
             } catch (e) {
-                expect(e.message.split('\n').slice(2, -1).join('\n')).to.be(expectedLines.map(function (line) {
-                    // BK: adding indentation
-                    return '            ' + line;
-                }).join('\n'));
+                expect(e.message.split('\n').slice(2, -1)).to.eql(expectedLines.map(function (line) {
+                    return '            ' + line; // BK: adding indentation
+                }));
             }
         };
     });
@@ -47,8 +46,9 @@ describe('power-assert message', function () {
             assert(!truth);
         }, [
             'assert(!truth);',
-            '        |      ',
-            '        true   '
+            '       ||      ',
+            '       |true   ',
+            '       false   '
         ]);
     });
 
@@ -59,8 +59,10 @@ describe('power-assert message', function () {
             assert(!!some);
         }, [
             'assert(!!some);',
-            '         |     ',
-            '         ""    '
+            '       |||     ',
+            '       ||""    ',
+            '       |true   ',
+            '       false   '
         ]);
     });
 
@@ -70,21 +72,29 @@ describe('power-assert message', function () {
             assert(typeof foo !== "undefined");
         }, [
             'assert(typeof foo !== "undefined");',
-            '                  |                ',
-            '                  false            '
+            '       |          |                ',
+            '       |          false            ',
+            '       "undefined"                 '
         ]);
     });
 
 
-    it('assert(delete foo.bar);', function () {
-        var foo = {
-            bar: {
-                baz: false
-            }
-        };
+    it('assert((delete foo.bar) === falsy);', function () {
+        var falsy = 0,
+            foo = {
+                bar: {
+                    baz: false
+                }
+            };
         this.expectPowerAssertMessage(function () {
-            assert(delete foo.bar);
+            assert((delete foo.bar) === falsy);
         }, [
+            'assert((delete foo.bar) === falsy);',
+            '        |      |   |    |   |      ',
+            '        |      |   |    |   0      ',
+            '        |      |   |    false      ',
+            '        |      |   {"baz":false}   ',
+            '        true   {"bar":{"baz":false}}'
         ]);
     });
 
@@ -378,10 +388,11 @@ describe('power-assert message', function () {
             assert(!concat(fuga, piyo));
         }, [
             'assert(!concat(fuga, piyo));',
-            '        |      |     |      ',
-            '        |      |     "うえお"',
-            '        |      "あい"       ',
-            '        "あいうえお"        '
+            '       ||      |     |      ',
+            '       ||      |     "うえお"',
+            '       ||      "あい"       ',
+            '       |"あいうえお"        ',
+            '       false                '
         ]);
     });
 
@@ -396,9 +407,10 @@ describe('power-assert message', function () {
             assert(!concat(fuga, piyo));
         }, [
             'assert(!concat(fuga, piyo));',
-            '        |      |     |      ',
-            '        |      "ｱｲ"  "ｳｴｵ"  ',
-            '        "ｱｲｳｴｵ"             '
+            '       ||      |     |      ',
+            '       ||      "ｱｲ"  "ｳｴｵ"  ',
+            '       |"ｱｲｳｴｵ"             ',
+            '       false                '
         ]);
     });
 

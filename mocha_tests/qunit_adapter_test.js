@@ -20,12 +20,11 @@ function doQUnitTest (testName, body, expectedLines) {
         q.test(testName, function (assert) {
             body(assert);
             try {
-                var actual = output[1].split('\n').slice(2, -1).join('\n');
+                var actual = output[1].split('\n').slice(2, -1);
                 var expected = expectedLines.map(function (line) {
-                    // BK: adding indentation
-                    return '#         ' + line;
-                }).join('\n');
-                expect(actual).to.be(expected);
+                    return '#         ' + line; // BK: adding indentation
+                });
+                expect(actual).to.eql(expected);
                 done();
             } catch (e) {
                 done(e);
@@ -67,8 +66,9 @@ describe('QUnit adapter', function () {
         assert.ok(!truth);
     }, [
         'assert.ok(!truth);',
-        '           |      ',
-        '           true   '
+        '          ||      ',
+        '          |true   ',
+        '          false   '
     ]);
 
 
@@ -77,8 +77,10 @@ describe('QUnit adapter', function () {
         assert.ok(!!some);
     }, [
         'assert.ok(!!some);',
-        '            |     ',
-        '            ""    '
+        '          |||     ',
+        '          ||""    ',
+        '          |true   ',
+        '          false   '
     ]);
 
 
@@ -86,20 +88,28 @@ describe('QUnit adapter', function () {
         assert.ok(typeof foo !== "undefined");
     }, [
         'assert.ok(typeof foo !== "undefined");',
-        '                     |                ',
-        '                     false            '
+        '          |          |                ',
+        '          |          false            ',
+        '          "undefined"                 '
     ]);
 
 
-    // doQUnitTest('assert.ok(delete foo.bar);', function (assert) {
-    //     var foo = {
-    //         bar: {
-    //             baz: false
-    //         }
-    //     };
-    //     assert.ok(delete foo.bar);
-    // }, [
-    // ]);
+    doQUnitTest('assert.ok(delete foo.bar);', function (assert) {
+        var falsy = 0,
+            foo = {
+                bar: {
+                    baz: false
+                }
+            };
+        assert.ok((delete foo.bar) === falsy);
+    }, [
+        'assert.ok((delete foo.bar) === falsy);',
+        '           |      |   |    |   |      ',
+        '           |      |   |    |   0      ',
+        '           |      |   |    false      ',
+        '           |      |   {"baz":false}   ',
+        '           true   {"bar":{"baz":false}}'
+    ]);
 
 
     doQUnitTest('assert.ok(fuga === piyo);', function (assert) {
@@ -372,10 +382,11 @@ describe('QUnit adapter', function () {
         assert.ok(!concat(fuga, piyo));
     }, [
         'assert.ok(!concat(fuga, piyo));',
-        '           |      |     |      ',
-        '           |      |     "うえお"',
-        '           |      "あい"       ',
-        '           "あいうえお"        '
+        '          ||      |     |      ',
+        '          ||      |     "うえお"',
+        '          ||      "あい"       ',
+        '          |"あいうえお"        ',
+        '          false                '
     ]);
 
 
@@ -389,9 +400,10 @@ describe('QUnit adapter', function () {
         assert.ok(!concat(fuga, piyo));
     }, [
         'assert.ok(!concat(fuga, piyo));',
-        '           |      |     |      ',
-        '           |      "ｱｲ"  "ｳｴｵ"  ',
-        '           "ｱｲｳｴｵ"             '
+        '          ||      |     |      ',
+        '          ||      "ｱｲ"  "ｳｴｵ"  ',
+        '          |"ｱｲｳｴｵ"             ',
+        '          false                '
     ]);
 
 });
