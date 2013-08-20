@@ -15,6 +15,12 @@ describe('power-assert message', function () {
         };
     });
 
+    it('remaining regular functions', function () {
+        assert.equal(1, '1');
+        assert.notStrictEqual(1, '1');
+        assert.deepEqual({foo: [1,2], bar: {hoge: 'fuga'}}, {bar: {hoge: 'fuga'}, foo: [1,2]});
+    });
+
 
     it('Identifier with empty string', function () {
         var falsyStr = '';
