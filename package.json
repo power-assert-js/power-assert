@@ -39,7 +39,6 @@
     "grunt": "~0.4.1",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-copy": "~0.4.1",
-    "grunt-shell": "~0.3.1",
     "grunt-mocha-test": "~0.6.2",
     "grunt-espower": "0.0.1"
   },
