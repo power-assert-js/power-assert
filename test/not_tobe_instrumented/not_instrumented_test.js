@@ -1,4 +1,4 @@
-var assert = require('../lib/power-assert'),
+var assert = require('../../lib/power-assert'),
     expect = require('expect.js');
 
 describe('power-assert client should work with not-instrumented code', function () {

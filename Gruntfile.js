@@ -20,8 +20,8 @@ module.exports = function(grunt) {
                 files: [
                     {
                         expand: true,     // Enable dynamic expansion.
-                        cwd: 'not_instrumented_tests/',      // Src matches are relative to this path.
-                        src: ['**/*.js'], // Actual pattern(s) to match.
+                        cwd: 'test/',      // Src matches are relative to this path.
+                        src: ['not_tobe_instrumented/**/*.js'], // Actual pattern(s) to match.
                         dest: '<%= destDir %>/',   // Destination path prefix.
                         ext: '.js'   // Dest filepaths will have this extension.
                     },
@@ -33,8 +33,8 @@ module.exports = function(grunt) {
                 files: [
                     {
                         expand: true,     // Enable dynamic expansion.
-                        cwd: 'mocha_tests/',      // Src matches are relative to this path.
-                        src: ['**/*.js'], // Actual pattern(s) to match.
+                        cwd: 'test/',      // Src matches are relative to this path.
+                        src: ['tobe_instrumented/**/*.js'], // Actual pattern(s) to match.
                         dest: '<%= destDir %>/',   // Destination path prefix.
                         ext: '.js'   // Dest filepaths will have this extension.
                     },
