@@ -6,9 +6,9 @@ DESCRIPTION
 ---------------------------------------
 `power-assert` is an implementation of "Power Assert" in JavaScript.
 
-`power-assert` provides standard `assert` compatible interface (best fit with [Mocha](http://visionmedia.github.io/mocha/)), and also supports [QUnit](http://qunitjs.com/) as well.
+`power-assert` provides standard `assert` compatible interface (best fit with [Mocha](http://visionmedia.github.io/mocha/)).
 
-`power-assert` provides `espower` command to make the magic happen. Internally, `espower` command (and its main body `espower.js`) manipulates assertion expression (JavaScript Code) represented as [Mozilla JavaScript AST](https://developer.mozilla.org/en-US/docs/SpiderMonkey/Parser_API), to instrument power-assert feature into the code. The magic is done by using [Esprima](http://esprima.org/) and [Escodegen](https://github.com/Constellation/escodegen).
+Internally, `power-assert` uses `empower` module to enhance power assert feature into the standard `assert` module, to run with the `espower`ed code.
 
 Please note that `power-assert` is an alpha version product. Pull-requests, issue reports and patches are always welcomed.
 
@@ -38,10 +38,10 @@ EXAMPLE
     });
 
 
-### `espower` code above then run. See the power-assert output appears.
+### run `grunt-espower` code above then run. See the power-assert output appears.
 
 
-      $ mocha /path/to/examples/mocha_node_espowered.js
+      $ mocha /path/to/espowered_examples/mocha_node.js
     
       ․․
     
@@ -57,7 +57,8 @@ EXAMPLE
                             |   -1      0     false
                             [1,2,3]
     
-          at powerAssert (/path/to/node_modules/power-assert/lib/power-assert.js:32:17)
+          at Object.empoweredAssert [as ok] (/path/to/node_modules/empower/lib/empower.js:97:25)
+          at powerAssert (/path/to/node_modules/empower/lib/empower.js:131:25)
           at Context.<anonymous> (/path/to/examples/mocha_node_espowered.js:13:13)
           at Test.Runnable.run (/path/to/node_modules/mocha/lib/runnable.js:211:32)
           at Runner.runTest (/path/to/node_modules/mocha/lib/runner.js:355:10)
@@ -77,6 +78,7 @@ EXAMPLE
                                |   1       2    false
                                [1,2,3]
     
+          at Function.empoweredAssert [as ok] (/path/to/node_modules/empower/lib/empower.js:97:25)
           at Context.<anonymous> (/path/to/examples/mocha_node_espowered.js:48:20)
           at Test.Runnable.run (/path/to/node_modules/mocha/lib/runnable.js:211:32)
           at Runner.runTest (/path/to/node_modules/mocha/lib/runner.js:355:10)
@@ -95,38 +97,50 @@ HOW TO USE
 
 ### on Node with Mocha
 
-First, declare power-assert as devDependencies in your package.json, then run `npm install`.
+First, declare `power-assert` and `grunt-espower` as devDependencies in your package.json, then run `npm install`.
 
     {
         . . .
         "devDependencies": {
-            "power-assert": "0.0.1",
+            "power-assert": "0.1.0",
+            "grunt-espower: "0.1.0",
             . . .
         },
         . . .
     }
 
-First, install power-assert globally.
+Second, configure `grunt-espower` task to  generate espowered code.
 
-    $ npm install -g power-assert
+    grunt.initConfig({
 
-Second, generate espowered code using `espower` command.
+      . . . 
 
-    $ espower your_test.js > your_test_espowered.js
+      espower: {
+        test: {
+          files: [
+            {
+              expand: true,        // Enable dynamic expansion.
+              cwd: 'test/',        // Src matches are relative to this path.
+              src: ['**/*.js'],    // Actual pattern(s) to match.
+              dest: 'espowered/',  // Destination path prefix.
+              ext: '.js'           // Dest filepaths will have this extension.
+            }
+          ]
+        },
+      },
+
+      . . . 
+
+    })
+
+
+Third, generate espowered code using `espower` task.
+
+    $ grunt espower:test
 
 Then run your test in your way.
 
     $ mocha your_test_espowered.js
-
-
-### on Browser (or PhantomJS) with QUnit
-
-
-
-### on Browser (or PhantomJS)
-
-Jxck/assert
-
 
 
 
@@ -134,6 +148,7 @@ TESTED FRAMEWORKS
 ---------------------------------------
 * [Mocha](http://visionmedia.github.io/mocha/)
 * [QUnit](http://qunitjs.com/)
+* [nodeunit](https://github.com/caolan/nodeunit)
 
 
 TESTED ENVIRONMENTS
@@ -159,9 +174,12 @@ MORE OUTPUT EXAMPLES
 
 ### Target test code (using QUnit in this example)
 
-    var q = require('power-assert').empowerQUnit(require('qunitjs'));
+    var q = require('qunitjs');
+    
     (function () {
-        var qunitTap = require("qunit-tap").qunitTap;
+        var empower = require('empower'),
+            qunitTap = require("qunit-tap");
+        empower(q.assert, {destructive: true});
         qunitTap(q, require('util').puts, {showSourceOnFailure: false});
         q.init();
         q.config.updateRate = 0;
@@ -269,7 +287,7 @@ MORE OUTPUT EXAMPLES
     
     # test: spike
     ok 1
-    not ok 2 - comment # /path/to/examples/qunit_node.js:16
+    not ok 2 - comment # /path/to/examples/qunit_node.js:17
     #
     #     assert.ok(hoge === fuga, 'comment');
     #               |    |   |
@@ -277,7 +295,7 @@ MORE OUTPUT EXAMPLES
     #               |    false
     #               "foo"
     # , test: spike
-    not ok 3 - # /path/to/examples/qunit_node.js:19
+    not ok 3 - # /path/to/examples/qunit_node.js:20
     #
     #     assert.ok(fuga === piyo);
     #               |    |   |
@@ -285,7 +303,7 @@ MORE OUTPUT EXAMPLES
     #               |    false
     #               "bar"
     # , test: spike
-    not ok 4 - # /path/to/examples/qunit_node.js:23
+    not ok 4 - # /path/to/examples/qunit_node.js:24
     #
     #     assert.ok(longString === anotherLongString);
     #               |          |   |
@@ -293,32 +311,32 @@ MORE OUTPUT EXAMPLES
     #               |          false
     #               "very very loooooooooooooooooooooooooooooooooooooooooooooooooooong message"
     # , test: spike
-    not ok 5 - # /path/to/examples/qunit_node.js:25
+    not ok 5 - # /path/to/examples/qunit_node.js:26
     #
     #     assert.ok(4 === piyo);
     #                 |   |
     #                 |   3
     #                 false
     # , test: spike
-    not ok 6 - # /path/to/examples/qunit_node.js:27
+    not ok 6 - # /path/to/examples/qunit_node.js:28
     #
     #     assert.ok(4 !== 4);
     #                 |
     #                 false
     # , test: spike
-    not ok 7 - # /path/to/examples/qunit_node.js:30
+    not ok 7 - # /path/to/examples/qunit_node.js:31
     #
     #     assert.ok(falsyStr);
     #               |
     #               ""
     # , test: spike
-    not ok 8 - # /path/to/examples/qunit_node.js:33
+    not ok 8 - # /path/to/examples/qunit_node.js:34
     #
     #     assert.ok(falsyNum);
     #               |
     #               0
     # , test: spike
-    not ok 9 - # /path/to/examples/qunit_node.js:37
+    not ok 9 - # /path/to/examples/qunit_node.js:38
     #
     #     assert.ok(ary1.length === ary2.length);
     #               |    |      |   |    |
@@ -327,28 +345,28 @@ MORE OUTPUT EXAMPLES
     #               |    2      false
     #               ["foo","bar"]
     # , test: spike
-    not ok 10 - # /path/to/examples/qunit_node.js:40
+    not ok 10 - # /path/to/examples/qunit_node.js:41
     #
     #     assert.ok(5 < actual && actual < 13);
     #                 | |         |      |
     #                 | 16        16     false
     #                 true
     # , test: spike
-    not ok 11 - # /path/to/examples/qunit_node.js:43
+    not ok 11 - # /path/to/examples/qunit_node.js:44
     #
     #     assert.ok(5 < actual && actual < 13);
     #                 | |
     #                 | 4
     #                 false
     # , test: spike
-    not ok 12 - # /path/to/examples/qunit_node.js:46
+    not ok 12 - # /path/to/examples/qunit_node.js:47
     #
     #     assert.ok(actual < 5 || 13 < actual);
     #               |      |         | |
     #               |      |         | 10
     #               10     false     false
     # , test: spike
-    not ok 13 - # /path/to/examples/qunit_node.js:54
+    not ok 13 - # /path/to/examples/qunit_node.js:55
     #
     #     assert.ok(foo.bar.baz);
     #               |   |   |
@@ -356,45 +374,46 @@ MORE OUTPUT EXAMPLES
     #               |   {"baz":false}
     #               {"bar":{"baz":false}}
     # , test: spike
-    not ok 14 - # /path/to/examples/qunit_node.js:58
+    not ok 14 - # /path/to/examples/qunit_node.js:59
     #
     #     assert.ok(!truth);
-    #                |
-    #                true
+    #               ||
+    #               |true
+    #               false
     # , test: spike
-    not ok 15 - # /path/to/examples/qunit_node.js:62
+    not ok 15 - # /path/to/examples/qunit_node.js:63
     #
     #     assert.ok(func());
     #               |
     #               false
     # , test: spike
-    not ok 16 - # /path/to/examples/qunit_node.js:70
+    not ok 16 - # /path/to/examples/qunit_node.js:71
     #
     #     assert.ok(obj.age());
     #               |   |
     #               {}  0
     # , test: spike
-    not ok 17 - # /path/to/examples/qunit_node.js:77
+    not ok 17 - # /path/to/examples/qunit_node.js:78
     #
     #     assert.ok(isFalsy(positiveInt));
     #               |       |
     #               false   50
     # , test: spike
-    not ok 18 - # /path/to/examples/qunit_node.js:88
+    not ok 18 - # /path/to/examples/qunit_node.js:89
     #
     #     assert.ok(sum(one, two, three) === seven);
     #               |   |    |    |      |   |
     #               |   |    |    |      |   7
     #               6   1    2    3      false
     # , test: spike
-    not ok 19 - # /path/to/examples/qunit_node.js:89
+    not ok 19 - # /path/to/examples/qunit_node.js:90
     #
     #     assert.ok(sum(sum(one, two), three) === sum(sum(two, three), seven));
     #               |   |   |    |     |      |   |   |   |    |       |
     #               |   |   |    |     |      |   12  5   2    3       7
     #               6   3   1    2     3      false
     # , test: spike
-    not ok 20 - # /path/to/examples/qunit_node.js:90
+    not ok 20 - # /path/to/examples/qunit_node.js:91
     #
     #     assert.ok((three * (seven * ten)) === three);
     #                |     |  |     | |     |   |
@@ -403,7 +422,7 @@ MORE OUTPUT EXAMPLES
     #                |     |  7     70
     #                3     210
     # , test: spike
-    not ok 21 - # /path/to/examples/qunit_node.js:104
+    not ok 21 - # /path/to/examples/qunit_node.js:105
     #
     #     assert.ok(math.calc.sum(one, two, three) === seven);
     #               |    |    |   |    |    |      |   |

@@ -1,7 +1,7 @@
 {
   "name": "power-assert",
   "description": "Power Assert in JavaScript",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "keywords": [
     "test",
     "assert",
@@ -25,10 +25,10 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "empower": "0.0.1"
+    "empower": "~0.1.0"
   },
   "devDependencies": {
-    "espower": "0.0.1",
+    "espower": "~0.1.0",
     "esprima": "1.0.3",
     "escodegen": "0.0.24",
     "coffee-script-redux": "2.0.0-beta6",
@@ -41,7 +41,7 @@
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-copy": "~0.4.1",
     "grunt-mocha-test": "~0.6.2",
-    "grunt-espower": "0.0.1"
+    "grunt-espower": "~0.1.0"
   },
   "licenses": [
     {
