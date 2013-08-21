@@ -1,14 +1,19 @@
-power-assert : Empower your assertions
+power-assert
 ================================
+
+"Power Assert" in JavaScript - Empower your assertions!
 
 
 DESCRIPTION
 ---------------------------------------
 `power-assert` is an implementation of "Power Assert" in JavaScript.
 
+
 `power-assert` provides standard `assert` compatible interface (best fit with [Mocha](http://visionmedia.github.io/mocha/)).
 
+
 Internally, `power-assert` uses `empower` module to enhance power assert feature into the standard `assert` module, to run with the `espower`ed code.
+
 
 Please note that `power-assert` is an alpha version product. Pull-requests, issue reports and patches are always welcomed.
 
