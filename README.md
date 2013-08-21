@@ -31,11 +31,11 @@ EXAMPLE
             this.ary = [1,2,3];
         });
         describe('#indexOf()', function(){
-            it('should return -1 when the value is not present', function(){
+            it('should return index when the value is present', function(){
                 var zero = 0, two = 2;
                 assert(this.ary.indexOf(zero) === two);
             });
-            it('should return index when the value is present', function(){
+            it('should return -1 when the value is not present', function(){
                 var minusOne = -1, two = 2;
                 assert.ok(this.ary.indexOf(two) === minusOne, 'THIS IS AN ASSERTION MESSAGE');
             });
@@ -48,12 +48,16 @@ EXAMPLE
 
       $ mocha /path/to/espowered_examples/mocha_node.js
     
-      ․․
+      Array
+        #indexOf()
+          1) should return index when the value is present
+          2) should return -1 when the value is not present
     
-      0 passing (5 ms)
+    
+      0 passing (7 ms)
       2 failing
     
-      1) Array #indexOf() should return -1 when the value is not present:
+      1) Array #indexOf() should return index when the value is present:
          AssertionError: # /path/to/examples/mocha_node.js:10
     
                 assert(this.ary.indexOf(zero) === two);
@@ -72,9 +76,9 @@ EXAMPLE
           at /path/to/node_modules/mocha/lib/runner.js:290:7
           at next (/path/to/node_modules/mocha/lib/runner.js:234:23)
           at Object._onImmediate (/path/to/node_modules/mocha/lib/runner.js:258:5)
-          at processImmediate [as _immediateCallback] (timers.js:309:15)
+          at processImmediate [as _immediateCallback] (timers.js:330:15)
     
-      2) Array #indexOf() should return index when the value is present:
+      2) Array #indexOf() should return -1 when the value is not present:
          AssertionError: THIS IS AN ASSERTION MESSAGE # /path/to/examples/mocha_node.js:14
     
                 assert.ok(this.ary.indexOf(two) === minusOne, 'THIS IS AN ASSERTION MESSAGE');
@@ -92,7 +96,7 @@ EXAMPLE
           at /path/to/node_modules/mocha/lib/runner.js:290:7
           at next (/path/to/node_modules/mocha/lib/runner.js:234:23)
           at Object._onImmediate (/path/to/node_modules/mocha/lib/runner.js:258:5)
-          at processImmediate [as _immediateCallback] (timers.js:309:15)
+          at processImmediate [as _immediateCallback] (timers.js:330:15)
 
 
 
