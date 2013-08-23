@@ -1,6 +1,8 @@
 power-assert
 ================================
 
+[![Build Status](https://travis-ci.org/twada/power-assert.png)](https://travis-ci.org/twada/power-assert)
+
 "Power Assert" in JavaScript - Empower your assertions!
 
 
