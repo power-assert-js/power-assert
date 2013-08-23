@@ -1,5 +1,6 @@
 .git*
 .idea*
+.travis.yml
 espowered_tests/
 node_modules/
 expr.js
