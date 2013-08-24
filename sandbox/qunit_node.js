@@ -47,12 +47,16 @@ q.test('spike', function (assert) {
     assert.ok(actual < 5 || 13 < actual);
 
 
-    var foo = {
-        bar: {
-            baz: false
-        }
-    };
+    var propName = 'bar',
+        foo = {
+            bar: {
+                baz: false
+            }
+        };
+
     assert.ok(foo.bar.baz);
+    assert.ok(foo['bar'].baz);
+    assert.ok(foo[propName]['baz']);
 
 
     var truth = true;

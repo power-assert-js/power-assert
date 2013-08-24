@@ -231,6 +231,66 @@ describe('power-assert message', function () {
     });
 
 
+    it('computed MemberExpression: assert(foo["bar"]);', function () {
+        var foo = {
+            bar: false
+        };
+        this.expectPowerAssertMessage(function () {
+            assert(foo["bar"]);
+        }, [
+            'assert(foo["bar"]);',
+            '       |  |        ',
+            '       |  false    ',
+            '       {"bar":false}'
+        ]);
+    });
+
+
+    it('computed MemberExpression chain: assert(foo[key].baz);', function () {
+        var key = 'bar',
+            foo = {
+                bar: {
+                    baz: false
+                }
+            };
+        this.expectPowerAssertMessage(function () {
+            assert(foo[key].baz);
+        }, [
+            'assert(foo[key].baz);',
+            '       |  ||    |    ',
+            '       |  ||    false',
+            '       |  |"bar"     ',
+            '       |  {"baz":false}',
+            '       {"bar":{"baz":false}}'
+        ]);
+    });
+
+
+    it('deep chained computed MemberExpression: assert(foo[propName]["baz"][keys()[0]]);', function () {
+        var keys = function () { return ["toto"]; },
+            propName = "bar",
+            foo = {
+                bar: {
+                    baz: {
+                        toto: false
+                    }
+                }
+            };
+        this.expectPowerAssertMessage(function () {
+            assert(foo[propName]["baz"][keys()[0]]);
+        }, [
+            'assert(foo[propName]["baz"][keys()[0]]);',
+            '       |  ||        |      ||     |     ',
+            '       |  ||        |      ||     "toto"',
+            '       |  ||        |      |["toto"]    ',
+            '       |  ||        |      false        ',
+            '       |  |"bar"    {"toto":false}      ',
+            '       |  {"baz":{"toto":false}}        ',
+            '       {"bar":{"baz":{"toto":false}}}   '
+        ]);
+    });
+
+
     it('assert(func());', function () {
         var func = function () { return false; };
         this.expectPowerAssertMessage(function () {
