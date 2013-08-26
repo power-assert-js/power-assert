@@ -2,6 +2,7 @@ power-assert
 ================================
 
 [![Build Status](https://travis-ci.org/twada/power-assert.png)](https://travis-ci.org/twada/power-assert)
+[![NPM version](https://badge.fury.io/js/power-assert.png)](http://badge.fury.io/js/power-assert)
 
 "Power Assert" in JavaScript - Empower your assertions!
 
