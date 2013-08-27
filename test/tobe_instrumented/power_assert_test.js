@@ -480,4 +480,22 @@ describe('power-assert message', function () {
         ]);
     });
 
+
+    it('Object having circular structure', function () {
+        var cyclic = [], two = 2;
+        cyclic.push('foo');
+        cyclic.push(cyclic);
+        cyclic.push('baz');
+        this.expectPowerAssertMessage(function () {
+            assert.ok(cyclic[two] === cyclic);
+        }, [
+            'assert.ok(cyclic[two] === cyclic);',
+            '          |     ||    |   |       ',
+            '          |     ||    |   ["foo","#Circular#","baz"]',
+            '          |     |2    false       ',
+            '          |     "baz"             ',
+            '          ["foo","#Circular#","baz"]'
+        ]);
+    });
+
 });
