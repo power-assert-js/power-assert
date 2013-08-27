@@ -4,21 +4,35 @@ power-assert
 [![Build Status](https://travis-ci.org/twada/power-assert.png)](https://travis-ci.org/twada/power-assert)
 [![NPM version](https://badge.fury.io/js/power-assert.png)](http://badge.fury.io/js/power-assert)
 
-"Power Assert" in JavaScript - Empower your assertions!
+Power Assert in JavaScript - Empower your assertions!
 
 
 DESCRIPTION
 ---------------------------------------
-`power-assert` is an implementation of "Power Assert" in JavaScript.
+`power-assert` is an implementation of "Power Assert" concept in JavaScript.
 
 
-`power-assert` provides standard `assert` compatible interface (best fit with [Mocha](http://visionmedia.github.io/mocha/)).
+`power-assert` family is composed of four modules.
+
+| module | description |
+|:-------|:------------|
+| [power-assert](http://github.com/twada/power-assert) | `assert` function wrapper on top of `empower` module. |
+| [empower](http://github.com/twada/empower) | Power Assert feature enhancer for assert function/object. |
+| [espower](http://github.com/twada/espower) | Power Assert feature instrumentor based on the [Mozilla JavaScript AST](https://developer.mozilla.org/en-US/docs/SpiderMonkey/Parser_API). |
+| [grunt-espower](http://github.com/twada/grunt-espower) | A grunt task to apply `espower` to target files. |
 
 
-Internally, `power-assert` uses `empower` module to enhance power assert feature into the standard `assert` module, to run with the `espower`ed code.
+`power-assert` provides standard `assert` compatible function with Power Assert feature. (Best fit with [Mocha](http://visionmedia.github.io/mocha/). If you use assert-like objects provided by various testing frameworks such as [QUnit](http://qunitjs.com/) or [nodeunit](https://github.com/caolan/nodeunit). Please use [empower](http://github.com/twada/empower) module directly).
+
+
+Internally, `power-assert` uses [empower](http://github.com/twada/empower) module to enhance power assert feature into the standard `assert` module, to run with the power assert feature added code by [espower](http://github.com/twada/espower) module. 
+
+
+See [power-assert-demo](http://github.com/twada/power-assert-demo) project for power-assert Demo running with mocha and [CoffeeScriptRedux](https://github.com/michaelficarra/CoffeeScriptRedux).
 
 
 Please note that `power-assert` is an alpha version product. Pull-requests, issue reports and patches are always welcomed.
+
 
 
 EXAMPLE
@@ -26,25 +40,25 @@ EXAMPLE
 
 ### Target test code (using Mocha in this example)
 
+```javascript
+var assert = require('power-assert');
 
-    var assert = require('power-assert');
-    
-    describe('Array', function(){
-        beforeEach(function(){
-            this.ary = [1,2,3];
+describe('Array', function(){
+    beforeEach(function(){
+        this.ary = [1,2,3];
+    });
+    describe('#indexOf()', function(){
+        it('should return index when the value is present', function(){
+            var zero = 0, two = 2;
+            assert(this.ary.indexOf(zero) === two);
         });
-        describe('#indexOf()', function(){
-            it('should return index when the value is present', function(){
-                var zero = 0, two = 2;
-                assert(this.ary.indexOf(zero) === two);
-            });
-            it('should return -1 when the value is not present', function(){
-                var minusOne = -1, two = 2;
-                assert.ok(this.ary.indexOf(two) === minusOne, 'THIS IS AN ASSERTION MESSAGE');
-            });
+        it('should return -1 when the value is not present', function(){
+            var minusOne = -1, two = 2;
+            assert.ok(this.ary.indexOf(two) === minusOne, 'THIS IS AN ASSERTION MESSAGE');
         });
     });
-
+});
+```
 
 ### run `grunt-espower` code above then run. See the power-assert output appears.
 
@@ -110,41 +124,45 @@ HOW TO USE
 ### on Node with Mocha
 
 First, declare `power-assert` and `grunt-espower` as devDependencies in your package.json, then run `npm install`.
+(If you do not like Grunt, [espower runner](https://gist.github.com/azu/6309397) and [its variation for Windows](https://gist.github.com/gooocho/6317135) may be useful to start with.)
 
-    {
+```javascript
+{
+    . . .
+    "devDependencies": {
+        "power-assert": "0.1.0",
+        "grunt-espower": "0.1.0",
         . . .
-        "devDependencies": {
-            "power-assert": "0.1.0",
-            "grunt-espower": "0.1.0",
-            . . .
-        },
-        . . .
-    }
+    },
+    . . .
+}
+```
 
 Second, configure `grunt-espower` task to  generate espowered code.
 
-    grunt.initConfig({
+```javascript
+grunt.initConfig({
 
-      . . . 
+  . . . 
 
-      espower: {
-        test: {
-          files: [
-            {
-              expand: true,        // Enable dynamic expansion.
-              cwd: 'test/',        // Src matches are relative to this path.
-              src: ['**/*.js'],    // Actual pattern(s) to match.
-              dest: 'espowered/',  // Destination path prefix.
-              ext: '.js'           // Dest filepaths will have this extension.
-            }
-          ]
-        },
-      },
+  espower: {
+    test: {
+      files: [
+        {
+          expand: true,        // Enable dynamic expansion.
+          cwd: 'test/',        // Src matches are relative to this path.
+          src: ['**/*.js'],    // Actual pattern(s) to match.
+          dest: 'espowered/',  // Destination path prefix.
+          ext: '.js'           // Dest filepaths will have this extension.
+        }
+      ]
+    },
+  },
 
-      . . . 
+  . . . 
 
-    })
-
+})
+```
 
 Third, generate espowered code using `espower` task.
 
@@ -186,117 +204,118 @@ MORE OUTPUT EXAMPLES
 
 ### Target test code (using QUnit in this example)
 
-    var q = require('qunitjs');
-    
-    (function () {
-        var empower = require('empower'),
-            qunitTap = require("qunit-tap");
-        empower(q.assert, {destructive: true});
-        qunitTap(q, require('util').puts, {showSourceOnFailure: false});
-        q.init();
-        q.config.updateRate = 0;
-    })();
-    
-    q.test('spike', function (assert) {
-        assert.ok(true);
-    
-        var hoge = 'foo';
-        var fuga = 'bar';
-        assert.ok(hoge === fuga, 'comment');
-    
-        var piyo = 3;
-        assert.ok(fuga === piyo);
-    
-        var longString = 'very very loooooooooooooooooooooooooooooooooooooooooooooooooooong message';
-        var anotherLongString = 'yet another loooooooooooooooooooooooooooooooooooooooooooooooooooong message';
-        assert.ok(longString === anotherLongString);
-    
-        assert.ok(4 === piyo);
-    
-        assert.ok(4 !== 4);
-    
-        var falsyStr = '';
-        assert.ok(falsyStr);
-    
-        var falsyNum = 0;
-        assert.ok(falsyNum);
-    
-        var ary1 = ['foo', 'bar'];
-        var ary2 = ['aaa', 'bbb', 'ccc'];
-        assert.ok(ary1.length === ary2.length);
-    
-        var actual = 16;
-        assert.ok(5 < actual && actual < 13);
-    
-        actual = 4;
-        assert.ok(5 < actual && actual < 13);
-    
-        actual = 10;
-        assert.ok(actual < 5 || 13 < actual);
-    
-    
-        var propName = 'bar',
-            foo = {
-                bar: {
-                    baz: false
-                }
-            };
-    
-        assert.ok(foo.bar.baz);
-        assert.ok(foo['bar'].baz);
-        assert.ok(foo[propName]['baz']);
-    
-    
-        var truth = true;
-        assert.ok(!truth);
-    
-    
-        var func = function () { return false; };
-        assert.ok(func());
-    
-    
-        var obj = {
-            age: function () {
-                return 0;
-            }
-        };
-        assert.ok(obj.age());
-    
-    
-        var isFalsy = function (arg) {
-            return !(arg);
-        };
-        var positiveInt = 50;
-        assert.ok(isFalsy(positiveInt));
-    
-    
-        var sum = function () {
-            var result = 0;
-            for (var i = 0; i < arguments.length; i += 1) {
-                result += arguments[i];
-            }
-            return result;
-        };
-        var one = 1, two = 2, three = 3, seven = 7, ten = 10;
-        assert.ok(sum(one, two, three) === seven);
-        assert.ok(sum(sum(one, two), three) === sum(sum(two, three), seven));
-        assert.ok((three * (seven * ten)) === three);
-    
-    
-        var math = {
-            calc: {
-                sum: function () {
-                    var result = 0;
-                    for (var i = 0; i < arguments.length; i += 1) {
-                        result += arguments[i];
-                    }
-                    return result;
-                }
-            }
-        };
-        assert.ok(math.calc.sum(one, two, three) === seven);
-    });
+```javascript
+var q = require('qunitjs');
 
+(function () {
+    var empower = require('empower'),
+        qunitTap = require("qunit-tap");
+    empower(q.assert, {destructive: true});
+    qunitTap(q, require('util').puts, {showSourceOnFailure: false});
+    q.init();
+    q.config.updateRate = 0;
+})();
+
+q.test('spike', function (assert) {
+    assert.ok(true);
+
+    var hoge = 'foo';
+    var fuga = 'bar';
+    assert.ok(hoge === fuga, 'comment');
+
+    var piyo = 3;
+    assert.ok(fuga === piyo);
+
+    var longString = 'very very loooooooooooooooooooooooooooooooooooooooooooooooooooong message';
+    var anotherLongString = 'yet another loooooooooooooooooooooooooooooooooooooooooooooooooooong message';
+    assert.ok(longString === anotherLongString);
+
+    assert.ok(4 === piyo);
+
+    assert.ok(4 !== 4);
+
+    var falsyStr = '';
+    assert.ok(falsyStr);
+
+    var falsyNum = 0;
+    assert.ok(falsyNum);
+
+    var ary1 = ['foo', 'bar'];
+    var ary2 = ['aaa', 'bbb', 'ccc'];
+    assert.ok(ary1.length === ary2.length);
+
+    var actual = 16;
+    assert.ok(5 < actual && actual < 13);
+
+    actual = 4;
+    assert.ok(5 < actual && actual < 13);
+
+    actual = 10;
+    assert.ok(actual < 5 || 13 < actual);
+
+
+    var propName = 'bar',
+        foo = {
+            bar: {
+                baz: false
+            }
+        };
+
+    assert.ok(foo.bar.baz);
+    assert.ok(foo['bar'].baz);
+    assert.ok(foo[propName]['baz']);
+
+
+    var truth = true;
+    assert.ok(!truth);
+
+
+    var func = function () { return false; };
+    assert.ok(func());
+
+
+    var obj = {
+        age: function () {
+            return 0;
+        }
+    };
+    assert.ok(obj.age());
+
+
+    var isFalsy = function (arg) {
+        return !(arg);
+    };
+    var positiveInt = 50;
+    assert.ok(isFalsy(positiveInt));
+
+
+    var sum = function () {
+        var result = 0;
+        for (var i = 0; i < arguments.length; i += 1) {
+            result += arguments[i];
+        }
+        return result;
+    };
+    var one = 1, two = 2, three = 3, seven = 7, ten = 10;
+    assert.ok(sum(one, two, three) === seven);
+    assert.ok(sum(sum(one, two), three) === sum(sum(two, three), seven));
+    assert.ok((three * (seven * ten)) === three);
+
+
+    var math = {
+        calc: {
+            sum: function () {
+                var result = 0;
+                for (var i = 0; i < arguments.length; i += 1) {
+                    result += arguments[i];
+                }
+                return result;
+            }
+        }
+    };
+    assert.ok(math.calc.sum(one, two, three) === seven);
+});
+```
 
 
 ### `espower` code above then running under Node.js
