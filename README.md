@@ -60,7 +60,7 @@ describe('Array', function(){
 });
 ```
 
-### run `grunt-espower` code above then run. See the power-assert output appears.
+### Apply `grunt-espower` task to code above then run tests. See the power-assert output appears.
 
 
       $ mocha /path/to/espowered_examples/mocha_node.js
@@ -130,8 +130,8 @@ First, declare `power-assert` and `grunt-espower` as devDependencies in your pac
 {
     . . .
     "devDependencies": {
-        "power-assert": "0.1.0",
-        "grunt-espower": "0.1.0",
+        "power-assert": "0.1.1",
+        "grunt-espower": "0.1.1",
         . . .
     },
     . . .
@@ -168,7 +168,11 @@ Third, generate espowered code using `espower` task.
 
     $ grunt espower:test
 
-Then run your test in your way.
+Then run your test in your way. For example,
+
+    $ grunt test
+
+or
 
     $ mocha your_test_espowered.js
 
