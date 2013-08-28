@@ -180,8 +180,9 @@ describe('power-assert message', function () {
             assert(5 < actual && actual < 13);
         }, [
             'assert(5 < actual && actual < 13);',
-            '         | |         |      |     ',
-            '         | 16        16     false ',
+            '         | |      |  |      |     ',
+            '         | |      |  16     false ',
+            '         | 16     false           ',
             '         true                     '
         ]);
     });
@@ -193,9 +194,10 @@ describe('power-assert message', function () {
             assert.ok(actual < 5 || 13 < actual);
         }, [
             'assert.ok(actual < 5 || 13 < actual);',
-            '          |      |         | |       ',
-            '          |      |         | 10      ',
-            '          10     false     false     '
+            '          |      |   |     | |       ',
+            '          |      |   |     | 10      ',
+            '          |      |   false false     ',
+            '          10     false               '
         ]);
     });
 
@@ -206,8 +208,8 @@ describe('power-assert message', function () {
             assert(2 > actual && actual < 13);
         }, [
             'assert(2 > actual && actual < 13);',
-            '         | |                      ',
-            '         | 5                      ',
+            '         | |      |               ',
+            '         | 5      false           ',
             '         false                    '
         ]);
     });
