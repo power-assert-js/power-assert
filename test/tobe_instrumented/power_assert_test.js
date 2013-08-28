@@ -500,4 +500,37 @@ describe('power-assert message', function () {
         ]);
     });
 
+
+
+    it('ArrayExpression: assert([foo, bar].length === four);', function () {
+        var foo = 'hoge', bar = 'fuga', four = 4;
+        this.expectPowerAssertMessage(function () {
+            assert([foo, bar].length === four);
+        }, [
+            'assert([foo, bar].length === four);',
+            '        |    |    |      |   |     ',
+            '        |    |    |      |   4     ',
+            '        |    |    2      false     ',
+            '        |    "fuga"                ',
+            '        "hoge"                     '
+        ]);
+    });
+
+
+
+    it('various expressions in ArrayExpression: assert(typeof [[foo.bar, baz(moo)], + fourStr] === "number");', function () {
+        var foo = {bar: 'fuga'}, baz = function (arg) { return null; }, moo = 'boo', fourStr = '4';
+        this.expectPowerAssertMessage(function () {
+            assert(typeof [[foo.bar, baz(moo)], + fourStr] === "number");
+        }, [
+            'assert(typeof [[foo.bar, baz(moo)], + fourStr] === "number");',
+            '       |        |   |    |   |      | |        |             ',
+            '       |        |   |    |   "boo"  4 "4"      false         ',
+            '       |        |   |    null                                ',
+            '       |        |   "fuga"                                   ',
+            '       "object" {"bar":"fuga"}                               '
+        ]);
+    });
+
+
 });
