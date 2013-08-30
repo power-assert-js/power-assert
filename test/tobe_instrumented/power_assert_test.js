@@ -533,4 +533,27 @@ describe('power-assert message', function () {
     });
 
 
+    it('prefix UpdateExpression: assert(++minusOne);', function () {
+        var minusOne = -1;
+        this.expectPowerAssertMessage(function () {
+            assert(++minusOne);
+        }, [
+            'assert(++minusOne);',
+            '       |           ',
+            '       0           '
+        ]);
+    });
+
+
+    it('suffix UpdateExpression: assert(zero--);', function () {
+        var zero = 0;
+        this.expectPowerAssertMessage(function () {
+            assert(zero--);
+        }, [
+            'assert(zero--);',
+            '       |       ',
+            '       0       '
+        ]);
+    });
+
 });
