@@ -131,8 +131,8 @@ First, declare `power-assert` and `grunt-espower` as devDependencies in your pac
 {
     . . .
     "devDependencies": {
-        "power-assert": "~0.1.2",
-        "grunt-espower": "~0.1.2",
+        "power-assert": "~0.1.3",
+        "grunt-espower": "~0.1.3",
         . . .
     },
     . . .

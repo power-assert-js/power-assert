@@ -5,7 +5,9 @@
   "keywords": [
     "test",
     "assert",
-    "testing"
+    "testing",
+    "ecmascript",
+    "ast"
   ],
   "homepage": "http://github.com/twada/power-assert",
   "author": {
@@ -25,10 +27,10 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "empower": "~0.1.3"
+    "empower": "~0.1.4"
   },
   "devDependencies": {
-    "espower": "~0.1.3",
+    "espower": "~0.1.4",
     "esprima": "1.0.4",
     "escodegen": "0.0.26",
     "coffee-script-redux": "2.0.0-beta7",
@@ -40,8 +42,8 @@
     "grunt": "~0.4.1",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-copy": "~0.4.1",
-    "grunt-mocha-test": "~0.6.2",
-    "grunt-espower": "~0.1.2"
+    "grunt-mocha-test": "~0.6.3",
+    "grunt-espower": "~0.1.3"
   },
   "licenses": [
     {
