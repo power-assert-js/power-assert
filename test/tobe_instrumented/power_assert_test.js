@@ -22,6 +22,14 @@ describe('power-assert message', function () {
     });
 
 
+    it('assert(false);', function () {
+        this.expectPowerAssertMessage(function () {
+            assert(false);
+        }, [
+        ]);
+    });
+
+
     it('Identifier with empty string', function () {
         var falsyStr = '';
         this.expectPowerAssertMessage(function () {
@@ -81,6 +89,17 @@ describe('power-assert message', function () {
             '       |          |                ',
             '       |          false            ',
             '       "undefined"                 '
+        ]);
+    });
+
+
+    it('assert((delete nonexistent) === false);', function () {
+        this.expectPowerAssertMessage(function () {
+            assert((delete nonexistent) === false);
+        }, [
+            'assert((delete nonexistent) === false);',
+            '        |                   |          ',
+            '        true                false      '
         ]);
     });
 
