@@ -10,7 +10,7 @@ describe('power-assert message', function () {
             } catch (e) {
                 if (typeof e.message === 'undefined') { // Node 0.8.x workaround
                     expect(e.actual).to.not.be.ok();
-                    expect(e.expect).to.be.ok();
+                    expect(e.expected).to.be.ok();
                 } else {
                     expect(e.message.split('\n').slice(2, -1)).to.eql(expectedLines.map(function (line) {
                         return '            ' + line; // BK: adding indentation
