@@ -5,7 +5,7 @@ power-assert
 [![NPM version](https://badge.fury.io/js/power-assert.png)](http://badge.fury.io/js/power-assert)
 [![Dependency Status](https://gemnasium.com/twada/power-assert.png)](https://gemnasium.com/twada/power-assert)
 
-Power Assert in JavaScript - Empower your assertions. Less code, more information.
+Power Assert in JavaScript - Less code, more information.
 
 
 DESCRIPTION
@@ -29,7 +29,7 @@ DESCRIPTION
 Internally, `power-assert` uses [empower](http://github.com/twada/empower) module to enhance power assert feature into the standard `assert` module, to run with the power assert feature added code by [espower](http://github.com/twada/espower) module. 
 
 
-See [power-assert-demo](http://github.com/twada/power-assert-demo) project for power-assert Demo running with mocha and [CoffeeScriptRedux](https://github.com/michaelficarra/CoffeeScriptRedux).
+See [power-assert-demo](http://github.com/twada/power-assert-demo) project for power-assert Demo running with mocha (includes power-assert demo running with [CoffeeScriptRedux](https://github.com/michaelficarra/CoffeeScriptRedux) ).
 
 
 Please note that `power-assert` is an alpha version product. Pull-requests, issue reports and patches are always welcomed.
