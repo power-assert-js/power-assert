@@ -5,7 +5,7 @@ power-assert
 [![NPM version](https://badge.fury.io/js/power-assert.png)](http://badge.fury.io/js/power-assert)
 [![Dependency Status](https://gemnasium.com/twada/power-assert.png)](https://gemnasium.com/twada/power-assert)
 
-Power Assert in JavaScript - Less code, more information.
+Power Assert in JavaScript. Less code, more information.
 
 
 DESCRIPTION
@@ -131,8 +131,8 @@ First, declare `power-assert` and `grunt-espower` as devDependencies in your pac
 {
     . . .
     "devDependencies": {
-        "power-assert": "~0.1.4",
-        "grunt-espower": "~0.1.4",
+        "power-assert": "~0.1.5",
+        "grunt-espower": "~0.1.5",
         . . .
     },
     . . .
