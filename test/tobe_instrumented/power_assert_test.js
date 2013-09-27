@@ -580,4 +580,75 @@ describe('power-assert message', function () {
         ]);
     });
 
+
+    it('ConditionalExpression of ConditionalExpression: assert(falsy ? truthy : truthy ? anotherFalsy : truthy);', function () {
+        var truthy = 'truthy', falsy = 0, anotherFalsy = null;
+        this.expectPowerAssertMessage(function () {
+            assert(falsy ? truthy : truthy ? anotherFalsy : truthy);
+        }, [
+            'assert(falsy ? truthy : truthy ? anotherFalsy : truthy);',
+            '       |                |        |                      ',
+            '       0                "truthy" null                   '
+        ]);
+    });
+
+
+    it('RegularExpression will not be instrumented: assert(/^not/.exec(str));', function () {
+        var str = 'ok';
+        this.expectPowerAssertMessage(function () {
+            assert(/^not/.exec(str));
+        }, [
+            'assert(/^not/.exec(str));',
+            '              |    |     ',
+            '              null "ok"  '
+        ]);
+    });
+
+
+    it('complex ObjectExpression: assert(!({ foo: bar.baz, name: nameOf({firstName: first, lastName: last}) }));', function () {
+        var bar = { baz: 'BAZ' },  first = 'Brendan', last = 'Eich',
+            nameOf = function (person) { return person.firstName + ' ' + person.lastName; };
+        this.expectPowerAssertMessage(function () {
+            assert(!({ foo: bar.baz, name: nameOf({firstName: first, lastName: last}) }));
+        }, [
+            'assert(!({ foo: bar.baz, name: nameOf({firstName: first, lastName: last}) }));',
+            '       |        |   |          |                  |                |          ',
+            '       |        |   "BAZ"      "Brendan Eich"     "Brendan"        "Eich"     ',
+            '       false    {"baz":"BAZ"}                                                 '
+        ]);
+    });
+
+
+    it('NewExpression: assert(baz === new Array(foo, bar, baz)[1]);', function () {
+        var foo = 'foo', bar = 'bar', baz = 'baz';
+        this.expectPowerAssertMessage(function () {
+            assert(baz === new Array(foo, bar, baz)[1]);
+        }, [
+            'assert(baz === new Array(foo, bar, baz)[1]);',
+            '       |   |   |         |    |    |   |    ',
+            '       |   |   |         |    |    |   "bar"',
+            '       |   |   |         |    |    "baz"    ',
+            '       |   |   |         |    "bar"         ',
+            '       |   |   |         "foo"              ',
+            '       |   |   ["foo","bar","baz"]          ',
+            '       |   false                            ',
+            '       "baz"                                '
+        ]);
+    });
+
+
+    it('FunctionExpression will not be instrumented: assert(baz === (function (a, b) { return a + b; })(foo, bar));', function () {
+        var foo = 'foo', bar = 'bar', baz = 'baz';
+        this.expectPowerAssertMessage(function () {
+            assert(baz === (function (a, b) { return a + b; })(foo, bar));
+        }, [
+            'assert(baz === (function (a, b) { return a + b; })(foo, bar));',
+            '       |   |   |                                   |    |     ',
+            '       |   |   |                                   |    "bar" ',
+            '       |   |   "foobar"                            "foo"      ',
+            '       |   false                                              ',
+            '       "baz"                                                  '
+        ]);
+    });
+
 });
