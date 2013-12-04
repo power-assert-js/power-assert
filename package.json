@@ -27,22 +27,22 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "empower": "~0.1.6"
+    "empower": "~0.2.0"
   },
   "devDependencies": {
-    "espower": "~0.1.6",
+    "espower": "~0.2.0",
     "esprima": "~1.0.4",
-    "escodegen": "~0.0.27",
+    "escodegen": "~0.0.28",
     "coffee-script-redux": "2.0.0-beta7",
     "optimist": "0.6.0",
     "expect.js": "0.2.0",
     "qunitjs": "1.10.0",
-    "qunit-tap": "1.4.0",
+    "qunit-tap": "1.4.1",
     "grunt": "~0.4.1",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-copy": "~0.4.1",
-    "grunt-mocha-test": "~0.7.0",
-    "grunt-espower": "~0.1.5"
+    "grunt-mocha-test": "~0.8.0",
+    "grunt-espower": "~0.2.0"
   },
   "licenses": [
     {
