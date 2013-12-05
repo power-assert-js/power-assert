@@ -1,0 +1,17 @@
+{
+    "name": "power-assert",
+    "version": "0.2.1",
+    "main": "lib/power-assert.js",
+    "ignore": [
+        "**/.*",
+        "Gruntfile.js",
+        "node_modules",
+        "package.json",
+        "test",
+        "test_helper.js"
+    ],
+    "dependencies": {
+        "empower": "~0.2.1",
+        "assert": "Jxck/assert"
+    }
+}
