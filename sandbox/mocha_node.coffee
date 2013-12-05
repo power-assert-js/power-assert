@@ -10,9 +10,9 @@ describe 'Array', ->
         it 'should return -1 when the value is not present', ->  
             zero = 0
             two = 2
-            assert this.ary.indexOf(zero) == two
+            assert this.ary.indexOf(zero) is two
 
         it 'should return index when the value is present', ->  
             minusOne = -1
             two = 2
-            assert.ok this.ary.indexOf(two) == minusOne, 'THIS IS AN ASSERTION MESSAGE'
+            assert.ok this.ary.indexOf(two) is minusOne, 'THIS IS AN ASSERTION MESSAGE'

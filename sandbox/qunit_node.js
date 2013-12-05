@@ -36,6 +36,7 @@ q.test('spike', function (assert) {
     var ary1 = ['foo', 'bar'];
     var ary2 = ['aaa', 'bbb', 'ccc'];
     assert.ok(ary1.length === ary2.length);
+    assert.deepEqual(ary1, ary2);
 
     var actual = 16;
     assert.ok(5 < actual && actual < 13);

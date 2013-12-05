@@ -20,4 +20,11 @@ describe('power-assert client should work with not-instrumented code', function 
             assert.ok((three * (seven * ten)) === three, 'plain assertion message');
         });
     });
+
+    it('equal with Literal and Identifier: assert.equal(1, minusOne);', function () {
+        var minusOne = -1;
+        this.expectAssertMessage(function () {
+            assert.equal(1, minusOne, 'plain assertion message');
+        });
+    });
 });
