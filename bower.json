@@ -1,14 +1,15 @@
 {
     "name": "power-assert",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "main": "lib/power-assert.js",
     "ignore": [
         "**/.*",
         "Gruntfile.js",
         "node_modules",
         "package.json",
-        "test",
-        "test_helper.js"
+        "sandbox",
+        "scripts",
+        "test"
     ],
     "dependencies": {
         "empower": "~0.2.1",
