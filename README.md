@@ -32,7 +32,7 @@ Internally, `power-assert` uses [empower](http://github.com/twada/empower) modul
 See [power-assert-demo](http://github.com/twada/power-assert-demo) project for power-assert Demo running with mocha (includes power-assert demo running with [CoffeeScriptRedux](https://github.com/michaelficarra/CoffeeScriptRedux) ).
 
 
-Please note that `power-assert` is an alpha version product. Pull-requests, issue reports and patches are always welcomed.
+Please note that `power-assert` is a beta version product. Pull-requests, issue reports and patches are always welcomed.
 
 
 
