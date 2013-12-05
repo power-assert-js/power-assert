@@ -7,7 +7,12 @@ var q = require('qunitjs'),
     tap = (function (qu) {
         var qunitTap = require("qunit-tap");
         //qu.config.updateRate = 0;
-        return qunitTap(qu, puts, {showSourceOnFailure: false});
+        return qunitTap(qu, puts, {
+            showModuleNameOnFailure: false,
+            showTestNameOnFailure: false,
+            showExpectationOnFailure: true,
+            showSourceOnFailure: false
+        });
     })(q),
     expect = require('expect.js');
 
@@ -20,11 +25,8 @@ function doQUnitTest (testName, body, expectedLines) {
         q.test(testName, function (assert) {
             body(assert);
             try {
-                var actual = output[1].split('\n').slice(2, -1);
-                var expected = expectedLines.map(function (line) {
-                    return '#         ' + line; // BK: adding indentation
-                });
-                expect(actual).to.eql(expected);
+                var actual = output[1].split('\n').slice(2);
+                expect(actual).to.eql(expectedLines);
                 done();
             } catch (e) {
                 done(e);
@@ -45,9 +47,10 @@ describe('QUnit adapter', function () {
         var falsyStr = '';
         assert.ok(falsyStr);
     }, [
-        'assert.ok(falsyStr);',
-        '          |         ',
-        '          ""        '
+        '#         assert.ok(falsyStr);',
+        '#                   |         ',
+        '#                   ""        ',
+        '# '
     ]);
 
 
@@ -55,9 +58,10 @@ describe('QUnit adapter', function () {
         var falsyNum = 0;
         assert.ok(falsyNum);
     }, [
-        'assert.ok(falsyNum);',
-        '          |         ',
-        '          0         '
+        '#         assert.ok(falsyNum);',
+        '#                   |         ',
+        '#                   0         ',
+        '# '
     ]);
 
 
@@ -65,10 +69,11 @@ describe('QUnit adapter', function () {
         var truth = true;
         assert.ok(!truth);
     }, [
-        'assert.ok(!truth);',
-        '          ||      ',
-        '          |true   ',
-        '          false   '
+        '#         assert.ok(!truth);',
+        '#                   ||      ',
+        '#                   |true   ',
+        '#                   false   ',
+        '# '
     ]);
 
 
@@ -76,21 +81,23 @@ describe('QUnit adapter', function () {
         var some = '';
         assert.ok(!!some);
     }, [
-        'assert.ok(!!some);',
-        '          |||     ',
-        '          ||""    ',
-        '          |true   ',
-        '          false   '
+        '#         assert.ok(!!some);',
+        '#                   |||     ',
+        '#                   ||""    ',
+        '#                   |true   ',
+        '#                   false   ',
+        '# '
     ]);
 
 
     doQUnitTest('typeof operator: assert.ok(typeof foo !== "undefined");', function (assert) {
         assert.ok(typeof foo !== "undefined");
     }, [
-        'assert.ok(typeof foo !== "undefined");',
-        '          |          |                ',
-        '          |          false            ',
-        '          "undefined"                 '
+        '#         assert.ok(typeof foo !== "undefined");',
+        '#                   |          |                ',
+        '#                   |          false            ',
+        '#                   "undefined"                 ',
+        '# '
     ]);
 
 
@@ -103,12 +110,13 @@ describe('QUnit adapter', function () {
             };
         assert.ok((delete foo.bar) === falsy);
     }, [
-        'assert.ok((delete foo.bar) === falsy);',
-        '           |      |   |    |   |      ',
-        '           |      |   |    |   0      ',
-        '           |      |   |    false      ',
-        '           |      |   {"baz":false}   ',
-        '           true   {"bar":{"baz":false}}'
+        '#         assert.ok((delete foo.bar) === falsy);',
+        '#                    |      |   |    |   |      ',
+        '#                    |      |   |    |   0      ',
+        '#                    |      |   |    false      ',
+        '#                    |      |   {"baz":false}   ',
+        '#                    true   {"bar":{"baz":false}}',
+        '# '
     ]);
 
 
@@ -117,11 +125,12 @@ describe('QUnit adapter', function () {
             piyo = 8;
         assert.ok(fuga === piyo);
     }, [
-        'assert.ok(fuga === piyo);',
-        '          |    |   |     ',
-        '          |    |   8     ',
-        '          |    false     ',
-        '          "foo"          '
+        '#         assert.ok(fuga === piyo);',
+        '#                   |    |   |     ',
+        '#                   |    |   8     ',
+        '#                   |    false     ',
+        '#                   "foo"          ',
+        '# '
     ]);
 
 
@@ -131,11 +140,12 @@ describe('QUnit adapter', function () {
             piyo = 'foo';
         assert.ok(fuga !== piyo);
     }, [
-        'assert.ok(fuga !== piyo);',
-        '          |    |   |     ',
-        '          |    |   "foo" ',
-        '          |    false     ',
-        '          "foo"          '
+        '#         assert.ok(fuga !== piyo);',
+        '#                   |    |   |     ',
+        '#                   |    |   "foo" ',
+        '#                   |    false     ',
+        '#                   "foo"          ',
+        '# '
     ]);
 
 
@@ -144,9 +154,10 @@ describe('QUnit adapter', function () {
         var fuga = 4;
         assert.ok(fuga !== 4);
     }, [
-        'assert.ok(fuga !== 4);',
-        '          |    |      ',
-        '          4    false  '
+        '#         assert.ok(fuga !== 4);',
+        '#                   |    |      ',
+        '#                   4    false  ',
+        '# '
     ]);
 
 
@@ -154,9 +165,10 @@ describe('QUnit adapter', function () {
     doQUnitTest('assert.ok(4 !== 4);', function (assert) {
         assert.ok(4 !== 4);
     }, [
-        'assert.ok(4 !== 4);',
-        '            |      ',
-        '            false  '
+        '#         assert.ok(4 !== 4);',
+        '#                     |      ',
+        '#                     false  ',
+        '# '
     ]);
 
 
@@ -166,12 +178,13 @@ describe('QUnit adapter', function () {
         var ary2 = ['aaa', 'bbb', 'ccc'];
         assert.ok(ary1.length === ary2.length);
     }, [
-        'assert.ok(ary1.length === ary2.length);',
-        '          |    |      |   |    |       ',
-        '          |    |      |   |    3       ',
-        '          |    |      |   ["aaa","bbb","ccc"]',
-        '          |    2      false            ',
-        '          ["foo","bar"]                '
+        '#         assert.ok(ary1.length === ary2.length);',
+        '#                   |    |      |   |    |       ',
+        '#                   |    |      |   |    3       ',
+        '#                   |    |      |   ["aaa","bbb","ccc"]',
+        '#                   |    2      false            ',
+        '#                   ["foo","bar"]                ',
+        '# '
     ]);
 
 
@@ -180,11 +193,12 @@ describe('QUnit adapter', function () {
         var actual = 16;
         assert.ok(5 < actual && actual < 13);
     }, [
-        'assert.ok(5 < actual && actual < 13);',
-        '            | |      |  |      |     ',
-        '            | |      |  16     false ',
-        '            | 16     false           ',
-        '            true                     '
+        '#         assert.ok(5 < actual && actual < 13);',
+        '#                     | |      |  |      |     ',
+        '#                     | |      |  16     false ',
+        '#                     | 16     false           ',
+        '#                     true                     ',
+        '# '
     ]);
 
 
@@ -193,11 +207,12 @@ describe('QUnit adapter', function () {
         var actual = 10;
         assert.ok(actual < 5 || 13 < actual);
     }, [
-        'assert.ok(actual < 5 || 13 < actual);',
-        '          |      |   |     | |       ',
-        '          |      |   |     | 10      ',
-        '          |      |   false false     ',
-        '          10     false               '
+        '#         assert.ok(actual < 5 || 13 < actual);',
+        '#                   |      |   |     | |       ',
+        '#                   |      |   |     | 10      ',
+        '#                   |      |   false false     ',
+        '#                   10     false               ',
+        '# '
     ]);
 
 
@@ -206,10 +221,11 @@ describe('QUnit adapter', function () {
         var actual = 5;
         assert.ok(2 > actual && actual < 13);
     }, [
-        'assert.ok(2 > actual && actual < 13);',
-        '            | |      |               ',
-        '            | 5      false           ',
-        '            false                    '
+        '#         assert.ok(2 > actual && actual < 13);',
+        '#                     | |      |               ',
+        '#                     | 5      false           ',
+        '#                     false                    ',
+        '# '
     ]);
 
 
@@ -222,11 +238,12 @@ describe('QUnit adapter', function () {
         };
         assert.ok(foo.bar.baz);
     }, [
-        'assert.ok(foo.bar.baz);',
-        '          |   |   |    ',
-        '          |   |   false',
-        '          |   {"baz":false}',
-        '          {"bar":{"baz":false}}'
+        '#         assert.ok(foo.bar.baz);',
+        '#                   |   |   |    ',
+        '#                   |   |   false',
+        '#                   |   {"baz":false}',
+        '#                   {"bar":{"baz":false}}',
+        '# '
     ]);
 
 
@@ -235,9 +252,10 @@ describe('QUnit adapter', function () {
         var func = function () { return false; };
         assert.ok(func());
     }, [
-        'assert.ok(func());',
-        '          |       ',
-        '          false   '
+        '#         assert.ok(func());',
+        '#                   |       ',
+        '#                   false   ',
+        '# '
     ]);
 
 
@@ -250,9 +268,10 @@ describe('QUnit adapter', function () {
         };
         assert.ok(obj.age());
     }, [
-        'assert.ok(obj.age());',
-        '          |   |      ',
-        '          {}  0      '
+        '#         assert.ok(obj.age());',
+        '#                   |   |      ',
+        '#                   {}  0      ',
+        '# '
     ]);
 
 
@@ -264,9 +283,10 @@ describe('QUnit adapter', function () {
         var positiveInt = 50;
         assert.ok(isFalsy(positiveInt));
     }, [
-        'assert.ok(isFalsy(positiveInt));',
-        '          |       |             ',
-        '          false   50            '
+        '#         assert.ok(isFalsy(positiveInt));',
+        '#                   |       |             ',
+        '#                   false   50            ',
+        '# '
     ]);
 
 
@@ -282,10 +302,11 @@ describe('QUnit adapter', function () {
         var one = 1, two = 2, three = 3, seven = 7, ten = 10;
         assert.ok(sum(one, two, three) === seven);
     }, [
-        'assert.ok(sum(one, two, three) === seven);',
-        '          |   |    |    |      |   |      ',
-        '          |   |    |    |      |   7      ',
-        '          6   1    2    3      false      '
+        '#         assert.ok(sum(one, two, three) === seven);',
+        '#                   |   |    |    |      |   |      ',
+        '#                   |   |    |    |      |   7      ',
+        '#                   6   1    2    3      false      ',
+        '# '
     ]);
 
 
@@ -301,10 +322,11 @@ describe('QUnit adapter', function () {
         var one = 1, two = 2, three = 3, seven = 7, ten = 10;
         assert.ok(sum(sum(one, two), three) === sum(sum(two, three), seven));
     }, [
-        'assert.ok(sum(sum(one, two), three) === sum(sum(two, three), seven));',
-        '          |   |   |    |     |      |   |   |   |    |       |       ',
-        '          |   |   |    |     |      |   12  5   2    3       7       ',
-        '          6   3   1    2     3      false                            '
+        '#         assert.ok(sum(sum(one, two), three) === sum(sum(two, three), seven));',
+        '#                   |   |   |    |     |      |   |   |   |    |       |       ',
+        '#                   |   |   |    |     |      |   12  5   2    3       7       ',
+        '#                   6   3   1    2     3      false                            ',
+        '# '
     ]);
 
 
@@ -324,11 +346,12 @@ describe('QUnit adapter', function () {
         var one = 1, two = 2, three = 3, seven = 7, ten = 10;
         assert.ok(math.calc.sum(one, two, three) === seven);
     }, [
-        'assert.ok(math.calc.sum(one, two, three) === seven);',
-        '          |    |    |   |    |    |      |   |      ',
-        '          |    |    |   |    |    |      |   7      ',
-        '          |    {}   6   1    2    3      false      ',
-        '          {"calc":{}}                               '
+        '#         assert.ok(math.calc.sum(one, two, three) === seven);',
+        '#                   |    |    |   |    |    |      |   |      ',
+        '#                   |    |    |   |    |    |      |   7      ',
+        '#                   |    {}   6   1    2    3      false      ',
+        '#                   {"calc":{}}                               ',
+        '# '
     ]);
 
 
@@ -337,12 +360,13 @@ describe('QUnit adapter', function () {
         var one = 1, two = 2, three = 3, seven = 7, ten = 10;
         assert.ok((three * (seven * ten)) === three);
     }, [
-        'assert.ok((three * (seven * ten)) === three);',
-        '           |     |  |     | |     |   |      ',
-        '           |     |  |     | |     |   3      ',
-        '           |     |  |     | 10    false      ',
-        '           |     |  7     70                 ',
-        '           3     210                         '
+        '#         assert.ok((three * (seven * ten)) === three);',
+        '#                    |     |  |     | |     |   |      ',
+        '#                    |     |  |     | |     |   3      ',
+        '#                    |     |  |     | 10    false      ',
+        '#                    |     |  7     70                 ',
+        '#                    3     210                         ',
+        '# '
     ]);
 
 
@@ -352,11 +376,12 @@ describe('QUnit adapter', function () {
         var fuga = 'bar';
         assert.ok(hoge === fuga, "comment");
     }, [
-        'assert.ok(hoge === fuga, "comment");',
-        '          |    |   |                ',
-        '          |    |   "bar"            ',
-        '          |    false                ',
-        '          "foo"                     '
+        '#         assert.ok(hoge === fuga, "comment");',
+        '#                   |    |   |                ',
+        '#                   |    |   "bar"            ',
+        '#                   |    false                ',
+        '#                   "foo"                     ',
+        '# '
     ]);
 
 
@@ -366,11 +391,12 @@ describe('QUnit adapter', function () {
         var anotherLongString = 'yet another loooooooooooooooooooooooooooooooooooooooooooooooooooong message';
         assert.ok(longString === anotherLongString);
     }, [
-        'assert.ok(longString === anotherLongString);',
-        '          |          |   |                  ',
-        '          |          |   "yet another loooooooooooooooooooooooooooooooooooooooooooooooooooong message"',
-        '          |          false                  ',
-        '          "very very loooooooooooooooooooooooooooooooooooooooooooooooooooong message"'
+        '#         assert.ok(longString === anotherLongString);',
+        '#                   |          |   |                  ',
+        '#                   |          |   "yet another loooooooooooooooooooooooooooooooooooooooooooooooooooong message"',
+        '#                   |          false                  ',
+        '#                   "very very loooooooooooooooooooooooooooooooooooooooooooooooooooong message"',
+        '# '
     ]);
 
 
@@ -383,12 +409,13 @@ describe('QUnit adapter', function () {
         };
         assert.ok(!concat(fuga, piyo));
     }, [
-        'assert.ok(!concat(fuga, piyo));',
-        '          ||      |     |      ',
-        '          ||      |     "うえお"',
-        '          ||      "あい"       ',
-        '          |"あいうえお"        ',
-        '          false                '
+        '#         assert.ok(!concat(fuga, piyo));',
+        '#                   ||      |     |      ',
+        '#                   ||      |     "うえお"',
+        '#                   ||      "あい"       ',
+        '#                   |"あいうえお"        ',
+        '#                   false                ',
+        '# '
     ]);
 
 
@@ -401,11 +428,126 @@ describe('QUnit adapter', function () {
         };
         assert.ok(!concat(fuga, piyo));
     }, [
-        'assert.ok(!concat(fuga, piyo));',
-        '          ||      |     |      ',
-        '          ||      "ｱｲ"  "ｳｴｵ"  ',
-        '          |"ｱｲｳｴｵ"             ',
-        '          false                '
+        '#         assert.ok(!concat(fuga, piyo));',
+        '#                   ||      |     |      ',
+        '#                   ||      "ｱｲ"  "ｳｴｵ"  ',
+        '#                   |"ｱｲｳｴｵ"             ',
+        '#                   false                ',
+        '# '
+    ]);
+
+
+
+
+
+    doQUnitTest('equal with Literal and Identifier: assert.equal(1, minusOne);', function (assert) {
+        var minusOne = -1;
+        assert.equal(1, minusOne);
+    },[
+        '#         assert.equal(1, minusOne);',
+        '#                         |         ',
+        '#                         -1        ',
+        '# , expected: -1, got: 1'
+    ]);
+
+
+    doQUnitTest('equal with UpdateExpression and Literal: assert.equal(++minusOne, 1);', function (assert) {
+        var minusOne = -1;
+        assert.equal(++minusOne, 1);
+    },[
+        '#         assert.equal(++minusOne, 1);',
+        '#                      |              ',
+        '#                      0              ',
+        '# , expected: 1, got: 0'
+    ]);
+
+
+    doQUnitTest('notEqual with ConditionalExpression and AssignmentExpression: assert.notEqual(truthy ? fiveInStr : tenInStr, four += 1);', function (assert) {
+        var truthy = 3, fiveInStr = '5', tenInStr = '10', four = 4;
+        assert.notEqual(truthy ? fiveInStr : tenInStr, four += 1);
+    },[
+        '#         assert.notEqual(truthy ? fiveInStr : tenInStr, four += 1);',
+        '#                         |        |                          |     ',
+        '#                         3        "5"                        5     ',
+        '# , expected: 5, got: "5"'
+    ]);
+
+
+    doQUnitTest('strictEqual with CallExpression and BinaryExpression, Identifier: assert.strictEqual(obj.truthy(), three == threeInStr);', function (assert) {
+        var obj = { truthy: function () { return 'true'; }}, three = 3, threeInStr = '3';
+        assert.strictEqual(obj.truthy(), three == threeInStr);
+    },[
+        '#         assert.strictEqual(obj.truthy(), three == threeInStr);',
+        '#                            |   |         |     |  |           ',
+        '#                            |   |         |     |  "3"         ',
+        '#                            {}  "true"    3     true           ',
+        '# , expected: true, got: "true"'
+    ]);
+
+
+    doQUnitTest('notStrictEqual with MemberExpression and UnaryExpression: assert.notStrictEqual(typeof undefinedVar, types.undef);', function (assert) {
+        var types = { undef: 'undefined' };
+        assert.notStrictEqual(typeof undefinedVar, types.undef);
+    },[
+        '#         assert.notStrictEqual(typeof undefinedVar, types.undef);',
+        '#                               |                    |     |      ',
+        '#                               |                    |     "undefined"',
+        '#                               "undefined"          {"undef":"undefined"}',
+        '# , expected: "undefined", got: "undefined"'
+    ]);
+
+
+    doQUnitTest('deepEqual with LogicalExpression and ObjectExpression: assert.deepEqual(alice || bob, {name: kenName, age: four});', function (assert) {
+        var alice = {name: 'alice', age: 3}, bob = {name: 'bob', age: 5}, kenName = 'ken', four = 4;
+        assert.deepEqual(alice || bob, {name: kenName, age: four});
+    },[
+        '#         assert.deepEqual(alice || bob, {name: kenName, age: four});',
+        '#                          |     |              |             |      ',
+        '#                          |     |              "ken"         4      ',
+        '#                          |     {"name":"alice","age":3}            ',
+        '#                          {"name":"alice","age":3}                  ',
+        '# , expected: {',
+        '#   "age": 4,',
+        '#   "name": "ken"',
+        '# }, got: {',
+        '#   "age": 3,',
+        '#   "name": "alice"',
+        '# }'
+    ]);
+
+
+    doQUnitTest('notDeepEqual with ArrayExpression and NewExpression: assert.notDeepEqual([foo, bar, baz], new Array(foo, bar, baz));', function (assert) {
+        var foo = 'foo', bar = ['toto', 'tata'], baz = {name: 'hoge'};
+        assert.notDeepEqual([foo, bar, baz], new Array(foo, bar, baz));
+    },[
+        '#         assert.notDeepEqual([foo, bar, baz], new Array(foo, bar, baz));',
+        '#                              |    |    |     |         |    |    |     ',
+        '#                              |    |    |     |         |    |    {"name":"hoge"}',
+        '#                              |    |    |     |         |    ["toto","tata"]',
+        '#                              |    |    |     |         "foo"           ',
+        '#                              |    |    |     ["foo",["toto","tata"],{"name":"hoge"}]',
+        '#                              |    |    {"name":"hoge"}                 ',
+        '#                              |    ["toto","tata"]                      ',
+        '#                              "foo"                                     ',
+        '# , expected: [',
+        '#   "foo",',
+        '#   [',
+        '#     "toto",',
+        '#     "tata"',
+        '#   ],',
+        '#   {',
+        '#     "name": "hoge"',
+        '#   }',
+        '# ], got: [',
+        '#   "foo",',
+        '#   [',
+        '#     "toto",',
+        '#     "tata"',
+        '#   ],',
+        '#   {',
+        '#     "name": "hoge"',
+        '#   }',
+        '# ]'
     ]);
 
 });
