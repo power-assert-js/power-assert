@@ -13,13 +13,14 @@ DESCRIPTION
 `power-assert` is an implementation of "Power Assert" concept in JavaScript.
 
 
-`power-assert` family is composed of four modules.
+`power-assert` family is composed of five modules.
 
 | module | description |
 |:-------|:------------|
 | [power-assert](http://github.com/twada/power-assert) | `assert` function wrapper on top of `empower` module. |
 | [empower](http://github.com/twada/empower) | Power Assert feature enhancer for assert function/object. |
 | [espower](http://github.com/twada/espower) | Power Assert feature instrumentor based on the [Mozilla JavaScript AST](https://developer.mozilla.org/en-US/docs/SpiderMonkey/Parser_API). |
+| [espower-loader](http://github.com/twada/espower-loader) | `espower` feature instrumentor on the fly. |
 | [grunt-espower](http://github.com/twada/grunt-espower) | A grunt task to apply `espower` to target files. |
 
 
@@ -61,7 +62,7 @@ describe('Array', function(){
 });
 ```
 
-### Apply `grunt-espower` task to code above then run tests. See the power-assert output appears.
+### Apply `espower-loader` or `grunt-espower` task to code above then run tests. See the power-assert output appears.
 
 
       $ mocha /path/to/espowered_examples/mocha_node.js
@@ -122,24 +123,78 @@ HOW TO USE
 ---------------------------------------
 
 
-### on Node with Mocha
+### using `espower-loader`
 
-First, declare `power-assert` and `grunt-espower` as devDependencies in your package.json, then run `npm install`.
-(If you do not like Grunt, [espower runner](https://gist.github.com/azu/6309397) and [its variation for Windows](https://gist.github.com/gooocho/6317135) may be useful to start with.)
+You can instrument Power Assert feature without code generation by using `espower-loader`.
+
+First, declare `power-assert` and `espower-loader` as devDependencies in your package.json, then run `npm install`.
 
 ```javascript
 {
     . . .
     "devDependencies": {
-        "power-assert": "~0.2.0",
-        "grunt-espower": "~0.2.0",
+        "power-assert": "~0.2.2",
+        "espower-loader": "~0.1.0",
         . . .
     },
     . . .
 }
 ```
 
-Second, configure `grunt-espower` task to  generate espowered code.
+Second, require `power-assert` in your test.
+
+    --- a/test/your_test.js
+    +++ b/test/your_test.js
+    @@ -1,4 +1,4 @@
+    -var assert = require('assert');
+    +var assert = require('power-assert');
+
+
+Third, put `enable-power-assert.js` somewhere in your project, where `pattern` matches to target test files.
+
+```javascript
+require('espower-loader')({
+    // directory where match starts with
+    cwd: process.cwd(),
+    // glob pattern using minimatch module
+    pattern: 'test/**/*.js'
+});
+```
+
+Then run mocha, with `--require` option. No code generation required.
+
+    $ mocha --require ./path/to/enable-power-assert test/your_test.js
+
+
+
+
+### using `grunt-espower`
+
+First, declare `power-assert` and `grunt-espower` as devDependencies in your package.json, then run `npm install`.
+(If you do not like Grunt, use `espower-loader` module or [espower runner](https://gist.github.com/azu/6309397) and [its variation for Windows](https://gist.github.com/gooocho/6317135) may be useful to start with.)
+
+```javascript
+{
+    . . .
+    "devDependencies": {
+        "power-assert": "~0.2.2",
+        "grunt-espower": "~0.2.1",
+        . . .
+    },
+    . . .
+}
+```
+
+Second, require `power-assert` in your test.
+
+    --- a/test/your_test.js
+    +++ b/test/your_test.js
+    @@ -1,4 +1,4 @@
+    -var assert = require('assert');
+    +var assert = require('power-assert');
+
+
+Third, configure `grunt-espower` task to  generate espowered code.
 
 ```javascript
 grunt.initConfig({
@@ -165,11 +220,11 @@ grunt.initConfig({
 })
 ```
 
-Third, generate espowered code using `espower` task.
+Then, generate espowered code using `espower` task.
 
     $ grunt espower:test
 
-Then run your test in your way. For example,
+Lastly, run your test in your way. For example,
 
     $ grunt test
 
