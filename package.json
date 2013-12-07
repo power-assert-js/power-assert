@@ -32,7 +32,7 @@
   "devDependencies": {
     "espower": "~0.2.1",
     "esprima": "~1.0.4",
-    "escodegen": "~0.0.28",
+    "escodegen": "~1.0.1",
     "coffee-script-redux": "2.0.0-beta7",
     "optimist": "0.6.0",
     "expect.js": "0.2.0",
@@ -41,7 +41,7 @@
     "grunt": "~0.4.1",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-copy": "~0.4.1",
-    "grunt-mocha-test": "~0.8.0",
+    "grunt-mocha-test": "~0.8.1",
     "grunt-espower": "~0.2.0"
   },
   "licenses": [
