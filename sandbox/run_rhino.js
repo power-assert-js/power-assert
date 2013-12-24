@@ -1,7 +1,7 @@
-load('node_modules/qunitjs/qunit/qunit.js');
-load('node_modules/qunit-tap/lib/qunit-tap.js');
-load('node_modules/empower/lib/power-assert-formatter.js');
-load('node_modules/empower/lib/empower.js');
+load('bower_components/qunit/qunit/qunit.js');
+load('bower_components/qunit-tap/lib/qunit-tap.js');
+load('bower_components/power-assert-formatter/lib/power-assert-formatter.js');
+load('bower_components/empower/lib/empower.js');
 
 (function () {
     qunitTap(QUnit, print, {
@@ -10,7 +10,7 @@ load('node_modules/empower/lib/empower.js');
         showExpectationOnFailure: true,
         showSourceOnFailure: false
     });
-    empower(QUnit.assert, {destructive: true});
+    empower(QUnit.assert, powerAssertFormatter(), {destructive: true});
 })();
 
 QUnit.init();
