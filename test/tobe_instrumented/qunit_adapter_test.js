@@ -1,5 +1,6 @@
 var q = require('qunitjs'),
     empower = require('empower'),
+    formatter = require('power-assert-formatter')(),
     output = [],
     puts = function (str) {
         output.push(str);
@@ -16,7 +17,7 @@ var q = require('qunitjs'),
     })(q),
     expect = require('expect.js');
 
-empower(q.assert, {destructive: true});
+empower(q.assert, formatter, {destructive: true});
 
 
 function doQUnitTest (testName, body, expectedLines) {

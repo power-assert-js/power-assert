@@ -27,10 +27,12 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "empower": "~0.2.1"
+    "empower": "~0.3.0",
+    "power-assert-formatter": "~0.3.0"
   },
   "devDependencies": {
-    "espower": "~0.2.1",
+    "espower": "~0.3.0",
+    "grunt-espower": "~0.3.0",
     "esprima": "~1.0.4",
     "escodegen": "~1.0.1",
     "coffee-script-redux": "2.0.0-beta7",
@@ -42,7 +44,6 @@
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-copy": "~0.4.1",
     "grunt-mocha-test": "~0.8.1",
-    "grunt-espower": "~0.2.0",
     "grunt-bump": "~0.0.13"
   },
   "licenses": [
