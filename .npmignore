@@ -3,6 +3,7 @@
 .travis.yml
 espowered_tests/
 node_modules/
+bower_components/
 expr.js
 sandbox
 js.jar
