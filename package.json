@@ -27,8 +27,8 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "empower": "~0.3.0",
-    "power-assert-formatter": "~0.3.0"
+    "empower": "~0.3.2",
+    "power-assert-formatter": "~0.3.1"
   },
   "devDependencies": {
     "espower": "~0.3.0",
