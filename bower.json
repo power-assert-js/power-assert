@@ -5,11 +5,13 @@
     "ignore": [
         "**/.*",
         "Gruntfile.js",
+        "espowered_tests",
         "node_modules",
         "package.json",
         "sandbox",
         "scripts",
-        "test"
+        "test",
+        "enable_power_assert.js"
     ],
     "dependencies": {
         "empower": "~0.3.2",
