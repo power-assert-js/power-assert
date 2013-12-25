@@ -45,7 +45,8 @@
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-copy": "~0.4.1",
     "grunt-mocha-test": "~0.8.1",
-    "grunt-bump": "~0.0.13"
+    "grunt-bump": "~0.0.13",
+    "grunt-contrib-connect": "~0.5.0"
   },
   "licenses": [
     {
