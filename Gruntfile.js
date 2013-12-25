@@ -12,6 +12,14 @@ module.exports = function(grunt) {
 
     grunt.initConfig({
         pkg: pkg,
+        bower: {
+            all: {
+                rjsConfig: 'test/rjsconfig.js',
+                options: {
+                    baseUrl: 'test'
+                }
+            }
+        },
         bump: {
             options: {
                 files: ['package.json', 'bower.json'],

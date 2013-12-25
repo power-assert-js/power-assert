@@ -1,13 +1,12 @@
 (function (root, factory) {
     'use strict';
 
-    // using returnExports UMD pattern
     if (typeof define === 'function' && define.amd) {
         define(['../../lib/power-assert', 'expect'], factory);
     } else if (typeof exports === 'object') {
-        module.exports = factory(require('../../lib/power-assert'), require('expect.js'));
+        factory(require('../../lib/power-assert'), require('expect.js'));
     } else {
-        root.assert = factory(root.assert, root.expect);
+        factory(root.assert, root.expect);
     }
 }(this, function (assert, expect) {
 
