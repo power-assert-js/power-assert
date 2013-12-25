@@ -66,15 +66,23 @@ module.exports = function(grunt) {
                 ]
             }
         },
+        mocha: {
+            browser: {
+                src: ['test/test-browser.html'],
+                options: {
+                    run: true
+                }
+            }
+        },
         mochaTest: {
-            unit: {
+            espower_loader: {
                 options: {
                     reporter: 'dot',
                     require: './enable_power_assert'
                 },
                 src: ['test/**/*_test.js']
             },
-            functional_test: {
+            grunt_espower: {
                 options: {
                     reporter: 'dot'
                 },
@@ -84,6 +92,6 @@ module.exports = function(grunt) {
     });
 
 
-    grunt.registerTask('unit', ['mochaTest:unit']);
-    grunt.registerTask('test', ['clean', 'copy', 'espower', 'mochaTest:functional_test']);
+    grunt.registerTask('unit', ['mochaTest:espower_loader']);
+    grunt.registerTask('test', ['clean', 'copy', 'espower', 'mocha:browser', 'mochaTest:espower_loader', 'mochaTest:grunt_espower']);
 };
