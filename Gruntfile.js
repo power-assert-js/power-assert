@@ -80,6 +80,12 @@ module.exports = function(grunt) {
                 options: {
                     run: true
                 }
+            },
+            amd: {
+                src: ['test/test-amd.html'],
+                options: {
+                    run: false
+                }
             }
         },
         mochaTest: {
@@ -101,5 +107,6 @@ module.exports = function(grunt) {
 
 
     grunt.registerTask('unit', ['mochaTest:espower_loader']);
-    grunt.registerTask('test', ['clean', 'copy', 'espower', 'mocha:browser', 'mochaTest:espower_loader', 'mochaTest:grunt_espower']);
+    grunt.registerTask('code_generation_based', ['clean', 'copy', 'espower', 'mocha:browser', 'mocha:amd', 'mochaTest:grunt_espower']);
+    grunt.registerTask('test', ['unit', 'code_generation_based']);
 };
