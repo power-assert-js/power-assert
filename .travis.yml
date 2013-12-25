@@ -2,5 +2,9 @@ language: node_js
 node_js:
   - "0.10"
   - "0.8"
-before_script:
+before_install:
   - "npm install -g grunt-cli"
+before_script:
+  - "npm run-script bower"
+script:
+  - "npm test"

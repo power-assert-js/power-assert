@@ -12,6 +12,14 @@ module.exports = function(grunt) {
 
     grunt.initConfig({
         pkg: pkg,
+        bower: {
+            all: {
+                rjsConfig: 'test/rjsconfig.js',
+                options: {
+                    baseUrl: 'test'
+                }
+            }
+        },
         bump: {
             options: {
                 files: ['package.json', 'bower.json'],
@@ -25,6 +33,15 @@ module.exports = function(grunt) {
                 push: false,
                 pushTo: 'upstream',
                 gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d' // options to use with '$ git describe'
+            }
+        },
+        connect: {
+            server: {
+                options: {
+                    port: 9001,
+                    base: '.',
+                    keepalive: true
+                }
             }
         },
         destDir: 'espowered_tests',
@@ -57,8 +74,29 @@ module.exports = function(grunt) {
                 ]
             }
         },
+        mocha: {
+            browser: {
+                src: ['test/test-browser.html'],
+                options: {
+                    run: true
+                }
+            },
+            amd: {
+                src: ['test/test-amd.html'],
+                options: {
+                    run: false
+                }
+            }
+        },
         mochaTest: {
-            functional_test: {
+            espower_loader: {
+                options: {
+                    reporter: 'dot',
+                    require: './enable_power_assert'
+                },
+                src: ['test/**/*_test.js']
+            },
+            grunt_espower: {
                 options: {
                     reporter: 'dot'
                 },
@@ -68,5 +106,7 @@ module.exports = function(grunt) {
     });
 
 
-    grunt.registerTask('test', ['clean', 'copy', 'espower', 'mochaTest']);
+    grunt.registerTask('unit', ['mochaTest:espower_loader']);
+    grunt.registerTask('code_generation_based', ['clean', 'copy', 'espower', 'mocha:browser', 'mocha:amd', 'mochaTest:grunt_espower']);
+    grunt.registerTask('test', ['unit', 'code_generation_based']);
 };

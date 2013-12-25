@@ -3,10 +3,10 @@
 .travis.yml
 espowered_tests/
 node_modules/
-expr.js
+bower_components/
 sandbox
 js.jar
-TODO.txt
 scripts/run_examples.sh
 scripts/example_runners/*
 npm-debug.log
+enable_power_assert.js

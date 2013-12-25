@@ -13,21 +13,24 @@ DESCRIPTION
 `power-assert` is an implementation of "Power Assert" concept in JavaScript.
 
 
-`power-assert` family is composed of five modules.
+`power-assert` family is composed of six modules.
 
 | module | description |
 |:-------|:------------|
-| [power-assert](http://github.com/twada/power-assert) | `assert` function wrapper on top of `empower` module. |
+| [power-assert](http://github.com/twada/power-assert) | standard `assert` function on top of `empower` and `power-assert-formatter` modules. |
 | [empower](http://github.com/twada/empower) | Power Assert feature enhancer for assert function/object. |
+| [power-assert-formatter](http://github.com/twada/power-assert-formatter) | Power Assert output formatter. |
 | [espower](http://github.com/twada/espower) | Power Assert feature instrumentor based on the [Mozilla JavaScript AST](https://developer.mozilla.org/en-US/docs/SpiderMonkey/Parser_API). |
 | [espower-loader](http://github.com/twada/espower-loader) | `espower` feature instrumentor on the fly. |
 | [grunt-espower](http://github.com/twada/grunt-espower) | A grunt task to apply `espower` to target files. |
 
 
-`power-assert` provides standard `assert` compatible function with Power Assert feature. (Best fit with [Mocha](http://visionmedia.github.io/mocha/). If you use assert-like objects provided by various testing frameworks such as [QUnit](http://qunitjs.com/) or [nodeunit](https://github.com/caolan/nodeunit). Please use [empower](http://github.com/twada/empower) module directly).
+`power-assert` provides standard `assert` compatible function with Power Assert feature. (Best fit with [Mocha](http://visionmedia.github.io/mocha/).
+
+If you use assert-like objects provided by various testing frameworks such as [QUnit](http://qunitjs.com/) or [nodeunit](https://github.com/caolan/nodeunit). Please use [empower](http://github.com/twada/empower) and [power-assert-formatter](http://github.com/twada/power-assert-formatter) modules directly).
 
 
-Internally, `power-assert` uses [empower](http://github.com/twada/empower) module to enhance power assert feature into the standard `assert` module, to run with the power assert feature added code by [espower](http://github.com/twada/espower) module. 
+Internally, `power-assert` uses [empower](http://github.com/twada/empower) module to enhance power assert feature into the standard `assert` module, to run with the power assert feature added code by [espower](http://github.com/twada/espower) module, and prettify output using [power-assert-formatter](http://github.com/twada/power-assert-formatter).
 
 
 See [power-assert-demo](http://github.com/twada/power-assert-demo) project for power-assert Demo running with mocha (includes power-assert demo running with [CoffeeScriptRedux](https://github.com/michaelficarra/CoffeeScriptRedux) ).
@@ -127,19 +130,9 @@ HOW TO USE
 
 You can instrument Power Assert feature without code generation by using `espower-loader`.
 
-First, declare `power-assert` and `espower-loader` as devDependencies in your package.json, then run `npm install`.
+First, install `power-assert` and `espower-loader` via npm.
 
-```javascript
-{
-    . . .
-    "devDependencies": {
-        "power-assert": "~0.2.2",
-        "espower-loader": "~0.1.0",
-        . . .
-    },
-    . . .
-}
-```
+    $ npm install --save-dev power-assert espower-loader
 
 Second, require `power-assert` in your test.
 
@@ -170,20 +163,10 @@ Then run mocha, with `--require` option. No code generation required.
 
 ### using `grunt-espower`
 
-First, declare `power-assert` and `grunt-espower` as devDependencies in your package.json, then run `npm install`.
+First, install `power-assert` and `grunt-espower` via npm.
 (If you do not like Grunt, use `espower-loader` module or [espower runner](https://gist.github.com/azu/6309397) and [its variation for Windows](https://gist.github.com/gooocho/6317135) may be useful to start with.)
 
-```javascript
-{
-    . . .
-    "devDependencies": {
-        "power-assert": "~0.2.2",
-        "grunt-espower": "~0.2.1",
-        . . .
-    },
-    . . .
-}
-```
+    $ npm install --save-dev power-assert grunt-espower
 
 Second, require `power-assert` in your test.
 
@@ -269,8 +252,9 @@ var q = require('qunitjs');
 
 (function () {
     var empower = require('empower'),
+        formatter = require('power-assert-formatter'),
         qunitTap = require("qunit-tap");
-    empower(q.assert, {destructive: true});
+    empower(q.assert, formatter(), {destructive: true});
     qunitTap(q, require('util').puts, {showSourceOnFailure: false});
     q.init();
     q.config.updateRate = 0;

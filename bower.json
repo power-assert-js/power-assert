@@ -5,14 +5,24 @@
     "ignore": [
         "**/.*",
         "Gruntfile.js",
+        "espowered_tests",
         "node_modules",
         "package.json",
         "sandbox",
         "scripts",
-        "test"
+        "test",
+        "enable_power_assert.js"
     ],
     "dependencies": {
-        "empower": "~0.2.1",
+        "empower": "~0.3.2",
+        "power-assert-formatter": "~0.3.1",
         "assert": "Jxck/assert"
+    },
+    "devDependencies": {
+        "expect": "~0.2.0",
+        "mocha": "~1.16.2",
+        "qunit": "1.10.0",
+        "qunit-tap": "1.4.1",
+        "requirejs": "~2.1.5"
     }
 }

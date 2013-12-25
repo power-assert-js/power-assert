@@ -1,4 +1,5 @@
 /node_modules
+/bower_components
 /.idea
 /sandbox/plain_node_espowered.js
 /sandbox/qunit_node_espowered.js
