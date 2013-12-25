@@ -58,6 +58,13 @@ module.exports = function(grunt) {
             }
         },
         mochaTest: {
+            unit: {
+                options: {
+                    reporter: 'dot',
+                    require: './enable_power_assert'
+                },
+                src: ['test/**/*_test.js']
+            },
             functional_test: {
                 options: {
                     reporter: 'dot'
@@ -68,5 +75,6 @@ module.exports = function(grunt) {
     });
 
 
-    grunt.registerTask('test', ['clean', 'copy', 'espower', 'mochaTest']);
+    grunt.registerTask('unit', ['mochaTest:unit']);
+    grunt.registerTask('test', ['clean', 'copy', 'espower', 'mochaTest:functional_test']);
 };
