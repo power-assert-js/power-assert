@@ -15,7 +15,7 @@
     ],
     "dependencies": {
         "empower": "~0.3.2",
-        "power-assert-formatter": "~0.3.1",
+        "power-assert-formatter": "~0.3.2",
         "assert": "Jxck/assert"
     },
     "devDependencies": {

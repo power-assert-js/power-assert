@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "empower": "~0.3.2",
-    "power-assert-formatter": "~0.3.1"
+    "power-assert-formatter": "~0.3.2"
   },
   "devDependencies": {
     "espower-loader": "~0.3.0",
@@ -44,7 +44,7 @@
     "qunit-tap": "1.4.1",
     "grunt": "~0.4.1",
     "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-copy": "~0.5.0",
     "grunt-mocha-test": "~0.8.1",
     "grunt-bump": "~0.0.13",
     "grunt-contrib-connect": "~0.5.0",
