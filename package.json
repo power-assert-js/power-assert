@@ -47,7 +47,7 @@
     "grunt-contrib-copy": "~0.5.0",
     "grunt-mocha-test": "~0.8.1",
     "grunt-bump": "~0.0.13",
-    "grunt-contrib-connect": "~0.5.0",
+    "grunt-contrib-connect": "~0.6.0",
     "grunt-mocha": "~0.4.7",
     "bower": "~1.2.8",
     "grunt-bower-requirejs": "~0.8.0"
