@@ -28,13 +28,13 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "empower": "~0.3.2",
-    "power-assert-formatter": "~0.3.2"
+    "empower": "~0.3.3",
+    "power-assert-formatter": "~0.3.3"
   },
   "devDependencies": {
-    "espower-loader": "~0.3.0",
-    "grunt-espower": "~0.3.0",
-    "espower": "~0.3.0",
+    "espower-loader": "~0.3.1",
+    "grunt-espower": "~0.3.1",
+    "espower": "~0.3.1",
     "esprima": "~1.0.4",
     "escodegen": "~1.0.1",
     "coffee-script-redux": "2.0.0-beta7",
