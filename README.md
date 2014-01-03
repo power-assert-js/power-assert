@@ -26,9 +26,8 @@ DESCRIPTION
 | [grunt-espower](http://github.com/twada/grunt-espower) | A grunt task to apply `espower` to target files. |
 
 
-`power-assert` provides standard `assert` compatible function with Power Assert feature. (Best fit with [Mocha](http://visionmedia.github.io/mocha/).
-
-If you use assert-like objects provided by various testing frameworks such as [QUnit](http://qunitjs.com/) or [nodeunit](https://github.com/caolan/nodeunit). Please use [empower](http://github.com/twada/empower) and [power-assert-formatter](http://github.com/twada/power-assert-formatter) modules directly).
+`power-assert` provides standard `assert` compatible function with Power Assert feature.
+(Best fit with [Mocha](http://visionmedia.github.io/mocha/). If you use assert-like objects provided by various testing frameworks such as [QUnit](http://qunitjs.com/) or [nodeunit](https://github.com/caolan/nodeunit). Please use [empower](http://github.com/twada/empower) and [power-assert-formatter](http://github.com/twada/power-assert-formatter) modules directly).
 
 
 Internally, `power-assert` uses [empower](http://github.com/twada/empower) module to enhance power assert feature into the standard `assert` module, to run with the power assert feature added code by [espower](http://github.com/twada/espower) module, and prettify output using [power-assert-formatter](http://github.com/twada/power-assert-formatter).
@@ -125,6 +124,11 @@ describe('Array', function(){
 
 HOW TO USE
 ---------------------------------------
+
+There are two ways to use power-assert.
+
+1. `power-assert` + `espower-loader` : Highly recommended but only works under Node.
+2. `power-assert` + `grunt-espower` : Generate instrumented code so works anywhere.
 
 
 ### using `espower-loader`
@@ -230,6 +234,7 @@ TESTED ENVIRONMENTS
 * [Node.js](http://nodejs.org/)
 * [Rhino](https://developer.mozilla.org/en/Rhino)
 * [PhantomJS](http://phantomjs.org/)
+* [RequireJS](http://requirejs.org/)
 
 
 AUTHOR
