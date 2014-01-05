@@ -173,6 +173,10 @@ First, install `power-assert` and `grunt-espower` via npm.
 
     $ npm install --save-dev power-assert grunt-espower
 
+Or, install `power-assert` via bower. This means that you run grunt (on Node), then run tests on browser.
+
+    $ bower install --save-dev power-assert
+
 Second, require `power-assert` in your test.
 
     --- a/test/your_test.js
@@ -227,6 +231,10 @@ or
 First, install `power-assert`, `gulp` and `gulp-espower` via npm.
 
     $ npm install --save-dev power-assert gulp gulp-espower
+
+Or, install `power-assert` via bower. This means that you run gulp (on Node), then run tests on browser.
+
+    $ bower install --save-dev power-assert
 
 Second, require `power-assert` in your test.
 
