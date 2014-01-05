@@ -14,7 +14,7 @@
         "enable_power_assert.js"
     ],
     "dependencies": {
-        "empower": "~0.3.3",
+        "empower": "~0.3.4",
         "power-assert-formatter": "~0.3.3",
         "assert": "Jxck/assert"
     },
