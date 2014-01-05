@@ -271,6 +271,7 @@ TESTED FRAMEWORKS
 * [Mocha](http://visionmedia.github.io/mocha/)
 * [QUnit](http://qunitjs.com/)
 * [nodeunit](https://github.com/caolan/nodeunit)
+* [buster-assertions](http://docs.busterjs.org/en/latest/modules/buster-assertions/)
 
 
 TESTED ENVIRONMENTS
