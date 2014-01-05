@@ -14,7 +14,7 @@ DESCRIPTION
 `power-assert` is an implementation of "Power Assert" concept in JavaScript.
 
 
-`power-assert` family is composed of six modules.
+`power-assert` family is composed of seven modules.
 
 | module | description |
 |:-------|:------------|
@@ -24,6 +24,7 @@ DESCRIPTION
 | [espower](http://github.com/twada/espower) | Power Assert feature instrumentor based on the [Mozilla JavaScript AST](https://developer.mozilla.org/en-US/docs/SpiderMonkey/Parser_API). |
 | [espower-loader](http://github.com/twada/espower-loader) | `espower` feature instrumentor on the fly. |
 | [grunt-espower](http://github.com/twada/grunt-espower) | A grunt task to apply `espower` to target files. |
+| [gulp-espower](http://github.com/twada/gulp-espower) | A gulp plugin to apply `espower` to target files. |
 
 
 `power-assert` provides standard `assert` compatible function with Power Assert feature.
@@ -128,7 +129,7 @@ HOW TO USE
 There are two ways to use power-assert.
 
 1. `power-assert` + `espower-loader` : Highly recommended but only works under Node.
-2. `power-assert` + `grunt-espower` : Generate instrumented code so works anywhere.
+2. `power-assert` + `grunt-espower` or `gulp-espower` : Generate instrumented code so works anywhere.
 
 
 ### using `espower-loader`
@@ -162,7 +163,6 @@ require('espower-loader')({
 Then run mocha, with `--require` option. No code generation required.
 
     $ mocha --require ./path/to/enable-power-assert test/your_test.js
-
 
 
 
@@ -215,6 +215,50 @@ Then, generate espowered code using `espower` task.
 Lastly, run your test in your way. For example,
 
     $ grunt test
+
+or
+
+    $ mocha your_test_espowered.js
+
+
+
+### using `gulp-espower`
+
+First, install `power-assert`, `gulp` and `gulp-espower` via npm.
+
+    $ npm install --save-dev power-assert gulp gulp-espower
+
+Second, require `power-assert` in your test.
+
+    --- a/test/your_test.js
+    +++ b/test/your_test.js
+    @@ -1,4 +1,4 @@
+    -var assert = require('assert');
+    +var assert = require('power-assert');
+
+
+Third, configure `gulp-espower` task to generate espowered code.
+
+```javascript
+var gulp = require('gulp'),
+    espower = require('gulp-espower');
+  . . . 
+gulp.task('espower', function() {
+    gulp.src('test/**/*_test.js')
+        .pipe(espower())
+        .pipe(gulp.dest('espowered'));
+});
+  . . . 
+})
+```
+
+Then, generate espowered code using `espower` task.
+
+    $ gulp espower
+
+Lastly, run your test in your way. For example,
+
+    $ gulp test
 
 or
 
