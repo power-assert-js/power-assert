@@ -6,8 +6,7 @@ var q = require('qunitjs');
         qunitTap = require("qunit-tap");
     empower(q.assert, formatter(), {destructive: true});
     qunitTap(q, require('util').puts, {showSourceOnFailure: false});
-    q.init();
-    q.config.updateRate = 0;
+    q.config.autorun = false;
 })();
 
 q.test('spike', function (assert) {
@@ -110,3 +109,5 @@ q.test('spike', function (assert) {
     };
     assert.ok(math.calc.sum(one, two, three) === seven);
 });
+
+q.load();

@@ -13,9 +13,8 @@ load('bower_components/empower/lib/empower.js');
     empower(QUnit.assert, powerAssertFormatter(), {destructive: true});
 })();
 
-QUnit.init();
-QUnit.config.updateRate = 0;
+QUnit.config.autorun = false;
 
 load('sandbox/qunit_rhino_espowered.js');
 
-QUnit.start();
+QUnit.load();
