@@ -81,7 +81,7 @@ describe('Array', function(){
       2 failing
     
       1) Array #indexOf() should return index when the value is present:
-         AssertionError: # /path/to/examples/mocha_node.js:10
+         AssertionError: # /path/to/test/mocha_node.js:10
     
                 assert(this.ary.indexOf(zero) === two);
                             |   |       |     |   |
@@ -89,20 +89,21 @@ describe('Array', function(){
                             |   -1      0     false
                             [1,2,3]
     
-          at Object.empoweredAssert [as ok] (/path/to/node_modules/empower/lib/empower.js:97:25)
-          at powerAssert (/path/to/node_modules/empower/lib/empower.js:131:25)
-          at Context.<anonymous> (/path/to/examples/mocha_node_espowered.js:13:13)
-          at Test.Runnable.run (/path/to/node_modules/mocha/lib/runnable.js:211:32)
-          at Runner.runTest (/path/to/node_modules/mocha/lib/runner.js:355:10)
-          at /path/to/node_modules/mocha/lib/runner.js:401:12
-          at next (/path/to/node_modules/mocha/lib/runner.js:281:14)
-          at /path/to/node_modules/mocha/lib/runner.js:290:7
-          at next (/path/to/node_modules/mocha/lib/runner.js:234:23)
-          at Object._onImmediate (/path/to/node_modules/mocha/lib/runner.js:258:5)
+          at /path/to/node_modules/empower/lib/empower.js:150:20
+          at powerAssert (/path/to/node_modules/empower/lib/empower.js:99:17)
+          at Context.<anonymous> (/path/to/test/mocha_node.js:13:13)
+          at callFn (/path/to/node_modules/mocha/lib/runnable.js:223:21)
+          at Test.Runnable.run (/path/to/node_modules/mocha/lib/runnable.js:216:7)
+          at Runner.runTest (/path/to/node_modules/mocha/lib/runner.js:374:10)
+          at /path/to/node_modules/mocha/lib/runner.js:452:12
+          at next (/path/to/node_modules/mocha/lib/runner.js:299:14)
+          at /path/to/node_modules/mocha/lib/runner.js:309:7
+          at next (/path/to/node_modules/mocha/lib/runner.js:247:23)
+          at Object._onImmediate (/path/to/node_modules/mocha/lib/runner.js:276:5)
           at processImmediate [as _immediateCallback] (timers.js:330:15)
     
       2) Array #indexOf() should return -1 when the value is not present:
-         AssertionError: THIS IS AN ASSERTION MESSAGE # /path/to/examples/mocha_node.js:14
+         AssertionError: THIS IS AN ASSERTION MESSAGE # /path/to/test/mocha_node.js:14
     
                 assert.ok(this.ary.indexOf(two) === minusOne, 'THIS IS AN ASSERTION MESSAGE');
                                |   |       |    |   |
@@ -110,15 +111,16 @@ describe('Array', function(){
                                |   1       2    false
                                [1,2,3]
     
-          at Function.empoweredAssert [as ok] (/path/to/node_modules/empower/lib/empower.js:97:25)
-          at Context.<anonymous> (/path/to/examples/mocha_node_espowered.js:48:20)
-          at Test.Runnable.run (/path/to/node_modules/mocha/lib/runnable.js:211:32)
-          at Runner.runTest (/path/to/node_modules/mocha/lib/runner.js:355:10)
-          at /path/to/node_modules/mocha/lib/runner.js:401:12
-          at next (/path/to/node_modules/mocha/lib/runner.js:281:14)
-          at /path/to/node_modules/mocha/lib/runner.js:290:7
-          at next (/path/to/node_modules/mocha/lib/runner.js:234:23)
-          at Object._onImmediate (/path/to/node_modules/mocha/lib/runner.js:258:5)
+          at Function.ok (/path/to/node_modules/empower/lib/empower.js:150:20)
+          at Context.<anonymous> (/path/to/test/mocha_node.js:48:20)
+          at callFn (/path/to/node_modules/mocha/lib/runnable.js:223:21)
+          at Test.Runnable.run (/path/to/node_modules/mocha/lib/runnable.js:216:7)
+          at Runner.runTest (/path/to/node_modules/mocha/lib/runner.js:374:10)
+          at /path/to/node_modules/mocha/lib/runner.js:452:12
+          at next (/path/to/node_modules/mocha/lib/runner.js:299:14)
+          at /path/to/node_modules/mocha/lib/runner.js:309:7
+          at next (/path/to/node_modules/mocha/lib/runner.js:247:23)
+          at Object._onImmediate (/path/to/node_modules/mocha/lib/runner.js:276:5)
           at processImmediate [as _immediateCallback] (timers.js:330:15)
 
 
@@ -315,8 +317,7 @@ var q = require('qunitjs');
         qunitTap = require("qunit-tap");
     empower(q.assert, formatter(), {destructive: true});
     qunitTap(q, require('util').puts, {showSourceOnFailure: false});
-    q.init();
-    q.config.updateRate = 0;
+    q.config.autorun = false;
 })();
 
 q.test('spike', function (assert) {
@@ -419,6 +420,8 @@ q.test('spike', function (assert) {
     };
     assert.ok(math.calc.sum(one, two, three) === seven);
 });
+
+q.load();
 ```
 
 
