@@ -14,15 +14,15 @@
         "enable_power_assert.js"
     ],
     "dependencies": {
-        "empower": "~0.3.4",
+        "empower": "~0.3.5",
         "power-assert-formatter": "~0.3.3",
         "assert": "Jxck/assert"
     },
     "devDependencies": {
-        "expect": "~0.2.0",
-        "mocha": "~1.16.2",
-        "qunit": "1.10.0",
-        "qunit-tap": "1.4.1",
-        "requirejs": "~2.1.5"
+        "expect": "~0.3.1",
+        "mocha": "~1.18.2",
+        "qunit": "1.14.0",
+        "qunit-tap": "1.4.2",
+        "requirejs": "~2.1.11"
     }
 }

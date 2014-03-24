@@ -28,7 +28,7 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "empower": "~0.3.4",
+    "empower": "~0.3.5",
     "power-assert-formatter": "~0.3.3"
   },
   "devDependencies": {
@@ -36,22 +36,22 @@
     "grunt-espower": "~0.3.1",
     "espower": "~0.3.1",
     "esprima": "~1.0.4",
-    "escodegen": "~1.0.1",
-    "coffee-script-redux": "2.0.0-beta7",
-    "optimist": "0.6.0",
-    "expect.js": "0.2.0",
-    "qunitjs": "1.10.0",
-    "qunit-tap": "1.4.1",
+    "escodegen": "~1.3.0",
+    "coffee-script-redux": "2.0.0-beta8",
+    "optimist": "0.6.1",
+    "expect.js": "0.3.1",
+    "qunitjs": "1.14.0",
+    "qunit-tap": "1.4.2",
     "grunt": "~0.4.1",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-copy": "~0.5.0",
-    "grunt-mocha-test": "~0.8.1",
+    "grunt-mocha-test": "~0.10.0",
     "grunt-bump": "~0.0.13",
-    "grunt-contrib-connect": "~0.6.0",
-    "grunt-mocha": "~0.4.7",
-    "bower": "~1.2.8",
-    "grunt-bower-requirejs": "~0.8.1",
-    "load-grunt-tasks": "~0.2.1"
+    "grunt-contrib-connect": "~0.7.1",
+    "grunt-mocha": "~0.4.10",
+    "bower": "~1.3.1",
+    "grunt-bower-requirejs": "~0.9.2",
+    "load-grunt-tasks": "~0.3.0"
   },
   "licenses": [
     {
