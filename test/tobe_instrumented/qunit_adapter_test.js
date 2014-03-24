@@ -1,47 +1,68 @@
-var q = require('qunitjs'),
-    empower = require('empower'),
+var empower = require('empower'),
     formatter = require('power-assert-formatter')(),
+    q = require('qunitjs'),
+    qunitTap = require("qunit-tap"),
+    qunitAssertions = [],
     output = [],
     puts = function (str) {
         output.push(str);
     },
-    tap = (function (qu) {
-        var qunitTap = require("qunit-tap");
-        //qu.config.updateRate = 0;
-        return qunitTap(qu, puts, {
-            showModuleNameOnFailure: false,
-            showTestNameOnFailure: false,
-            showExpectationOnFailure: true,
-            showSourceOnFailure: false
-        });
-    })(q),
     expect = require('expect.js');
 
-empower(q.assert, formatter, {destructive: true});
+
+(function (qu) {
+    qu.config.autorun = false;
+    qu.config.updateRate = 0;
+    if (qu.config.semaphore !== 1) {
+        qu.config.semaphore = 1;
+    }
+    qunitTap(qu, puts, {
+        showModuleNameOnFailure: false,
+        showTestNameOnFailure: false,
+        showExpectationOnFailure: true,
+        showSourceOnFailure: false
+    });
+    empower(qu.assert, formatter, {destructive: true});
+})(q);
 
 
-function doQUnitTest (testName, body, expectedLines) {
-    it(testName, function (done) {
-        q.init();
-        q.test(testName, function (assert) {
-            body(assert);
-            try {
-                var actual = output[1].split('\n').slice(2);
-                expect(actual).to.eql(expectedLines);
-                done();
-            } catch (e) {
-                done(e);
-            }
+function doQUnitTest (testName, testBody, expectedLines) {
+    q.test(testName, function (assert) {
+        output.length = 0;
+        testBody(assert);
+        qunitAssertions.push({
+            name: testName,
+            expected: expectedLines,
+            actual: output[0].split('\n').slice(2)
         });
-        q.start();
     });
 }
 
 
-describe('QUnit adapter', function () {
-    beforeEach(function () {
-        output.length = 0;
+
+it('QUnit output', function (mochaDone) {
+
+    q.done(function () {
+        var expectedResults = [],
+            actualResults = [];
+        try {
+            qunitAssertions.forEach(function (test) {
+                expectedResults.push({
+                    testName: test.name,
+                    output: test.expected
+                });
+                actualResults.push({
+                    testName: test.name,
+                    output: test.actual
+                });
+            });
+            expect(actualResults).to.eql(expectedResults);
+            mochaDone();
+        } catch (e) {
+            mochaDone(e);
+        }
     });
+
 
 
     doQUnitTest('Identifier with empty string', function (assert) {
@@ -551,4 +572,6 @@ describe('QUnit adapter', function () {
         '# ]'
     ]);
 
+
+    q.load();
 });
