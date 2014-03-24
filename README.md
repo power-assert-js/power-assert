@@ -167,6 +167,8 @@ Then run mocha, with `--require` option. No code generation required.
     $ mocha --require ./path/to/enable-power-assert test/your_test.js
 
 
+FYI: You may be interested in [intelli-espower-loader](https://github.com/azu/intelli-espower-loader) to go one step further. With [intelli-espower-loader](https://github.com/azu/intelli-espower-loader), you don't need to create loader file (like `enable-power-assert.js`). Just define test directory in `package.json` wow!
+
 
 ### using `grunt-espower`
 
