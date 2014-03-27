@@ -320,6 +320,30 @@ describe('power-assert message', function () {
     });
 
 
+    it('deep chained computed MemberExpression with whitespaces: assert(  foo [   propName   ]  [  "baz"   ]  [   keys ( )  [ 0 ] ] );', function () {
+        var keys = function () { return ["toto"]; },
+            propName = "bar",
+            foo = {
+                bar: {
+                    baz: {
+                        toto: false
+                    }
+                }
+            };
+        this.expectPowerAssertMessage(function () {
+            assert(  foo [   propName   ]  [  "baz"   ]  [   keys ( )  [ 0 ] ] );
+        }, [
+            'assert(  foo [   propName   ]  [  "baz"   ]  [   keys ( )  [ 0 ] ] );',
+            '         |   |   |             |             |   |         |         ',
+            '         |   |   |             |             |   ["toto"]  "toto"    ',
+            '         |   |   |             |             false                   ',
+            '         |   |   "bar"         {"toto":false}                        ',
+            '         |   {"baz":{"toto":false}}                                  ',
+            '         {"bar":{"baz":{"toto":false}}}                              '
+        ]);
+    });
+
+
     it('assert(func());', function () {
         var func = function () { return false; };
         this.expectPowerAssertMessage(function () {

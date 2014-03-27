@@ -14,4 +14,8 @@ describe('Array', function(){
             assert.ok(this.ary.indexOf(two) === minusOne, 'THIS IS AN ASSERTION MESSAGE');
         });
     });
+    it('computed MemberExpression', function(){
+        var zero = 0, two = 2;
+        assert(this.ary  [  two] === zero);
+    });
 });
