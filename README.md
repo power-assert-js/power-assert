@@ -1,9 +1,9 @@
 power-assert
 ================================
 
-[![Build Status](https://travis-ci.org/twada/power-assert.png)](https://travis-ci.org/twada/power-assert)
-[![NPM version](https://badge.fury.io/js/power-assert.png)](http://badge.fury.io/js/power-assert)
-[![Dependency Status](https://gemnasium.com/twada/power-assert.png)](https://gemnasium.com/twada/power-assert)
+[![Build Status](https://travis-ci.org/twada/power-assert.svg)](https://travis-ci.org/twada/power-assert)
+[![NPM version](https://badge.fury.io/js/power-assert.svg)](http://badge.fury.io/js/power-assert)
+[![Dependency Status](https://gemnasium.com/twada/power-assert.svg)](https://gemnasium.com/twada/power-assert)
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 Power Assert in JavaScript. Less code, more information.
@@ -13,8 +13,19 @@ DESCRIPTION
 ---------------------------------------
 `power-assert` is an implementation of "Power Assert" concept in JavaScript.
 
+`power-assert` provides descriptive assertion messages for your tests, like this.
 
-`power-assert` family is composed of seven modules.
+      1) Array #indexOf() should return index when the value is present:
+         AssertionError: # /path/to/test/mocha_node.js:10
+    
+                assert(this.ary.indexOf(zero) === two);
+                            |   |       |     |   |
+                            |   |       |     |   2
+                            |   -1      0     false
+                            [1,2,3]
+
+
+`power-assert` family is composed of eight modules.
 
 | module | description |
 |:-------|:------------|
@@ -25,6 +36,7 @@ DESCRIPTION
 | [espower-loader](http://github.com/twada/espower-loader) | `espower` feature instrumentor on the fly. |
 | [grunt-espower](http://github.com/twada/grunt-espower) | A grunt task to apply `espower` to target files. |
 | [gulp-espower](http://github.com/twada/gulp-espower) | A gulp plugin to apply `espower` to target files. |
+| [espowerify](http://github.com/twada/espowerify) | [Browserify](http://browserify.org/) transform for power-assert. |
 
 
 `power-assert` provides standard `assert` compatible function with Power Assert feature.
@@ -66,7 +78,7 @@ describe('Array', function(){
 });
 ```
 
-### Apply `espower-loader` or `grunt-espower` task to code above then run tests. See the power-assert output appears.
+### Apply `espower-loader` / `espowerify` / `grunt-espower` / `gulp-espower` to code above then run tests. See the power-assert output appears.
 
 
       $ mocha /path/to/espowered_examples/mocha_node.js
@@ -128,10 +140,11 @@ describe('Array', function(){
 HOW TO USE
 ---------------------------------------
 
-There are two ways to use power-assert.
+There are three ways to use power-assert.
 
-1. `power-assert` + `espower-loader` : Highly recommended but only works under Node.
-2. `power-assert` + `grunt-espower` or `gulp-espower` : Generate instrumented code so works anywhere.
+1. `power-assert` + `espower-loader`: Highly recommended but only works under Node.
+2. `power-assert` + `espowerify` : if you use [browserify](http://browserify.org/).
+3. `power-assert` + `grunt-espower` or `gulp-espower` : Generate instrumented code so works anywhere.
 
 
 ### using `espower-loader`
@@ -168,6 +181,33 @@ Then run mocha, with `--require` option. No code generation required.
 
 
 FYI: You may be interested in [intelli-espower-loader](https://github.com/azu/intelli-espower-loader) to go one step further. With [intelli-espower-loader](https://github.com/azu/intelli-espower-loader), you don't need to create loader file (like `enable-power-assert.js`). Just define test directory in `package.json` wow!
+
+
+
+### using `espowerify`
+
+You can instrument Power Assert feature via [browserify](http://browserify.org/).
+
+First, install `power-assert` and `espowerify` via npm.
+
+    $ npm install --save-dev power-assert espowerify
+
+Second, require `power-assert` in your test.
+
+    --- a/test/your_test.js
+    +++ b/test/your_test.js
+    @@ -1,4 +1,4 @@
+    -var assert = require('assert');
+    +var assert = require('power-assert');
+
+Third, apply `espowerify` through browserify transform..
+
+    $ browserify -t espowerify test/your_test.js > dist/your_test.js
+
+Lastly, run your test in your way. For example,
+
+    $ mocha-phantomjs test.html
+
 
 
 ### using `grunt-espower`
@@ -292,6 +332,7 @@ TESTED ENVIRONMENTS
 * [Rhino](https://developer.mozilla.org/en/Rhino)
 * [PhantomJS](http://phantomjs.org/)
 * [RequireJS](http://requirejs.org/)
+* [Browserify](http://browserify.org/)
 
 
 AUTHOR
