@@ -39,11 +39,11 @@ DESCRIPTION
 | [espowerify](http://github.com/twada/espowerify) | [Browserify](http://browserify.org/) transform for power-assert. |
 
 
-`power-assert` provides standard `assert` compatible function with Power Assert feature.
+`power-assert` provides standard [assert](http://nodejs.org/api/assert.html) compatible function with Power Assert feature.
 (Best fit with [Mocha](http://visionmedia.github.io/mocha/). If you use assert-like objects provided by various testing frameworks such as [QUnit](http://qunitjs.com/) or [nodeunit](https://github.com/caolan/nodeunit). Please use [empower](http://github.com/twada/empower) and [power-assert-formatter](http://github.com/twada/power-assert-formatter) modules directly).
 
 
-Internally, `power-assert` uses [empower](http://github.com/twada/empower) module to enhance power assert feature into the standard `assert` module, to run with the power assert feature added code by [espower](http://github.com/twada/espower) module, and prettify output using [power-assert-formatter](http://github.com/twada/power-assert-formatter).
+Internally, `power-assert` uses [empower](http://github.com/twada/empower) module to enhance power assert feature into the standard [assert](http://nodejs.org/api/assert.html) module, to run with the power assert feature added code by [espower](http://github.com/twada/espower) module, and prettify output using [power-assert-formatter](http://github.com/twada/power-assert-formatter).
 
 
 See [power-assert-demo](http://github.com/twada/power-assert-demo) project for power-assert Demo running with mocha (includes power-assert demo running with [CoffeeScriptRedux](https://github.com/michaelficarra/CoffeeScriptRedux) ).
@@ -78,7 +78,7 @@ describe('Array', function(){
 });
 ```
 
-### Apply `espower-loader` / `espowerify` / `grunt-espower` / `gulp-espower` to code above then run tests. See the power-assert output appears.
+### Apply `espower-loader` or `espowerify` or `grunt-espower` or `gulp-espower` to code above then run tests. See the power-assert output appears.
 
 
       $ mocha /path/to/espowered_examples/mocha_node.js
