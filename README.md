@@ -14,12 +14,14 @@ DESCRIPTION
 
 What is `power-assert`?
 
- * an implementation of "Power Assert" concept in JavaScript.
- * provides descriptive assertion messages for your tests.
+ * is an implementation of "Power Assert" concept in JavaScript.
+ * provides descriptive assertion messages through standard [assert](http://nodejs.org/api/assert.html) compatible interface.
  * works both on server side and browser side.
  * available via [npm](https://www.npmjs.org/) and [bower](http://bower.io/). 
  * provides [browserify](http://browserify.org/) transform.
  * provides [grunt](http://gruntjs.com/) task and [gulp](http://gulpjs.com/) plugin.
+ * is a beta version product. Pull-requests, issue reports and patches are always welcomed.
+
 
 `power-assert` provides descriptive assertion messages for your tests, like this.
 
@@ -32,6 +34,9 @@ What is `power-assert`?
                             |   -1      0     false
                             [1,2,3]
 
+
+MODULES
+---------------------------------------
 
 `power-assert` family provides 8 modules. 4 core modules and 4 instrumentors.
 
@@ -62,9 +67,6 @@ Internally, `power-assert` uses [empower](http://github.com/twada/empower) modul
 
 
 See [power-assert-demo](http://github.com/twada/power-assert-demo) project for power-assert Demo running with mocha (includes power-assert demo running with [CoffeeScriptRedux](https://github.com/michaelficarra/CoffeeScriptRedux) ).
-
-
-Please note that `power-assert` is a beta version product. Pull-requests, issue reports and patches are always welcomed.
 
 
 
@@ -216,7 +218,7 @@ Second, require `power-assert` in your test.
     -var assert = require('assert');
     +var assert = require('power-assert');
 
-Third, apply `espowerify` through browserify transform..
+Third, apply `espowerify` through browserify transform.
 
     $ browserify -t espowerify test/your_test.js > dist/your_test.js
 
