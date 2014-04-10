@@ -8,6 +8,7 @@ var require = {
         qunit: "../bower_components/qunit/qunit/qunit",
         mocha: "../bower_components/mocha/mocha",
         empower: "../bower_components/empower/lib/empower",
+        estraverse: "../bower_components/estraverse/estraverse",
         requirejs: "../bower_components/requirejs/require"
     },
     shim: {

@@ -16,7 +16,7 @@ var espower = require('espower'),
     file = argv._[0],
     path = fs.realpathSync(file),
     source = fs.readFileSync(file, 'utf-8'),
-    tree = esprima.parse(source, {tolerant: true, loc: true, range: true, tokens: true});
+    tree = esprima.parse(source, {tolerant: true, loc: true, tokens: true, raw: true, source: path});
 
 if (argv.powerAssertVariableName) {
   options['powerAssertVariableName'] = argv.powerAssertVariableName;

@@ -38,25 +38,26 @@ What is `power-assert`?
 MODULES
 ---------------------------------------
 
-`power-assert` family provides 8 modules. 4 core modules and 4 instrumentors.
+`power-assert` family provides 9 modules. 5 core modules and 4 instrumentors.
 
 core modules are,
 
 | module | description |
 |:-------|:------------|
-| [power-assert](http://github.com/twada/power-assert) | standard `assert` function on top of `empower` and `power-assert-formatter` |
+| [power-assert](http://github.com/twada/power-assert) | Standard `assert` function on top of `empower` and `power-assert-formatter` |
 | [empower](http://github.com/twada/empower) | Power Assert feature enhancer for assert function/object. |
 | [power-assert-formatter](http://github.com/twada/power-assert-formatter) | Power Assert output formatter. |
 | [espower](http://github.com/twada/espower) | Power Assert feature instrumentor core based on the [Mozilla JavaScript AST](https://developer.mozilla.org/en-US/docs/SpiderMonkey/Parser_API). |
+| [espower-source](http://github.com/twada/espower-source) | Power Assert instrumentor from source to source (Thin wrapper of `espower`). |
 
 and instrumentors are,
 
 | module | description |
 |:-------|:------------|
 | [espower-loader](http://github.com/twada/espower-loader) | Node module loader to apply `espower` on the fly. |
+| [espowerify](http://github.com/twada/espowerify) | [Browserify](http://browserify.org/) transform to apply `espower` to target files. |
 | [grunt-espower](http://github.com/twada/grunt-espower) | Grunt task to apply `espower` to target files. |
 | [gulp-espower](http://github.com/twada/gulp-espower) | Gulp plugin to apply `espower` to target files. |
-| [espowerify](http://github.com/twada/espowerify) | [Browserify](http://browserify.org/) transform to apply `espower` to target files. |
 
 
 `power-assert` provides standard [assert](http://nodejs.org/api/assert.html) compatible function with Power Assert feature.
@@ -66,7 +67,7 @@ and instrumentors are,
 Internally, `power-assert` uses [empower](http://github.com/twada/empower) module to enhance power assert feature into the standard [assert](http://nodejs.org/api/assert.html) module, to run with the power assert feature added code by [espower](http://github.com/twada/espower) module, and prettify output using [power-assert-formatter](http://github.com/twada/power-assert-formatter).
 
 
-See [power-assert-demo](http://github.com/twada/power-assert-demo) project for power-assert Demo running with mocha (includes power-assert demo running with [CoffeeScriptRedux](https://github.com/michaelficarra/CoffeeScriptRedux) ).
+See [power-assert-demo](http://github.com/twada/power-assert-demo) project for power-assert Demo running with mocha.
 
 
 
