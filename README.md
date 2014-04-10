@@ -356,6 +356,11 @@ AUTHOR
 * [Takuto Wada](http://github.com/twada)
 
 
+CONTRIBUTORS
+---------------------------------------
+* [azu](https://github.com/azu)
+
+
 LICENSE
 ---------------------------------------
 Licensed under the [MIT](https://raw.github.com/twada/power-assert/master/MIT-LICENSE.txt) license.

@@ -16,6 +16,12 @@
     "email": "takuto.wada@gmail.com",
     "url": "http://github.com/twada"
   },
+  "contributors": [
+    {
+      "name": "azu",
+      "url": "https://github.com/azu"
+    }
+  ],
   "main": "./lib/power-assert",
   "directories": {
     "lib": "./lib"
