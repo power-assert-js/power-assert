@@ -35,6 +35,11 @@ What is `power-assert`?
                             [1,2,3]
 
 
+CHANGELOG
+---------------------------------------
+* (2014/04/10) Since version 0.6.0, power-assert-formatter requires `estraverse` as runtime dependency. Though npm and bower resolves this well, please be sure to check your dependencies if you are using power-assert under various browsers.
+
+
 MODULES
 ---------------------------------------
 
