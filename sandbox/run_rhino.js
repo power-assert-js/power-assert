@@ -1,5 +1,6 @@
 load('bower_components/qunit/qunit/qunit.js');
 load('bower_components/qunit-tap/lib/qunit-tap.js');
+load('bower_components/estraverse/estraverse.js');
 load('bower_components/power-assert-formatter/lib/power-assert-formatter.js');
 load('bower_components/empower/lib/empower.js');
 
