@@ -243,6 +243,7 @@ Second, require `power-assert` family in your test html.
 
     <script type="text/javascript" src="./path/to/bower_components/assert/assert.js"></script>
     <script type="text/javascript" src="./path/to/bower_components/empower/lib/empower.js"></script>
+    <script type="text/javascript" src="./path/to/bower_components/estraverse/estraverse.js"></script>
     <script type="text/javascript" src="./path/to/bower_components/power-assert-formatter/lib/power-assert-formatter.js"></script>
     <script type="text/javascript" src="./path/to/bower_components/power-assert/lib/power-assert.js"></script>
 
@@ -300,6 +301,7 @@ Second, require `power-assert` family in your test html.
 
     <script type="text/javascript" src="./path/to/bower_components/assert/assert.js"></script>
     <script type="text/javascript" src="./path/to/bower_components/empower/lib/empower.js"></script>
+    <script type="text/javascript" src="./path/to/bower_components/estraverse/estraverse.js"></script>
     <script type="text/javascript" src="./path/to/bower_components/power-assert-formatter/lib/power-assert-formatter.js"></script>
     <script type="text/javascript" src="./path/to/bower_components/power-assert/lib/power-assert.js"></script>
 
