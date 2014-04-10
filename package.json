@@ -25,7 +25,7 @@
     "url": "http://github.com/twada/power-assert.git"
   },
   "scripts": {
-    "bower": "./node_modules/bower/bin/bower install",
+    "bower": "./node_modules/bower/bin/bower install --config.interactive=false",
     "test": "grunt test"
   },
   "dependencies": {
