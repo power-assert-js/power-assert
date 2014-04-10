@@ -1,7 +1,9 @@
 module.exports = function(grunt) {
     var pkg = grunt.file.readJSON('package.json');
 
-    require('jit-grunt')(grunt);
+    require('jit-grunt')(grunt, {
+        bower: 'grunt-bower-requirejs'
+    });
 
     grunt.initConfig({
         pkg: pkg,
