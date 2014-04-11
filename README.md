@@ -20,6 +20,7 @@ What is `power-assert`?
  * available via [npm](https://www.npmjs.org/) and [bower](http://bower.io/). 
  * provides [browserify](http://browserify.org/) transform.
  * provides [grunt](http://gruntjs.com/) task and [gulp](http://gulpjs.com/) plugin.
+ * supports source-map so you can debug as usual.
  * is a beta version product. Pull-requests, issue reports and patches are always welcomed.
 
 
