@@ -65,15 +65,6 @@ and instrumentors are,
 | [grunt-espower](http://github.com/twada/grunt-espower) | Grunt task to apply `espower` to target files. |
 | [gulp-espower](http://github.com/twada/gulp-espower) | Gulp plugin to apply `espower` to target files. |
 
-Available demo / seed projects are as follows.
-
-| module | env | description |
-|:-------|:------------|:------------|
-| [power-assert-demo](http://github.com/twada/power-assert-demo) | Node | power-assert Demo running with mocha. |
-| [power-assert-node-seed](https://github.com/azu/power-assert-node-seed) | Node | Example project of power-assert + [intelli-espower-loader](https://github.com/azu/intelli-espower-loader) on Node.js |
-| [power-assert-testem-seed](https://github.com/azu/power-assert-testem-seed) | Browsers | Example project of power-assert + [gulp-espower](http://github.com/twada/gulp-espower) + [testem](https://github.com/airportyh/testem). |
-| [power-assert-karma-seed](https://github.com/azu/power-assert-karma-seed) | Browsers | Example project of power-assert + [espowerify](http://github.com/twada/espowerify) + [browserify](http://browserify.org/) + [Karma](http://karma-runner.github.io/). |
-
 
 `power-assert` provides standard [assert](http://nodejs.org/api/assert.html) compatible function with Power Assert feature.
 (Best fit with [Mocha](http://visionmedia.github.io/mocha/). If you use assert-like objects provided by various testing frameworks such as [QUnit](http://qunitjs.com/) or [nodeunit](https://github.com/caolan/nodeunit). Please use [empower](http://github.com/twada/empower) and [power-assert-formatter](http://github.com/twada/power-assert-formatter) modules directly).
@@ -81,6 +72,20 @@ Available demo / seed projects are as follows.
 
 Internally, `power-assert` uses [empower](http://github.com/twada/empower) module to enhance power assert feature into the standard [assert](http://nodejs.org/api/assert.html) module, to run with the power assert feature added code by [espower](http://github.com/twada/espower) module, and prettify output using [power-assert-formatter](http://github.com/twada/power-assert-formatter).
 
+
+See [power-assert-demo](http://github.com/twada/power-assert-demo) project for power-assert Demo running with mocha.
+
+
+SEED PROJECTS
+---------------------------------------
+
+Some seed projects are available to help you start with power-assert.
+
+| module | env | tech stack |
+|:-------|:------------|:------------|
+| [power-assert-node-seed](https://github.com/azu/power-assert-node-seed) | Node.js | power-assert + [intelli-espower-loader](https://github.com/azu/intelli-espower-loader) |
+| [power-assert-testem-seed](https://github.com/azu/power-assert-testem-seed) | Browsers(by [testem](https://github.com/airportyh/testem)) | power-assert + [gulp-espower](http://github.com/twada/gulp-espower) + [testem](https://github.com/airportyh/testem). |
+| [power-assert-karma-seed](https://github.com/azu/power-assert-karma-seed) | Browsers(by [Karma](http://karma-runner.github.io/)) | power-assert + [espowerify](http://github.com/twada/espowerify) + [browserify](http://browserify.org/) + [Karma](http://karma-runner.github.io/). |
 
 
 EXAMPLE
@@ -170,21 +175,11 @@ describe('Array', function(){
 HOW TO USE
 ---------------------------------------
 
-There are three ways to use power-assert.
+There are three ways to use power-assert. (If you want to see running examples, see [SEED PROJECTS](#seed-projects))
 
 1. `power-assert` + `espower-loader`: Highly recommended but only works under Node.
 2. `power-assert` + `espowerify` : Recommended if you are using [browserify](http://browserify.org/).
 3. `power-assert` + `grunt-espower` or `gulp-espower` : Generate instrumented code so works anywhere.
-
-Available demo / seed projects are as follows.
-
-| module | env | description |
-|:-------|:------------|:------------|
-| [power-assert-demo](http://github.com/twada/power-assert-demo) | Node | power-assert Demo running with mocha. |
-| [power-assert-node-seed](https://github.com/azu/power-assert-node-seed) | Node | Example project of power-assert + [intelli-espower-loader](https://github.com/azu/intelli-espower-loader) on Node.js |
-| [power-assert-testem-seed](https://github.com/azu/power-assert-testem-seed) | Browsers | Example project of power-assert + [gulp-espower](http://github.com/twada/gulp-espower) + [testem](https://github.com/airportyh/testem). |
-| [power-assert-karma-seed](https://github.com/azu/power-assert-karma-seed) | Browsers | Example project of power-assert + [espowerify](http://github.com/twada/espowerify) + [browserify](http://browserify.org/) + [Karma](http://karma-runner.github.io/). |
-
 
 
 ### using `espower-loader`
