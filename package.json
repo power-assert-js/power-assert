@@ -51,6 +51,7 @@
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-connect": "~0.7.1",
     "grunt-contrib-copy": "~0.5.0",
+    "grunt-contrib-watch": "~0.6.1",
     "grunt-espower": "~0.6.0",
     "grunt-mocha": "~0.4.10",
     "grunt-mocha-test": "~0.10.0",
