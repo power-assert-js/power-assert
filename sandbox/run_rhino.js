@@ -1,6 +1,8 @@
 load('bower_components/qunit/qunit/qunit.js');
 load('bower_components/qunit-tap/lib/qunit-tap.js');
 load('bower_components/estraverse/estraverse.js');
+load('bower_components/esprima/esprima.js');
+load('bower_components/google-diff-match-patch-js/diff_match_patch.js');
 load('bower_components/power-assert-formatter/lib/power-assert-formatter.js');
 load('bower_components/empower/lib/empower.js');
 
