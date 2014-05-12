@@ -8,12 +8,17 @@ var require = {
         qunit: "../bower_components/qunit/qunit/qunit",
         mocha: "../bower_components/mocha/mocha",
         empower: "../bower_components/empower/lib/empower",
+        esprima: "../bower_components/esprima/esprima",
         estraverse: "../bower_components/estraverse/estraverse",
-        requirejs: "../bower_components/requirejs/require"
+        requirejs: "../bower_components/requirejs/require",
+        diff_match_patch: "../bower_components/google-diff-match-patch-js/diff_match_patch"
     },
     shim: {
         assert: {
             exports: "assert"
+        },
+        diff_match_patch: {
+            exports: "diff_match_patch"
         },
         expect: {
             exports: "expect"

@@ -136,8 +136,13 @@ it('QUnit output', function (mochaDone) {
         '#           |      |   |   |   |     ',
         '#           |      |   |   |   0     ',
         '#           |      |   |   false     ',
-        '#           |      |   {"baz":false} ',
-        '#           true   {"bar":{"baz":false}}',
+        '#           |      |   Object{baz:false}',
+        '#           true   Object{bar:#Object#}',
+        '# ',
+        '# $$$ [number] falsy',
+        '# ### [boolean] delete foo.bar',
+        '# $=> 0',
+        '# #=> true',
         '# '
     ]);
 
@@ -152,6 +157,11 @@ it('QUnit output', function (mochaDone) {
         '#           |    |   8    ',
         '#           |    false    ',
         '#           "foo"         ',
+        '# ',
+        '# $$$ [number] piyo',
+        '# ### [string] fuga',
+        '# $=> 8',
+        '# #=> "foo"',
         '# '
     ]);
 
@@ -206,6 +216,11 @@ it('QUnit output', function (mochaDone) {
         '#           |    |      |   ["aaa","bbb","ccc"]',
         '#           |    2      false           ',
         '#           ["foo","bar"]               ',
+        '# ',
+        '# $$$ [number] ary2.length',
+        '# ### [number] ary1.length',
+        '# $=> 3',
+        '# #=> 2',
         '# '
     ]);
 
@@ -263,8 +278,8 @@ it('QUnit output', function (mochaDone) {
         '# assert.ok(foo.bar.baz)',
         '#           |   |   |   ',
         '#           |   |   false',
-        '#           |   {"baz":false}',
-        '#           {"bar":{"baz":false}}',
+        '#           |   Object{baz:false}',
+        '#           Object{bar:#Object#}',
         '# '
     ]);
 
@@ -292,7 +307,8 @@ it('QUnit output', function (mochaDone) {
     }, [
         '# assert.ok(obj.age())',
         '#           |   |     ',
-        '#           {}  0     ',
+        '#           |   0     ',
+        '#           Object{age:#function#}',
         '# '
     ]);
 
@@ -328,6 +344,11 @@ it('QUnit output', function (mochaDone) {
         '#           |   |    |    |      |   |     ',
         '#           |   |    |    |      |   7     ',
         '#           6   1    2    3      false     ',
+        '# ',
+        '# $$$ [number] seven',
+        '# ### [number] sum(one, two, three)',
+        '# $=> 7',
+        '# #=> 6',
         '# '
     ]);
 
@@ -348,6 +369,11 @@ it('QUnit output', function (mochaDone) {
         '#           |   |   |    |     |      |   |   |   |    |       |      ',
         '#           |   |   |    |     |      |   12  5   2    3       7      ',
         '#           6   3   1    2     3      false                           ',
+        '# ',
+        '# $$$ [number] sum(sum(two, three), seven)',
+        '# ### [number] sum(sum(one, two), three)',
+        '# $=> 12',
+        '# #=> 6',
         '# '
     ]);
 
@@ -371,8 +397,14 @@ it('QUnit output', function (mochaDone) {
         '# assert.ok(math.calc.sum(one, two, three) === seven)',
         '#           |    |    |   |    |    |      |   |     ',
         '#           |    |    |   |    |    |      |   7     ',
-        '#           |    {}   6   1    2    3      false     ',
-        '#           {"calc":{}}                              ',
+        '#           |    |    6   1    2    3      false     ',
+        '#           |    Object{sum:#function#}              ',
+        '#           Object{calc:#Object#}                    ',
+        '# ',
+        '# $$$ [number] seven',
+        '# ### [number] math.calc.sum(one, two, three)',
+        '# $=> 7',
+        '# #=> 6',
         '# '
     ]);
 
@@ -388,6 +420,11 @@ it('QUnit output', function (mochaDone) {
         '#           |     |  |     | 10   false     ',
         '#           |     |  7     70               ',
         '#           3     210                       ',
+        '# ',
+        '# $$$ [number] three',
+        '# ### [number] three * (seven * ten)',
+        '# $=> 3',
+        '# #=> 210',
         '# '
     ]);
 
@@ -403,6 +440,13 @@ it('QUnit output', function (mochaDone) {
         '#           |    |   "bar"           ',
         '#           |    false               ',
         '#           "foo"                    ',
+        '# ',
+        '# --- [string] fuga',
+        '# +++ [string] hoge',
+        '# @@ -1,3 +1,3 @@',
+        '# -bar',
+        '# +foo',
+        '# ',
         '# '
     ]);
 
@@ -418,6 +462,16 @@ it('QUnit output', function (mochaDone) {
         '#           |          |   "yet another loooooooooooooooooooooooooooooooooooooooooooooooooooong message"',
         '#           |          false                 ',
         '#           "very very loooooooooooooooooooooooooooooooooooooooooooooooooooong message"',
+        '# ',
+        '# --- [string] anotherLongString',
+        '# +++ [string] longString',
+        '# @@ -1,15 +1,13 @@',
+        '# -yet anoth',
+        '# +very v',
+        '#  er',
+        '# +y',
+        '#   loo',
+        '# ',
         '# '
     ]);
 
@@ -502,7 +556,8 @@ it('QUnit output', function (mochaDone) {
         '# assert.strictEqual(obj.truthy(), three == threeInStr)',
         '#                    |   |         |     |  |          ',
         '#                    |   |         |     |  "3"        ',
-        '#                    {}  "true"    3     true          ',
+        '#                    |   "true"    3     true          ',
+        '#                    Object{truthy:#function#}         ',
         '# , expected: true, got: "true"'
     ]);
 
@@ -514,20 +569,26 @@ it('QUnit output', function (mochaDone) {
         '# assert.notStrictEqual(typeof undefinedVar, types.undef)',
         '#                       |                    |     |     ',
         '#                       |                    |     "undefined"',
-        '#                       "undefined"          {"undef":"undefined"}',
+        '#                       "undefined"          Object{undef:"undefined"}',
         '# , expected: "undefined", got: "undefined"'
     ]);
 
 
     doQUnitTest('deepEqual with LogicalExpression and ObjectExpression: assert.deepEqual(alice || bob, {name: kenName, age: four});', function (assert) {
-        var alice = {name: 'alice', age: 3}, bob = {name: 'bob', age: 5}, kenName = 'ken', four = 4;
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+        var alice = new Person('alice', 3),
+            bob = new Person('bob', 5),
+            kenName = 'ken', four = 4;
         assert.deepEqual(alice || bob, {name: kenName, age: four});
     },[
         '# assert.deepEqual(alice || bob, {name: kenName,age: four})',
         '#                  |     |              |            |     ',
         '#                  |     |              "ken"        4     ',
-        '#                  |     {"name":"alice","age":3}          ',
-        '#                  {"name":"alice","age":3}                ',
+        '#                  |     Person{name:"alice",age:3}        ',
+        '#                  Person{name:"alice",age:3}              ',
         '# , expected: {',
         '#   "age": 4,',
         '#   "name": "ken"',
@@ -544,11 +605,11 @@ it('QUnit output', function (mochaDone) {
     },[
         '# assert.notDeepEqual([foo,bar,baz], new Array(foo, bar, baz))',
         '#                      |   |   |     |         |    |    |    ',
-        '#                      |   |   |     |         |    |    {"name":"hoge"}',
+        '#                      |   |   |     |         |    |    Object{name:"hoge"}',
         '#                      |   |   |     |         |    ["toto","tata"]',
         '#                      |   |   |     |         "foo"          ',
-        '#                      |   |   |     ["foo",["toto","tata"],{"name":"hoge"}]',
-        '#                      |   |   {"name":"hoge"}                ',
+        '#                      |   |   |     ["foo",#Array#,#Object#] ',
+        '#                      |   |   Object{name:"hoge"}            ',
         '#                      |   ["toto","tata"]                    ',
         '#                      "foo"                                  ',
         '# , expected: [',
