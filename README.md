@@ -29,16 +29,22 @@ What is `power-assert`?
       1) Array #indexOf() should return index when the value is present:
          AssertionError: # /path/to/test/mocha_node.js:10
     
-                assert(this.ary.indexOf(zero) === two);
-                            |   |       |     |   |
-                            |   |       |     |   2
-                            |   -1      0     false
-                            [1,2,3]
+      assert(this.ary.indexOf(zero) === two)
+                  |   |       |     |   |
+                  |   |       |     |   2
+                  |   -1      0     false
+                  [1,2,3]
+    
+      $$$ [number] two
+      ### [number] this.ary.indexOf(zero)
+      $=> 2
+      #=> -1
 
 
 CHANGELOG
 ---------------------------------------
 * (2014/04/10) Since version 0.6.0, power-assert-formatter requires `estraverse` as runtime dependency. Though npm and bower resolves this well, please be sure to check your dependencies if you are using power-assert under various browsers.
+* (2014/05/XX) Since version 0.7.0, power-assert-formatter requires `esprima` and google's `diff_match_patch` as runtime dependency. Though npm and bower resolves this well, please be sure to check your dependencies if you are using power-assert under various browsers.
 
 
 MODULES
@@ -129,46 +135,40 @@ describe('Array', function(){
     
       1) Array #indexOf() should return index when the value is present:
          AssertionError: # /path/to/test/mocha_node.js:10
-    
-                assert(this.ary.indexOf(zero) === two);
-                            |   |       |     |   |
-                            |   |       |     |   2
-                            |   -1      0     false
-                            [1,2,3]
-    
-          at /path/to/node_modules/empower/lib/empower.js:150:20
+      
+      assert(this.ary.indexOf(zero) === two)
+                  |   |       |     |   |
+                  |   |       |     |   2
+                  |   -1      0     false
+                  [1,2,3]
+      
+      $$$ [number] two
+      ### [number] this.ary.indexOf(zero)
+      $=> 2
+      #=> -1
+
+          at doPowerAssert (/path/to/node_modules/empower/lib/empower.js:116:39)
+          at /path/to/node_modules/empower/lib/empower.js:202:20
           at powerAssert (/path/to/node_modules/empower/lib/empower.js:99:17)
           at Context.<anonymous> (/path/to/test/mocha_node.js:13:13)
-          at callFn (/path/to/node_modules/mocha/lib/runnable.js:223:21)
-          at Test.Runnable.run (/path/to/node_modules/mocha/lib/runnable.js:216:7)
-          at Runner.runTest (/path/to/node_modules/mocha/lib/runner.js:374:10)
-          at /path/to/node_modules/mocha/lib/runner.js:452:12
-          at next (/path/to/node_modules/mocha/lib/runner.js:299:14)
-          at /path/to/node_modules/mocha/lib/runner.js:309:7
-          at next (/path/to/node_modules/mocha/lib/runner.js:247:23)
-          at Object._onImmediate (/path/to/node_modules/mocha/lib/runner.js:276:5)
-          at processImmediate [as _immediateCallback] (timers.js:330:15)
-    
+
       2) Array #indexOf() should return -1 when the value is not present:
          AssertionError: THIS IS AN ASSERTION MESSAGE # /path/to/test/mocha_node.js:14
     
-                assert.ok(this.ary.indexOf(two) === minusOne, 'THIS IS AN ASSERTION MESSAGE');
-                               |   |       |    |   |
-                               |   |       |    |   -1
-                               |   1       2    false
-                               [1,2,3]
+      assert.ok(this.ary.indexOf(two) === minusOne, 'THIS IS AN ASSERTION MESSAGE')
+                     |   |       |    |   |
+                     |   |       |    |   -1
+                     |   1       2    false
+                     [1,2,3]
+      
+      $$$ [number] minusOne
+      ### [number] this.ary.indexOf(two)
+      $=> -1
+      #=> 1
     
-          at Function.ok (/path/to/node_modules/empower/lib/empower.js:150:20)
-          at Context.<anonymous> (/path/to/test/mocha_node.js:48:20)
-          at callFn (/path/to/node_modules/mocha/lib/runnable.js:223:21)
-          at Test.Runnable.run (/path/to/node_modules/mocha/lib/runnable.js:216:7)
-          at Runner.runTest (/path/to/node_modules/mocha/lib/runner.js:374:10)
-          at /path/to/node_modules/mocha/lib/runner.js:452:12
-          at next (/path/to/node_modules/mocha/lib/runner.js:299:14)
-          at /path/to/node_modules/mocha/lib/runner.js:309:7
-          at next (/path/to/node_modules/mocha/lib/runner.js:247:23)
-          at Object._onImmediate (/path/to/node_modules/mocha/lib/runner.js:276:5)
-          at processImmediate [as _immediateCallback] (timers.js:330:15)
+          at doPowerAssert (/path/to/node_modules/empower/lib/empower.js:116:39)
+          at Function.ok (/path/to/node_modules/empower/lib/empower.js:202:20)
+          at Context.<anonymous> (/path/to/test/mocha_node.js:21:20)
 
 
 
@@ -259,6 +259,8 @@ Second, require `power-assert` family in your test html.
 
     <script type="text/javascript" src="./path/to/bower_components/assert/assert.js"></script>
     <script type="text/javascript" src="./path/to/bower_components/empower/lib/empower.js"></script>
+    <script type="text/javascript" src="./path/to/bower_components/esprima/esprima.js"></script>
+    <script type="text/javascript" src="./path/to/bower_components/google-diff-match-patch-js/diff_match_patch.js"></script>
     <script type="text/javascript" src="./path/to/bower_components/estraverse/estraverse.js"></script>
     <script type="text/javascript" src="./path/to/bower_components/power-assert-formatter/lib/power-assert-formatter.js"></script>
     <script type="text/javascript" src="./path/to/bower_components/power-assert/lib/power-assert.js"></script>
@@ -317,6 +319,8 @@ Second, require `power-assert` family in your test html.
 
     <script type="text/javascript" src="./path/to/bower_components/assert/assert.js"></script>
     <script type="text/javascript" src="./path/to/bower_components/empower/lib/empower.js"></script>
+    <script type="text/javascript" src="./path/to/bower_components/esprima/esprima.js"></script>
+    <script type="text/javascript" src="./path/to/bower_components/google-diff-match-patch-js/diff_match_patch.js"></script>
     <script type="text/javascript" src="./path/to/bower_components/estraverse/estraverse.js"></script>
     <script type="text/javascript" src="./path/to/bower_components/power-assert-formatter/lib/power-assert-formatter.js"></script>
     <script type="text/javascript" src="./path/to/bower_components/power-assert/lib/power-assert.js"></script>
