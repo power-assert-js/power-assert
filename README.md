@@ -43,8 +43,8 @@ What is `power-assert`?
 
 CHANGELOG
 ---------------------------------------
-* (2014/04/10) Since version 0.6.0, power-assert-formatter requires `estraverse` as runtime dependency. Though npm and bower resolves this well, please be sure to check your dependencies if you are using power-assert under various browsers.
-* (2014/05/XX) Since version 0.7.0, power-assert-formatter requires `esprima` and google's `diff_match_patch` as runtime dependency. Though npm and bower resolves this well, please be sure to check your dependencies if you are using power-assert under various browsers.
+* Since version 0.6.0, power-assert-formatter requires `estraverse` as runtime dependency. Though npm and bower resolves this well, please be sure to check your dependencies if you are using power-assert under various browsers.
+* Since version 0.7.0, power-assert-formatter requires `esprima` and google's `diff_match_patch` as runtime dependency. Though npm and bower resolves this well, please be sure to check your dependencies if you are using power-assert under various browsers.
 
 
 MODULES
@@ -117,6 +117,28 @@ describe('Array', function(){
         });
     });
 });
+
+describe('various types', function(){
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    beforeEach(function(){
+        this.types = [
+            'string', 98.6, true, false, null, undefined,
+            ['nested', 'array'],
+            {object: true},
+            NaN, Infinity,
+            /^not/,
+            new Person('alice', 3)
+        ];
+    });
+    it('demo', function(){
+        var index = this.types.length -1,
+            bob = new Person('bob', 5);
+        assert(this.types[index].name === bob.name);
+    });
+});
 ```
 
 ### Apply one of power assert instrumentors to code above then run tests. See the power-assert output appears.
@@ -128,48 +150,75 @@ describe('Array', function(){
         #indexOf()
           1) should return index when the value is present
           2) should return -1 when the value is not present
+      
+      various types
+        3) demo    
     
-    
-      0 passing (7 ms)
-      2 failing
+      0 passing (14 ms)
+      3 failing
     
       1) Array #indexOf() should return index when the value is present:
          AssertionError: # /path/to/test/mocha_node.js:10
       
-      assert(this.ary.indexOf(zero) === two)
-                  |   |       |     |   |
-                  |   |       |     |   2
-                  |   -1      0     false
-                  [1,2,3]
-      
-      $$$ [number] two
-      ### [number] this.ary.indexOf(zero)
-      $=> 2
-      #=> -1
+        assert(this.ary.indexOf(zero) === two)
+                    |   |       |     |   |
+                    |   |       |     |   2
+                    |   -1      0     false
+                    [1,2,3]
+        
+        $$$ [number] two
+        ### [number] this.ary.indexOf(zero)
+        $=> 2
+        #=> -1
 
           at doPowerAssert (/path/to/node_modules/empower/lib/empower.js:116:39)
           at /path/to/node_modules/empower/lib/empower.js:202:20
           at powerAssert (/path/to/node_modules/empower/lib/empower.js:99:17)
           at Context.<anonymous> (/path/to/test/mocha_node.js:13:13)
-
+      
+      
       2) Array #indexOf() should return -1 when the value is not present:
          AssertionError: THIS IS AN ASSERTION MESSAGE # /path/to/test/mocha_node.js:14
     
-      assert.ok(this.ary.indexOf(two) === minusOne, 'THIS IS AN ASSERTION MESSAGE')
-                     |   |       |    |   |
-                     |   |       |    |   -1
-                     |   1       2    false
-                     [1,2,3]
+        assert.ok(this.ary.indexOf(two) === minusOne, 'THIS IS AN ASSERTION MESSAGE')
+                       |   |       |    |   |
+                       |   |       |    |   -1
+                       |   1       2    false
+                       [1,2,3]
+        
+        $$$ [number] minusOne
+        ### [number] this.ary.indexOf(two)
+        $=> -1
+        #=> 1
       
-      $$$ [number] minusOne
-      ### [number] this.ary.indexOf(two)
-      $=> -1
-      #=> 1
-    
           at doPowerAssert (/path/to/node_modules/empower/lib/empower.js:116:39)
           at Function.ok (/path/to/node_modules/empower/lib/empower.js:202:20)
           at Context.<anonymous> (/path/to/test/mocha_node.js:21:20)
-
+      
+      
+      3) various types demo:
+         AssertionError: # /Users/takuto/work/git-sandbox/github/POWERASSERT/power-assert/sandbox/mocha_node.js:37
+    
+        assert(this.types[index].name === bob.name)
+                    |    ||      |    |   |   |
+                    |    ||      |    |   |   "bob"
+                    |    ||      |    |   Person{name:"bob",age:5}
+                    |    ||      |    false
+                    |    |11     "alice"
+                    |    Person{name:"alice",age:3}
+                    ["string",98.6,true,false,null,undefined,#Array#,#Object#,NaN,Infinity,/^not/,#Person#]
+        
+        --- [string] bob.name
+        +++ [string] this.types[index].name
+        @@ -1,3 +1,5 @@
+        -bob
+        +alice
+        
+        
+          at doPowerAssert (/path/to/node_modules/empower/lib/empower.js:116:39)
+          at /path/to/node_modules/empower/lib/empower.js:202:20
+          at powerAssert (/path/to/node_modules/empower/lib/empower.js:99:17)
+          at Context.<anonymous> (/path/to/test/mocha_node.js:55:9)
 
 
 HOW TO USE

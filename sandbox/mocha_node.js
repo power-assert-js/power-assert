@@ -14,8 +14,26 @@ describe('Array', function(){
             assert.ok(this.ary.indexOf(two) === minusOne, 'THIS IS AN ASSERTION MESSAGE');
         });
     });
-    it('computed MemberExpression', function(){
-        var zero = 0, two = 2;
-        assert(this.ary  [  two] === zero);
+});
+
+describe('various types', function(){
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    beforeEach(function(){
+        this.types = [
+            'string', 98.6, true, false, null, undefined,
+            ['nested', 'array'],
+            {object: true},
+            NaN, Infinity,
+            /^not/,
+            new Person('alice', 3)
+        ];
+    });
+    it('demo', function(){
+        var index = this.types.length -1,
+            bob = new Person('bob', 5);
+        assert(this.types[index].name === bob.name);
     });
 });
