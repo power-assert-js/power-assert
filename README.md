@@ -511,184 +511,240 @@ q.load();
 
 ### `espower` code above then running under Node.js
     
-    # test: spike
-    ok 1
-    not ok 2 - comment # /path/to/examples/qunit_node.js:17
-    #
-    #     assert.ok(hoge === fuga, 'comment');
-    #               |    |   |
-    #               |    |   "bar"
-    #               |    false
-    #               "foo"
-    # , test: spike
-    not ok 3 - # /path/to/examples/qunit_node.js:20
-    #
-    #     assert.ok(fuga === piyo);
-    #               |    |   |
-    #               |    |   3
-    #               |    false
-    #               "bar"
-    # , test: spike
-    not ok 4 - # /path/to/examples/qunit_node.js:24
-    #
-    #     assert.ok(longString === anotherLongString);
-    #               |          |   |
-    #               |          |   "yet another loooooooooooooooooooooooooooooooooooooooooooooooooooong message"
-    #               |          false
-    #               "very very loooooooooooooooooooooooooooooooooooooooooooooooooooong message"
-    # , test: spike
-    not ok 5 - # /path/to/examples/qunit_node.js:26
-    #
-    #     assert.ok(4 === piyo);
-    #                 |   |
-    #                 |   3
-    #                 false
-    # , test: spike
-    not ok 6 - # /path/to/examples/qunit_node.js:28
-    #
-    #     assert.ok(4 !== 4);
-    #                 |
-    #                 false
-    # , test: spike
-    not ok 7 - # /path/to/examples/qunit_node.js:31
-    #
-    #     assert.ok(falsyStr);
-    #               |
-    #               ""
-    # , test: spike
-    not ok 8 - # /path/to/examples/qunit_node.js:34
-    #
-    #     assert.ok(falsyNum);
-    #               |
-    #               0
-    # , test: spike
-    not ok 9 - # /path/to/examples/qunit_node.js:38
-    #
-    #     assert.ok(ary1.length === ary2.length);
-    #               |    |      |   |    |
-    #               |    |      |   |    3
-    #               |    |      |   ["aaa","bbb","ccc"]
-    #               |    2      false
-    #               ["foo","bar"]
-    # , test: spike
-    not ok 10 - # /path/to/examples/qunit_node.js:39
-    #
-    #     assert.deepEqual(ary1, ary2);
-    #                      |     |
-    #                      |     ["aaa","bbb","ccc"]
-    #                      ["foo","bar"]
-    # , expected: [
-    #   "aaa",
-    #   "bbb",
-    #   "ccc"
-    # ], got: [
-    #   "foo",
-    #   "bar"
-    # ], test: spike
-    not ok 11 - # /path/to/examples/qunit_node.js:42
-    #
-    #     assert.ok(5 < actual && actual < 13);
-    #                 | |      |  |      |
-    #                 | |      |  16     false
-    #                 | 16     false
-    #                 true
-    # , test: spike
-    not ok 12 - # /path/to/examples/qunit_node.js:45
-    #
-    #     assert.ok(5 < actual && actual < 13);
-    #                 | |      |
-    #                 | 4      false
-    #                 false
-    # , test: spike
-    not ok 13 - # /path/to/examples/qunit_node.js:48
-    #
-    #     assert.ok(actual < 5 || 13 < actual);
-    #               |      |   |     | |
-    #               |      |   |     | 10
-    #               |      |   false false
-    #               10     false
-    # , test: spike
-    not ok 14 - # /path/to/examples/qunit_node.js:58
-    #
-    #     assert.ok(foo.bar.baz);
-    #               |   |   |
-    #               |   |   false
-    #               |   {"baz":false}
-    #               {"bar":{"baz":false}}
-    # , test: spike
-    not ok 15 - # /path/to/examples/qunit_node.js:59
-    #
-    #     assert.ok(foo['bar'].baz);
-    #               |  |       |
-    #               |  |       false
-    #               |  {"baz":false}
-    #               {"bar":{"baz":false}}
-    # , test: spike
-    not ok 16 - # /path/to/examples/qunit_node.js:60
-    #
-    #     assert.ok(foo[propName]['baz']);
-    #               |  ||        |
-    #               |  |"bar"    false
-    #               |  {"baz":false}
-    #               {"bar":{"baz":false}}
-    # , test: spike
-    not ok 17 - # /path/to/examples/qunit_node.js:64
-    #
-    #     assert.ok(!truth);
-    #               ||
-    #               |true
-    #               false
-    # , test: spike
-    not ok 18 - # /path/to/examples/qunit_node.js:68
-    #
-    #     assert.ok(func());
-    #               |
-    #               false
-    # , test: spike
-    not ok 19 - # /path/to/examples/qunit_node.js:76
-    #
-    #     assert.ok(obj.age());
-    #               |   |
-    #               {}  0
-    # , test: spike
-    not ok 20 - # /path/to/examples/qunit_node.js:83
-    #
-    #     assert.ok(isFalsy(positiveInt));
-    #               |       |
-    #               false   50
-    # , test: spike
-    not ok 21 - # /path/to/examples/qunit_node.js:94
-    #
-    #     assert.ok(sum(one, two, three) === seven);
-    #               |   |    |    |      |   |
-    #               |   |    |    |      |   7
-    #               6   1    2    3      false
-    # , test: spike
-    not ok 22 - # /path/to/examples/qunit_node.js:95
-    #
-    #     assert.ok(sum(sum(one, two), three) === sum(sum(two, three), seven));
-    #               |   |   |    |     |      |   |   |   |    |       |
-    #               |   |   |    |     |      |   12  5   2    3       7
-    #               6   3   1    2     3      false
-    # , test: spike
-    not ok 23 - # /path/to/examples/qunit_node.js:96
-    #
-    #     assert.ok((three * (seven * ten)) === three);
-    #                |     |  |     | |     |   |
-    #                |     |  |     | |     |   3
-    #                |     |  |     | 10    false
-    #                |     |  7     70
-    #                3     210
-    # , test: spike
-    not ok 24 - # /path/to/examples/qunit_node.js:110
-    #
-    #     assert.ok(math.calc.sum(one, two, three) === seven);
-    #               |    |    |   |    |    |      |   |
-    #               |    |    |   |    |    |      |   7
-    #               |    {}   6   1    2    3      false
-    #               {"calc":{}}
-    # , test: spike
-    1..24
-
+```
+# module: undefined
+# test: spike
+ok 1 - okay
+not ok 2 - comment # /path/to/examples/qunit_node.js:17
+#
+# assert.ok(hoge === fuga, 'comment')
+#           |    |   |
+#           |    |   "bar"
+#           |    false
+#           "foo"
+#
+# --- [string] fuga
+# +++ [string] hoge
+# @@ -1,3 +1,3 @@
+# -bar
+# +foo
+#
+# , test: spike
+not ok 3 - # /path/to/examples/qunit_node.js:20
+#
+# assert.ok(fuga === piyo)
+#           |    |   |
+#           |    |   3
+#           |    false
+#           "bar"
+#
+# $$$ [number] piyo
+# ### [string] fuga
+# $=> 3
+# #=> "bar"
+# , test: spike
+not ok 4 - # /path/to/examples/qunit_node.js:24
+#
+# assert.ok(longString === anotherLongString)
+#           |          |   |
+#           |          |   "yet another loooooooooooooooooooooooooooooooooooooooooooooooooooong message"
+#           |          false
+#           "very very loooooooooooooooooooooooooooooooooooooooooooooooooooong message"
+#
+# --- [string] anotherLongString
+# +++ [string] longString
+# @@ -1,15 +1,13 @@
+# -yet anoth
+# +very v
+#  er
+# +y
+#   loo
+#
+# , test: spike
+not ok 5 - # /path/to/examples/qunit_node.js:26
+#
+# assert.ok(4 === piyo)
+#             |   |
+#             |   3
+#             false
+#
+# $$$ [number] piyo
+# ### [number] 4
+# $=> 3
+# #=> 4
+# , test: spike
+not ok 6 - # /path/to/examples/qunit_node.js:28
+#
+# assert.ok(4 !== 4)
+#             |
+#             false
+# , test: spike
+not ok 7 - # /path/to/examples/qunit_node.js:31
+#
+# assert.ok(falsyStr)
+#           |
+#           ""
+# , test: spike
+not ok 8 - # /path/to/examples/qunit_node.js:34
+#
+# assert.ok(falsyNum)
+#           |
+#           0
+# , test: spike
+not ok 9 - # /path/to/examples/qunit_node.js:38
+#
+# assert.ok(ary1.length === ary2.length)
+#           |    |      |   |    |
+#           |    |      |   |    3
+#           |    |      |   ["aaa","bbb","ccc"]
+#           |    2      false
+#           ["foo","bar"]
+#
+# $$$ [number] ary2.length
+# ### [number] ary1.length
+# $=> 3
+# #=> 2
+# , test: spike
+not ok 10 - # /path/to/examples/qunit_node.js:39
+#
+# assert.deepEqual(ary1, ary2)
+#                  |     |
+#                  |     ["aaa","bbb","ccc"]
+#                  ["foo","bar"]
+# , expected: [
+#   "aaa",
+#   "bbb",
+#   "ccc"
+# ], got: [
+#   "foo",
+#   "bar"
+# ], test: spike
+not ok 11 - # /path/to/examples/qunit_node.js:42
+#
+# assert.ok(5 < actual && actual < 13)
+#             | |      |  |      |
+#             | |      |  16     false
+#             | 16     false
+#             true
+# , test: spike
+not ok 12 - # /path/to/examples/qunit_node.js:45
+#
+# assert.ok(5 < actual && actual < 13)
+#             | |      |
+#             | 4      false
+#             false
+# , test: spike
+not ok 13 - # /path/to/examples/qunit_node.js:48
+#
+# assert.ok(actual < 5 || 13 < actual)
+#           |      |   |     | |
+#           |      |   |     | 10
+#           |      |   false false
+#           10     false
+# , test: spike
+not ok 14 - # /path/to/examples/qunit_node.js:58
+#
+# assert.ok(foo.bar.baz)
+#           |   |   |
+#           |   |   false
+#           |   Object{baz:false}
+#           Object{bar:#Object#}
+# , test: spike
+not ok 15 - # /path/to/examples/qunit_node.js:59
+#
+# assert.ok(foo['bar'].baz)
+#           |  |       |
+#           |  |       false
+#           |  Object{baz:false}
+#           Object{bar:#Object#}
+# , test: spike
+not ok 16 - # /path/to/examples/qunit_node.js:60
+#
+# assert.ok(foo[propName]['baz'])
+#           |  ||        |
+#           |  |"bar"    false
+#           |  Object{baz:false}
+#           Object{bar:#Object#}
+# , test: spike
+not ok 17 - # /path/to/examples/qunit_node.js:64
+#
+# assert.ok(!truth)
+#           ||
+#           |true
+#           false
+# , test: spike
+not ok 18 - # /path/to/examples/qunit_node.js:68
+#
+# assert.ok(func())
+#           |
+#           false
+# , test: spike
+not ok 19 - # /path/to/examples/qunit_node.js:76
+#
+# assert.ok(obj.age())
+#           |   |
+#           |   0
+#           Object{age:#function#}
+# , test: spike
+not ok 20 - # /path/to/examples/qunit_node.js:83
+#
+# assert.ok(isFalsy(positiveInt))
+#           |       |
+#           false   50
+# , test: spike
+not ok 21 - # /path/to/examples/qunit_node.js:94
+#
+# assert.ok(sum(one, two, three) === seven)
+#           |   |    |    |      |   |
+#           |   |    |    |      |   7
+#           6   1    2    3      false
+#
+# $$$ [number] seven
+# ### [number] sum(one, two, three)
+# $=> 7
+# #=> 6
+# , test: spike
+not ok 22 - # /path/to/examples/qunit_node.js:95
+#
+# assert.ok(sum(sum(one, two), three) === sum(sum(two, three), seven))
+#           |   |   |    |     |      |   |   |   |    |       |
+#           |   |   |    |     |      |   12  5   2    3       7
+#           6   3   1    2     3      false
+#
+# $$$ [number] sum(sum(two, three), seven)
+# ### [number] sum(sum(one, two), three)
+# $=> 12
+# #=> 6
+# , test: spike
+not ok 23 - # /path/to/examples/qunit_node.js:96
+#
+# assert.ok(three * (seven * ten) === three)
+#           |     |  |     | |    |   |
+#           |     |  |     | |    |   3
+#           |     |  |     | 10   false
+#           |     |  7     70
+#           3     210
+#
+# $$$ [number] three
+# ### [number] three * (seven * ten)
+# $=> 3
+# #=> 210
+# , test: spike
+not ok 24 - # /path/to/examples/qunit_node.js:110
+#
+# assert.ok(math.calc.sum(one, two, three) === seven)
+#           |    |    |   |    |    |      |   |
+#           |    |    |   |    |    |      |   7
+#           |    |    6   1    2    3      false
+#           |    Object{sum:#function#}
+#           Object{calc:#Object#}
+#
+# $$$ [number] seven
+# ### [number] math.calc.sum(one, two, three)
+# $=> 7
+# #=> 6
+# , test: spike
+1..24
+```
 
 Have fun!
