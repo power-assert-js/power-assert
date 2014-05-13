@@ -29,16 +29,22 @@ What is `power-assert`?
       1) Array #indexOf() should return index when the value is present:
          AssertionError: # /path/to/test/mocha_node.js:10
     
-                assert(this.ary.indexOf(zero) === two);
-                            |   |       |     |   |
-                            |   |       |     |   2
-                            |   -1      0     false
-                            [1,2,3]
+      assert(this.ary.indexOf(zero) === two)
+                  |   |       |     |   |
+                  |   |       |     |   2
+                  |   -1      0     false
+                  [1,2,3]
+    
+      $$$ [number] two
+      ### [number] this.ary.indexOf(zero)
+      $=> 2
+      #=> -1
 
 
 CHANGELOG
 ---------------------------------------
-* (2014/04/10) Since version 0.6.0, power-assert-formatter requires `estraverse` as runtime dependency. Though npm and bower resolves this well, please be sure to check your dependencies if you are using power-assert under various browsers.
+* Since version 0.6.0, power-assert-formatter requires `estraverse` as runtime dependency. Though npm and bower resolves this well, please be sure to check your dependencies if you are using power-assert under various browsers.
+* Since version 0.7.0, power-assert-formatter requires `esprima` and google's `diff_match_patch` as runtime dependency. Though npm and bower resolves this well, please be sure to check your dependencies if you are using power-assert under various browsers.
 
 
 MODULES
@@ -111,6 +117,28 @@ describe('Array', function(){
         });
     });
 });
+
+describe('various types', function(){
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    beforeEach(function(){
+        this.types = [
+            'string', 98.6, true, false, null, undefined,
+            ['nested', 'array'],
+            {object: true},
+            NaN, Infinity,
+            /^not/,
+            new Person('alice', 3)
+        ];
+    });
+    it('demo', function(){
+        var index = this.types.length -1,
+            bob = new Person('bob', 5);
+        assert(this.types[index].name === bob.name);
+    });
+});
 ```
 
 ### Apply one of power assert instrumentors to code above then run tests. See the power-assert output appears.
@@ -122,54 +150,75 @@ describe('Array', function(){
         #indexOf()
           1) should return index when the value is present
           2) should return -1 when the value is not present
+      
+      various types
+        3) demo    
     
-    
-      0 passing (7 ms)
-      2 failing
+      0 passing (14 ms)
+      3 failing
     
       1) Array #indexOf() should return index when the value is present:
          AssertionError: # /path/to/test/mocha_node.js:10
-    
-                assert(this.ary.indexOf(zero) === two);
-                            |   |       |     |   |
-                            |   |       |     |   2
-                            |   -1      0     false
-                            [1,2,3]
-    
-          at /path/to/node_modules/empower/lib/empower.js:150:20
+      
+        assert(this.ary.indexOf(zero) === two)
+                    |   |       |     |   |
+                    |   |       |     |   2
+                    |   -1      0     false
+                    [1,2,3]
+        
+        $$$ [number] two
+        ### [number] this.ary.indexOf(zero)
+        $=> 2
+        #=> -1
+
+          at doPowerAssert (/path/to/node_modules/empower/lib/empower.js:116:39)
+          at /path/to/node_modules/empower/lib/empower.js:202:20
           at powerAssert (/path/to/node_modules/empower/lib/empower.js:99:17)
           at Context.<anonymous> (/path/to/test/mocha_node.js:13:13)
-          at callFn (/path/to/node_modules/mocha/lib/runnable.js:223:21)
-          at Test.Runnable.run (/path/to/node_modules/mocha/lib/runnable.js:216:7)
-          at Runner.runTest (/path/to/node_modules/mocha/lib/runner.js:374:10)
-          at /path/to/node_modules/mocha/lib/runner.js:452:12
-          at next (/path/to/node_modules/mocha/lib/runner.js:299:14)
-          at /path/to/node_modules/mocha/lib/runner.js:309:7
-          at next (/path/to/node_modules/mocha/lib/runner.js:247:23)
-          at Object._onImmediate (/path/to/node_modules/mocha/lib/runner.js:276:5)
-          at processImmediate [as _immediateCallback] (timers.js:330:15)
-    
+      
+      
       2) Array #indexOf() should return -1 when the value is not present:
          AssertionError: THIS IS AN ASSERTION MESSAGE # /path/to/test/mocha_node.js:14
     
-                assert.ok(this.ary.indexOf(two) === minusOne, 'THIS IS AN ASSERTION MESSAGE');
-                               |   |       |    |   |
-                               |   |       |    |   -1
-                               |   1       2    false
-                               [1,2,3]
+        assert.ok(this.ary.indexOf(two) === minusOne, 'THIS IS AN ASSERTION MESSAGE')
+                       |   |       |    |   |
+                       |   |       |    |   -1
+                       |   1       2    false
+                       [1,2,3]
+        
+        $$$ [number] minusOne
+        ### [number] this.ary.indexOf(two)
+        $=> -1
+        #=> 1
+      
+          at doPowerAssert (/path/to/node_modules/empower/lib/empower.js:116:39)
+          at Function.ok (/path/to/node_modules/empower/lib/empower.js:202:20)
+          at Context.<anonymous> (/path/to/test/mocha_node.js:21:20)
+      
+      
+      3) various types demo:
+         AssertionError: # /Users/takuto/work/git-sandbox/github/POWERASSERT/power-assert/sandbox/mocha_node.js:37
     
-          at Function.ok (/path/to/node_modules/empower/lib/empower.js:150:20)
-          at Context.<anonymous> (/path/to/test/mocha_node.js:48:20)
-          at callFn (/path/to/node_modules/mocha/lib/runnable.js:223:21)
-          at Test.Runnable.run (/path/to/node_modules/mocha/lib/runnable.js:216:7)
-          at Runner.runTest (/path/to/node_modules/mocha/lib/runner.js:374:10)
-          at /path/to/node_modules/mocha/lib/runner.js:452:12
-          at next (/path/to/node_modules/mocha/lib/runner.js:299:14)
-          at /path/to/node_modules/mocha/lib/runner.js:309:7
-          at next (/path/to/node_modules/mocha/lib/runner.js:247:23)
-          at Object._onImmediate (/path/to/node_modules/mocha/lib/runner.js:276:5)
-          at processImmediate [as _immediateCallback] (timers.js:330:15)
-
+        assert(this.types[index].name === bob.name)
+                    |    ||      |    |   |   |
+                    |    ||      |    |   |   "bob"
+                    |    ||      |    |   Person{name:"bob",age:5}
+                    |    ||      |    false
+                    |    |11     "alice"
+                    |    Person{name:"alice",age:3}
+                    ["string",98.6,true,false,null,undefined,#Array#,#Object#,NaN,Infinity,/^not/,#Person#]
+        
+        --- [string] bob.name
+        +++ [string] this.types[index].name
+        @@ -1,3 +1,5 @@
+        -bob
+        +alice
+        
+        
+          at doPowerAssert (/path/to/node_modules/empower/lib/empower.js:116:39)
+          at /path/to/node_modules/empower/lib/empower.js:202:20
+          at powerAssert (/path/to/node_modules/empower/lib/empower.js:99:17)
+          at Context.<anonymous> (/path/to/test/mocha_node.js:55:9)
 
 
 HOW TO USE
@@ -259,6 +308,8 @@ Second, require `power-assert` family in your test html.
 
     <script type="text/javascript" src="./path/to/bower_components/assert/assert.js"></script>
     <script type="text/javascript" src="./path/to/bower_components/empower/lib/empower.js"></script>
+    <script type="text/javascript" src="./path/to/bower_components/esprima/esprima.js"></script>
+    <script type="text/javascript" src="./path/to/bower_components/google-diff-match-patch-js/diff_match_patch.js"></script>
     <script type="text/javascript" src="./path/to/bower_components/estraverse/estraverse.js"></script>
     <script type="text/javascript" src="./path/to/bower_components/power-assert-formatter/lib/power-assert-formatter.js"></script>
     <script type="text/javascript" src="./path/to/bower_components/power-assert/lib/power-assert.js"></script>
@@ -317,6 +368,8 @@ Second, require `power-assert` family in your test html.
 
     <script type="text/javascript" src="./path/to/bower_components/assert/assert.js"></script>
     <script type="text/javascript" src="./path/to/bower_components/empower/lib/empower.js"></script>
+    <script type="text/javascript" src="./path/to/bower_components/esprima/esprima.js"></script>
+    <script type="text/javascript" src="./path/to/bower_components/google-diff-match-patch-js/diff_match_patch.js"></script>
     <script type="text/javascript" src="./path/to/bower_components/estraverse/estraverse.js"></script>
     <script type="text/javascript" src="./path/to/bower_components/power-assert-formatter/lib/power-assert-formatter.js"></script>
     <script type="text/javascript" src="./path/to/bower_components/power-assert/lib/power-assert.js"></script>
@@ -507,184 +560,240 @@ q.load();
 
 ### `espower` code above then running under Node.js
     
-    # test: spike
-    ok 1
-    not ok 2 - comment # /path/to/examples/qunit_node.js:17
-    #
-    #     assert.ok(hoge === fuga, 'comment');
-    #               |    |   |
-    #               |    |   "bar"
-    #               |    false
-    #               "foo"
-    # , test: spike
-    not ok 3 - # /path/to/examples/qunit_node.js:20
-    #
-    #     assert.ok(fuga === piyo);
-    #               |    |   |
-    #               |    |   3
-    #               |    false
-    #               "bar"
-    # , test: spike
-    not ok 4 - # /path/to/examples/qunit_node.js:24
-    #
-    #     assert.ok(longString === anotherLongString);
-    #               |          |   |
-    #               |          |   "yet another loooooooooooooooooooooooooooooooooooooooooooooooooooong message"
-    #               |          false
-    #               "very very loooooooooooooooooooooooooooooooooooooooooooooooooooong message"
-    # , test: spike
-    not ok 5 - # /path/to/examples/qunit_node.js:26
-    #
-    #     assert.ok(4 === piyo);
-    #                 |   |
-    #                 |   3
-    #                 false
-    # , test: spike
-    not ok 6 - # /path/to/examples/qunit_node.js:28
-    #
-    #     assert.ok(4 !== 4);
-    #                 |
-    #                 false
-    # , test: spike
-    not ok 7 - # /path/to/examples/qunit_node.js:31
-    #
-    #     assert.ok(falsyStr);
-    #               |
-    #               ""
-    # , test: spike
-    not ok 8 - # /path/to/examples/qunit_node.js:34
-    #
-    #     assert.ok(falsyNum);
-    #               |
-    #               0
-    # , test: spike
-    not ok 9 - # /path/to/examples/qunit_node.js:38
-    #
-    #     assert.ok(ary1.length === ary2.length);
-    #               |    |      |   |    |
-    #               |    |      |   |    3
-    #               |    |      |   ["aaa","bbb","ccc"]
-    #               |    2      false
-    #               ["foo","bar"]
-    # , test: spike
-    not ok 10 - # /path/to/examples/qunit_node.js:39
-    #
-    #     assert.deepEqual(ary1, ary2);
-    #                      |     |
-    #                      |     ["aaa","bbb","ccc"]
-    #                      ["foo","bar"]
-    # , expected: [
-    #   "aaa",
-    #   "bbb",
-    #   "ccc"
-    # ], got: [
-    #   "foo",
-    #   "bar"
-    # ], test: spike
-    not ok 11 - # /path/to/examples/qunit_node.js:42
-    #
-    #     assert.ok(5 < actual && actual < 13);
-    #                 | |      |  |      |
-    #                 | |      |  16     false
-    #                 | 16     false
-    #                 true
-    # , test: spike
-    not ok 12 - # /path/to/examples/qunit_node.js:45
-    #
-    #     assert.ok(5 < actual && actual < 13);
-    #                 | |      |
-    #                 | 4      false
-    #                 false
-    # , test: spike
-    not ok 13 - # /path/to/examples/qunit_node.js:48
-    #
-    #     assert.ok(actual < 5 || 13 < actual);
-    #               |      |   |     | |
-    #               |      |   |     | 10
-    #               |      |   false false
-    #               10     false
-    # , test: spike
-    not ok 14 - # /path/to/examples/qunit_node.js:58
-    #
-    #     assert.ok(foo.bar.baz);
-    #               |   |   |
-    #               |   |   false
-    #               |   {"baz":false}
-    #               {"bar":{"baz":false}}
-    # , test: spike
-    not ok 15 - # /path/to/examples/qunit_node.js:59
-    #
-    #     assert.ok(foo['bar'].baz);
-    #               |  |       |
-    #               |  |       false
-    #               |  {"baz":false}
-    #               {"bar":{"baz":false}}
-    # , test: spike
-    not ok 16 - # /path/to/examples/qunit_node.js:60
-    #
-    #     assert.ok(foo[propName]['baz']);
-    #               |  ||        |
-    #               |  |"bar"    false
-    #               |  {"baz":false}
-    #               {"bar":{"baz":false}}
-    # , test: spike
-    not ok 17 - # /path/to/examples/qunit_node.js:64
-    #
-    #     assert.ok(!truth);
-    #               ||
-    #               |true
-    #               false
-    # , test: spike
-    not ok 18 - # /path/to/examples/qunit_node.js:68
-    #
-    #     assert.ok(func());
-    #               |
-    #               false
-    # , test: spike
-    not ok 19 - # /path/to/examples/qunit_node.js:76
-    #
-    #     assert.ok(obj.age());
-    #               |   |
-    #               {}  0
-    # , test: spike
-    not ok 20 - # /path/to/examples/qunit_node.js:83
-    #
-    #     assert.ok(isFalsy(positiveInt));
-    #               |       |
-    #               false   50
-    # , test: spike
-    not ok 21 - # /path/to/examples/qunit_node.js:94
-    #
-    #     assert.ok(sum(one, two, three) === seven);
-    #               |   |    |    |      |   |
-    #               |   |    |    |      |   7
-    #               6   1    2    3      false
-    # , test: spike
-    not ok 22 - # /path/to/examples/qunit_node.js:95
-    #
-    #     assert.ok(sum(sum(one, two), three) === sum(sum(two, three), seven));
-    #               |   |   |    |     |      |   |   |   |    |       |
-    #               |   |   |    |     |      |   12  5   2    3       7
-    #               6   3   1    2     3      false
-    # , test: spike
-    not ok 23 - # /path/to/examples/qunit_node.js:96
-    #
-    #     assert.ok((three * (seven * ten)) === three);
-    #                |     |  |     | |     |   |
-    #                |     |  |     | |     |   3
-    #                |     |  |     | 10    false
-    #                |     |  7     70
-    #                3     210
-    # , test: spike
-    not ok 24 - # /path/to/examples/qunit_node.js:110
-    #
-    #     assert.ok(math.calc.sum(one, two, three) === seven);
-    #               |    |    |   |    |    |      |   |
-    #               |    |    |   |    |    |      |   7
-    #               |    {}   6   1    2    3      false
-    #               {"calc":{}}
-    # , test: spike
-    1..24
-
+```
+# module: undefined
+# test: spike
+ok 1 - okay
+not ok 2 - comment # /path/to/examples/qunit_node.js:17
+#
+# assert.ok(hoge === fuga, 'comment')
+#           |    |   |
+#           |    |   "bar"
+#           |    false
+#           "foo"
+#
+# --- [string] fuga
+# +++ [string] hoge
+# @@ -1,3 +1,3 @@
+# -bar
+# +foo
+#
+# , test: spike
+not ok 3 - # /path/to/examples/qunit_node.js:20
+#
+# assert.ok(fuga === piyo)
+#           |    |   |
+#           |    |   3
+#           |    false
+#           "bar"
+#
+# $$$ [number] piyo
+# ### [string] fuga
+# $=> 3
+# #=> "bar"
+# , test: spike
+not ok 4 - # /path/to/examples/qunit_node.js:24
+#
+# assert.ok(longString === anotherLongString)
+#           |          |   |
+#           |          |   "yet another loooooooooooooooooooooooooooooooooooooooooooooooooooong message"
+#           |          false
+#           "very very loooooooooooooooooooooooooooooooooooooooooooooooooooong message"
+#
+# --- [string] anotherLongString
+# +++ [string] longString
+# @@ -1,15 +1,13 @@
+# -yet anoth
+# +very v
+#  er
+# +y
+#   loo
+#
+# , test: spike
+not ok 5 - # /path/to/examples/qunit_node.js:26
+#
+# assert.ok(4 === piyo)
+#             |   |
+#             |   3
+#             false
+#
+# $$$ [number] piyo
+# ### [number] 4
+# $=> 3
+# #=> 4
+# , test: spike
+not ok 6 - # /path/to/examples/qunit_node.js:28
+#
+# assert.ok(4 !== 4)
+#             |
+#             false
+# , test: spike
+not ok 7 - # /path/to/examples/qunit_node.js:31
+#
+# assert.ok(falsyStr)
+#           |
+#           ""
+# , test: spike
+not ok 8 - # /path/to/examples/qunit_node.js:34
+#
+# assert.ok(falsyNum)
+#           |
+#           0
+# , test: spike
+not ok 9 - # /path/to/examples/qunit_node.js:38
+#
+# assert.ok(ary1.length === ary2.length)
+#           |    |      |   |    |
+#           |    |      |   |    3
+#           |    |      |   ["aaa","bbb","ccc"]
+#           |    2      false
+#           ["foo","bar"]
+#
+# $$$ [number] ary2.length
+# ### [number] ary1.length
+# $=> 3
+# #=> 2
+# , test: spike
+not ok 10 - # /path/to/examples/qunit_node.js:39
+#
+# assert.deepEqual(ary1, ary2)
+#                  |     |
+#                  |     ["aaa","bbb","ccc"]
+#                  ["foo","bar"]
+# , expected: [
+#   "aaa",
+#   "bbb",
+#   "ccc"
+# ], got: [
+#   "foo",
+#   "bar"
+# ], test: spike
+not ok 11 - # /path/to/examples/qunit_node.js:42
+#
+# assert.ok(5 < actual && actual < 13)
+#             | |      |  |      |
+#             | |      |  16     false
+#             | 16     false
+#             true
+# , test: spike
+not ok 12 - # /path/to/examples/qunit_node.js:45
+#
+# assert.ok(5 < actual && actual < 13)
+#             | |      |
+#             | 4      false
+#             false
+# , test: spike
+not ok 13 - # /path/to/examples/qunit_node.js:48
+#
+# assert.ok(actual < 5 || 13 < actual)
+#           |      |   |     | |
+#           |      |   |     | 10
+#           |      |   false false
+#           10     false
+# , test: spike
+not ok 14 - # /path/to/examples/qunit_node.js:58
+#
+# assert.ok(foo.bar.baz)
+#           |   |   |
+#           |   |   false
+#           |   Object{baz:false}
+#           Object{bar:#Object#}
+# , test: spike
+not ok 15 - # /path/to/examples/qunit_node.js:59
+#
+# assert.ok(foo['bar'].baz)
+#           |  |       |
+#           |  |       false
+#           |  Object{baz:false}
+#           Object{bar:#Object#}
+# , test: spike
+not ok 16 - # /path/to/examples/qunit_node.js:60
+#
+# assert.ok(foo[propName]['baz'])
+#           |  ||        |
+#           |  |"bar"    false
+#           |  Object{baz:false}
+#           Object{bar:#Object#}
+# , test: spike
+not ok 17 - # /path/to/examples/qunit_node.js:64
+#
+# assert.ok(!truth)
+#           ||
+#           |true
+#           false
+# , test: spike
+not ok 18 - # /path/to/examples/qunit_node.js:68
+#
+# assert.ok(func())
+#           |
+#           false
+# , test: spike
+not ok 19 - # /path/to/examples/qunit_node.js:76
+#
+# assert.ok(obj.age())
+#           |   |
+#           |   0
+#           Object{age:#function#}
+# , test: spike
+not ok 20 - # /path/to/examples/qunit_node.js:83
+#
+# assert.ok(isFalsy(positiveInt))
+#           |       |
+#           false   50
+# , test: spike
+not ok 21 - # /path/to/examples/qunit_node.js:94
+#
+# assert.ok(sum(one, two, three) === seven)
+#           |   |    |    |      |   |
+#           |   |    |    |      |   7
+#           6   1    2    3      false
+#
+# $$$ [number] seven
+# ### [number] sum(one, two, three)
+# $=> 7
+# #=> 6
+# , test: spike
+not ok 22 - # /path/to/examples/qunit_node.js:95
+#
+# assert.ok(sum(sum(one, two), three) === sum(sum(two, three), seven))
+#           |   |   |    |     |      |   |   |   |    |       |
+#           |   |   |    |     |      |   12  5   2    3       7
+#           6   3   1    2     3      false
+#
+# $$$ [number] sum(sum(two, three), seven)
+# ### [number] sum(sum(one, two), three)
+# $=> 12
+# #=> 6
+# , test: spike
+not ok 23 - # /path/to/examples/qunit_node.js:96
+#
+# assert.ok(three * (seven * ten) === three)
+#           |     |  |     | |    |   |
+#           |     |  |     | |    |   3
+#           |     |  |     | 10   false
+#           |     |  7     70
+#           3     210
+#
+# $$$ [number] three
+# ### [number] three * (seven * ten)
+# $=> 3
+# #=> 210
+# , test: spike
+not ok 24 - # /path/to/examples/qunit_node.js:110
+#
+# assert.ok(math.calc.sum(one, two, three) === seven)
+#           |    |    |   |    |    |      |   |
+#           |    |    |   |    |    |      |   7
+#           |    |    6   1    2    3      false
+#           |    Object{sum:#function#}
+#           Object{calc:#Object#}
+#
+# $$$ [number] seven
+# ### [number] math.calc.sum(one, two, three)
+# $=> 7
+# #=> 6
+# , test: spike
+1..24
+```
 
 Have fun!

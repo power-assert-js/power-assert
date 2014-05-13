@@ -97,6 +97,12 @@ module.exports = function(grunt) {
                 },
                 src: ['<%= destDir %>/**/*.js']
             }
+        },
+        watch: {
+            unit: {
+                files: ['test/**/*.js', 'lib/**/*.js'],
+                tasks: ['unit']
+            }
         }
     });
 
