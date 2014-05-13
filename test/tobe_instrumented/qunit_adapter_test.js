@@ -139,10 +139,10 @@ it('QUnit output', function (mochaDone) {
         '#           |      |   Object{baz:false}',
         '#           true   Object{bar:#Object#}',
         '# ',
-        '# $$$ [number] falsy',
-        '# ### [boolean] delete foo.bar',
-        '# $=> 0',
-        '# #=> true',
+        '# [number] falsy',
+        '# => 0',
+        '# [boolean] delete foo.bar',
+        '# => true',
         '# '
     ]);
 
@@ -158,10 +158,10 @@ it('QUnit output', function (mochaDone) {
         '#           |    false    ',
         '#           "foo"         ',
         '# ',
-        '# $$$ [number] piyo',
-        '# ### [string] fuga',
-        '# $=> 8',
-        '# #=> "foo"',
+        '# [number] piyo',
+        '# => 8',
+        '# [string] fuga',
+        '# => "foo"',
         '# '
     ]);
 
@@ -217,10 +217,10 @@ it('QUnit output', function (mochaDone) {
         '#           |    2      false           ',
         '#           ["foo","bar"]               ',
         '# ',
-        '# $$$ [number] ary2.length',
-        '# ### [number] ary1.length',
-        '# $=> 3',
-        '# #=> 2',
+        '# [number] ary2.length',
+        '# => 3',
+        '# [number] ary1.length',
+        '# => 2',
         '# '
     ]);
 
@@ -345,10 +345,10 @@ it('QUnit output', function (mochaDone) {
         '#           |   |    |    |      |   7     ',
         '#           6   1    2    3      false     ',
         '# ',
-        '# $$$ [number] seven',
-        '# ### [number] sum(one, two, three)',
-        '# $=> 7',
-        '# #=> 6',
+        '# [number] seven',
+        '# => 7',
+        '# [number] sum(one, two, three)',
+        '# => 6',
         '# '
     ]);
 
@@ -370,10 +370,10 @@ it('QUnit output', function (mochaDone) {
         '#           |   |   |    |     |      |   12  5   2    3       7      ',
         '#           6   3   1    2     3      false                           ',
         '# ',
-        '# $$$ [number] sum(sum(two, three), seven)',
-        '# ### [number] sum(sum(one, two), three)',
-        '# $=> 12',
-        '# #=> 6',
+        '# [number] sum(sum(two, three), seven)',
+        '# => 12',
+        '# [number] sum(sum(one, two), three)',
+        '# => 6',
         '# '
     ]);
 
@@ -401,10 +401,10 @@ it('QUnit output', function (mochaDone) {
         '#           |    Object{sum:#function#}              ',
         '#           Object{calc:#Object#}                    ',
         '# ',
-        '# $$$ [number] seven',
-        '# ### [number] math.calc.sum(one, two, three)',
-        '# $=> 7',
-        '# #=> 6',
+        '# [number] seven',
+        '# => 7',
+        '# [number] math.calc.sum(one, two, three)',
+        '# => 6',
         '# '
     ]);
 
@@ -421,10 +421,10 @@ it('QUnit output', function (mochaDone) {
         '#           |     |  7     70               ',
         '#           3     210                       ',
         '# ',
-        '# $$$ [number] three',
-        '# ### [number] three * (seven * ten)',
-        '# $=> 3',
-        '# #=> 210',
+        '# [number] three',
+        '# => 3',
+        '# [number] three * (seven * ten)',
+        '# => 210',
         '# '
     ]);
 

@@ -109,10 +109,10 @@ describe('power-assert message', function () {
             '       |                  |         ',
             '       true               false     ',
             '',
-            '$$$ [boolean] false',
-            '### [boolean] delete nonexistent',
-            '$=> false',
-            '#=> true'
+            '[boolean] false',
+            '=> false',
+            '[boolean] delete nonexistent',
+            '=> true'
         ]);
     });
 
@@ -134,10 +134,10 @@ describe('power-assert message', function () {
             '       |      |   Object{baz:false}',
             '       true   Object{bar:#Object#}',
             '',
-            '$$$ [number] falsy',
-            '### [boolean] delete foo.bar',
-            '$=> 0',
-            '#=> true'
+            '[number] falsy',
+            '=> 0',
+            '[boolean] delete foo.bar',
+            '=> true'
         ]);
     });
 
@@ -154,10 +154,10 @@ describe('power-assert message', function () {
             '       |    false    ',
             '       "foo"         ',
             '',
-            '$$$ [number] piyo',
-            '### [string] fuga',
-            '$=> 8',
-            '#=> "foo"'
+            '[number] piyo',
+            '=> 8',
+            '[string] fuga',
+            '=> "foo"'
         ]);
     });
 
@@ -213,10 +213,10 @@ describe('power-assert message', function () {
             '       |    2      false           ',
             '       ["foo","bar"]               ',
             '',
-            '$$$ [number] ary2.length',
-            '### [number] ary1.length',
-            '$=> 3',
-            '#=> 2'
+            '[number] ary2.length',
+            '=> 3',
+            '[number] ary1.length',
+            '=> 2'
         ]);
     });
 
@@ -426,10 +426,10 @@ describe('power-assert message', function () {
             '       |   |    |    |      |   7     ',
             '       6   1    2    3      false     ',
             '',
-            '$$$ [number] seven',
-            '### [number] sum(one, two, three)',
-            '$=> 7',
-            '#=> 6'
+            '[number] seven',
+            '=> 7',
+            '[number] sum(one, two, three)',
+            '=> 6'
         ]);
     });
 
@@ -451,10 +451,10 @@ describe('power-assert message', function () {
             '       |   |   |    |     |      |   12  5   2    3       7      ',
             '       6   3   1    2     3      false                           ',
             '',
-            '$$$ [number] sum(sum(two, three), seven)',
-            '### [number] sum(sum(one, two), three)',
-            '$=> 12',
-            '#=> 6'
+            '[number] sum(sum(two, three), seven)',
+            '=> 12',
+            '[number] sum(sum(one, two), three)',
+            '=> 6'
         ]);
     });
 
@@ -482,10 +482,10 @@ describe('power-assert message', function () {
             '       |    Object{sum:#function#}              ',
             '       Object{calc:#Object#}                    ',
             '',
-            '$$$ [number] seven',
-            '### [number] math.calc.sum(one, two, three)',
-            '$=> 7',
-            '#=> 6'
+            '[number] seven',
+            '=> 7',
+            '[number] math.calc.sum(one, two, three)',
+            '=> 6'
         ]);
     });
 
@@ -502,10 +502,10 @@ describe('power-assert message', function () {
             '       |     |  7     70               ',
             '       3     210                       ',
             '',
-            '$$$ [number] three',
-            '### [number] three * (seven * ten)',
-            '$=> 3',
-            '#=> 210'
+            '[number] three',
+            '=> 3',
+            '[number] three * (seven * ten)',
+            '=> 210'
         ]);
     });
 
@@ -609,10 +609,10 @@ describe('power-assert message', function () {
             '          |     "baz"            ',
             '          ["foo",#Array#,"baz"]  ',
             '',
-            '$$$ [Array] cyclic',
-            '### [string] cyclic[two]',
-            '$=> ["foo",#Array#,"baz"]',
-            '#=> "baz"'
+            '[Array] cyclic',
+            '=> ["foo",#Array#,"baz"]',
+            '[string] cyclic[two]',
+            '=> "baz"'
         ]);
     });
 
@@ -630,10 +630,10 @@ describe('power-assert message', function () {
             '        |   "fuga"               ',
             '        "hoge"                   ',
             '',
-            '$$$ [number] four',
-            '### [number] [foo,bar].length',
-            '$=> 4',
-            '#=> 2'
+            '[number] four',
+            '=> 4',
+            '[number] [foo,bar].length',
+            '=> 2'
         ]);
     });
 

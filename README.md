@@ -35,10 +35,10 @@ What is `power-assert`?
                   |   -1      0     false
                   [1,2,3]
     
-      $$$ [number] two
-      ### [number] this.ary.indexOf(zero)
-      $=> 2
-      #=> -1
+      [number] two
+      => 2
+      [number] this.ary.indexOf(zero)
+      => -1
 
 
 CHANGELOG
@@ -166,10 +166,10 @@ describe('various types', function(){
                     |   -1      0     false
                     [1,2,3]
         
-        $$$ [number] two
-        ### [number] this.ary.indexOf(zero)
-        $=> 2
-        #=> -1
+        [number] two
+        => 2
+        [number] this.ary.indexOf(zero)
+        => -1
 
           at doPowerAssert (/path/to/node_modules/empower/lib/empower.js:116:39)
           at /path/to/node_modules/empower/lib/empower.js:202:20
@@ -186,10 +186,10 @@ describe('various types', function(){
                        |   1       2    false
                        [1,2,3]
         
-        $$$ [number] minusOne
-        ### [number] this.ary.indexOf(two)
-        $=> -1
-        #=> 1
+        [number] minusOne
+        => -1
+        [number] this.ary.indexOf(two)
+        => 1
       
           at doPowerAssert (/path/to/node_modules/empower/lib/empower.js:116:39)
           at Function.ok (/path/to/node_modules/empower/lib/empower.js:202:20)
@@ -587,10 +587,11 @@ not ok 3 - # /path/to/examples/qunit_node.js:20
 #           |    false
 #           "bar"
 #
-# $$$ [number] piyo
-# ### [string] fuga
-# $=> 3
-# #=> "bar"
+# [number] piyo
+# => 3
+# [string] fuga
+# => "bar"
+
 # , test: spike
 not ok 4 - # /path/to/examples/qunit_node.js:24
 #
@@ -617,10 +618,10 @@ not ok 5 - # /path/to/examples/qunit_node.js:26
 #             |   3
 #             false
 #
-# $$$ [number] piyo
-# ### [number] 4
-# $=> 3
-# #=> 4
+# [number] piyo
+# => 3
+# [number] 4
+# => 4
 # , test: spike
 not ok 6 - # /path/to/examples/qunit_node.js:28
 #
@@ -649,10 +650,10 @@ not ok 9 - # /path/to/examples/qunit_node.js:38
 #           |    2      false
 #           ["foo","bar"]
 #
-# $$$ [number] ary2.length
-# ### [number] ary1.length
-# $=> 3
-# #=> 2
+# [number] ary2.length
+# => 3
+# [number] ary1.length
+# => 2
 # , test: spike
 not ok 10 - # /path/to/examples/qunit_node.js:39
 #
@@ -748,10 +749,10 @@ not ok 21 - # /path/to/examples/qunit_node.js:94
 #           |   |    |    |      |   7
 #           6   1    2    3      false
 #
-# $$$ [number] seven
-# ### [number] sum(one, two, three)
-# $=> 7
-# #=> 6
+# [number] seven
+# => 7
+# [number] sum(one, two, three)
+# => 6
 # , test: spike
 not ok 22 - # /path/to/examples/qunit_node.js:95
 #
@@ -760,10 +761,10 @@ not ok 22 - # /path/to/examples/qunit_node.js:95
 #           |   |   |    |     |      |   12  5   2    3       7
 #           6   3   1    2     3      false
 #
-# $$$ [number] sum(sum(two, three), seven)
-# ### [number] sum(sum(one, two), three)
-# $=> 12
-# #=> 6
+# [number] sum(sum(two, three), seven)
+# => 12
+# [number] sum(sum(one, two), three)
+# => 6
 # , test: spike
 not ok 23 - # /path/to/examples/qunit_node.js:96
 #
@@ -774,10 +775,10 @@ not ok 23 - # /path/to/examples/qunit_node.js:96
 #           |     |  7     70
 #           3     210
 #
-# $$$ [number] three
-# ### [number] three * (seven * ten)
-# $=> 3
-# #=> 210
+# [number] three
+# => 3
+# [number] three * (seven * ten)
+# => 210
 # , test: spike
 not ok 24 - # /path/to/examples/qunit_node.js:110
 #
@@ -788,10 +789,10 @@ not ok 24 - # /path/to/examples/qunit_node.js:110
 #           |    Object{sum:#function#}
 #           Object{calc:#Object#}
 #
-# $$$ [number] seven
-# ### [number] math.calc.sum(one, two, three)
-# $=> 7
-# #=> 6
+# [number] seven
+# => 7
+# [number] math.calc.sum(one, two, three)
+# => 6
 # , test: spike
 1..24
 ```
