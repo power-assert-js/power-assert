@@ -1,6 +1,6 @@
 {
     "name": "power-assert",
-    "version": "0.7.0",
+    "version": "0.7.1",
     "main": "lib/power-assert.js",
     "ignore": [
         "**/.*",
