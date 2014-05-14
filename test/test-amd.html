@@ -9,7 +9,6 @@
   </head>
   <body>
     <div id="mocha"></div>
-    <script type="text/javascript" src="../bower_components/es5-shim/es5-shim.js"></script>
     <script type="text/javascript" src="../bower_components/mocha/mocha.js"></script>
     <script type="text/javascript" src="./rjsconfig.js"></script>
     <script type="text/javascript" src="../bower_components/requirejs/require.js"></script>
@@ -20,7 +19,11 @@
         "../espowered_tests/not_tobe_instrumented/not_instrumented_test"
       ], function() {
         mocha.checkLeaks();
-        mocha.run();
+        if (window.mochaPhantomJS) {
+          mochaPhantomJS.run();
+        } else {
+          mocha.run();
+        }
       });
     </script>
   </body>
