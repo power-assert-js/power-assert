@@ -3,7 +3,7 @@ node_js:
   - "0.10"
   - "0.8"
 before_install:
-  - "npm install -g grunt-cli"
+  - "npm install -g gulp"
 before_script:
   - "npm run-script bower"
 script:

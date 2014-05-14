@@ -32,7 +32,7 @@
   },
   "scripts": {
     "bower": "./node_modules/bower/bin/bower install --config.interactive=false",
-    "test": "grunt test"
+    "test": "gulp test"
   },
   "dependencies": {
     "empower": "~0.7.1",
@@ -45,20 +45,20 @@
     "espower-loader": "~0.7.0",
     "esprima": "~1.2.1",
     "expect.js": "0.3.1",
-    "grunt": "~0.4.1",
-    "grunt-bower-requirejs": "~0.9.2",
-    "grunt-bump": "~0.0.13",
-    "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-connect": "~0.7.1",
-    "grunt-contrib-copy": "~0.5.0",
-    "grunt-contrib-watch": "~0.6.1",
-    "grunt-espower": "~0.7.0",
-    "grunt-mocha": "~0.4.10",
-    "grunt-mocha-test": "~0.10.2",
-    "jit-grunt": "~0.5.0",
+    "gulp": "~3.6.2",
+    "gulp-bump": "~0.1.8",
+    "gulp-clean": "~0.2.4",
+    "gulp-connect": "~2.0.5",
+    "gulp-espower": "~0.7.0",
+    "gulp-git": "~0.4.2",
+    "gulp-mocha-phantomjs": "~0.2.0",
+    "gulp-spawn-mocha": "~0.1.4",
+    "gulp-util": "~2.2.14",
+    "lodash.merge": "~2.4.1",
     "optimist": "0.6.1",
     "qunit-tap": "1.4.2",
-    "qunitjs": "1.14.0"
+    "qunitjs": "1.14.0",
+    "run-sequence": "~0.3.6"
   },
   "licenses": [
     {
