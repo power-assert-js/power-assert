@@ -1,5 +1,6 @@
 var gulp = require('gulp'),
     bump = require('gulp-bump'),
+    git = require('gulp-git'),
     mocha = require('gulp-spawn-mocha'),
     mochaPhantomJS = require('gulp-mocha-phantomjs'),
     connect = require('gulp-connect'),
@@ -9,6 +10,7 @@ var gulp = require('gulp'),
     source = require('vinyl-source-stream'),
     browserify = require('browserify'),
     merge = require('lodash.merge'),
+    bumpTarget = ['./bower.json', './package.json'],
     bundleDir = 'build',
     bundleName = 'power-assert.js',
     destDir = 'espowered_tests';
@@ -30,14 +32,40 @@ function runMochaWithEspowerLoader() {
 
 function bumpVersion(options) {
     return gulp
-        .src(['./bower.json', './package.json'])
+        .src(bumpTarget)
         .pipe(bump(options))
         .pipe(gulp.dest('./'));
 }
 
+gulp.task('git_add', function(){
+    return gulp
+        .src(bumpTarget)
+        .pipe(git.add());
+});
+
+gulp.task('git_commit', function(){
+    var pkg = require('./package.json');
+    return gulp
+        .src(bumpTarget)
+        .pipe(git.commit(pkg.version));
+});
+
+gulp.task('git_tag', function(done) {
+    var pkg = require('./package.json');
+    git.tag('v' + pkg.version, pkg.version, null, done);
+});
+
 ['patch', 'minor', 'major'].forEach(function (v) {
     gulp.task('bump_' + v, function(){
         return bumpVersion({type: v});
+    });
+    gulp.task('release_' + v, function(){
+        runSequence(
+            'bump_' + v,
+            'git_add',
+            'git_commit',
+            'git_tag'
+        );
     });
 });
 
