@@ -39,6 +39,7 @@
     "power-assert-formatter": "~0.7.1"
   },
   "devDependencies": {
+    "browserify": "~4.1.3",
     "escodegen": "~1.3.2",
     "espower": "~0.7.0",
     "espower-loader": "~0.7.0",
@@ -52,12 +53,12 @@
     "gulp-git": "~0.4.2",
     "gulp-mocha-phantomjs": "~0.2.0",
     "gulp-spawn-mocha": "~0.1.4",
-    "gulp-util": "~2.2.14",
     "lodash.merge": "~2.4.1",
     "optimist": "0.6.1",
     "qunit-tap": "1.4.2",
     "qunitjs": "1.14.0",
-    "run-sequence": "~0.3.6"
+    "run-sequence": "~0.3.6",
+    "vinyl-source-stream": "~0.1.1"
   },
   "licenses": [
     {

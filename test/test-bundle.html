@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../bower_components/mocha/mocha.css">
+    <title>Tests on Browser</title>
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <script type="text/javascript" src="../build/power-assert.js"></script>
+    <script type="text/javascript" src="../bower_components/expect/index.js"></script>
+    <script type="text/javascript" src="../bower_components/mocha/mocha.js"></script>
+    <script type="text/javascript">
+      mocha.setup('bdd');
+    </script>
+    <script type="text/javascript" src="../espowered_tests/tobe_instrumented/power_assert_test.js"></script>
+    <script type="text/javascript" src="../espowered_tests/not_tobe_instrumented/not_instrumented_test.js"></script>
+    <script type="text/javascript">
+      mocha.checkLeaks();
+      if (window.mochaPhantomJS) {
+        mochaPhantomJS.run();
+      } else {
+        mocha.run();
+      }
+    </script>
+  </body>
+</html>

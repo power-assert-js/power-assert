@@ -6,7 +6,11 @@ var gulp = require('gulp'),
     clean = require('gulp-clean'),
     espower = require('gulp-espower'),
     runSequence = require('run-sequence'),
+    source = require('vinyl-source-stream'),
+    browserify = require('browserify'),
     merge = require('lodash.merge'),
+    bundleDir = 'build',
+    bundleName = 'power-assert.js',
     destDir = 'espowered_tests';
 
 function runMocha(pattern, extraOptions) {
@@ -50,6 +54,19 @@ gulp.task('watch', function () {
     runMochaWithEspowerLoader();
 });
 
+gulp.task('clean_bundle', function () {
+    return gulp
+        .src(bundleDir, {read: false})
+        .pipe(clean());
+});
+
+gulp.task('bundle', function() {
+    var bundleStream = browserify('./lib/power-assert.js').bundle({standalone: 'assert'});
+    return bundleStream
+        .pipe(source(bundleName))
+        .pipe(gulp.dest(bundleDir));
+})
+
 gulp.task('clean', function () {
     return gulp
         .src(destDir, {read: false})
@@ -89,10 +106,16 @@ gulp.task('amd', function () {
         .pipe(mochaPhantomJS({reporter: 'dot'}));
 });
 
+gulp.task('test_bundle', function () {
+    return gulp
+        .src('test/test-bundle.html')
+        .pipe(mochaPhantomJS({reporter: 'dot'}));
+});
+
 gulp.task('test', function(callback) {
     runSequence(
-        'clean',
-        ['copy_not_tobe_instrumented', 'espower'],
-        ['unit','functional','browser','amd']
+        ['clean', 'clean_bundle'],
+        ['copy_not_tobe_instrumented', 'espower', 'bundle'],
+        ['unit','functional','browser','amd', 'test_bundle']
     );
 });
