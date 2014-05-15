@@ -95,7 +95,7 @@ gulp.task('bundle', function() {
         .pipe(gulp.dest(bundleDir));
 })
 
-gulp.task('clean', function () {
+gulp.task('clean_espower', function () {
     return gulp
         .src(destDir, {read: false})
         .pipe(clean());
@@ -122,28 +122,22 @@ gulp.task('functional', function () {
     return runMocha(destDir + '/**/*_test.js');
 });
 
-gulp.task('browser', function () {
-    return gulp
-        .src('test/test-browser.html')
-        .pipe(mochaPhantomJS({reporter: 'dot'}));
-});
-
-gulp.task('amd', function () {
+gulp.task('test_amd', function () {
     return gulp
         .src('test/test-amd.html')
         .pipe(mochaPhantomJS({reporter: 'dot'}));
 });
 
-gulp.task('test_bundle', function () {
+gulp.task('test_browser', function () {
     return gulp
-        .src('test/test-bundle.html')
+        .src('test/test-browser.html')
         .pipe(mochaPhantomJS({reporter: 'dot'}));
 });
 
 gulp.task('test', function(callback) {
     runSequence(
-        ['clean', 'clean_bundle'],
+        ['clean_espower', 'clean_bundle'],
         ['copy_not_tobe_instrumented', 'espower', 'bundle'],
-        ['unit','functional','browser','amd', 'test_bundle']
+        ['unit','functional','test_browser','test_amd']
     );
 });

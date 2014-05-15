@@ -2,7 +2,7 @@
     'use strict';
 
     if (typeof define === 'function' && define.amd) {
-        define(['../../lib/power-assert', 'expect'], factory);
+        define(['power-assert', 'expect'], factory);
     } else if (typeof exports === 'object') {
         factory(require('../../lib/power-assert'), require('expect.js'));
     } else {
