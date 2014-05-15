@@ -42,8 +42,9 @@ What is `power-assert`?
 
 CHANGELOG
 ---------------------------------------
-* Since version 0.6.0, power-assert-formatter requires `estraverse` as runtime dependency. Though npm and bower resolves this well, please be sure to check your dependencies if you are using power-assert under various browsers.
+* Since version 0.7.2, power-assert provides all-in-one bundle for browsers. Therefore, you don't neeed to care about browser-side dependencies.
 * Since version 0.7.0, power-assert-formatter requires `esprima` and google's `diff_match_patch` as runtime dependency. Though npm and bower resolves this well, please be sure to check your dependencies if you are using power-assert under various browsers.
+* Since version 0.6.0, power-assert-formatter requires `estraverse` as runtime dependency. Though npm and bower resolves this well, please be sure to check your dependencies if you are using power-assert under various browsers.
 
 
 MODULES
@@ -303,15 +304,9 @@ First, install `power-assert` via bower and `grunt-espower` via npm. This means 
     $ bower install --save-dev power-assert
     $ npm install --save-dev grunt-espower
 
-Second, require `power-assert` family in your test html.
+Second, require `power-assert` in your test html.
 
-    <script type="text/javascript" src="./path/to/bower_components/assert/assert.js"></script>
-    <script type="text/javascript" src="./path/to/bower_components/empower/lib/empower.js"></script>
-    <script type="text/javascript" src="./path/to/bower_components/esprima/esprima.js"></script>
-    <script type="text/javascript" src="./path/to/bower_components/google-diff-match-patch-js/diff_match_patch.js"></script>
-    <script type="text/javascript" src="./path/to/bower_components/estraverse/estraverse.js"></script>
-    <script type="text/javascript" src="./path/to/bower_components/power-assert-formatter/lib/power-assert-formatter.js"></script>
-    <script type="text/javascript" src="./path/to/bower_components/power-assert/lib/power-assert.js"></script>
+    <script type="text/javascript" src="./path/to/bower_components/power-assert/build/power-assert.js"></script>
 
 Third, configure `grunt-espower` task to  generate espowered code.
 
@@ -363,15 +358,9 @@ First, install `power-assert` via bower and `gulp-espower` via npm. This means t
     $ bower install --save-dev power-assert
     $ npm install --save-dev gulp-espower
 
-Second, require `power-assert` family in your test html.
+Second, require `power-assert` in your test html.
 
-    <script type="text/javascript" src="./path/to/bower_components/assert/assert.js"></script>
-    <script type="text/javascript" src="./path/to/bower_components/empower/lib/empower.js"></script>
-    <script type="text/javascript" src="./path/to/bower_components/esprima/esprima.js"></script>
-    <script type="text/javascript" src="./path/to/bower_components/google-diff-match-patch-js/diff_match_patch.js"></script>
-    <script type="text/javascript" src="./path/to/bower_components/estraverse/estraverse.js"></script>
-    <script type="text/javascript" src="./path/to/bower_components/power-assert-formatter/lib/power-assert-formatter.js"></script>
-    <script type="text/javascript" src="./path/to/bower_components/power-assert/lib/power-assert.js"></script>
+    <script type="text/javascript" src="./path/to/bower_components/power-assert/build/power-assert.js"></script>
 
 Third, configure `gulp-espower` task to generate espowered code.
 
@@ -380,7 +369,8 @@ var gulp = require('gulp'),
     espower = require('gulp-espower');
   . . . 
 gulp.task('espower', function() {
-    gulp.src('test/**/*_test.js')
+    return gulp
+        .src('test/**/*_test.js')
         .pipe(espower())
         .pipe(gulp.dest('espowered'));
 });
