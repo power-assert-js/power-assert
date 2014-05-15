@@ -1,28 +1,28 @@
 {
-    "name": "power-assert",
-    "version": "0.7.1",
-    "main": "lib/power-assert.js",
-    "ignore": [
-        "**/.*",
-        "Gruntfile.js",
-        "espowered_tests",
-        "node_modules",
-        "package.json",
-        "sandbox",
-        "scripts",
-        "test",
-        "enable_power_assert.js"
-    ],
-    "dependencies": {
-        "empower": "~0.7.1",
-        "power-assert-formatter": "~0.7.1",
-        "assert": "Jxck/assert"
-    },
-    "devDependencies": {
-        "expect": "~0.3.1",
-        "mocha": "~1.18.2",
-        "qunit": "1.14.0",
-        "qunit-tap": "1.4.2",
-        "requirejs": "~2.1.11"
-    }
+  "name": "power-assert",
+  "version": "0.7.1",
+  "main": "lib/power-assert.js",
+  "ignore": [
+    "**/.*",
+    "Gruntfile.js",
+    "espowered_tests",
+    "node_modules",
+    "package.json",
+    "sandbox",
+    "scripts",
+    "test",
+    "enable_power_assert.js"
+  ],
+  "dependencies": {
+    "empower": "~0.7.1",
+    "power-assert-formatter": "~0.7.1",
+    "assert": "Jxck/assert"
+  },
+  "devDependencies": {
+    "expect": "~0.3.1",
+    "mocha": "~1.18.2",
+    "qunit": "1.14.0",
+    "qunit-tap": "1.4.2",
+    "requirejs": "~2.1.11"
+  }
 }
