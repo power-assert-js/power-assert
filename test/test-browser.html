@@ -9,15 +9,8 @@
   </head>
   <body>
     <div id="mocha"></div>
-    <script type="text/javascript" src="../bower_components/es5-shim/es5-shim.js"></script>
-    <script type="text/javascript" src="../bower_components/assert/assert.js"></script>
+    <script type="text/javascript" src="../build/power-assert.js"></script>
     <script type="text/javascript" src="../bower_components/expect/index.js"></script>
-    <script type="text/javascript" src="../bower_components/empower/lib/empower.js"></script>
-    <script type="text/javascript" src="../bower_components/estraverse/estraverse.js"></script>
-    <script type="text/javascript" src="../bower_components/esprima/esprima.js"></script>
-    <script type="text/javascript" src="../bower_components/google-diff-match-patch-js/diff_match_patch.js"></script>
-    <script type="text/javascript" src="../bower_components/power-assert-formatter/lib/power-assert-formatter.js"></script>
-    <script type="text/javascript" src="../lib/power-assert.js"></script>
     <script type="text/javascript" src="../bower_components/mocha/mocha.js"></script>
     <script type="text/javascript">
       mocha.setup('bdd');
@@ -26,7 +19,11 @@
     <script type="text/javascript" src="../espowered_tests/not_tobe_instrumented/not_instrumented_test.js"></script>
     <script type="text/javascript">
       mocha.checkLeaks();
-      mocha.run();
+      if (window.mochaPhantomJS) {
+        mochaPhantomJS.run();
+      } else {
+        mocha.run();
+      }
     </script>
   </body>
 </html>
