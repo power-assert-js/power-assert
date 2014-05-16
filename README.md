@@ -304,7 +304,7 @@ First, install `power-assert` via bower and `grunt-espower` via npm. This means 
     $ bower install --save-dev power-assert
     $ npm install --save-dev grunt-espower
 
-Second, require `power-assert` in your test html.
+Second, require `build/power-assert.js` (all-in-one build for browsers) in your test html.
 
     <script type="text/javascript" src="./path/to/bower_components/power-assert/build/power-assert.js"></script>
 
@@ -358,7 +358,7 @@ First, install `power-assert` via bower and `gulp-espower` via npm. This means t
     $ bower install --save-dev power-assert
     $ npm install --save-dev gulp-espower
 
-Second, require `power-assert` in your test html.
+Second, require `build/power-assert.js` (all-in-one build for browsers) in your test html.
 
     <script type="text/javascript" src="./path/to/bower_components/power-assert/build/power-assert.js"></script>
 
@@ -370,7 +370,7 @@ var gulp = require('gulp'),
   . . . 
 gulp.task('espower', function() {
     return gulp
-        .src('test/**/*_test.js')
+        .src('test/**/*_test.js', {base: './test/'})
         .pipe(espower())
         .pipe(gulp.dest('espowered'));
 });
@@ -378,7 +378,7 @@ gulp.task('espower', function() {
 })
 ```
 
-Then, generate espowered code using `espower` task.
+Then, generate espowered code (in this example, using `espower` task).
 
     $ gulp espower
 
