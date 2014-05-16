@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    gutil = require('gulp-util'),
     bump = require('gulp-bump'),
     git = require('gulp-git'),
     mocha = require('gulp-spawn-mocha'),
@@ -23,7 +24,7 @@ function runMocha(pattern, extraOptions) {
             R: 'dot',
             c: true
         }, extraOptions)))
-        .on('error', console.warn.bind(console));
+        .on('error', gutil.log);
 }
 
 function runMochaWithEspowerLoader() {
@@ -101,7 +102,7 @@ gulp.task('clean_espower', function () {
         .pipe(clean());
 });
 
-gulp.task('copy_not_tobe_instrumented', function(){
+gulp.task('copy_others', function(){
     return gulp
         .src('test/not_tobe_instrumented/**/*.js', {base: './test/'})
         .pipe(gulp.dest(destDir));
@@ -118,7 +119,7 @@ gulp.task('unit', function () {
     return runMochaWithEspowerLoader();
 });
 
-gulp.task('functional', function () {
+gulp.task('test_espowered', function () {
     return runMocha(destDir + '/**/*_test.js');
 });
 
@@ -134,10 +135,10 @@ gulp.task('test_browser', function () {
         .pipe(mochaPhantomJS({reporter: 'dot'}));
 });
 
-gulp.task('test', function(callback) {
+gulp.task('test', function() {
     runSequence(
         ['clean_espower', 'clean_bundle'],
-        ['copy_not_tobe_instrumented', 'espower', 'bundle'],
-        ['unit','functional','test_browser','test_amd']
+        ['espower', 'copy_others', 'bundle'],
+        ['unit','test_espowered','test_browser','test_amd']
     );
 });

@@ -53,6 +53,7 @@
     "gulp-git": "~0.4.2",
     "gulp-mocha-phantomjs": "~0.2.0",
     "gulp-spawn-mocha": "~0.1.4",
+    "gulp-util": "~2.2.14",
     "lodash.merge": "~2.4.1",
     "optimist": "0.6.1",
     "qunit-tap": "1.4.2",
