@@ -11,10 +11,29 @@ var gulp = require('gulp'),
     source = require('vinyl-source-stream'),
     browserify = require('browserify'),
     merge = require('lodash.merge'),
-    bumpTarget = ['./bower.json', './package.json'],
-    bundleDir = 'build',
-    bundleName = 'power-assert.js',
-    destDir = 'espowered_tests';
+    paths = {
+        bump: {
+            target: ['./bower.json', './package.json']
+        },
+        bundle: {
+            srcFile: './lib/power-assert.js',
+            destDir: './build',
+            destName: 'power-assert.js'
+        },
+        test: {
+            base: './test/',
+            pattern: '**/*_test.js',
+            poweredDir: './espowered_tests/',
+            toBeInstrumented: function () {
+                return this.base + 'tobe_instrumented/' + this.pattern;
+            },
+            notToBeInstrumented: function () {
+                return this.base + 'not_tobe_instrumented/' + this.pattern;
+            },
+            amd: 'test/test-amd.html',
+            browser: 'test/test-browser.html'
+        }
+    };
 
 function runMocha(pattern, extraOptions) {
     extraOptions = extraOptions || {};
@@ -28,26 +47,26 @@ function runMocha(pattern, extraOptions) {
 }
 
 function runMochaWithEspowerLoader() {
-    return runMocha('test/**/*_test.js', {r: './enable_power_assert'});
+    return runMocha(paths.test.base + paths.test.pattern, {r: './enable_power_assert'});
 }
 
 function bumpVersion(options) {
     return gulp
-        .src(bumpTarget)
+        .src(paths.bump.target)
         .pipe(bump(options))
         .pipe(gulp.dest('./'));
 }
 
 gulp.task('git_add', function(){
     return gulp
-        .src(bumpTarget)
+        .src(paths.bump.target)
         .pipe(git.add());
 });
 
 gulp.task('git_commit', function(){
     var pkg = require('./package.json');
     return gulp
-        .src(bumpTarget)
+        .src(paths.bump.target)
         .pipe(git.commit(pkg.version));
 });
 
@@ -85,34 +104,34 @@ gulp.task('watch', function () {
 
 gulp.task('clean_bundle', function () {
     return gulp
-        .src(bundleDir, {read: false})
+        .src(paths.bundle.destDir, {read: false})
         .pipe(clean());
 });
 
 gulp.task('bundle', function() {
-    var bundleStream = browserify('./lib/power-assert.js').bundle({standalone: 'assert'});
+    var bundleStream = browserify(paths.bundle.srcFile).bundle({standalone: 'assert'});
     return bundleStream
-        .pipe(source(bundleName))
-        .pipe(gulp.dest(bundleDir));
+        .pipe(source(paths.bundle.destName))
+        .pipe(gulp.dest(paths.bundle.destDir));
 })
 
 gulp.task('clean_espower', function () {
     return gulp
-        .src(destDir, {read: false})
+        .src(paths.test.poweredDir, {read: false})
         .pipe(clean());
 });
 
 gulp.task('copy_others', function(){
     return gulp
-        .src('test/not_tobe_instrumented/**/*.js', {base: './test/'})
-        .pipe(gulp.dest(destDir));
+        .src(paths.test.notToBeInstrumented(), {base: paths.test.base})
+        .pipe(gulp.dest(paths.test.poweredDir));
 });
 
 gulp.task('espower', function() {
     return gulp
-        .src('test/tobe_instrumented/**/*.js', {base: './test/'})
+        .src(paths.test.toBeInstrumented(), {base: paths.test.base})
         .pipe(espower())
-        .pipe(gulp.dest(destDir));
+        .pipe(gulp.dest(paths.test.poweredDir));
 });
 
 gulp.task('unit', function () {
@@ -120,18 +139,18 @@ gulp.task('unit', function () {
 });
 
 gulp.task('test_espowered', function () {
-    return runMocha(destDir + '/**/*_test.js');
+    return runMocha(paths.test.poweredDir + paths.test.pattern);
 });
 
 gulp.task('test_amd', function () {
     return gulp
-        .src('test/test-amd.html')
+        .src(paths.test.amd)
         .pipe(mochaPhantomJS({reporter: 'dot'}));
 });
 
 gulp.task('test_browser', function () {
     return gulp
-        .src('test/test-browser.html')
+        .src(paths.test.browser)
         .pipe(mochaPhantomJS({reporter: 'dot'}));
 });
 
