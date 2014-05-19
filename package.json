@@ -55,6 +55,7 @@
     "gulp-spawn-mocha": "~0.1.4",
     "gulp-util": "~2.2.14",
     "lodash.merge": "~2.4.1",
+    "mocha": "~1.19.0",
     "optimist": "0.6.1",
     "qunit-tap": "1.4.2",
     "qunitjs": "1.14.0",
