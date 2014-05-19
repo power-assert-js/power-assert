@@ -40,6 +40,7 @@ function runMocha(pattern, extraOptions) {
     return gulp
         .src(pattern, {read: false})
         .pipe(mocha(merge({
+            bin: './node_modules/.bin/mocha',
             R: 'dot',
             c: true
         }, extraOptions)))
