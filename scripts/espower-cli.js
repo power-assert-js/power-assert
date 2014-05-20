@@ -1,11 +1,11 @@
 /**
- * power-assert - Empower your assertions
+ * espower-cli.js
  *
  * https://github.com/twada/power-assert
  *
  * Copyright (c) 2013-2014 Takuto Wada
  * Licensed under the MIT license.
- *   https://raw.github.com/twada/power-assert/master/MIT-LICENSE.txt
+ *   https://github.com/twada/power-assert/blob/master/MIT-LICENSE.txt
  */
 var espowerSourceToSource = require('espower-source'),
     argv = require('optimist').argv,

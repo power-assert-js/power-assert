@@ -419,7 +419,7 @@ CONTRIBUTORS
 
 LICENSE
 ---------------------------------------
-Licensed under the [MIT](https://raw.github.com/twada/power-assert/master/MIT-LICENSE.txt) license.
+Licensed under the [MIT](https://github.com/twada/power-assert/blob/master/MIT-LICENSE.txt) license.
 
 
 
