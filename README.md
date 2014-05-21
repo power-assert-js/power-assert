@@ -48,13 +48,19 @@ NOTICE
 MODULES
 ---------------------------------------
 
-`power-assert` family provides 9 modules. 5 core modules and 4 instrumentors.
+`power-assert` family provides 9 modules. 1 main module, 4 core modules and 4 instrumentors.
+
+
+Main (facade) module is,
+
+| module | description |
+|:-------|:------------|
+| [power-assert](http://github.com/twada/power-assert) | Standard `assert` function on top of `empower` and `power-assert-formatter` |
 
 core modules are,
 
 | module | description |
 |:-------|:------------|
-| [power-assert](http://github.com/twada/power-assert) | Standard `assert` function on top of `empower` and `power-assert-formatter` |
 | [empower](http://github.com/twada/empower) | Power Assert feature enhancer for assert function/object. |
 | [power-assert-formatter](http://github.com/twada/power-assert-formatter) | Power Assert output formatter. |
 | [espower](http://github.com/twada/espower) | Power Assert feature instrumentor core based on the [Mozilla JavaScript AST](https://developer.mozilla.org/en-US/docs/SpiderMonkey/Parser_API). |
