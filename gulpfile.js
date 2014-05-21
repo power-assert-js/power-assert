@@ -139,7 +139,7 @@ gulp.task('unit', function () {
     return runMochaWithEspowerLoader();
 });
 
-gulp.task('test_espowered', function () {
+gulp.task('test_generated', function () {
     return runMocha(paths.test.poweredDir + paths.test.pattern);
 });
 
@@ -159,6 +159,8 @@ gulp.task('test', function() {
     runSequence(
         ['clean_espower', 'clean_bundle'],
         ['espower', 'copy_others', 'bundle'],
-        ['unit','test_espowered','test_browser','test_amd']
+        ['unit','test_generated','test_browser','test_amd']
     );
 });
+
+gulp.task('clean', ['clean_espower', 'clean_bundle']);
