@@ -17,11 +17,11 @@
   "devDependencies": {
     "empower": "~0.7.1",
     "expect": "~0.3.1",
-    "mocha": "~1.19.0",
+    "mocha": "~1.20.0",
     "power-assert-formatter": "~0.7.1",
     "qunit": "1.14.0",
     "qunit-tap": "1.4.2",
-    "requirejs": "~2.1.11",
+    "requirejs": "~2.1.13",
     "assert": "Jxck/assert"
   }
 }
