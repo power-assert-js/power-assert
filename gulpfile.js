@@ -164,4 +164,5 @@ gulp.task('test', function() {
     );
 });
 
+gulp.task('just_test', ['unit','test_generated','test_browser','test_amd']);
 gulp.task('clean', ['clean_espower', 'clean_bundle']);
