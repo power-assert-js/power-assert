@@ -15,9 +15,9 @@
     "enable_power_assert.js"
   ],
   "devDependencies": {
-    "empower": "~0.7.1",
+    "empower": "~0.7.2",
     "expect": "~0.3.1",
-    "mocha": "~1.20.0",
+    "mocha": "~1.20.1",
     "power-assert-formatter": "~0.7.1",
     "qunit": "1.14.0",
     "qunit-tap": "1.4.2",
