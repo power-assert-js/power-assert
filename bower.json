@@ -1,10 +1,10 @@
 {
   "name": "power-assert",
-  "version": "0.7.2",
+  "description": "Power Assert in JavaScript",
   "main": "build/power-assert.js",
+  "license": "MIT",
   "ignore": [
     "**/.*",
-    "Gruntfile.js",
     "gulpfile.js",
     "espowered_tests",
     "node_modules",
@@ -13,6 +13,14 @@
     "scripts",
     "test",
     "enable_power_assert.js"
+  ],
+  "keywords": [
+    "power-assert",
+    "test",
+    "assert",
+    "testing",
+    "ecmascript",
+    "ast"
   ],
   "devDependencies": {
     "empower": "~0.7.2",
