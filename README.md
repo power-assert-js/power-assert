@@ -1,11 +1,13 @@
 power-assert
 ================================
 
+Power Assert in JavaScript. Less code, more information.
+
 [![Build Status](https://travis-ci.org/twada/power-assert.svg)](https://travis-ci.org/twada/power-assert)
 [![NPM version](https://badge.fury.io/js/power-assert.svg)](http://badge.fury.io/js/power-assert)
 [![Dependency Status](https://gemnasium.com/twada/power-assert.svg)](https://gemnasium.com/twada/power-assert)
-
-Power Assert in JavaScript. Less code, more information.
+[![License](http://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/twada/power-assert/blob/master/MIT-LICENSE.txt)
+[![Built with Gulp](http://img.shields.io/badge/built_with-gulp-brightgreen.svg)](http://gulpjs.com/)
 
 
 DESCRIPTION
