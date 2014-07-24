@@ -42,6 +42,22 @@ What is `power-assert`?
       => -1
 
 
+API
+---------------------------------------
+powert-assert provides these assert functions:
+
+* `assert(value)`
+* `assert.ok(value)`
+* `assert.equal(actual, expected)`
+* `assert.notEqual(actual, expected)`
+* `assert.strictEqual(actual, expected)`
+* `assert.notStrictEqual(actual, expected)`
+* `assert.deepEqual(actual, expected)`
+* `assert.notDeepEqual(actual, expected)`
+
+As written below, power-assert is constructed with many family modules. See more details of [empower](http://github.com/twada/empower) and others.
+
+
 NOTICE
 ---------------------------------------
 * Since version 0.7.2, power-assert provides all-in-one bundle for browsers. Therefore, you don't neeed to care about browser-side dependencies.
