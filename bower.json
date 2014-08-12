@@ -22,6 +22,22 @@
     "ecmascript",
     "ast"
   ],
+  "authors": [
+    {
+      "name": "Takuto Wada",
+      "email": "takuto.wada@gmail.com",
+      "homepage": "https://github.com/twada"
+    },
+    {
+      "name": "azu",
+      "url": "https://github.com/azu"
+    }
+  ],
+  "homepage": "https://github.com/twada/power-assert",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/twada/power-assert.git"
+  },
   "devDependencies": {
     "empower": "~0.8.0",
     "expect": "~0.3.1",
