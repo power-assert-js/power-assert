@@ -604,13 +604,13 @@ describe('power-assert message', function () {
         }, [
             'assert.ok(cyclic[two] === cyclic)',
             '          |     ||    |   |      ',
-            '          |     ||    |   ["foo",#Array#,"baz"]',
+            '          |     ||    |   ["foo",#@Circular#,"baz"]',
             '          |     |2    false      ',
             '          |     "baz"            ',
-            '          ["foo",#Array#,"baz"]  ',
+            '          ["foo",#@Circular#,"baz"]',
             '',
             '[Array] cyclic',
-            '=> ["foo",#Array#,"baz"]',
+            '=> ["foo",#@Circular#,"baz"]',
             '[string] cyclic[two]',
             '=> "baz"'
         ]);
