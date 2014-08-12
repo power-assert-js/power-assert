@@ -4,7 +4,7 @@
     if (typeof define === 'function' && define.amd) {
         define(['power-assert', 'expect'], factory);
     } else if (typeof exports === 'object') {
-        factory(require('../../lib/power-assert'), require('expect.js'));
+        factory(require('../..'), require('expect.js'));
     } else {
         factory(root.assert, root.expect);
     }

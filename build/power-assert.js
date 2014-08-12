@@ -8,22 +8,13 @@
  * Licensed under the MIT license.
  *   https://github.com/twada/power-assert/blob/master/MIT-LICENSE.txt
  */
-(function (root, factory) {
-    'use strict';
+'use strict';
 
-    // using returnExports UMD pattern
-    if (typeof define === 'function' && define.amd) {
-        define(['assert', 'empower', 'power-assert-formatter'], factory);
-    } else if (typeof exports === 'object') {
-        module.exports = factory(_dereq_('assert'), _dereq_('empower'), _dereq_('power-assert-formatter'));
-    } else {
-        root.assert = factory(root.assert, root.empower, root.powerAssertFormatter);
-    }
-}(this, function (baseAssert, empower, formatter) {
-    'use strict';
+var baseAssert = _dereq_('assert'),
+    empower = _dereq_('empower'),
+    formatter = _dereq_('power-assert-formatter');
 
-    return empower(baseAssert, formatter(), {modifyMessageOnRethrow: true, saveContextOnRethrow: true});
-}));
+module.exports = empower(baseAssert, formatter(), {modifyMessageOnRethrow: true, saveContextOnRethrow: true});
 
 },{"assert":2,"empower":7,"power-assert-formatter":21}],2:[function(_dereq_,module,exports){
 // http://wiki.commonjs.org/wiki/Unit_Testing/1.0

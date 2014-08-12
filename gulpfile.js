@@ -13,7 +13,7 @@ var gulp = require('gulp'),
     config = {
         bundle: {
             standalone: 'assert',
-            srcFile: './lib/power-assert.js',
+            srcFile: './index.js',
             destDir: './build',
             destName: 'power-assert.js'
         },

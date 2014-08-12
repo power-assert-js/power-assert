@@ -22,12 +22,12 @@
       "url": "https://github.com/azu"
     }
   ],
-  "main": "./lib/power-assert",
+  "main": "./index.js",
   "files": [
     "MIT-LICENSE.txt",
     "README.md",
     "gulpfile.js",
-    "lib",
+    "index.js",
     "package.json",
     "test"
   ],
