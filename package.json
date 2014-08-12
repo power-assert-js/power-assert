@@ -24,6 +24,7 @@
   ],
   "main": "./index.js",
   "files": [
+    "CHANGELOG.md",
     "MIT-LICENSE.txt",
     "README.md",
     "gulpfile.js",

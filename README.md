@@ -58,9 +58,9 @@ powert-assert provides these assert functions:
 As written below, power-assert is constructed with many family modules. See more details of [empower](http://github.com/twada/empower) and others.
 
 
-NOTICE
+CHANGELOG
 ---------------------------------------
-* Since version 0.7.2, power-assert provides all-in-one bundle for browsers. Therefore, you don't neeed to care about browser-side dependencies.
+See [CHANGELOG](https://github.com/twada/power-assert/blob/master/CHANGELOG.md)
 
 
 MODULES
