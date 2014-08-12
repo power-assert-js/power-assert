@@ -2,17 +2,18 @@ var gulp = require('gulp'),
     gutil = require('gulp-util'),
     mocha = require('gulp-spawn-mocha'),
     mochaPhantomJS = require('gulp-mocha-phantomjs'),
-    connect = require('gulp-connect'),
-    clean = require('gulp-clean'),
+    webserver = require('gulp-webserver'),
+    del = require('del'),
     espower = require('gulp-espower'),
     runSequence = require('run-sequence'),
     source = require('vinyl-source-stream'),
     browserify = require('browserify'),
+    derequire = require('gulp-derequire'),
     merge = require('lodash.merge'),
     config = {
         bundle: {
             standalone: 'assert',
-            srcFile: './lib/power-assert.js',
+            srcFile: './index.js',
             destDir: './build',
             destName: 'power-assert.js'
         },
@@ -47,12 +48,12 @@ function runMochaWithEspowerLoader() {
     return runMocha(config.test.base + config.test.pattern, {r: './enable_power_assert'});
 }
 
-gulp.task('connect', function() {
-    connect.server({
-        root: [__dirname],
-        port: 9001,
-        keepalive: true
-    });
+gulp.task('webserver', function() {
+    gulp.src(__dirname)
+        .pipe(webserver({
+            port: 9001,
+            directoryListing: true
+        }));
 });
 
 gulp.task('watch', function () {
@@ -60,23 +61,20 @@ gulp.task('watch', function () {
     runMochaWithEspowerLoader();
 });
 
-gulp.task('clean_bundle', function () {
-    return gulp
-        .src(config.bundle.destDir, {read: false})
-        .pipe(clean());
+gulp.task('clean_bundle', function (done) {
+    del([config.bundle.destDir], done);
 });
 
 gulp.task('bundle', function() {
-    var bundleStream = browserify(config.bundle.srcFile).bundle({standalone: config.bundle.standalone});
+    var bundleStream = browserify({entries: config.bundle.srcFile, standalone: config.bundle.standalone}).bundle();
     return bundleStream
         .pipe(source(config.bundle.destName))
+        .pipe(derequire())
         .pipe(gulp.dest(config.bundle.destDir));
-})
+});
 
-gulp.task('clean_espower', function () {
-    return gulp
-        .src(config.test.poweredDir, {read: false})
-        .pipe(clean());
+gulp.task('clean_espower', function (done) {
+    del([config.test.poweredDir], done);
 });
 
 gulp.task('copy_others', function(){

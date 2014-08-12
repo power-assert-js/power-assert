@@ -22,6 +22,7 @@ What is `power-assert`?
  * provides [browserify](http://browserify.org/) transform.
  * provides [grunt](http://gruntjs.com/) task and [gulp](http://gulpjs.com/) plugin.
  * supports source-map so you can debug as usual.
+ * supports [CoffeeScript](http://coffeescript.org/) (experimental).
  * is a beta version product. Pull-requests, issue reports and patches are always welcomed.
 
 
@@ -58,52 +59,6 @@ powert-assert provides these assert functions:
 As written below, power-assert is constructed with many family modules. See more details of [empower](http://github.com/twada/empower) and others.
 
 
-NOTICE
----------------------------------------
-* Since version 0.7.2, power-assert provides all-in-one bundle for browsers. Therefore, you don't neeed to care about browser-side dependencies.
-
-
-MODULES
----------------------------------------
-
-`power-assert` family provides 9 modules. 1 main module, 4 core modules and 4 instrumentors.
-
-
-Main (facade) module is,
-
-| module | description |
-|:-------|:------------|
-| [power-assert](http://github.com/twada/power-assert) | Standard `assert` function on top of `empower` and `power-assert-formatter` |
-
-core modules are,
-
-| module | description |
-|:-------|:------------|
-| [empower](http://github.com/twada/empower) | Power Assert feature enhancer for assert function/object. |
-| [power-assert-formatter](http://github.com/twada/power-assert-formatter) | Power Assert output formatter. |
-| [espower](http://github.com/twada/espower) | Power Assert feature instrumentor core based on the [Mozilla JavaScript AST](https://developer.mozilla.org/en-US/docs/SpiderMonkey/Parser_API). |
-| [espower-source](http://github.com/twada/espower-source) | Power Assert instrumentor from source to source, with source-map. (Thin wrapper of `espower`). |
-
-and instrumentors are,
-
-| module | description |
-|:-------|:------------|
-| [espower-loader](http://github.com/twada/espower-loader) | Node module loader to apply `espower` on the fly. |
-| [espowerify](http://github.com/twada/espowerify) | [Browserify](http://browserify.org/) transform to apply `espower` to target files. |
-| [grunt-espower](http://github.com/twada/grunt-espower) | Grunt task to apply `espower` to target files. |
-| [gulp-espower](http://github.com/twada/gulp-espower) | Gulp plugin to apply `espower` to target files. |
-
-
-`power-assert` provides standard [assert](http://nodejs.org/api/assert.html) compatible function with Power Assert feature.
-(Best fit with [Mocha](http://visionmedia.github.io/mocha/). If you use assert-like objects provided by various testing frameworks such as [QUnit](http://qunitjs.com/) or [nodeunit](https://github.com/caolan/nodeunit). Please use [empower](http://github.com/twada/empower) and [power-assert-formatter](http://github.com/twada/power-assert-formatter) modules directly).
-
-
-Internally, `power-assert` uses [empower](http://github.com/twada/empower) module to enhance power assert feature into the standard [assert](http://nodejs.org/api/assert.html) module, to run with the power assert feature added code by [espower](http://github.com/twada/espower) module, and prettify output using [power-assert-formatter](http://github.com/twada/power-assert-formatter).
-
-
-See [power-assert-demo](http://github.com/twada/power-assert-demo) project for power-assert Demo running with mocha.
-
-
 SEED PROJECTS
 ---------------------------------------
 
@@ -114,6 +69,11 @@ Some seed projects are available to help you start with power-assert.
 | [power-assert-node-seed](https://github.com/azu/power-assert-node-seed) | Node.js | power-assert + [intelli-espower-loader](https://github.com/azu/intelli-espower-loader) |
 | [power-assert-testem-seed](https://github.com/azu/power-assert-testem-seed) | Browsers(by [testem](https://github.com/airportyh/testem)) | power-assert + [gulp-espower](http://github.com/twada/gulp-espower) + [testem](https://github.com/airportyh/testem). |
 | [power-assert-karma-seed](https://github.com/azu/power-assert-karma-seed) | Browsers(by [Karma](http://karma-runner.github.io/)) | power-assert + [espowerify](http://github.com/twada/espowerify) + [browserify](http://browserify.org/) + [Karma](http://karma-runner.github.io/). |
+
+
+CHANGELOG
+---------------------------------------
+See [CHANGELOG](https://github.com/twada/power-assert/blob/master/CHANGELOG.md)
 
 
 EXAMPLE
@@ -412,6 +372,48 @@ or
 
     $ mocha your_test_espowered.js
 
+
+
+INTERNAL DESIGN
+---------------------------------------
+
+`power-assert` family provides 10 modules. 1 main module, 4 core modules and 5 instrumentors.
+
+
+Main (facade) module is,
+
+| module | description |
+|:-------|:------------|
+| [power-assert](http://github.com/twada/power-assert) | Standard `assert` function on top of `empower` and `power-assert-formatter` |
+
+core modules are,
+
+| module | description |
+|:-------|:------------|
+| [empower](http://github.com/twada/empower) | Power Assert feature enhancer for assert function/object. |
+| [power-assert-formatter](http://github.com/twada/power-assert-formatter) | Power Assert output formatter. |
+| [espower](http://github.com/twada/espower) | Power Assert feature instrumentor core based on the [Mozilla JavaScript AST](https://developer.mozilla.org/en-US/docs/SpiderMonkey/Parser_API). |
+| [espower-source](http://github.com/twada/espower-source) | Power Assert instrumentor from source to source, with source-map. (Thin wrapper of `espower`). |
+
+and instrumentors are,
+
+| module | description |
+|:-------|:------------|
+| [espower-loader](http://github.com/twada/espower-loader) | Node module loader to apply `espower` on the fly. |
+| [espowerify](http://github.com/twada/espowerify) | [Browserify](http://browserify.org/) transform to apply `espower` to target files. |
+| [grunt-espower](http://github.com/twada/grunt-espower) | Grunt task to apply `espower` to target files. |
+| [gulp-espower](http://github.com/twada/gulp-espower) | Gulp plugin to apply `espower` to target files. |
+| [espower-coffee](http://github.com/twada/espower-coffee) | Experimental power-assert instrumentor for CoffeeScript. |
+
+
+`power-assert` provides standard [assert](http://nodejs.org/api/assert.html) compatible function with Power Assert feature.
+(Best fit with [Mocha](http://visionmedia.github.io/mocha/). If you use assert-like objects provided by various testing frameworks such as [QUnit](http://qunitjs.com/) or [nodeunit](https://github.com/caolan/nodeunit). Please use [empower](http://github.com/twada/empower) and [power-assert-formatter](http://github.com/twada/power-assert-formatter) modules directly).
+
+
+Internally, `power-assert` uses [empower](http://github.com/twada/empower) module to enhance power assert feature into the standard [assert](http://nodejs.org/api/assert.html) module, to run with the power assert feature added code by [espower](http://github.com/twada/espower) module, and prettify output using [power-assert-formatter](http://github.com/twada/power-assert-formatter).
+
+
+See [power-assert-demo](http://github.com/twada/power-assert-demo) project for power-assert Demo running with mocha.
 
 
 TESTED FRAMEWORKS

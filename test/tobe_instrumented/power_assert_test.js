@@ -4,7 +4,7 @@
     if (typeof define === 'function' && define.amd) {
         define(['power-assert', 'expect'], factory);
     } else if (typeof exports === 'object') {
-        factory(require('../../lib/power-assert'), require('expect.js'));
+        factory(require('../..'), require('expect.js'));
     } else {
         factory(root.assert, root.expect);
     }
@@ -604,13 +604,13 @@ describe('power-assert message', function () {
         }, [
             'assert.ok(cyclic[two] === cyclic)',
             '          |     ||    |   |      ',
-            '          |     ||    |   ["foo",#Array#,"baz"]',
+            '          |     ||    |   ["foo",#@Circular#,"baz"]',
             '          |     |2    false      ',
             '          |     "baz"            ',
-            '          ["foo",#Array#,"baz"]  ',
+            '          ["foo",#@Circular#,"baz"]',
             '',
             '[Array] cyclic',
-            '=> ["foo",#Array#,"baz"]',
+            '=> ["foo",#@Circular#,"baz"]',
             '[string] cyclic[two]',
             '=> "baz"'
         ]);

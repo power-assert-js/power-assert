@@ -1,4 +1,4 @@
-var assert = require('../lib/power-assert');
+var assert = require('..');
 
 describe('Array', function(){
     beforeEach(function(){

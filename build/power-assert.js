@@ -1,4 +1,4 @@
-!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.assert=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
+!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.assert=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 /**
  * power-assert.js - Power Assert in JavaScript.
  *
@@ -8,24 +8,15 @@
  * Licensed under the MIT license.
  *   https://github.com/twada/power-assert/blob/master/MIT-LICENSE.txt
  */
-(function (root, factory) {
-    'use strict';
+'use strict';
 
-    // using returnExports UMD pattern
-    if (typeof define === 'function' && define.amd) {
-        define(['assert', 'empower', 'power-assert-formatter'], factory);
-    } else if (typeof exports === 'object') {
-        module.exports = factory(_dereq_('assert'), _dereq_('empower'), _dereq_('power-assert-formatter'));
-    } else {
-        root.assert = factory(root.assert, root.empower, root.powerAssertFormatter);
-    }
-}(this, function (baseAssert, empower, formatter) {
-    'use strict';
+var baseAssert = _dereq_('assert'),
+    empower = _dereq_('empower'),
+    formatter = _dereq_('power-assert-formatter');
 
-    return empower(baseAssert, formatter(), {modifyMessageOnFail: true, saveContextOnFail: true});
-}));
+module.exports = empower(baseAssert, formatter(), {modifyMessageOnRethrow: true, saveContextOnRethrow: true});
 
-},{"assert":2,"empower":7,"power-assert-formatter":8}],2:[function(_dereq_,module,exports){
+},{"assert":2,"empower":7,"power-assert-formatter":21}],2:[function(_dereq_,module,exports){
 // http://wiki.commonjs.org/wiki/Unit_Testing/1.0
 //
 // THIS IS NOT TESTED NOR LIKELY TO WORK OUTSIDE V8!
@@ -983,8 +974,8 @@ function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-}).call(this,_dereq_("FWaASH"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":3,"FWaASH":6,"inherits":5}],5:[function(_dereq_,module,exports){
+}).call(this,_dereq_('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./support/isBuffer":3,"_process":6,"inherits":5}],5:[function(_dereq_,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -1076,893 +1067,782 @@ process.chdir = function (dir) {
 
 },{}],7:[function(_dereq_,module,exports){
 /**
- * empower.js - Power Assert feature enhancer for assert function/object.
+ * empower - Power Assert feature enhancer for assert function/object.
  *
  * https://github.com/twada/empower
  *
  * Copyright (c) 2013-2014 Takuto Wada
  * Licensed under the MIT license.
- *   https://raw.github.com/twada/empower/master/MIT-LICENSE.txt
- *
- * A part of extend function is:
- *   Copyright 2012 jQuery Foundation and other contributors
- *   Released under the MIT license.
- *   http://jquery.org/license
+ *   https://github.com/twada/empower/blob/master/MIT-LICENSE.txt
  */
-(function (root, factory) {
-    'use strict';
+var defaultOptions = _dereq_('./lib/default-options'),
+    Decorator = _dereq_('./lib/decorator'),
+    slice = Array.prototype.slice,
+    extend = _dereq_('xtend/mutable');
 
-    // using returnExports UMD pattern
-    if (typeof define === 'function' && define.amd) {
-        define(factory);
-    } else if (typeof exports === 'object') {
-        module.exports = factory();
+/**
+ * Enhance Power Assert feature to assert function/object.
+ * @param assert target assert function or object to enhance
+ * @param formatter power assert format function
+ * @param options enhancement options
+ * @return enhanced assert function/object
+ */
+function empower (assert, formatter, options) {
+    var typeOfAssert = (typeof assert),
+        config;
+    if ((typeOfAssert !== 'object' && typeOfAssert !== 'function') || assert === null) {
+        throw new TypeError('empower argument should be a function or object.');
+    }
+    if (isEmpowered(assert)) {
+        return assert;
+    }
+    config = extend(defaultOptions(), options);
+    switch (typeOfAssert) {
+    case 'function':
+        return empowerAssertFunction(assert, formatter, config);
+    case 'object':
+        return empowerAssertObject(assert, formatter, config);
+    default:
+        throw new Error('Cannot be here');
+    }
+}
+
+function empowerAssertObject (assertObject, formatter, config) {
+    var target = config.destructive ? assertObject : Object.create(assertObject);
+    var decorator = new Decorator(target, formatter, config);
+    return extend(target, decorator.enhancement());
+}
+
+function empowerAssertFunction (assertFunction, formatter, config) {
+    if (config.destructive) {
+        throw new Error('cannot use destructive:true to function.');
+    }
+    var decorator = new Decorator(assertFunction, formatter, config);
+    var enhancement = decorator.enhancement();
+    var powerAssert;
+    if (typeof enhancement === 'function') {
+        powerAssert = function powerAssert () {
+            return enhancement.apply(null, slice.apply(arguments));
+        };
     } else {
-        root.empower = factory();
+        powerAssert = function powerAssert () {
+            return assertFunction.apply(null, slice.apply(arguments));
+        };
     }
-}(this, function () {
-    'use strict';
+    extend(powerAssert, assertFunction);
+    return extend(powerAssert, enhancement);
+}
 
-    var isPhantom = typeof window !== 'undefined' && typeof window.callPhantom === 'function';
+function isEmpowered (assertObjectOrFunction) {
+    return (typeof assertObjectOrFunction._capt === 'function') && (typeof assertObjectOrFunction._expr === 'function');
+}
 
-    function defaultOptions () {
+empower.defaultOptions = defaultOptions;
+module.exports = empower;
+
+},{"./lib/decorator":10,"./lib/default-options":11,"xtend/mutable":42}],8:[function(_dereq_,module,exports){
+'use strict';
+
+module.exports = function capturable () {
+    var events = [];
+
+    function _capt (value, espath) {
+        events.push({value: value, espath: espath});
+        return value;
+    }
+
+    function _expr (value, args) {
+        var captured = events;
+        events = [];
         return {
-            destructive: false,
-            modifyMessageOnFail: false,
-            saveContextOnFail: false,
-            targetMethods: {
-                oneArg: [
-                    'ok'
-                ],
-                twoArgs: [
-                    'equal',
-                    'notEqual',
-                    'strictEqual',
-                    'notStrictEqual',
-                    'deepEqual',
-                    'notDeepEqual'
-                ]
-            }
-        };
-    }
-
-
-    /**
-     * Enhance Power Assert feature to assert function/object.
-     * @param assert target assert function or object to enhance
-     * @param formatter power assert format function
-     * @param options enhancement options
-     * @return enhanced assert function/object
-     */
-    function empower (assert, formatter, options) {
-        var typeOfAssert = (typeof assert),
-            config;
-        if ((typeOfAssert !== 'object' && typeOfAssert !== 'function') || assert === null) {
-            throw new TypeError('empower argument should be a function or object.');
-        }
-        if (isEmpowered(assert)) {
-            return assert;
-        }
-        config = extend(defaultOptions(), (options || {}));
-        switch (typeOfAssert) {
-        case 'function':
-            return empowerAssertFunction(assert, formatter, config);
-        case 'object':
-            return empowerAssertObject(assert, formatter, config);
-        default:
-            throw new Error('Cannot be here');
-        }
-    }
-
-
-    function isEmpowered (assertObjectOrFunction) {
-        return (typeof assertObjectOrFunction._capt === 'function') && (typeof assertObjectOrFunction._expr === 'function');
-    }
-
-
-    function empowerAssertObject (assertObject, formatter, config) {
-        var enhancement = enhance(assertObject, formatter, config),
-            target = config.destructive ? assertObject : Object.create(assertObject);
-        return extend(target, enhancement);
-    }
-
-
-    function empowerAssertFunction (assertFunction, formatter, config) {
-        if (config.destructive) {
-            throw new Error('cannot use destructive:true to function.');
-        }
-        var enhancement = enhance(assertFunction, formatter, config),
-            powerAssert = function powerAssert (context, message) {
-                enhancement(context, message);
-            };
-        extend(powerAssert, assertFunction);
-        return extend(powerAssert, enhancement);
-    }
-
-
-    function enhance (target, formatter, config) {
-        var eagerEvaluation = !(config.modifyMessageOnFail || config.saveContextOnFail),
-            doPowerAssert = function (baseAssert, args, message, context) {
-                var f;
-                if (eagerEvaluation) {
-                    args.push(buildPowerAssertText(message, context));
-                    return baseAssert.apply(target, args);
-                }
-                try {
-                    args.push(message);
-                    return baseAssert.apply(target, args);
-                } catch (e) {
-                    if (e.name !== 'AssertionError') {
-                        throw e;
-                    }
-                    if (typeof target.AssertionError !== 'function') {
-                        throw e;
-                    }
-                    if (isPhantom) {
-                        f = new target.AssertionError({
-                            actual: e.actual,
-                            expected: e.expected,
-                            operator: e.operator,
-                            message: e.message
-                        });
-                    } else {
-                        f = e;
-                    }
-                    if (config.modifyMessageOnFail) {
-                        f.message = buildPowerAssertText(message, context);
-                        if (typeof e.generatedMessage !== 'undefined') {
-                            f.generatedMessage = false;
-                        }
-                    }
-                    if (config.saveContextOnFail) {
-                        f.powerAssertContext = context;
-                    }
-                    throw f;
-                }
+            powerAssertContext: {
+                value: value,
+                events: captured
             },
-            enhancement = (typeof target === 'function') ? decorateOneArg(target, target, doPowerAssert) : {},
-            events = [];
-
-        function buildPowerAssertText (message, context) {
-            var powerAssertText = formatter(context);
-            return message ? message + ' ' + powerAssertText : powerAssertText;
-        }
-
-        function _capt (value, espath) {
-            events.push({value: value, espath: espath});
-            return value;
-        }
-
-        function _expr (value, args) {
-            var captured = events;
-            events = [];
-            return { powerAssertContext: {value: value, events: captured}, source: {content: args.content, filepath: args.filepath, line: args.line} };
-        }
-
-        config.targetMethods.oneArg.forEach(function (methodName) {
-            if (typeof target[methodName] === 'function') {
-                enhancement[methodName] = decorateOneArg(target, target[methodName], doPowerAssert);
+            source: {
+                content: args.content,
+                filepath: args.filepath,
+                line: args.line
             }
-        });
-        config.targetMethods.twoArgs.forEach(function (methodName) {
-            if (typeof target[methodName] === 'function') {
-                enhancement[methodName] = decorateTwoArgs(target, target[methodName], doPowerAssert);
-            }
-        });
-
-        enhancement._capt = _capt;
-        enhancement._expr = _expr;
-        return enhancement;
-    }
-
-
-    function isEspoweredValue (value) {
-        return (typeof value === 'object') && (value !== null) && (typeof value.powerAssertContext !== 'undefined');
-    }
-
-
-    function decorateOneArg (target, baseAssert, doPowerAssert) {
-        return function (arg1, message) {
-            var context, val1;
-            if (! isEspoweredValue(arg1)) {
-                return baseAssert.apply(target, [arg1, message]);
-            }
-            val1 = arg1.powerAssertContext.value;
-            context = {
-                source: arg1.source,
-                args: []
-            };
-            context.args.push({
-                value: val1,
-                events: arg1.powerAssertContext.events
-            });
-            return doPowerAssert(baseAssert, [val1], message, context);
         };
     }
 
+    return {
+        _capt: _capt,
+        _expr: _expr
+    };
+};
 
-    function decorateTwoArgs (target, baseAssert, doPowerAssert) {
-        return function (arg1, arg2, message) {
-            var context, val1, val2;
-            if (!(isEspoweredValue(arg1) || isEspoweredValue(arg2))) {
-                return baseAssert.apply(target, [arg1, arg2, message]);
+},{}],9:[function(_dereq_,module,exports){
+'use strict';
+
+var slice = Array.prototype.slice;
+
+function decorate (callSpec, decorator) {
+    var func = callSpec.func,
+        thisObj = callSpec.thisObj,
+        numNonMessageArgs = callSpec.numArgsToCapture;
+
+    return function () {
+        var context, message, args = slice.apply(arguments);
+
+        if (args.every(isNotCaptured)) {
+            return func.apply(thisObj, args);
+        }
+
+        var values = args.slice(0, numNonMessageArgs).map(function (arg) {
+            if (isNotCaptured(arg)) {
+                return arg;
             }
-
-            if (isEspoweredValue(arg1)) {
+            if (!context) {
                 context = {
-                    source: arg1.source,
+                    source: arg.source,
                     args: []
                 };
-                context.args.push({
-                    value: arg1.powerAssertContext.value,
-                    events: arg1.powerAssertContext.events
-                });
-                val1 = arg1.powerAssertContext.value;
-            } else {
-                val1 = arg1;
             }
+            context.args.push({
+                value: arg.powerAssertContext.value,
+                events: arg.powerAssertContext.events
+            });
+            return arg.powerAssertContext.value;
+        });
 
-            if (isEspoweredValue(arg2)) {
-                if (!isEspoweredValue(arg1)) {
-                    context = {
-                        source: arg2.source,
-                        args: []
-                    };
-                }
-                context.args.push({
-                    value: arg2.powerAssertContext.value,
-                    events: arg2.powerAssertContext.events
-                });
-                val2 = arg2.powerAssertContext.value;
-            } else {
-                val2 = arg2;
-            }
-
-            return doPowerAssert(baseAssert, [val1, val2], message, context);
-        };
-    }
-
-
-    // borrowed from qunit.js
-    function extend (a, b) {
-        var prop;
-        for (prop in b) {
-            if (b.hasOwnProperty(prop)) {
-                if (typeof b[prop] === 'undefined') {
-                    delete a[prop];
-                } else {
-                    a[prop] = b[prop];
-                }
-            }
+        if (numNonMessageArgs === (args.length - 1)) {
+            message = args[args.length - 1];
         }
-        return a;
+
+        var invocation = {
+            thisObj: thisObj,
+            func: func,
+            values: values,
+            message: message
+        };
+        return decorator.concreteAssert(invocation, context);
+    };
+}
+
+function isNotCaptured (value) {
+    return !isCaptured(value);
+}
+
+function isCaptured (value) {
+    return (typeof value === 'object') &&
+        (value !== null) &&
+        (typeof value.powerAssertContext !== 'undefined');
+}
+
+module.exports = decorate;
+
+},{}],10:[function(_dereq_,module,exports){
+'use strict';
+
+var escallmatch = _dereq_('escallmatch'),
+    extend = _dereq_('xtend/mutable'),
+    capturable = _dereq_('./capturable'),
+    decorate = _dereq_('./decorate'),
+    slice = Array.prototype.slice,
+    isPhantom = typeof window !== 'undefined' && typeof window.callPhantom === 'function';
+
+
+function Decorator (receiver, formatter, config) {
+    this.receiver = receiver;
+    this.formatter = formatter;
+    this.config = config;
+    this.matchers = config.patterns.map(escallmatch);
+    this.eagerEvaluation = !(config.modifyMessageOnRethrow || config.saveContextOnRethrow);
+}
+
+Decorator.prototype.enhancement = function () {
+    var that = this;
+    var container = this.container();
+    this.matchers.filter(methodCall).forEach(function (matcher) {
+        var methodName = detectMethodName(matcher.calleeAst());
+        if (typeof that.receiver[methodName] === 'function') {
+            var callSpec = {
+                thisObj: that.receiver,
+                func: that.receiver[methodName],
+                numArgsToCapture: numberOfArgumentsToCapture(matcher)
+            };
+            container[methodName] = decorate(callSpec, that);
+        }
+    });
+    extend(container, capturable());
+    return container;
+};
+
+Decorator.prototype.container = function () {
+    var basement = {};
+    if (typeof this.receiver === 'function') {
+        var candidates = this.matchers.filter(functionCall);
+        if (candidates.length === 1) {
+            var callSpec = {
+                thisObj: null,
+                func: this.receiver,
+                numArgsToCapture: numberOfArgumentsToCapture(candidates[0])
+            };
+            basement = decorate(callSpec, this);
+        }
     }
+    return basement;
+};
 
+Decorator.prototype.concreteAssert = function (invocation, context) {
+    var func = invocation.func,
+        thisObj = invocation.thisObj,
+        args = invocation.values,
+        message = invocation.message;
+    if (this.eagerEvaluation) {
+        var poweredMessage = this.buildPowerAssertText(message, context);
+        return func.apply(thisObj, args.concat(poweredMessage));
+    }
+    try {
+        return func.apply(thisObj, args.concat(message));
+    } catch (e) {
+        throw this.errorToRethrow(e, message, context);
+    }
+};
 
-    // using returnExports UMD pattern with substack pattern
-    empower.defaultOptions = defaultOptions;
-    return empower;
-}));
-
-},{}],8:[function(_dereq_,module,exports){
-/**
- * power-assert-formatter.js - Power Assert output formatter
- *
- * https://github.com/twada/power-assert-formatter
- *
- * Copyright (c) 2013-2014 Takuto Wada
- * Licensed under the MIT license.
- *   https://raw.github.com/twada/power-assert-formatter/master/MIT-LICENSE.txt
- *
- * A part of extend function is:
- *   Copyright 2012 jQuery Foundation and other contributors
- *   Released under the MIT license.
- *   http://jquery.org/license
- */
-(function (root, factory) {
-    'use strict';
-    /*jshint camelcase: false */
-
-    // using returnExports UMD pattern
-    if (typeof define === 'function' && define.amd) {
-        define(['estraverse', 'esprima', 'diff_match_patch'], factory);
-    } else if (typeof exports === 'object') {
-        module.exports = factory(_dereq_('estraverse'), _dereq_('esprima'), _dereq_('googlediff'));
+Decorator.prototype.errorToRethrow = function (e, originalMessage, context) {
+    var f;
+    if (e.name !== 'AssertionError') {
+        return e;
+    }
+    if (typeof this.receiver.AssertionError !== 'function') {
+        return e;
+    }
+    if (isPhantom) {
+        f = new this.receiver.AssertionError({
+            actual: e.actual,
+            expected: e.expected,
+            operator: e.operator,
+            message: e.message
+        });
     } else {
-        root.powerAssertFormatter = factory(root.estraverse, root.esprima, root.diff_match_patch);
+        f = e;
     }
-}(this, function (estraverse, esprima, DiffMatchPatch) {
-    'use strict';
+    if (this.config.modifyMessageOnRethrow) {
+        f.message = this.buildPowerAssertText(originalMessage, context);
+        if (typeof e.generatedMessage !== 'undefined') {
+            f.generatedMessage = false;
+        }
+    }
+    if (this.config.saveContextOnRethrow) {
+        f.powerAssertContext = context;
+    }
+    return f;
+};
 
-    var syntax, dmp;
+Decorator.prototype.buildPowerAssertText = function (message, context) {
+    var powerAssertText = this.formatter(context);
+    return message ? message + ' ' + powerAssertText : powerAssertText;
+};
 
-    function defaultOptions () {
+
+function numberOfArgumentsToCapture (matcher) {
+    var argSpecs = matcher.argumentSignatures(),
+        len = argSpecs.length,
+        lastArg;
+    if (0 < len) {
+        lastArg = argSpecs[len - 1];
+        if (lastArg.name === 'message' && lastArg.kind === 'optional') {
+            len -= 1;
+        }
+    }
+    return len;
+}
+
+
+function detectMethodName (node) {
+    if (node.type === 'MemberExpression') {
+        return node.property.name;
+    }
+    return null;
+}
+
+
+function functionCall (matcher) {
+    return matcher.calleeAst().type === 'Identifier';
+}
+
+
+function methodCall (matcher) {
+    return matcher.calleeAst().type === 'MemberExpression';
+}
+
+
+module.exports = Decorator;
+
+},{"./capturable":8,"./decorate":9,"escallmatch":12,"xtend/mutable":42}],11:[function(_dereq_,module,exports){
+'use strict';
+
+module.exports = function defaultOptions () {
+    return {
+        destructive: false,
+        modifyMessageOnRethrow: false,
+        saveContextOnRethrow: false,
+        patterns: [
+            'assert(value, [message])',
+            'assert.ok(value, [message])',
+            'assert.equal(actual, expected, [message])',
+            'assert.notEqual(actual, expected, [message])',
+            'assert.strictEqual(actual, expected, [message])',
+            'assert.notStrictEqual(actual, expected, [message])',
+            'assert.deepEqual(actual, expected, [message])',
+            'assert.notDeepEqual(actual, expected, [message])'
+        ]
+    };
+};
+
+},{}],12:[function(_dereq_,module,exports){
+/**
+ * escallmatch:
+ *   ECMAScript CallExpression matcher made from function/method signature
+ * 
+ * https://github.com/twada/escallmatch
+ *
+ * Copyright (c) 2014 Takuto Wada
+ * Licensed under the MIT license.
+ *   http://twada.mit-license.org/
+ */
+'use strict';
+/* jshint -W024 */
+
+var esprima = _dereq_('esprima'),
+    estraverse = _dereq_('estraverse'),
+    espurify = _dereq_('espurify'),
+    syntax = estraverse.Syntax,
+    hasOwn = Object.prototype.hasOwnProperty,
+    deepEqual = _dereq_('deep-equal'),
+    notCallExprMessage = 'Argument should be in the form of CallExpression',
+    duplicatedArgMessage = 'Duplicate argument name: ',
+    invalidFormMessage = 'Argument should be in the form of `name` or `[name]`';
+
+function createMatcher (signatureStr) {
+    var ast = extractExpressionFrom(esprima.parse(signatureStr));
+    return new Matcher(ast);
+}
+
+function Matcher (signatureAst) {
+    this.signatureAst = signatureAst;
+    this.signatureCalleeDepth = astDepth(signatureAst.callee);
+    this.numMaxArgs = this.signatureAst.arguments.length;
+    this.numMinArgs = this.signatureAst.arguments.filter(identifiers).length;
+}
+
+Matcher.prototype.test = function (currentNode) {
+    var calleeMatched = isCalleeMatched(this.signatureAst, this.signatureCalleeDepth, currentNode),
+        numArgs;
+    if (calleeMatched) {
+        numArgs = currentNode.arguments.length;
+        return this.numMinArgs <= numArgs && numArgs <= this.numMaxArgs;
+    }
+    return false;
+};
+
+Matcher.prototype.matchArgument = function (currentNode, parentNode) {
+    var indexOfCurrentArg, argNode;
+    if (isCalleeOfParent(currentNode, parentNode)) {
+        return null;
+    }
+    if (this.test(parentNode)) {
+        indexOfCurrentArg = parentNode.arguments.indexOf(currentNode);
+        argNode = this.signatureAst.arguments[indexOfCurrentArg];
+        return toArgumentSignature(argNode);
+    }
+    return null;
+};
+
+Matcher.prototype.calleeAst = function () {
+    return espurify(this.signatureAst.callee);
+};
+
+Matcher.prototype.argumentSignatures = function () {
+    return this.signatureAst.arguments.map(toArgumentSignature);
+};
+
+function toArgumentSignature (argSignatureNode) {
+    switch(argSignatureNode.type) {
+    case syntax.Identifier:
         return {
-            lineDiffThreshold: 5,
-            stringifyDepth: 2,
-            lineSeparator: '\n'
+            name: argSignatureNode.name,
+            kind: 'mandatory'
         };
+    case syntax.ArrayExpression:
+        return {
+            name: argSignatureNode.elements[0].name,
+            kind: 'optional'
+        };
+    default:
+        return null;
     }
+}
 
-
-    function PowerAssertContextRenderer (config) {
-        this.config = config;
-        this.stringify = config.stringify;
-        this.compare = config.compare;
-        this.widthOf = config.widthOf;
-        this.initialVertivalBarLength = 1;
-    }
-
-    PowerAssertContextRenderer.prototype.init = function (context) {
-        this.context = context;
-        this.assertionLine = context.source.content;
-        this.filepath = context.source.filepath;
-        this.lineNumber = context.source.line;
-        this.initializeRows();
-    };
-
-    PowerAssertContextRenderer.prototype.initializeRows = function () {
-        this.rows = [];
-        for (var i = 0; i <= this.initialVertivalBarLength; i += 1) {
-            this.addOneMoreRow();
-        }
-    };
-
-    PowerAssertContextRenderer.prototype.newRowFor = function (assertionLine) {
-        return createRow(this.widthOf(assertionLine), ' ');
-    };
-
-    PowerAssertContextRenderer.prototype.addOneMoreRow = function () {
-        this.rows.push(this.newRowFor(this.assertionLine));
-    };
-
-    PowerAssertContextRenderer.prototype.lastRow = function () {
-        return this.rows[this.rows.length - 1];
-    };
-
-    PowerAssertContextRenderer.prototype.renderVerticalBarAt = function (columnIndex) {
-        var i, lastRowIndex = this.rows.length - 1;
-        for (i = 0; i < lastRowIndex; i += 1) {
-            this.rows[i].splice(columnIndex, 1, '|');
-        }
-    };
-
-    PowerAssertContextRenderer.prototype.renderValueAt = function (columnIndex, dumpedValue) {
-        var i, width = this.widthOf(dumpedValue);
-        for (i = 0; i < width; i += 1) {
-            this.lastRow().splice(columnIndex + i, 1, dumpedValue.charAt(i));
-        }
-    };
-
-    PowerAssertContextRenderer.prototype.isOverlapped = function (prevCapturing, nextCaputuring, dumpedValue) {
-        return (typeof prevCapturing !== 'undefined') && this.startColumnFor(prevCapturing) <= (this.startColumnFor(nextCaputuring) + this.widthOf(dumpedValue));
-    };
-
-    PowerAssertContextRenderer.prototype.constructRows = function (capturedEvents) {
-        var that = this,
-            prevCaptured;
-        capturedEvents.forEach(function (captured) {
-            var dumpedValue = that.stringify(captured.value);
-            if (that.isOverlapped(prevCaptured, captured, dumpedValue)) {
-                that.addOneMoreRow();
-            }
-            that.renderVerticalBarAt(that.startColumnFor(captured));
-            that.renderValueAt(that.startColumnFor(captured), dumpedValue);
-            prevCaptured = captured;
-        });
-    };
-
-    PowerAssertContextRenderer.prototype.startColumnFor = function (captured) {
-        return this.widthOf(this.assertionLine.slice(0, captured.loc.start.column));
-    };
-
-    PowerAssertContextRenderer.prototype.renderLines = function () {
-        var that = this,
-            lines = [],
-            events = [],
-            pairs = [];
-
-        if (this.filepath) {
-            lines.push('# ' + [this.filepath, this.lineNumber].join(':'));
-        } else {
-            lines.push('# at line: ' + this.lineNumber);
-        }
-        lines.push('');
-        lines.push(this.assertionLine);
-
-        traverseContext(this.context, events, pairs);
-
-        events.sort(rightToLeft);
-        this.constructRows(events);
-        this.rows.forEach(function (columns) {
-            lines.push(columns.join(''));
-        });
-
-        pairs.forEach(function (pair) {
-            that.compare(pair, lines);
-        });
-
-        lines.push('');
-        return lines;
-    };
-
-
-    function EsNode (path, currentNode, parentNode, espathToValue, jsCode, jsAST) {
-        if (path) {
-            this.espath = path.join('/');
-            this.parentEspath = path.slice(0, path.length - 1).join('/');
-            this.currentProp = path[path.length - 1];
-        } else {
-            this.espath = '';
-            this.parentEspath = '';
-            this.currentProp = null;
-        }
-        this.currentNode = currentNode;
-        this.parentNode = parentNode;
-        this.parentEsNode = null;
-        this.espathToValue = espathToValue;
-        this.jsCode = jsCode;
-        this.jsAST = jsAST;
-    }
-    EsNode.prototype.setParentEsNode = function (parentEsNode) {
-        this.parentEsNode = parentEsNode;
-    };
-    EsNode.prototype.getParentEsNode = function () {
-        return this.parentEsNode;
-    };
-    EsNode.prototype.code = function () {
-        return this.jsCode.slice(this.currentNode.loc.start.column, this.currentNode.loc.end.column);
-    };
-    EsNode.prototype.value = function () {
-        if (this.currentNode.type === syntax.Literal) {
-            return this.currentNode.value;
-        }
-        return this.espathToValue[this.espath];
-    };
-    EsNode.prototype.isCaptured = function () {
-        return this.espathToValue.hasOwnProperty(this.espath);
-    };
-    EsNode.prototype.location = function () {
-        return locationOf(this.currentNode, this.jsAST.tokens);
-    };
-
-
-    function traverseContext (context, events, pairs) {
-        context.args.forEach(function (arg) {
-            var espathToPair = {};
-            onEachEsNode(arg, context.source.content, function (esNode) {
-                var pair;
-                if (!esNode.isCaptured()) {
-                    if (isTargetBinaryExpression(esNode.getParentEsNode()) && esNode.currentNode.type === syntax.Literal) {
-                        espathToPair[esNode.parentEspath][esNode.currentProp] = {code: esNode.code(), value: esNode.value()};
-                    }
-                    return;
-                }
-                events.push({value: esNode.value(), espath: esNode.espath, loc: esNode.location()});
-                if (isTargetBinaryExpression(esNode.getParentEsNode())) {
-                    espathToPair[esNode.parentEspath][esNode.currentProp] = {code: esNode.code(), value: esNode.value()};
-                }
-                if (isTargetBinaryExpression(esNode)) {
-                    pair = {
-                        operator: esNode.currentNode.operator,
-                        value: esNode.value()
-                    };
-                    espathToPair[esNode.espath] = pair;
-                }
-            });
-            Object.keys(espathToPair).forEach(function (espath) {
-                var pair = espathToPair[espath];
-                if (pair.left && pair.right) {
-                    pairs.push(pair);
-                }
-            });
-        });
-    }
-
-
-    function isTargetBinaryExpression (esNode) {
-        return esNode &&
-            esNode.currentNode.type === syntax.BinaryExpression &&
-            (esNode.currentNode.operator === '===' || esNode.currentNode.operator === '==') &&
-            esNode.isCaptured() &&
-            !(esNode.value());
-    }
-
-
-    function onEachEsNode(arg, jsCode, callback) {
-        var jsAST = esprima.parse(jsCode, {tolerant: true, loc: true, tokens: true, raw: true}),
-            espathToValue = arg.events.reduce(function (accum, ev) {
-                accum[ev.espath] = ev.value;
-                return accum;
-            }, {}),
-            nodeStack = [];
-        estraverse.traverse(extractExpressionFrom(jsAST), {
-            enter: function (currentNode, parentNode) {
-                var esNode = new EsNode(this.path(), currentNode, parentNode, espathToValue, jsCode, jsAST);
-                if (1 < nodeStack.length) {
-                    esNode.setParentEsNode(nodeStack[nodeStack.length - 1]);
-                }
-                nodeStack.push(esNode);
-                callback(esNode);
-            },
-            leave: function (currentNode, parentNode) {
-                nodeStack.pop();
-            }
-        });
-    }
-
-
-    function extractExpressionFrom (tree) {
-        var expressionStatement = tree.body[0],
-            expression = expressionStatement.expression;
-        return expression;
-    }
-
-
-    function locationOf(currentNode, tokens) {
-        switch(currentNode.type) {
-        case syntax.MemberExpression:
-            return propertyLocationOf(currentNode, tokens);
-        case syntax.CallExpression:
-            if (currentNode.callee.type === syntax.MemberExpression) {
-                return propertyLocationOf(currentNode.callee, tokens);
-            }
-            break;
-        case syntax.BinaryExpression:
-        case syntax.LogicalExpression:
-        case syntax.AssignmentExpression:
-            return infixOperatorLocationOf(currentNode, tokens);
-        default:
-            break;
-        }
-        return currentNode.loc;
-    }
-
-
-    function propertyLocationOf(memberExpression, tokens) {
-        var prop = memberExpression.property,
-            token;
-        if (!memberExpression.computed) {
-            return prop.loc;
-        }
-        token = findLeftBracketTokenOf(memberExpression, tokens);
-        return token ? token.loc : prop.loc;
-    }
-
-
-    // calculate location of infix operator for BinaryExpression, AssignmentExpression and LogicalExpression.
-    function infixOperatorLocationOf (expression, tokens) {
-        var token = findOperatorTokenOf(expression, tokens);
-        return token ? token.loc : expression.left.loc;
-    }
-
-
-    function findLeftBracketTokenOf(expression, tokens) {
-        var fromLine = expression.loc.start.line,
-            toLine = expression.property.loc.start.line,
-            fromColumn = expression.property.loc.start.column;
-        return searchToken(tokens, fromLine, toLine, function (token, index) {
-            var prevToken;
-            if (token.loc.start.column === fromColumn) {
-                prevToken = tokens[index - 1];
-                if (prevToken.type === 'Punctuator' && prevToken.value === '[') {
-                    return prevToken;
-                }
-            }
-            return undefined;
-        });
-    }
-
-
-    function findOperatorTokenOf(expression, tokens) {
-        var fromLine = expression.left.loc.end.line,
-            toLine = expression.right.loc.start.line,
-            fromColumn = expression.left.loc.end.column,
-            toColumn = expression.right.loc.start.column;
-        return searchToken(tokens, fromLine, toLine, function (token, index) {
-            if (fromColumn < token.loc.start.column &&
-                token.loc.end.column < toColumn &&
-                token.type === 'Punctuator' &&
-                token.value === expression.operator) {
-                return token;
-            }
-            return undefined;
-        });
-    }
-
-
-    function searchToken(tokens, fromLine, toLine, predicate) {
-        var i, token, found;
-        for(i = 0; i < tokens.length; i += 1) {
-            token = tokens[i];
-            if (token.loc.start.line < fromLine) {
-                continue;
-            }
-            if (toLine < token.loc.end.line) {
-                break;
-            }
-            found = predicate(token, i);
-            if (found) {
-                return found;
-            }
-        }
-        return undefined;
-    }
-
-
-    function createRow (numCols, initial) {
-        var row = [], i;
-        for(i = 0; i < numCols; i += 1) {
-            row[i] = initial;
-        }
-        return row;
-    }
-
-
-    function rightToLeft (a, b) {
-        return b.loc.start.column - a.loc.start.column;
-    }
-
-
-    function multibyteStringWidthOf (str) {
-        var i, c, width = 0;
-        for(i = 0; i < str.length; i+=1){
-            c = str.charCodeAt(i);
-            if ((0x0 <= c && c < 0x81) || (c === 0xf8f0) || (0xff61 <= c && c < 0xffa0) || (0xf8f1 <= c && c < 0xf8f4)) {
-                width += 1;
-            } else {
-                width += 2;
-            }
-        }
-        return width;
-    }
-
-
-    function constructorNameOf (obj) {
-        var ctor = obj.constructor,
-            cname = '';
-        if (typeof(ctor) === 'function') {
-            cname = ctor.name ? ctor.name : Object.prototype.toString.call(obj).slice(8, -1);
-        }
-        return cname ? cname : 'Object';
-    }
-
-
-    function typeNameOf (val) {
-        var type = typeof(val);
-        if (val === null) {
-            return 'null';
-        }
-        if (typeof val === 'undefined') {
-            return 'undefined';
-        }
-        if (type === 'object') {
-            if (Array.isArray(val)) {
-                return 'Array';
-            }
-            return constructorNameOf(val);
-        }
-        return type;
-    }
-
-
-    function isComparedByValue (obj) {
-        if (obj === null) {
-            return true;
-        }
-        switch(typeof obj) {
-        case 'string':
-        case 'number':
-        case 'boolean':
-        case 'undefined':
-            return true;
-        }
+function isCalleeMatched(callSignature, signatureCalleeDepth, node) {
+    if (!isCallExpression(node)) {
         return false;
     }
+    if (!isSameAstDepth(node.callee, signatureCalleeDepth)) {
+        return false;
+    }
+    return deepEqual(espurify(callSignature.callee), espurify(node.callee));
+}
 
+function isSameAstDepth (ast, depth) {
+    var currentDepth = 0;
+    estraverse.traverse(ast, {
+        enter: function (currentNode, parentNode) {
+            var path = this.path(),
+                pathDepth = path ? path.length : 0;
+            if (currentDepth < pathDepth) {
+                currentDepth = pathDepth;
+            }
+            if (depth < currentDepth) {
+                this.break();
+            }
+        }
+    });
+    return (depth === currentDepth);
+}
 
-    // borrowed from qunit.js
-    function extend (a, b) {
-        var prop;
-        for (prop in b) {
-            if (b.hasOwnProperty(prop)) {
-                if (typeof b[prop] === 'undefined') {
-                    delete a[prop];
+function astDepth (ast) {
+    var maxDepth = 0;
+    estraverse.traverse(ast, {
+        enter: function (currentNode, parentNode) {
+            var path = this.path(),
+                pathDepth = path ? path.length : 0;
+            if (maxDepth < pathDepth) {
+                maxDepth = pathDepth;
+            }
+        }
+    });
+    return maxDepth;
+}
+
+function isCallExpression (node) {
+    return node && node.type === syntax.CallExpression;
+}
+
+function isCalleeOfParent(currentNode, parentNode) {
+    return parentNode && currentNode &&
+        parentNode.type === syntax.CallExpression &&
+        parentNode.callee === currentNode;
+}
+
+function identifiers (node) {
+    return node.type === syntax.Identifier;
+}
+
+function validateApiExpression (callExpression) {
+    if (callExpression.type !== syntax.CallExpression) {
+        throw new Error(notCallExprMessage);
+    }
+    var names = {};
+    callExpression.arguments.forEach(function (arg) {
+        var name = validateArg(arg);
+        if (hasOwn.call(names, name)) {
+            throw new Error(duplicatedArgMessage + name);
+        } else {
+            names[name] = name;
+        }
+    });
+}
+
+function validateArg (arg) {
+    var inner;
+    switch(arg.type) {
+    case syntax.Identifier:
+        return arg.name;
+    case syntax.ArrayExpression:
+        if (arg.elements.length !== 1) {
+            throw new Error(invalidFormMessage);
+        }
+        inner = arg.elements[0];
+        if (inner.type !== syntax.Identifier) {
+            throw new Error(invalidFormMessage);
+        }
+        return inner.name;
+    default:
+        throw new Error(invalidFormMessage);
+    }
+}
+
+function extractExpressionFrom (tree) {
+    var statement, expression;
+    statement = tree.body[0];
+    if (statement.type !== syntax.ExpressionStatement) {
+        throw new Error(notCallExprMessage);
+    }
+    expression = statement.expression;
+    validateApiExpression(expression);
+    return expression;
+}
+
+module.exports = createMatcher;
+
+},{"deep-equal":13,"esprima":19,"espurify":16,"estraverse":20}],13:[function(_dereq_,module,exports){
+var pSlice = Array.prototype.slice;
+var objectKeys = _dereq_('./lib/keys.js');
+var isArguments = _dereq_('./lib/is_arguments.js');
+
+var deepEqual = module.exports = function (actual, expected, opts) {
+  if (!opts) opts = {};
+  // 7.1. All identical values are equivalent, as determined by ===.
+  if (actual === expected) {
+    return true;
+
+  } else if (actual instanceof Date && expected instanceof Date) {
+    return actual.getTime() === expected.getTime();
+
+  // 7.3. Other pairs that do not both pass typeof value == 'object',
+  // equivalence is determined by ==.
+  } else if (typeof actual != 'object' && typeof expected != 'object') {
+    return opts.strict ? actual === expected : actual == expected;
+
+  // 7.4. For all other Object pairs, including Array objects, equivalence is
+  // determined by having the same number of owned properties (as verified
+  // with Object.prototype.hasOwnProperty.call), the same set of keys
+  // (although not necessarily the same order), equivalent values for every
+  // corresponding key, and an identical 'prototype' property. Note: this
+  // accounts for both named and indexed properties on Arrays.
+  } else {
+    return objEquiv(actual, expected, opts);
+  }
+}
+
+function isUndefinedOrNull(value) {
+  return value === null || value === undefined;
+}
+
+function isBuffer (x) {
+  if (!x || typeof x !== 'object' || typeof x.length !== 'number') return false;
+  if (typeof x.copy !== 'function' || typeof x.slice !== 'function') {
+    return false;
+  }
+  if (x.length > 0 && typeof x[0] !== 'number') return false;
+  return true;
+}
+
+function objEquiv(a, b, opts) {
+  var i, key;
+  if (isUndefinedOrNull(a) || isUndefinedOrNull(b))
+    return false;
+  // an identical 'prototype' property.
+  if (a.prototype !== b.prototype) return false;
+  //~~~I've managed to break Object.keys through screwy arguments passing.
+  //   Converting to array solves the problem.
+  if (isArguments(a)) {
+    if (!isArguments(b)) {
+      return false;
+    }
+    a = pSlice.call(a);
+    b = pSlice.call(b);
+    return deepEqual(a, b, opts);
+  }
+  if (isBuffer(a)) {
+    if (!isBuffer(b)) {
+      return false;
+    }
+    if (a.length !== b.length) return false;
+    for (i = 0; i < a.length; i++) {
+      if (a[i] !== b[i]) return false;
+    }
+    return true;
+  }
+  try {
+    var ka = objectKeys(a),
+        kb = objectKeys(b);
+  } catch (e) {//happens when one is a string literal and the other isn't
+    return false;
+  }
+  // having the same number of owned properties (keys incorporates
+  // hasOwnProperty)
+  if (ka.length != kb.length)
+    return false;
+  //the same set of keys (although not necessarily the same order),
+  ka.sort();
+  kb.sort();
+  //~~~cheap key test
+  for (i = ka.length - 1; i >= 0; i--) {
+    if (ka[i] != kb[i])
+      return false;
+  }
+  //equivalent values for every corresponding key, and
+  //~~~possibly expensive deep test
+  for (i = ka.length - 1; i >= 0; i--) {
+    key = ka[i];
+    if (!deepEqual(a[key], b[key], opts)) return false;
+  }
+  return true;
+}
+
+},{"./lib/is_arguments.js":14,"./lib/keys.js":15}],14:[function(_dereq_,module,exports){
+var supportsArgumentsClass = (function(){
+  return Object.prototype.toString.call(arguments)
+})() == '[object Arguments]';
+
+exports = module.exports = supportsArgumentsClass ? supported : unsupported;
+
+exports.supported = supported;
+function supported(object) {
+  return Object.prototype.toString.call(object) == '[object Arguments]';
+};
+
+exports.unsupported = unsupported;
+function unsupported(object){
+  return object &&
+    typeof object == 'object' &&
+    typeof object.length == 'number' &&
+    Object.prototype.hasOwnProperty.call(object, 'callee') &&
+    !Object.prototype.propertyIsEnumerable.call(object, 'callee') ||
+    false;
+};
+
+},{}],15:[function(_dereq_,module,exports){
+exports = module.exports = typeof Object.keys === 'function'
+  ? Object.keys : shim;
+
+exports.shim = shim;
+function shim (obj) {
+  var keys = [];
+  for (var key in obj) keys.push(key);
+  return keys;
+}
+
+},{}],16:[function(_dereq_,module,exports){
+/**
+ * espurify - Clone new AST without extra properties
+ * 
+ * https://github.com/twada/espurify
+ *
+ * Copyright (c) 2014 Takuto Wada
+ * Licensed under the MIT license.
+ *   http://twada.mit-license.org/
+ */
+'use strict';
+
+var traverse = _dereq_('traverse'),
+    deepCopy = _dereq_('./lib/ast-deepcopy'),
+    astProps = _dereq_('./lib/ast-properties'),
+    hasOwn = Object.prototype.hasOwnProperty;
+
+function espurify (node) {
+    var result = deepCopy(node);
+    traverse(result).forEach(function (x) {
+        if (this.parent &&
+            this.parent.node &&
+            this.parent.node.type &&
+            isSupportedNodeType(this.parent.node.type) &&
+            !isSupportedKey(this.parent.node.type, this.key))
+        {
+            this.remove(true);
+        }
+    });
+    return result;
+}
+
+function isSupportedNodeType (type) {
+    return hasOwn.call(astProps, type);
+}
+
+function isSupportedKey (type, key) {
+    return astProps[type].indexOf(key) !== -1;
+}
+
+module.exports = espurify;
+
+},{"./lib/ast-deepcopy":17,"./lib/ast-properties":18,"traverse":40}],17:[function(_dereq_,module,exports){
+/**
+ * Copyright (C) 2012 Yusuke Suzuki (twitter: @Constellation) and other contributors.
+ * Released under the BSD license.
+ * https://github.com/Constellation/esmangle/blob/master/LICENSE.BSD
+ */
+'use strict';
+
+var isArray = Array.isArray || function isArray (array) {
+    return Object.prototype.toString.call(array) === '[object Array]';
+};
+
+function deepCopyInternal (obj, result) {
+    var key, val;
+    for (key in obj) {
+        if (key.lastIndexOf('__', 0) === 0) {
+            continue;
+        }
+        if (obj.hasOwnProperty(key)) {
+            val = obj[key];
+            if (typeof val === 'object' && val !== null) {
+                if (val instanceof RegExp) {
+                    val = new RegExp(val);
                 } else {
-                    a[prop] = b[prop];
+                    val = deepCopyInternal(val, isArray(val) ? [] : {});
                 }
             }
+            result[key] = val;
         }
-        return a;
     }
+    return result;
+}
 
+function deepCopy (obj) {
+    return deepCopyInternal(obj, isArray(obj) ? [] : {});
+}
 
-    function defaultStringifier (config) {
-        var globalConstructors = [
-            Boolean,
-            Date,
-            Number,
-            RegExp,
-            String
-        ];
+module.exports = deepCopy;
 
-        function stringify(obj, depth) {
-            if (typeof depth !== 'number') {
-                depth = config.stringifyDepth;
-            }
-            return stringifyAny(obj, depth);
-        }
+},{}],18:[function(_dereq_,module,exports){
+module.exports = {
+    AssignmentExpression: ['type', 'operator', 'left', 'right'],
+    ArrayExpression: ['type', 'elements'],
+    ArrayPattern: ['type', 'elements'],
+    // ArrowFunctionExpression: ['type', 'params', 'defaults', 'rest', 'body', 'generator', 'expression'],
+    BlockStatement: ['type', 'body'],
+    BinaryExpression: ['type', 'operator', 'left', 'right'],
+    BreakStatement: ['type', 'label'],
+    CallExpression: ['type', 'callee', 'arguments'],
+    CatchClause: ['type', 'param', 'guard', 'body'],
+    // ClassBody: ['type', 'body'],
+    // ClassDeclaration: ['type', 'id', 'body', 'superClass'],
+    // ClassExpression: ['type', 'id', 'body', 'superClass'],
+    ConditionalExpression: ['type', 'test', 'consequent', 'alternate'],
+    ContinueStatement: ['type', 'label'],
+    DebuggerStatement: ['type'],
+    // DirectiveStatement: ['type'],
+    DoWhileStatement: ['type', 'body', 'test'],
+    EmptyStatement: ['type'],
+    ExpressionStatement: ['type', 'expression'],
+    ForStatement: ['type', 'init', 'test', 'update', 'body'],
+    ForInStatement: ['type', 'left', 'right', 'body', 'each'],
+    FunctionDeclaration: ['type', 'id', 'params', 'defaults', 'rest', 'body', 'generator', 'expression'],
+    FunctionExpression: ['type', 'id', 'params', 'defaults', 'rest', 'body', 'generator', 'expression'],
+    Identifier: ['type', 'name'],
+    IfStatement: ['type', 'test', 'consequent', 'alternate'],
+    Literal: ['type', 'value'],
+    LabeledStatement: ['type', 'label', 'body'],
+    LogicalExpression: ['type', 'operator', 'left', 'right'],
+    MemberExpression: ['type', 'object', 'property', 'computed'],
+    // MethodDefinition: ['type', 'key', 'value'],
+    NewExpression: ['type', 'callee', 'arguments'],
+    ObjectExpression: ['type', 'properties'],
+    ObjectPattern: ['type', 'properties'],
+    Program: ['type', 'body'],
+    Property: ['type', 'key', 'value', 'kind'],
+    ReturnStatement: ['type', 'argument'],
+    SequenceExpression: ['type', 'expressions'],
+    SwitchStatement: ['type', 'discriminant', 'cases', 'lexical'],
+    SwitchCase: ['type', 'test', 'consequent'],
+    ThisExpression: ['type'],
+    ThrowStatement: ['type', 'argument'],
+    TryStatement: ['type', 'block', 'handlers', 'handler', 'guardedHandlers', 'finalizer'],
+    UnaryExpression: ['type', 'operator', 'prefix', 'argument'],
+    UpdateExpression: ['type', 'operator', 'argument', 'prefix'],
+    VariableDeclaration: ['type', 'declarations', 'kind'],
+    VariableDeclarator: ['type', 'id', 'init'],
+    WhileStatement: ['type', 'test', 'body'],
+    WithStatement: ['type', 'object', 'body'],
+    YieldExpression: ['type', 'argument']
+};
 
-        function stringifyAny(obj, depth) {
-            switch(typeof obj) {
-            case 'string':
-            case 'boolean':
-                return JSON.stringify(obj);
-            case 'number':
-                return stringifyNumber(obj);
-            case 'function':
-                return '#function#';
-            case 'undefined':
-                return 'undefined';
-            case 'object':
-                if (obj === null) {
-                    return 'null';
-                } else if (Array.isArray(obj)) {
-                    return stringifyArray(obj, depth);
-                } else {
-                    return stringifyObject(obj, depth);
-                }
-                break;
-            default:
-                break;
-            }
-        }
-
-        function stringifyNumber(num) {
-            if (isNaN(num)) {
-                return 'NaN';
-            }
-            if (!isFinite(num)) {
-                return num === Infinity ? 'Infinity' : '-Infinity';
-            }
-            return JSON.stringify(num);
-        }
-
-        function stringifyArray(ary, depth) {
-            depth -= 1;
-            if (depth === 0) {
-                return '#Array#';
-            }
-            return '[' + ary.map(function (elem, idx) {
-                return stringifyAny(elem, depth);
-            }).join(',') + ']';
-        }
-
-        function stringifyObject(obj, depth) {
-            var pairs, cname;
-            depth -= 1;
-            if (obj instanceof RegExp) {
-                return obj.toString();
-            }
-            cname = constructorNameOf(obj);
-            if (globalConstructors.some(function (ctor) { return obj instanceof ctor; })) {
-                return 'new ' + cname + '(' + JSON.stringify(obj) + ')';
-            }
-            if (depth === 0) {
-                return '#' + cname + '#';
-            }
-            pairs = [];
-            Object.keys(obj).forEach(function (key) {
-                var val = stringifyAny(obj[key], depth);
-                if (!/^[A-Za-z_]+$/.test(key)) {
-                    key = JSON.stringify(key);
-                }
-                pairs.push(key + ':' + val);
-            });
-            return cname + '{' + pairs.join(',') + '}';
-        }
-
-        return stringify;
-    }
-
-
-    function defaultComparator(config) {
-        function compare(pair, lines) {
-            if (isStringDiffTarget(pair)) {
-                showStringDiff(pair, lines);
-            } else {
-                showExpectedAndActual(pair, lines);
-            }
-        }
-
-        function isStringDiffTarget(pair) {
-            return typeof pair.left.value === 'string' && typeof pair.right.value === 'string';
-        }
-
-        function showExpectedAndActual (pair, lines) {
-            lines.push('');
-            lines.push('[' + typeNameOf(pair.right.value) + '] ' + pair.right.code);
-            lines.push('=> ' + config.stringify(pair.right.value));
-            lines.push('[' + typeNameOf(pair.left.value)  + '] ' + pair.left.code);
-            lines.push('=> ' + config.stringify(pair.left.value));
-        }
-
-        function showStringDiff (pair, lines) {
-            var patch;
-            if (shouldUseLineLevelDiff(pair.right.value)) {
-                patch = udiffLines(pair.right.value, pair.left.value);
-            } else {
-                patch = udiffChars(pair.right.value, pair.left.value);
-            }
-            lines.push('');
-            lines.push('--- [string] ' + pair.right.code);
-            lines.push('+++ [string] ' + pair.left.code);
-            lines.push(decodeURIComponent(patch));
-        }
-
-        function shouldUseLineLevelDiff (text) {
-            return config.lineDiffThreshold < text.split(/\r\n|\r|\n/).length;
-        }
-
-        function udiffLines(text1, text2) {
-            /*jshint camelcase: false */
-            var a = dmp.diff_linesToChars_(text1, text2),
-                diffs = dmp.diff_main(a.chars1, a.chars2, false);
-            dmp.diff_charsToLines_(diffs, a.lineArray);
-            dmp.diff_cleanupSemantic(diffs);
-            return dmp.patch_toText(dmp.patch_make(text1, diffs));
-        }
-
-        function udiffChars (text1, text2) {
-            /*jshint camelcase: false */
-            var diffs = dmp.diff_main(text1, text2, false);
-            dmp.diff_cleanupSemantic(diffs);
-            return dmp.patch_toText(dmp.patch_make(text1, diffs));
-        }
-
-        return compare;
-    }
-
-
-    function create (options) {
-        var config = extend(defaultOptions(), (options || {}));
-        if (typeof config.widthOf !== 'function') {
-            config.widthOf = multibyteStringWidthOf;
-        }
-        if (typeof config.stringify !== 'function') {
-            config.stringify = defaultStringifier(config);
-        }
-        if (typeof config.compare !== 'function') {
-            config.compare = defaultComparator(config);
-        }
-        return function (context) {
-            if (!DiffMatchPatch) {
-                throw new Error('power-assert requires google\'s `diff_match_patch` library since 0.7.0. Please check your dependencies.');
-            }
-            if (!estraverse) {
-                throw new Error('power-assert requires `estraverse` library since 0.6.0. Please check your dependencies.');
-            } else {
-            }
-            if (!esprima) {
-                throw new Error('power-assert requires `esprima` library since 0.7.0. Please check your dependencies.');
-            }
-            dmp = new DiffMatchPatch();
-            syntax = estraverse.Syntax;
-
-            var renderer = new PowerAssertContextRenderer(config);
-            renderer.init(context);
-            return renderer.renderLines().join(config.lineSeparator);
-        };
-    }
-
-    create.PowerAssertContextRenderer = PowerAssertContextRenderer;
-    create.constructorNameOf = constructorNameOf;
-    create.typeNameOf = typeNameOf;
-    create.isComparedByValue = isComparedByValue;
-    return create;
-}));
-
-},{"esprima":9,"estraverse":10,"googlediff":11}],9:[function(_dereq_,module,exports){
+},{}],19:[function(_dereq_,module,exports){
 /*
   Copyright (C) 2013 Ariya Hidayat <ariya.hidayat@gmail.com>
   Copyright (C) 2013 Thaddee Tyl <thaddee.tyl@gmail.com>
@@ -3365,8 +3245,6 @@ parseStatement: true, parseSourceElement: true */
                     return;
                 }
             }
-
-            peek();
 
             if (extra.trailingComments.length > 0) {
                 if (extra.trailingComments[0].range[0] >= node.range[1]) {
@@ -5691,7 +5569,7 @@ parseStatement: true, parseSourceElement: true */
     }
 
     // Sync with *.json manifests.
-    exports.version = '1.2.1';
+    exports.version = '1.2.2';
 
     exports.tokenize = tokenize;
 
@@ -5722,7 +5600,7 @@ parseStatement: true, parseSourceElement: true */
 }));
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-},{}],10:[function(_dereq_,module,exports){
+},{}],20:[function(_dereq_,module,exports){
 /*
   Copyright (C) 2012-2013 Yusuke Suzuki <utatane.tea@gmail.com>
   Copyright (C) 2012 Ariya Hidayat <ariya.hidayat@gmail.com>
@@ -5923,6 +5801,7 @@ parseStatement: true, parseSourceElement: true */
         ExpressionStatement: ['expression'],
         ForStatement: ['init', 'test', 'update', 'body'],
         ForInStatement: ['left', 'right', 'body'],
+        ForOfStatement: ['left', 'right', 'body'],
         FunctionDeclaration: ['id', 'params', 'defaults', 'rest', 'body'],
         FunctionExpression: ['id', 'params', 'defaults', 'rest', 'body'],
         Identifier: [],
@@ -6401,7 +6280,7 @@ parseStatement: true, parseSourceElement: true */
         return tree;
     }
 
-    exports.version = '1.3.3-dev';
+    exports.version = '1.5.1-dev';
     exports.Syntax = Syntax;
     exports.traverse = traverse;
     exports.replace = replace;
@@ -6412,10 +6291,850 @@ parseStatement: true, parseSourceElement: true */
 }));
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-},{}],11:[function(_dereq_,module,exports){
+},{}],21:[function(_dereq_,module,exports){
+/**
+ * power-assert-formatter.js - Power Assert output formatter
+ *
+ * https://github.com/twada/power-assert-formatter
+ *
+ * Copyright (c) 2013-2014 Takuto Wada
+ * Licensed under the MIT license.
+ *   https://github.com/twada/power-assert-formatter/blob/master/MIT-LICENSE.txt
+ */
+'use strict';
+
+module.exports = _dereq_('./lib/create');
+
+},{"./lib/create":22}],22:[function(_dereq_,module,exports){
+'use strict';
+
+var stringifier = _dereq_('stringifier'),
+    stringWidth = _dereq_('./string-width'),
+    StringWriter = _dereq_('./string-writer'),
+    traverseContext = _dereq_('./traverse'),
+    defaultOptions = _dereq_('./options'),
+    extend = _dereq_('xtend');
+
+(function() {
+    // "Browserify can only analyze static requires. It is not in the scope of browserify to handle dynamic requires."
+    // https://github.com/substack/node-browserify/issues/377
+    _dereq_('./renderers/assertion');
+    _dereq_('./renderers/binary-expression');
+    _dereq_('./renderers/diagram');
+    _dereq_('./renderers/file');
+})();
+
+function create (options) {
+    var config = extend(defaultOptions(), options);
+    if (typeof config.widthOf !== 'function') {
+        config.widthOf = stringWidth;
+    }
+    if (typeof config.stringify !== 'function') {
+        config.stringify = stringifier(config);
+    }
+    if (!config.writerClass) {
+        config.writerClass = StringWriter;
+    }
+    return function (context) {
+        var writer = new config.writerClass(extend(config)),
+            renderers = config.renderers.map(function (rendererName) {
+                var RendererClass = _dereq_('./renderers/' + rendererName);
+                return new RendererClass(extend(config));
+            });
+        renderers.forEach(function (renderer) {
+            renderer.init(context);
+        });
+        traverseContext(context, renderers);
+        renderers.forEach(function (renderer) {
+            renderer.render(writer);
+        });
+        writer.write('');
+        return writer.flush();
+    };
+}
+
+create.defaultOptions = defaultOptions;
+create.stringWidth = stringWidth;
+module.exports = create;
+
+},{"./options":24,"./renderers/assertion":25,"./renderers/binary-expression":26,"./renderers/diagram":27,"./renderers/file":28,"./string-width":29,"./string-writer":30,"./traverse":31,"stringifier":37,"xtend":41}],23:[function(_dereq_,module,exports){
+var syntax = _dereq_('estraverse').Syntax;
+
+function EsNode (path, currentNode, parentNode, espathToValue, jsCode, jsAST) {
+    if (path) {
+        this.espath = path.join('/');
+        this.parentEspath = path.slice(0, path.length - 1).join('/');
+        this.currentProp = path[path.length - 1];
+    } else {
+        this.espath = '';
+        this.parentEspath = '';
+        this.currentProp = null;
+    }
+    this.currentNode = currentNode;
+    this.parentNode = parentNode;
+    this.parentEsNode = null;
+    this.espathToValue = espathToValue;
+    this.jsCode = jsCode;
+    this.jsAST = jsAST;
+}
+EsNode.prototype.setParentEsNode = function (parentEsNode) {
+    this.parentEsNode = parentEsNode;
+};
+EsNode.prototype.getParentEsNode = function () {
+    return this.parentEsNode;
+};
+EsNode.prototype.code = function () {
+    return this.jsCode.slice(this.currentNode.loc.start.column, this.currentNode.loc.end.column);
+};
+EsNode.prototype.value = function () {
+    if (this.currentNode.type === syntax.Literal) {
+        return this.currentNode.value;
+    }
+    return this.espathToValue[this.espath];
+};
+EsNode.prototype.isCaptured = function () {
+    return this.espathToValue.hasOwnProperty(this.espath);
+};
+EsNode.prototype.location = function () {
+    return locationOf(this.currentNode, this.jsAST.tokens);
+};
+
+
+function locationOf(currentNode, tokens) {
+    switch(currentNode.type) {
+    case syntax.MemberExpression:
+        return propertyLocationOf(currentNode, tokens);
+    case syntax.CallExpression:
+        if (currentNode.callee.type === syntax.MemberExpression) {
+            return propertyLocationOf(currentNode.callee, tokens);
+        }
+        break;
+    case syntax.BinaryExpression:
+    case syntax.LogicalExpression:
+    case syntax.AssignmentExpression:
+        return infixOperatorLocationOf(currentNode, tokens);
+    default:
+        break;
+    }
+    return currentNode.loc;
+}
+
+function propertyLocationOf(memberExpression, tokens) {
+    var prop = memberExpression.property,
+        token;
+    if (!memberExpression.computed) {
+        return prop.loc;
+    }
+    token = findLeftBracketTokenOf(memberExpression, tokens);
+    return token ? token.loc : prop.loc;
+}
+
+
+// calculate location of infix operator for BinaryExpression, AssignmentExpression and LogicalExpression.
+function infixOperatorLocationOf (expression, tokens) {
+    var token = findOperatorTokenOf(expression, tokens);
+    return token ? token.loc : expression.left.loc;
+}
+
+
+function findLeftBracketTokenOf(expression, tokens) {
+    var fromLine = expression.loc.start.line,
+        toLine = expression.property.loc.start.line,
+        fromColumn = expression.property.loc.start.column;
+    return searchToken(tokens, fromLine, toLine, function (token, index) {
+        var prevToken;
+        if (token.loc.start.column === fromColumn) {
+            prevToken = tokens[index - 1];
+            if (prevToken.type === 'Punctuator' && prevToken.value === '[') {
+                return prevToken;
+            }
+        }
+        return undefined;
+    });
+}
+
+
+function findOperatorTokenOf(expression, tokens) {
+    var fromLine = expression.left.loc.end.line,
+        toLine = expression.right.loc.start.line,
+        fromColumn = expression.left.loc.end.column,
+        toColumn = expression.right.loc.start.column;
+    return searchToken(tokens, fromLine, toLine, function (token, index) {
+        if (fromColumn < token.loc.start.column &&
+            token.loc.end.column < toColumn &&
+            token.type === 'Punctuator' &&
+            token.value === expression.operator) {
+            return token;
+        }
+        return undefined;
+    });
+}
+
+
+function searchToken(tokens, fromLine, toLine, predicate) {
+    var i, token, found;
+    for(i = 0; i < tokens.length; i += 1) {
+        token = tokens[i];
+        if (token.loc.start.line < fromLine) {
+            continue;
+        }
+        if (toLine < token.loc.end.line) {
+            break;
+        }
+        found = predicate(token, i);
+        if (found) {
+            return found;
+        }
+    }
+    return undefined;
+}
+
+
+module.exports = EsNode;
+
+},{"estraverse":20}],24:[function(_dereq_,module,exports){
+module.exports = function defaultOptions () {
+    'use strict';
+    return {
+        lineDiffThreshold: 5,
+        maxDepth: 1,
+        anonymous: 'Object',
+        circular: '#@Circular#',
+        lineSeparator: '\n',
+        renderers: [
+            'file',
+            'assertion',
+            'diagram',
+            'binary-expression'
+        ]
+    };
+};
+
+},{}],25:[function(_dereq_,module,exports){
+function AssertionRenderer (config) {
+}
+
+AssertionRenderer.prototype.init = function (context) {
+    this.assertionLine = context.source.content;
+};
+
+AssertionRenderer.prototype.onEachEsNode = function (esNode) {
+};
+
+AssertionRenderer.prototype.render = function (writer) {
+    writer.write('');
+    writer.write(this.assertionLine);
+};
+
+module.exports = AssertionRenderer;
+
+},{}],26:[function(_dereq_,module,exports){
+'use strict';
+
+var DiffMatchPatch = _dereq_('googlediff'),
+    dmp = new DiffMatchPatch(),
+    typeName = _dereq_('type-name'),
+    keys = Object.keys || _dereq_('object-keys'),
+    syntax = _dereq_('estraverse').Syntax;
+
+
+function BinaryExpressionRenderer(config) {
+    this.config = config;
+    this.stringify = config.stringify;
+    this.espathToPair = {};
+}
+
+BinaryExpressionRenderer.prototype.init = function (context) {
+};
+
+BinaryExpressionRenderer.prototype.onEachEsNode = function (esNode) {
+    var pair,
+        that = this;
+    if (!esNode.isCaptured()) {
+        if (isTargetBinaryExpression(esNode.getParentEsNode()) && esNode.currentNode.type === syntax.Literal) {
+            that.espathToPair[esNode.parentEspath][esNode.currentProp] = {code: esNode.code(), value: esNode.value()};
+        }
+        return;
+    }
+    if (isTargetBinaryExpression(esNode.getParentEsNode())) {
+        that.espathToPair[esNode.parentEspath][esNode.currentProp] = {code: esNode.code(), value: esNode.value()};
+    }
+    if (isTargetBinaryExpression(esNode)) {
+        pair = {
+            operator: esNode.currentNode.operator,
+            value: esNode.value()
+        };
+        that.espathToPair[esNode.espath] = pair;
+    }
+};
+
+BinaryExpressionRenderer.prototype.render = function (writer) {
+    var pairs = [],
+        that = this;
+    keys(that.espathToPair).forEach(function (espath) {
+        var pair = that.espathToPair[espath];
+        if (pair.left && pair.right) {
+            pairs.push(pair);
+        }
+    });
+
+    pairs.forEach(function (pair) {
+        that.compare(pair, writer);
+    });
+};
+
+BinaryExpressionRenderer.prototype.compare = function (pair, writer) {
+    if (isStringDiffTarget(pair)) {
+        this.showStringDiff(pair, writer);
+    } else {
+        this.showExpectedAndActual(pair, writer);
+    }
+};
+
+BinaryExpressionRenderer.prototype.showExpectedAndActual = function (pair, writer) {
+    writer.write('');
+    writer.write('[' + typeName(pair.right.value) + '] ' + pair.right.code);
+    writer.write('=> ' + this.stringify(pair.right.value));
+    writer.write('[' + typeName(pair.left.value)  + '] ' + pair.left.code);
+    writer.write('=> ' + this.stringify(pair.left.value));
+};
+
+BinaryExpressionRenderer.prototype.showStringDiff = function (pair, writer) {
+    var patch;
+    if (this.shouldUseLineLevelDiff(pair.right.value)) {
+        patch = udiffLines(pair.right.value, pair.left.value);
+    } else {
+        patch = udiffChars(pair.right.value, pair.left.value);
+    }
+    writer.write('');
+    writer.write('--- [string] ' + pair.right.code);
+    writer.write('+++ [string] ' + pair.left.code);
+    writer.write(decodeURIComponent(patch));
+};
+
+BinaryExpressionRenderer.prototype.shouldUseLineLevelDiff = function (text) {
+    return this.config.lineDiffThreshold < text.split(/\r\n|\r|\n/).length;
+};
+
+
+function isTargetBinaryExpression (esNode) {
+    return esNode &&
+        esNode.currentNode.type === syntax.BinaryExpression &&
+        (esNode.currentNode.operator === '===' || esNode.currentNode.operator === '==') &&
+        esNode.isCaptured() &&
+        !(esNode.value());
+}
+
+function isStringDiffTarget(pair) {
+    return typeof pair.left.value === 'string' && typeof pair.right.value === 'string';
+}
+
+function udiffLines(text1, text2) {
+    /*jshint camelcase: false */
+    var a = dmp.diff_linesToChars_(text1, text2),
+        diffs = dmp.diff_main(a.chars1, a.chars2, false);
+    dmp.diff_charsToLines_(diffs, a.lineArray);
+    dmp.diff_cleanupSemantic(diffs);
+    return dmp.patch_toText(dmp.patch_make(text1, diffs));
+}
+
+function udiffChars (text1, text2) {
+    /*jshint camelcase: false */
+    var diffs = dmp.diff_main(text1, text2, false);
+    dmp.diff_cleanupSemantic(diffs);
+    return dmp.patch_toText(dmp.patch_make(text1, diffs));
+}
+
+module.exports = BinaryExpressionRenderer;
+
+},{"estraverse":20,"googlediff":33,"object-keys":35,"type-name":39}],27:[function(_dereq_,module,exports){
+function DiagramRenderer (config) {
+    this.config = config;
+    this.events = [];
+    this.stringify = config.stringify;
+    this.widthOf = config.widthOf;
+    this.initialVertivalBarLength = 1;
+}
+
+DiagramRenderer.prototype.init = function (context) {
+    this.context = context;
+    this.assertionLine = context.source.content;
+    this.initializeRows();
+};
+
+DiagramRenderer.prototype.onEachEsNode = function (esNode) {
+    if (!esNode.isCaptured()) {
+        return;
+    }
+    this.events.push({value: esNode.value(), loc: esNode.location()});
+};
+
+DiagramRenderer.prototype.render = function (writer) {
+    this.events.sort(rightToLeft);
+    this.constructRows(this.events);
+    this.rows.forEach(function (columns) {
+        writer.write(columns.join(''));
+    });
+};
+
+DiagramRenderer.prototype.initializeRows = function () {
+    this.rows = [];
+    for (var i = 0; i <= this.initialVertivalBarLength; i += 1) {
+        this.addOneMoreRow();
+    }
+};
+
+DiagramRenderer.prototype.newRowFor = function (assertionLine) {
+    return createRow(this.widthOf(assertionLine), ' ');
+};
+
+DiagramRenderer.prototype.addOneMoreRow = function () {
+    this.rows.push(this.newRowFor(this.assertionLine));
+};
+
+DiagramRenderer.prototype.lastRow = function () {
+    return this.rows[this.rows.length - 1];
+};
+
+DiagramRenderer.prototype.renderVerticalBarAt = function (columnIndex) {
+    var i, lastRowIndex = this.rows.length - 1;
+    for (i = 0; i < lastRowIndex; i += 1) {
+        this.rows[i].splice(columnIndex, 1, '|');
+    }
+};
+
+DiagramRenderer.prototype.renderValueAt = function (columnIndex, dumpedValue) {
+    var i, width = this.widthOf(dumpedValue);
+    for (i = 0; i < width; i += 1) {
+        this.lastRow().splice(columnIndex + i, 1, dumpedValue.charAt(i));
+    }
+};
+
+DiagramRenderer.prototype.isOverlapped = function (prevCapturing, nextCaputuring, dumpedValue) {
+    return (typeof prevCapturing !== 'undefined') && this.startColumnFor(prevCapturing) <= (this.startColumnFor(nextCaputuring) + this.widthOf(dumpedValue));
+};
+
+DiagramRenderer.prototype.constructRows = function (capturedEvents) {
+    var that = this,
+        prevCaptured;
+    capturedEvents.forEach(function (captured) {
+        var dumpedValue = that.stringify(captured.value);
+        if (that.isOverlapped(prevCaptured, captured, dumpedValue)) {
+            that.addOneMoreRow();
+        }
+        that.renderVerticalBarAt(that.startColumnFor(captured));
+        that.renderValueAt(that.startColumnFor(captured), dumpedValue);
+        prevCaptured = captured;
+    });
+};
+
+DiagramRenderer.prototype.startColumnFor = function (captured) {
+    return this.widthOf(this.assertionLine.slice(0, captured.loc.start.column));
+};
+
+function createRow (numCols, initial) {
+    var row = [], i;
+    for(i = 0; i < numCols; i += 1) {
+        row[i] = initial;
+    }
+    return row;
+}
+
+function rightToLeft (a, b) {
+    return b.loc.start.column - a.loc.start.column;
+}
+
+module.exports = DiagramRenderer;
+
+},{}],28:[function(_dereq_,module,exports){
+function FileRenderer (config) {
+}
+
+FileRenderer.prototype.init = function (context) {
+    this.filepath = context.source.filepath;
+    this.lineNumber = context.source.line;
+};
+
+FileRenderer.prototype.onEachEsNode = function (esNode) {
+};
+
+FileRenderer.prototype.render = function (writer) {
+    if (this.filepath) {
+        writer.write('# ' + [this.filepath, this.lineNumber].join(':'));
+    } else {
+        writer.write('# at line: ' + this.lineNumber);
+    }
+};
+
+module.exports = FileRenderer;
+
+},{}],29:[function(_dereq_,module,exports){
+var eaw = _dereq_('eastasianwidth');
+
+module.exports = function (str) {
+    var i, code, width = 0;
+    for(i = 0; i < str.length; i+=1) {
+        code = eaw.eastAsianWidth(str.charAt(i));
+        switch(code) {
+        case 'F':
+        case 'W':
+            width += 2;
+            break;
+        case 'H':
+        case 'Na':
+        case 'N':
+            width += 1;
+            break;
+        case 'A':
+            width += 1;
+            break;
+        }
+    }
+    return width;
+};
+
+},{"eastasianwidth":32}],30:[function(_dereq_,module,exports){
+function StringWriter (config) {
+    this.lines = [];
+    this.lineSeparator = config.lineSeparator;
+}
+
+StringWriter.prototype.write = function (str) {
+    this.lines.push(str);
+};
+
+StringWriter.prototype.flush = function () {
+    var str = this.lines.join(this.lineSeparator);
+    this.lines.length = 0;
+    return str;
+};
+
+module.exports = StringWriter;
+
+},{}],31:[function(_dereq_,module,exports){
+'use strict';
+
+var estraverse = _dereq_('estraverse'),
+    esprima = _dereq_('esprima'),
+    EsNode = _dereq_('./esnode');
+
+function traverseContext (context, handlers) {
+    context.args.forEach(function (arg) {
+        onEachEsNode(arg, context.source.content, function (esNode) {
+            handlers.forEach(function (handler) {
+                handler.onEachEsNode(esNode);
+            });
+        });
+    });
+}
+
+function onEachEsNode(arg, jsCode, callback) {
+    var jsAST = esprima.parse(jsCode, {tolerant: true, loc: true, tokens: true, raw: true}),
+        espathToValue = arg.events.reduce(function (accum, ev) {
+            accum[ev.espath] = ev.value;
+            return accum;
+        }, {}),
+        nodeStack = [];
+    estraverse.traverse(extractExpressionFrom(jsAST), {
+        enter: function (currentNode, parentNode) {
+            var esNode = new EsNode(this.path(), currentNode, parentNode, espathToValue, jsCode, jsAST);
+            if (1 < nodeStack.length) {
+                esNode.setParentEsNode(nodeStack[nodeStack.length - 1]);
+            }
+            nodeStack.push(esNode);
+            callback(esNode);
+        },
+        leave: function (currentNode, parentNode) {
+            nodeStack.pop();
+        }
+    });
+}
+
+function extractExpressionFrom (tree) {
+    var expressionStatement = tree.body[0],
+        expression = expressionStatement.expression;
+    return expression;
+}
+
+module.exports = traverseContext;
+
+},{"./esnode":23,"esprima":19,"estraverse":20}],32:[function(_dereq_,module,exports){
+var eaw = exports;
+
+eaw.eastAsianWidth = function(character) {
+  var x = character.charCodeAt(0);
+  var y = (character.length == 2) ? character.charCodeAt(1) : 0;
+  var codePoint = x;
+  if ((0xD800 <= x && x <= 0xDBFF) && (0xDC00 <= y && y <= 0xDFFF)) {
+    x &= 0x3FF;
+    y &= 0x3FF;
+    codePoint = (x << 10) | y;
+    codePoint += 0x10000;
+  }
+
+  if ((0x3000 == codePoint) ||
+      (0xFF01 <= codePoint && codePoint <= 0xFF60) ||
+      (0xFFE0 <= codePoint && codePoint <= 0xFFE6)) {
+    return 'F';
+  }
+  if ((0x20A9 == codePoint) ||
+      (0xFF61 <= codePoint && codePoint <= 0xFFBE) ||
+      (0xFFC2 <= codePoint && codePoint <= 0xFFC7) ||
+      (0xFFCA <= codePoint && codePoint <= 0xFFCF) ||
+      (0xFFD2 <= codePoint && codePoint <= 0xFFD7) ||
+      (0xFFDA <= codePoint && codePoint <= 0xFFDC) ||
+      (0xFFE8 <= codePoint && codePoint <= 0xFFEE)) {
+    return 'H';
+  }
+  if ((0x1100 <= codePoint && codePoint <= 0x115F) ||
+      (0x11A3 <= codePoint && codePoint <= 0x11A7) ||
+      (0x11FA <= codePoint && codePoint <= 0x11FF) ||
+      (0x2329 <= codePoint && codePoint <= 0x232A) ||
+      (0x2E80 <= codePoint && codePoint <= 0x2E99) ||
+      (0x2E9B <= codePoint && codePoint <= 0x2EF3) ||
+      (0x2F00 <= codePoint && codePoint <= 0x2FD5) ||
+      (0x2FF0 <= codePoint && codePoint <= 0x2FFB) ||
+      (0x3001 <= codePoint && codePoint <= 0x303E) ||
+      (0x3041 <= codePoint && codePoint <= 0x3096) ||
+      (0x3099 <= codePoint && codePoint <= 0x30FF) ||
+      (0x3105 <= codePoint && codePoint <= 0x312D) ||
+      (0x3131 <= codePoint && codePoint <= 0x318E) ||
+      (0x3190 <= codePoint && codePoint <= 0x31BA) ||
+      (0x31C0 <= codePoint && codePoint <= 0x31E3) ||
+      (0x31F0 <= codePoint && codePoint <= 0x321E) ||
+      (0x3220 <= codePoint && codePoint <= 0x3247) ||
+      (0x3250 <= codePoint && codePoint <= 0x32FE) ||
+      (0x3300 <= codePoint && codePoint <= 0x4DBF) ||
+      (0x4E00 <= codePoint && codePoint <= 0xA48C) ||
+      (0xA490 <= codePoint && codePoint <= 0xA4C6) ||
+      (0xA960 <= codePoint && codePoint <= 0xA97C) ||
+      (0xAC00 <= codePoint && codePoint <= 0xD7A3) ||
+      (0xD7B0 <= codePoint && codePoint <= 0xD7C6) ||
+      (0xD7CB <= codePoint && codePoint <= 0xD7FB) ||
+      (0xF900 <= codePoint && codePoint <= 0xFAFF) ||
+      (0xFE10 <= codePoint && codePoint <= 0xFE19) ||
+      (0xFE30 <= codePoint && codePoint <= 0xFE52) ||
+      (0xFE54 <= codePoint && codePoint <= 0xFE66) ||
+      (0xFE68 <= codePoint && codePoint <= 0xFE6B) ||
+      (0x1B000 <= codePoint && codePoint <= 0x1B001) ||
+      (0x1F200 <= codePoint && codePoint <= 0x1F202) ||
+      (0x1F210 <= codePoint && codePoint <= 0x1F23A) ||
+      (0x1F240 <= codePoint && codePoint <= 0x1F248) ||
+      (0x1F250 <= codePoint && codePoint <= 0x1F251) ||
+      (0x20000 <= codePoint && codePoint <= 0x2F73F) ||
+      (0x2B740 <= codePoint && codePoint <= 0x2FFFD) ||
+      (0x30000 <= codePoint && codePoint <= 0x3FFFD)) {
+    return 'W';
+  }
+  if ((0x0020 <= codePoint && codePoint <= 0x007E) ||
+      (0x00A2 <= codePoint && codePoint <= 0x00A3) ||
+      (0x00A5 <= codePoint && codePoint <= 0x00A6) ||
+      (0x00AC == codePoint) ||
+      (0x00AF == codePoint) ||
+      (0x27E6 <= codePoint && codePoint <= 0x27ED) ||
+      (0x2985 <= codePoint && codePoint <= 0x2986)) {
+    return 'Na';
+  }
+  if ((0x00A1 == codePoint) ||
+      (0x00A4 == codePoint) ||
+      (0x00A7 <= codePoint && codePoint <= 0x00A8) ||
+      (0x00AA == codePoint) ||
+      (0x00AD <= codePoint && codePoint <= 0x00AE) ||
+      (0x00B0 <= codePoint && codePoint <= 0x00B4) ||
+      (0x00B6 <= codePoint && codePoint <= 0x00BA) ||
+      (0x00BC <= codePoint && codePoint <= 0x00BF) ||
+      (0x00C6 == codePoint) ||
+      (0x00D0 == codePoint) ||
+      (0x00D7 <= codePoint && codePoint <= 0x00D8) ||
+      (0x00DE <= codePoint && codePoint <= 0x00E1) ||
+      (0x00E6 == codePoint) ||
+      (0x00E8 <= codePoint && codePoint <= 0x00EA) ||
+      (0x00EC <= codePoint && codePoint <= 0x00ED) ||
+      (0x00F0 == codePoint) ||
+      (0x00F2 <= codePoint && codePoint <= 0x00F3) ||
+      (0x00F7 <= codePoint && codePoint <= 0x00FA) ||
+      (0x00FC == codePoint) ||
+      (0x00FE == codePoint) ||
+      (0x0101 == codePoint) ||
+      (0x0111 == codePoint) ||
+      (0x0113 == codePoint) ||
+      (0x011B == codePoint) ||
+      (0x0126 <= codePoint && codePoint <= 0x0127) ||
+      (0x012B == codePoint) ||
+      (0x0131 <= codePoint && codePoint <= 0x0133) ||
+      (0x0138 == codePoint) ||
+      (0x013F <= codePoint && codePoint <= 0x0142) ||
+      (0x0144 == codePoint) ||
+      (0x0148 <= codePoint && codePoint <= 0x014B) ||
+      (0x014D == codePoint) ||
+      (0x0152 <= codePoint && codePoint <= 0x0153) ||
+      (0x0166 <= codePoint && codePoint <= 0x0167) ||
+      (0x016B == codePoint) ||
+      (0x01CE == codePoint) ||
+      (0x01D0 == codePoint) ||
+      (0x01D2 == codePoint) ||
+      (0x01D4 == codePoint) ||
+      (0x01D6 == codePoint) ||
+      (0x01D8 == codePoint) ||
+      (0x01DA == codePoint) ||
+      (0x01DC == codePoint) ||
+      (0x0251 == codePoint) ||
+      (0x0261 == codePoint) ||
+      (0x02C4 == codePoint) ||
+      (0x02C7 == codePoint) ||
+      (0x02C9 <= codePoint && codePoint <= 0x02CB) ||
+      (0x02CD == codePoint) ||
+      (0x02D0 == codePoint) ||
+      (0x02D8 <= codePoint && codePoint <= 0x02DB) ||
+      (0x02DD == codePoint) ||
+      (0x02DF == codePoint) ||
+      (0x0300 <= codePoint && codePoint <= 0x036F) ||
+      (0x0391 <= codePoint && codePoint <= 0x03A1) ||
+      (0x03A3 <= codePoint && codePoint <= 0x03A9) ||
+      (0x03B1 <= codePoint && codePoint <= 0x03C1) ||
+      (0x03C3 <= codePoint && codePoint <= 0x03C9) ||
+      (0x0401 == codePoint) ||
+      (0x0410 <= codePoint && codePoint <= 0x044F) ||
+      (0x0451 == codePoint) ||
+      (0x2010 == codePoint) ||
+      (0x2013 <= codePoint && codePoint <= 0x2016) ||
+      (0x2018 <= codePoint && codePoint <= 0x2019) ||
+      (0x201C <= codePoint && codePoint <= 0x201D) ||
+      (0x2020 <= codePoint && codePoint <= 0x2022) ||
+      (0x2024 <= codePoint && codePoint <= 0x2027) ||
+      (0x2030 == codePoint) ||
+      (0x2032 <= codePoint && codePoint <= 0x2033) ||
+      (0x2035 == codePoint) ||
+      (0x203B == codePoint) ||
+      (0x203E == codePoint) ||
+      (0x2074 == codePoint) ||
+      (0x207F == codePoint) ||
+      (0x2081 <= codePoint && codePoint <= 0x2084) ||
+      (0x20AC == codePoint) ||
+      (0x2103 == codePoint) ||
+      (0x2105 == codePoint) ||
+      (0x2109 == codePoint) ||
+      (0x2113 == codePoint) ||
+      (0x2116 == codePoint) ||
+      (0x2121 <= codePoint && codePoint <= 0x2122) ||
+      (0x2126 == codePoint) ||
+      (0x212B == codePoint) ||
+      (0x2153 <= codePoint && codePoint <= 0x2154) ||
+      (0x215B <= codePoint && codePoint <= 0x215E) ||
+      (0x2160 <= codePoint && codePoint <= 0x216B) ||
+      (0x2170 <= codePoint && codePoint <= 0x2179) ||
+      (0x2189 == codePoint) ||
+      (0x2190 <= codePoint && codePoint <= 0x2199) ||
+      (0x21B8 <= codePoint && codePoint <= 0x21B9) ||
+      (0x21D2 == codePoint) ||
+      (0x21D4 == codePoint) ||
+      (0x21E7 == codePoint) ||
+      (0x2200 == codePoint) ||
+      (0x2202 <= codePoint && codePoint <= 0x2203) ||
+      (0x2207 <= codePoint && codePoint <= 0x2208) ||
+      (0x220B == codePoint) ||
+      (0x220F == codePoint) ||
+      (0x2211 == codePoint) ||
+      (0x2215 == codePoint) ||
+      (0x221A == codePoint) ||
+      (0x221D <= codePoint && codePoint <= 0x2220) ||
+      (0x2223 == codePoint) ||
+      (0x2225 == codePoint) ||
+      (0x2227 <= codePoint && codePoint <= 0x222C) ||
+      (0x222E == codePoint) ||
+      (0x2234 <= codePoint && codePoint <= 0x2237) ||
+      (0x223C <= codePoint && codePoint <= 0x223D) ||
+      (0x2248 == codePoint) ||
+      (0x224C == codePoint) ||
+      (0x2252 == codePoint) ||
+      (0x2260 <= codePoint && codePoint <= 0x2261) ||
+      (0x2264 <= codePoint && codePoint <= 0x2267) ||
+      (0x226A <= codePoint && codePoint <= 0x226B) ||
+      (0x226E <= codePoint && codePoint <= 0x226F) ||
+      (0x2282 <= codePoint && codePoint <= 0x2283) ||
+      (0x2286 <= codePoint && codePoint <= 0x2287) ||
+      (0x2295 == codePoint) ||
+      (0x2299 == codePoint) ||
+      (0x22A5 == codePoint) ||
+      (0x22BF == codePoint) ||
+      (0x2312 == codePoint) ||
+      (0x2460 <= codePoint && codePoint <= 0x24E9) ||
+      (0x24EB <= codePoint && codePoint <= 0x254B) ||
+      (0x2550 <= codePoint && codePoint <= 0x2573) ||
+      (0x2580 <= codePoint && codePoint <= 0x258F) ||
+      (0x2592 <= codePoint && codePoint <= 0x2595) ||
+      (0x25A0 <= codePoint && codePoint <= 0x25A1) ||
+      (0x25A3 <= codePoint && codePoint <= 0x25A9) ||
+      (0x25B2 <= codePoint && codePoint <= 0x25B3) ||
+      (0x25B6 <= codePoint && codePoint <= 0x25B7) ||
+      (0x25BC <= codePoint && codePoint <= 0x25BD) ||
+      (0x25C0 <= codePoint && codePoint <= 0x25C1) ||
+      (0x25C6 <= codePoint && codePoint <= 0x25C8) ||
+      (0x25CB == codePoint) ||
+      (0x25CE <= codePoint && codePoint <= 0x25D1) ||
+      (0x25E2 <= codePoint && codePoint <= 0x25E5) ||
+      (0x25EF == codePoint) ||
+      (0x2605 <= codePoint && codePoint <= 0x2606) ||
+      (0x2609 == codePoint) ||
+      (0x260E <= codePoint && codePoint <= 0x260F) ||
+      (0x2614 <= codePoint && codePoint <= 0x2615) ||
+      (0x261C == codePoint) ||
+      (0x261E == codePoint) ||
+      (0x2640 == codePoint) ||
+      (0x2642 == codePoint) ||
+      (0x2660 <= codePoint && codePoint <= 0x2661) ||
+      (0x2663 <= codePoint && codePoint <= 0x2665) ||
+      (0x2667 <= codePoint && codePoint <= 0x266A) ||
+      (0x266C <= codePoint && codePoint <= 0x266D) ||
+      (0x266F == codePoint) ||
+      (0x269E <= codePoint && codePoint <= 0x269F) ||
+      (0x26BE <= codePoint && codePoint <= 0x26BF) ||
+      (0x26C4 <= codePoint && codePoint <= 0x26CD) ||
+      (0x26CF <= codePoint && codePoint <= 0x26E1) ||
+      (0x26E3 == codePoint) ||
+      (0x26E8 <= codePoint && codePoint <= 0x26FF) ||
+      (0x273D == codePoint) ||
+      (0x2757 == codePoint) ||
+      (0x2776 <= codePoint && codePoint <= 0x277F) ||
+      (0x2B55 <= codePoint && codePoint <= 0x2B59) ||
+      (0x3248 <= codePoint && codePoint <= 0x324F) ||
+      (0xE000 <= codePoint && codePoint <= 0xF8FF) ||
+      (0xFE00 <= codePoint && codePoint <= 0xFE0F) ||
+      (0xFFFD == codePoint) ||
+      (0x1F100 <= codePoint && codePoint <= 0x1F10A) ||
+      (0x1F110 <= codePoint && codePoint <= 0x1F12D) ||
+      (0x1F130 <= codePoint && codePoint <= 0x1F169) ||
+      (0x1F170 <= codePoint && codePoint <= 0x1F19A) ||
+      (0xE0100 <= codePoint && codePoint <= 0xE01EF) ||
+      (0xF0000 <= codePoint && codePoint <= 0xFFFFD) ||
+      (0x100000 <= codePoint && codePoint <= 0x10FFFD)) {
+    return 'A';
+  }
+
+  return 'N';
+};
+
+eaw.characterLength = function(character) {
+  var code = this.eastAsianWidth(character);
+  if (code == 'F' || code == 'W' || code == 'A') {
+    return 2;
+  } else {
+    return 1;
+  }
+};
+
+eaw.length = function(string) {
+  var len = 0;
+  for (var i = 0; i < string.length; i++) {
+    len = len + this.characterLength(string.charAt(i));
+  }
+  return len;
+};
+
+},{}],33:[function(_dereq_,module,exports){
 module.exports = _dereq_('./javascript/diff_match_patch_uncompressed.js').diff_match_patch;
 
-},{"./javascript/diff_match_patch_uncompressed.js":12}],12:[function(_dereq_,module,exports){
+},{"./javascript/diff_match_patch_uncompressed.js":34}],34:[function(_dereq_,module,exports){
 /**
  * Diff Match and Patch
  *
@@ -8610,6 +9329,953 @@ this['DIFF_DELETE'] = DIFF_DELETE;
 this['DIFF_INSERT'] = DIFF_INSERT;
 this['DIFF_EQUAL'] = DIFF_EQUAL;
 
-},{}]},{},[1])
-(1)
+},{}],35:[function(_dereq_,module,exports){
+"use strict";
+
+// modified from https://github.com/es-shims/es5-shim
+var has = Object.prototype.hasOwnProperty,
+	toString = Object.prototype.toString,
+	isArgs = _dereq_('./isArguments'),
+	hasDontEnumBug = !({'toString': null}).propertyIsEnumerable('toString'),
+	hasProtoEnumBug = (function () {}).propertyIsEnumerable('prototype'),
+	dontEnums = [
+		"toString",
+		"toLocaleString",
+		"valueOf",
+		"hasOwnProperty",
+		"isPrototypeOf",
+		"propertyIsEnumerable",
+		"constructor"
+	];
+
+var keysShim = function keys(object) {
+	var isObject = object !== null && typeof object === 'object',
+		isFunction = toString.call(object) === '[object Function]',
+		isArguments = isArgs(object),
+		theKeys = [];
+
+	if (!isObject && !isFunction && !isArguments) {
+		throw new TypeError("Object.keys called on a non-object");
+	}
+
+	if (isArguments) {
+		for (var key in object) {
+			if (has.call(object, key)) {
+				theKeys.push(Number(key));
+			}
+		}
+	} else {
+		var name,
+			skipProto = hasProtoEnumBug && isFunction;
+
+		for (name in object) {
+			if (!(skipProto && name === 'prototype') && has.call(object, name)) {
+				theKeys.push(name);
+			}
+		}
+	}
+
+	if (hasDontEnumBug) {
+		var ctor = object.constructor;
+		var skipConstructor = ctor && ctor.prototype === object;
+
+		for (var j = 0; j < dontEnums.length; ++j) {
+			if (!(skipConstructor && dontEnums[j] === 'constructor') && has.call(object, dontEnums[j])) {
+				theKeys.push(dontEnum);
+			}
+		}
+	}
+	return theKeys;
+};
+
+keysShim.shim = function shimObjectKeys() {
+	if (!Object.keys) {
+		Object.keys = keysShim;
+	}
+	return Object.keys || keysShim;
+};
+
+module.exports = keysShim;
+
+
+},{"./isArguments":36}],36:[function(_dereq_,module,exports){
+"use strict";
+
+var toString = Object.prototype.toString;
+
+module.exports = function isArguments(value) {
+	var str = toString.call(value);
+	var isArguments = str === '[object Arguments]';
+	if (!isArguments) {
+		isArguments = str !== '[object Array]'
+			&& value !== null
+			&& typeof value === 'object'
+			&& typeof value.length === 'number'
+			&& value.length >= 0
+			&& toString.call(value.callee) === '[object Function]';
+	}
+	return isArguments;
+};
+
+
+},{}],37:[function(_dereq_,module,exports){
+/**
+ * stringifier
+ * 
+ * https://github.com/twada/stringifier
+ *
+ * Copyright (c) 2014 Takuto Wada
+ * Licensed under the MIT license.
+ *   http://twada.mit-license.org/
+ */
+'use strict';
+
+var traverse = _dereq_('traverse'),
+    typeName = _dereq_('type-name'),
+    extend = _dereq_('xtend'),
+    s = _dereq_('./strategies');
+
+function defaultHandlers () {
+    return {
+        'null': s.always('null'),
+        'undefined': s.always('undefined'),
+        'function': s.prune(),
+        'string': s.json(),
+        'boolean': s.json(),
+        'number': s.number(),
+        'RegExp': s.toStr(),
+        'String': s.newLike(),
+        'Boolean': s.newLike(),
+        'Number': s.newLike(),
+        'Date': s.newLike(),
+        'Array': s.array(),
+        'Object': s.object(),
+        '@default': s.object()
+    };
+}
+
+function defaultOptions () {
+    return {
+        maxDepth: null,
+        indent: null,
+        anonymous: '@Anonymous',
+        circular: '#@Circular#',
+        snip: '..(snip)',
+        lineSeparator: '\n',
+        typeFun: typeName
+    };
+}
+
+function createStringifier (customOptions, customHandlers) {
+    var options = extend(defaultOptions(), customOptions),
+        handlers = extend(defaultHandlers(), customHandlers);
+    return function stringifyAny (push, x) {
+        var context = this,
+            handler = handlerFor(context.node, options, handlers),
+            currentPath = '/' + context.path.join('/'),
+            customization = handlers[currentPath],
+            acc = {
+                context: context,
+                options: options,
+                handlers: handlers,
+                push: push
+            };
+        if (typeName(customization) === 'function') {
+            handler = customization;
+        } else if (typeName(customization) === 'number') {
+            handler = s.flow.compose(s.filters.truncate(customization),handler);
+        }
+        handler(acc, x);
+        return push;
+    };
+}
+
+function handlerFor (val, options, handlers) {
+    var tname = options.typeFun(val);
+    if (typeName(handlers[tname]) === 'function') {
+        return handlers[tname];
+    }
+    return handlers['@default'];
+}
+
+function walk (val, reducer) {
+    var buffer = [],
+        push = function (str) {
+            buffer.push(str);
+        };
+    traverse(val).reduce(reducer, push);
+    return buffer.join('');
+}
+
+function stringify (val, options, handlers) {
+    return walk(val, createStringifier(options, handlers));
+}
+
+function stringifier (options, handlers) {
+    return function (val) {
+        return walk(val, createStringifier(options, handlers));
+    };
+}
+
+stringifier.stringify = stringify;
+stringifier.strategies = s;
+stringifier.defaultOptions = defaultOptions;
+stringifier.defaultHandlers = defaultHandlers;
+module.exports = stringifier;
+
+},{"./strategies":38,"traverse":40,"type-name":39,"xtend":41}],38:[function(_dereq_,module,exports){
+'use strict';
+
+var typeName = _dereq_('type-name'),
+    slice = Array.prototype.slice,
+    END = {},
+    ITERATE = {};
+
+// arguments should end with end or iterate
+function compose () {
+    var filters = slice.apply(arguments);
+    return filters.reduceRight(function(right, left) {
+        return left(right);
+    });
+}
+
+// skip children
+function end () {
+    return function (acc, x) {
+        acc.context.keys = [];
+        return END;
+    };
+}
+
+// iterate children
+function iterate () {
+    return function (acc, x) {
+        return ITERATE;
+    };
+}
+
+function filter (predicate) {
+    return function (next) {
+        return function (acc, x) {
+            var toBeIterated,
+                isIteratingArray = (typeName(x) === 'Array');
+            if (typeName(predicate) === 'function') {
+                toBeIterated = [];
+                acc.context.keys.forEach(function (key) {
+                    var indexOrKey = isIteratingArray ? parseInt(key, 10) : key,
+                        kvp = {
+                            key: indexOrKey,
+                            value: x[key]
+                        },
+                        decision = predicate(kvp);
+                    if (decision) {
+                        toBeIterated.push(key);
+                    }
+                    if (typeName(decision) === 'number') {
+                        truncateByKey(decision, key, acc);
+                    }
+                    if (typeName(decision) === 'function') {
+                        customizeStrategyForKey(decision, key, acc);
+                    }
+                });
+                acc.context.keys = toBeIterated;
+            }
+            return next(acc, x);
+        };
+    };
+}
+
+function customizeStrategyForKey (strategy, key, acc) {
+    acc.handlers[currentPath(key, acc)] = strategy;
+}
+
+function truncateByKey (size, key, acc) {
+    acc.handlers[currentPath(key, acc)] = size;
+}
+
+function currentPath (key, acc) {
+    var pathToCurrentNode = [''].concat(acc.context.path);
+    if (typeName(key) !== 'undefined') {
+        pathToCurrentNode.push(key);
+    }
+    return pathToCurrentNode.join('/');
+}
+
+function allowedKeys (orderedWhiteList) {
+    return function (next) {
+        return function (acc, x) {
+            var isIteratingArray = (typeName(x) === 'Array');
+            if (!isIteratingArray && typeName(orderedWhiteList) === 'Array') {
+                acc.context.keys = orderedWhiteList.filter(function (propKey) {
+                    return acc.context.keys.indexOf(propKey) !== -1;
+                });
+            }
+            return next(acc, x);
+        };
+    };
+}
+
+function when (guard, then) {
+    return function (next) {
+        return function (acc, x) {
+            var kvp = {
+                key: acc.context.key,
+                value: x
+            };
+            if (guard(kvp, acc)) {
+                return then(acc, x);
+            }
+            return next(acc, x);
+        };
+    };
+}
+
+function truncate (size) {
+    return function (next) {
+        return function (acc, x) {
+            var orig = acc.push, ret;
+            acc.push = function (str) {
+                var truncated = str.substring(0, size);
+                orig.call(acc, truncated + acc.options.snip);
+            };
+            ret = next(acc, x);
+            acc.push = orig;
+            return ret;
+        };
+    };
+}
+
+function constructorName () {
+    return function (next) {
+        return function (acc, x) {
+            var name = acc.options.typeFun(x);
+            if (name === '') {
+                name = acc.options.anonymous;
+            }
+            acc.push(name);
+            return next(acc, x);
+        };
+    };
+}
+
+function always (str) {
+    return function (next) {
+        return function (acc, x) {
+            acc.push(str);
+            return next(acc, x);
+        };
+    };
+}
+
+function optionValue (key) {
+    return function (next) {
+        return function (acc, x) {
+            acc.push(acc.options[key]);
+            return next(acc, x);
+        };
+    };
+}
+
+function json (replacer) {
+    return function (next) {
+        return function (acc, x) {
+            acc.push(JSON.stringify(x, replacer));
+            return next(acc, x);
+        };
+    };
+}
+
+function toStr () {
+    return function (next) {
+        return function (acc, x) {
+            acc.push(x.toString());
+            return next(acc, x);
+        };
+    };
+}
+
+function decorateArray () {
+    return function (next) {
+        return function (acc, x) {
+            acc.context.before(function (node) {
+                acc.push('[');
+            });
+            acc.context.after(function (node) {
+                afterAllChildren(this, acc.push, acc.options);
+                acc.push(']');
+            });
+            acc.context.pre(function (val, key) {
+                beforeEachChild(this, acc.push, acc.options);
+            });
+            acc.context.post(function (childContext) {
+                afterEachChild(childContext, acc.push);
+            });
+            return next(acc, x);
+        };
+    };
+}
+
+function decorateObject () {
+    return function (next) {
+        return function (acc, x) {
+            acc.context.before(function (node) {
+                acc.push('{');
+            });
+            acc.context.after(function (node) {
+                afterAllChildren(this, acc.push, acc.options);
+                acc.push('}');
+            });
+            acc.context.pre(function (val, key) {
+                beforeEachChild(this, acc.push, acc.options);
+                acc.push(sanitizeKey(key) + (acc.options.indent ? ': ' : ':'));
+            });
+            acc.context.post(function (childContext) {
+                afterEachChild(childContext, acc.push);
+            });
+            return next(acc, x);
+        };
+    };
+}
+
+function sanitizeKey (key) {
+    return /^[A-Za-z_]+$/.test(key) ? key : JSON.stringify(key);
+}
+
+function afterAllChildren (context, push, options) {
+    if (options.indent && 0 < context.keys.length) {
+        push(options.lineSeparator);
+        for(var i = 0; i < context.level; i += 1) { // indent level - 1
+            push(options.indent);
+        }
+    }
+}
+
+function beforeEachChild (context, push, options) {
+    if (options.indent) {
+        push(options.lineSeparator);
+        for(var i = 0; i <= context.level; i += 1) {
+            push(options.indent);
+        }
+    }
+}
+
+function afterEachChild (childContext, push) {
+    if (!childContext.isLast) {
+        push(',');
+    }
+}
+
+function nan (kvp, acc) {
+    return kvp.value !== kvp.value;
+}
+
+function positiveInfinity (kvp, acc) {
+    return !isFinite(kvp.value) && kvp.value === Infinity;
+}
+
+function negativeInfinity (kvp, acc) {
+    return !isFinite(kvp.value) && kvp.value !== Infinity;
+}
+
+function circular (kvp, acc) {
+    return acc.context.circular;
+}
+
+function maxDepth (kvp, acc) {
+    return (acc.options.maxDepth && acc.options.maxDepth <= acc.context.level);
+}
+
+var prune = compose(
+    always('#'),
+    constructorName(),
+    always('#'),
+    end()
+);
+var omitNaN = when(nan, compose(
+    always('NaN'),
+    end()
+));
+var omitPositiveInfinity = when(positiveInfinity, compose(
+    always('Infinity'),
+    end()
+));
+var omitNegativeInfinity = when(negativeInfinity, compose(
+    always('-Infinity'),
+    end()
+));
+var omitCircular = when(circular, compose(
+    optionValue('circular'),
+    end()
+));
+var omitMaxDepth = when(maxDepth, prune);
+
+module.exports = {
+    filters: {
+        always: always,
+        constructorName: constructorName,
+        json: json,
+        toStr: toStr,
+        prune: prune,
+        truncate: truncate,
+        decorateArray: decorateArray,
+        decorateObject: decorateObject
+    },
+    flow: {
+        compose: compose,
+        when: when,
+        allowedKeys: allowedKeys,
+        filter: filter,
+        iterate: iterate,
+        end: end
+    },
+    symbols: {
+        END: END,
+        ITERATE: ITERATE
+    },
+    always: function (str) {
+        return compose(always(str), end());
+    },
+    json: function () {
+        return compose(json(), end());
+    },
+    toStr: function () {
+        return compose(toStr(), end());
+    },
+    prune: function () {
+        return prune;
+    },
+    number: function () {
+        return compose(
+            omitNaN,
+            omitPositiveInfinity,
+            omitNegativeInfinity,
+            json(),
+            end()
+        );
+    },
+    newLike: function () {
+        return compose(
+            always('new '),
+            constructorName(),
+            always('('),
+            json(),
+            always(')'),
+            end()
+        );
+    },
+    array: function (predicate) {
+        return compose(
+            omitCircular,
+            omitMaxDepth,
+            decorateArray(),
+            filter(predicate),
+            iterate()
+        );
+    },
+    object: function (predicate, orderedWhiteList) {
+        return compose(
+            omitCircular,
+            omitMaxDepth,
+            constructorName(),
+            decorateObject(),
+            allowedKeys(orderedWhiteList),
+            filter(predicate),
+            iterate()
+        );
+    }
+};
+
+},{"type-name":39}],39:[function(_dereq_,module,exports){
+/**
+ * type-name - Just a reasonable typeof
+ * 
+ * https://github.com/twada/type-name
+ *
+ * Copyright (c) 2014 Takuto Wada
+ * Licensed under the MIT license.
+ *   http://twada.mit-license.org/
+ */
+'use strict';
+
+var toStr = Object.prototype.toString;
+
+function funcName (f) {
+    return f.name ? f.name : /^\s*function\s*([^\(]*)/im.exec(f.toString())[1];
+}
+
+function ctorName (obj) {
+    var strName = toStr.call(obj).slice(8, -1);
+    if (strName === 'Object') {
+        return funcName(obj.constructor);
+    }
+    return strName;
+}
+
+function typeName (val) {
+    var type;
+    if (val === null) {
+        return 'null';
+    }
+    type = typeof(val);
+    if (type === 'object') {
+        return ctorName(val);
+    }
+    return type;
+}
+
+module.exports = typeName;
+
+},{}],40:[function(_dereq_,module,exports){
+var traverse = module.exports = function (obj) {
+    return new Traverse(obj);
+};
+
+function Traverse (obj) {
+    this.value = obj;
+}
+
+Traverse.prototype.get = function (ps) {
+    var node = this.value;
+    for (var i = 0; i < ps.length; i ++) {
+        var key = ps[i];
+        if (!node || !hasOwnProperty.call(node, key)) {
+            node = undefined;
+            break;
+        }
+        node = node[key];
+    }
+    return node;
+};
+
+Traverse.prototype.has = function (ps) {
+    var node = this.value;
+    for (var i = 0; i < ps.length; i ++) {
+        var key = ps[i];
+        if (!node || !hasOwnProperty.call(node, key)) {
+            return false;
+        }
+        node = node[key];
+    }
+    return true;
+};
+
+Traverse.prototype.set = function (ps, value) {
+    var node = this.value;
+    for (var i = 0; i < ps.length - 1; i ++) {
+        var key = ps[i];
+        if (!hasOwnProperty.call(node, key)) node[key] = {};
+        node = node[key];
+    }
+    node[ps[i]] = value;
+    return value;
+};
+
+Traverse.prototype.map = function (cb) {
+    return walk(this.value, cb, true);
+};
+
+Traverse.prototype.forEach = function (cb) {
+    this.value = walk(this.value, cb, false);
+    return this.value;
+};
+
+Traverse.prototype.reduce = function (cb, init) {
+    var skip = arguments.length === 1;
+    var acc = skip ? this.value : init;
+    this.forEach(function (x) {
+        if (!this.isRoot || !skip) {
+            acc = cb.call(this, acc, x);
+        }
+    });
+    return acc;
+};
+
+Traverse.prototype.paths = function () {
+    var acc = [];
+    this.forEach(function (x) {
+        acc.push(this.path); 
+    });
+    return acc;
+};
+
+Traverse.prototype.nodes = function () {
+    var acc = [];
+    this.forEach(function (x) {
+        acc.push(this.node);
+    });
+    return acc;
+};
+
+Traverse.prototype.clone = function () {
+    var parents = [], nodes = [];
+    
+    return (function clone (src) {
+        for (var i = 0; i < parents.length; i++) {
+            if (parents[i] === src) {
+                return nodes[i];
+            }
+        }
+        
+        if (typeof src === 'object' && src !== null) {
+            var dst = copy(src);
+            
+            parents.push(src);
+            nodes.push(dst);
+            
+            forEach(objectKeys(src), function (key) {
+                dst[key] = clone(src[key]);
+            });
+            
+            parents.pop();
+            nodes.pop();
+            return dst;
+        }
+        else {
+            return src;
+        }
+    })(this.value);
+};
+
+function walk (root, cb, immutable) {
+    var path = [];
+    var parents = [];
+    var alive = true;
+    
+    return (function walker (node_) {
+        var node = immutable ? copy(node_) : node_;
+        var modifiers = {};
+        
+        var keepGoing = true;
+        
+        var state = {
+            node : node,
+            node_ : node_,
+            path : [].concat(path),
+            parent : parents[parents.length - 1],
+            parents : parents,
+            key : path.slice(-1)[0],
+            isRoot : path.length === 0,
+            level : path.length,
+            circular : null,
+            update : function (x, stopHere) {
+                if (!state.isRoot) {
+                    state.parent.node[state.key] = x;
+                }
+                state.node = x;
+                if (stopHere) keepGoing = false;
+            },
+            'delete' : function (stopHere) {
+                delete state.parent.node[state.key];
+                if (stopHere) keepGoing = false;
+            },
+            remove : function (stopHere) {
+                if (isArray(state.parent.node)) {
+                    state.parent.node.splice(state.key, 1);
+                }
+                else {
+                    delete state.parent.node[state.key];
+                }
+                if (stopHere) keepGoing = false;
+            },
+            keys : null,
+            before : function (f) { modifiers.before = f },
+            after : function (f) { modifiers.after = f },
+            pre : function (f) { modifiers.pre = f },
+            post : function (f) { modifiers.post = f },
+            stop : function () { alive = false },
+            block : function () { keepGoing = false }
+        };
+        
+        if (!alive) return state;
+        
+        function updateState() {
+            if (typeof state.node === 'object' && state.node !== null) {
+                if (!state.keys || state.node_ !== state.node) {
+                    state.keys = objectKeys(state.node)
+                }
+                
+                state.isLeaf = state.keys.length == 0;
+                
+                for (var i = 0; i < parents.length; i++) {
+                    if (parents[i].node_ === node_) {
+                        state.circular = parents[i];
+                        break;
+                    }
+                }
+            }
+            else {
+                state.isLeaf = true;
+                state.keys = null;
+            }
+            
+            state.notLeaf = !state.isLeaf;
+            state.notRoot = !state.isRoot;
+        }
+        
+        updateState();
+        
+        // use return values to update if defined
+        var ret = cb.call(state, state.node);
+        if (ret !== undefined && state.update) state.update(ret);
+        
+        if (modifiers.before) modifiers.before.call(state, state.node);
+        
+        if (!keepGoing) return state;
+        
+        if (typeof state.node == 'object'
+        && state.node !== null && !state.circular) {
+            parents.push(state);
+            
+            updateState();
+            
+            forEach(state.keys, function (key, i) {
+                path.push(key);
+                
+                if (modifiers.pre) modifiers.pre.call(state, state.node[key], key);
+                
+                var child = walker(state.node[key]);
+                if (immutable && hasOwnProperty.call(state.node, key)) {
+                    state.node[key] = child.node;
+                }
+                
+                child.isLast = i == state.keys.length - 1;
+                child.isFirst = i == 0;
+                
+                if (modifiers.post) modifiers.post.call(state, child);
+                
+                path.pop();
+            });
+            parents.pop();
+        }
+        
+        if (modifiers.after) modifiers.after.call(state, state.node);
+        
+        return state;
+    })(root).node;
+}
+
+function copy (src) {
+    if (typeof src === 'object' && src !== null) {
+        var dst;
+        
+        if (isArray(src)) {
+            dst = [];
+        }
+        else if (isDate(src)) {
+            dst = new Date(src.getTime ? src.getTime() : src);
+        }
+        else if (isRegExp(src)) {
+            dst = new RegExp(src);
+        }
+        else if (isError(src)) {
+            dst = { message: src.message };
+        }
+        else if (isBoolean(src)) {
+            dst = new Boolean(src);
+        }
+        else if (isNumber(src)) {
+            dst = new Number(src);
+        }
+        else if (isString(src)) {
+            dst = new String(src);
+        }
+        else if (Object.create && Object.getPrototypeOf) {
+            dst = Object.create(Object.getPrototypeOf(src));
+        }
+        else if (src.constructor === Object) {
+            dst = {};
+        }
+        else {
+            var proto =
+                (src.constructor && src.constructor.prototype)
+                || src.__proto__
+                || {}
+            ;
+            var T = function () {};
+            T.prototype = proto;
+            dst = new T;
+        }
+        
+        forEach(objectKeys(src), function (key) {
+            dst[key] = src[key];
+        });
+        return dst;
+    }
+    else return src;
+}
+
+var objectKeys = Object.keys || function keys (obj) {
+    var res = [];
+    for (var key in obj) res.push(key)
+    return res;
+};
+
+function toS (obj) { return Object.prototype.toString.call(obj) }
+function isDate (obj) { return toS(obj) === '[object Date]' }
+function isRegExp (obj) { return toS(obj) === '[object RegExp]' }
+function isError (obj) { return toS(obj) === '[object Error]' }
+function isBoolean (obj) { return toS(obj) === '[object Boolean]' }
+function isNumber (obj) { return toS(obj) === '[object Number]' }
+function isString (obj) { return toS(obj) === '[object String]' }
+
+var isArray = Array.isArray || function isArray (xs) {
+    return Object.prototype.toString.call(xs) === '[object Array]';
+};
+
+var forEach = function (xs, fn) {
+    if (xs.forEach) return xs.forEach(fn)
+    else for (var i = 0; i < xs.length; i++) {
+        fn(xs[i], i, xs);
+    }
+};
+
+forEach(objectKeys(Traverse.prototype), function (key) {
+    traverse[key] = function (obj) {
+        var args = [].slice.call(arguments, 1);
+        var t = new Traverse(obj);
+        return t[key].apply(t, args);
+    };
+});
+
+var hasOwnProperty = Object.hasOwnProperty || function (obj, key) {
+    return key in obj;
+};
+
+},{}],41:[function(_dereq_,module,exports){
+module.exports = extend
+
+function extend() {
+    var target = {}
+
+    for (var i = 0; i < arguments.length; i++) {
+        var source = arguments[i]
+
+        for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+                target[key] = source[key]
+            }
+        }
+    }
+
+    return target
+}
+
+},{}],42:[function(_dereq_,module,exports){
+module.exports = extend
+
+function extend(target) {
+    for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i]
+
+        for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+                target[key] = source[key]
+            }
+        }
+    }
+
+    return target
+}
+
+},{}]},{},[1])(1)
 });
