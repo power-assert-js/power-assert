@@ -23,6 +23,14 @@
     }
   ],
   "main": "./lib/power-assert",
+  "files": [
+    "MIT-LICENSE.txt",
+    "README.md",
+    "gulpfile.js",
+    "lib",
+    "package.json",
+    "test"
+  ],
   "directories": {
     "lib": "./lib"
   },
