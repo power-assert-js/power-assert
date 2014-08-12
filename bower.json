@@ -23,10 +23,10 @@
     "ast"
   ],
   "devDependencies": {
-    "empower": "~0.7.2",
+    "empower": "~0.8.0",
     "expect": "~0.3.1",
-    "mocha": "~1.20.1",
-    "power-assert-formatter": "~0.7.1",
+    "mocha": "~1.21.4",
+    "power-assert-formatter": "~0.8.0",
     "qunit": "1.14.0",
     "qunit-tap": "1.4.2",
     "requirejs": "~2.1.13",
