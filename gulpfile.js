@@ -3,7 +3,7 @@ var gulp = require('gulp'),
     mocha = require('gulp-spawn-mocha'),
     mochaPhantomJS = require('gulp-mocha-phantomjs'),
     connect = require('gulp-connect'),
-    clean = require('gulp-clean'),
+    del = require('del'),
     espower = require('gulp-espower'),
     runSequence = require('run-sequence'),
     source = require('vinyl-source-stream'),
@@ -61,10 +61,8 @@ gulp.task('watch', function () {
     runMochaWithEspowerLoader();
 });
 
-gulp.task('clean_bundle', function () {
-    return gulp
-        .src(config.bundle.destDir, {read: false})
-        .pipe(clean());
+gulp.task('clean_bundle', function (done) {
+    del([config.bundle.destDir], done);
 });
 
 gulp.task('bundle', function() {
@@ -75,10 +73,8 @@ gulp.task('bundle', function() {
         .pipe(gulp.dest(config.bundle.destDir));
 });
 
-gulp.task('clean_espower', function () {
-    return gulp
-        .src(config.test.poweredDir, {read: false})
-        .pipe(clean());
+gulp.task('clean_espower', function (done) {
+    del([config.test.poweredDir], done);
 });
 
 gulp.task('copy_others', function(){

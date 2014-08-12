@@ -48,11 +48,11 @@
   },
   "devDependencies": {
     "browserify": "~5.9.1",
+    "del": "~0.1.1",
     "espower-loader": "~0.8.0",
     "espower-source": "~0.8.0",
     "expect.js": "0.3.1",
     "gulp": "~3.8.7",
-    "gulp-clean": "~0.3.0",
     "gulp-connect": "~2.0.5",
     "gulp-derequire": "~0.3.1",
     "gulp-espower": "~0.8.0",
