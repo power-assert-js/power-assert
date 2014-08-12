@@ -2,7 +2,7 @@ var gulp = require('gulp'),
     gutil = require('gulp-util'),
     mocha = require('gulp-spawn-mocha'),
     mochaPhantomJS = require('gulp-mocha-phantomjs'),
-    connect = require('gulp-connect'),
+    webserver = require('gulp-webserver'),
     del = require('del'),
     espower = require('gulp-espower'),
     runSequence = require('run-sequence'),
@@ -48,12 +48,12 @@ function runMochaWithEspowerLoader() {
     return runMocha(config.test.base + config.test.pattern, {r: './enable_power_assert'});
 }
 
-gulp.task('connect', function() {
-    connect.server({
-        root: [__dirname],
-        port: 9001,
-        keepalive: true
-    });
+gulp.task('webserver', function() {
+    gulp.src(__dirname)
+        .pipe(webserver({
+            port: 9001,
+            directoryListing: true
+        }));
 });
 
 gulp.task('watch', function () {
