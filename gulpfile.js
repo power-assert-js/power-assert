@@ -8,6 +8,7 @@ var gulp = require('gulp'),
     runSequence = require('run-sequence'),
     source = require('vinyl-source-stream'),
     browserify = require('browserify'),
+    derequire = require('gulp-derequire'),
     merge = require('lodash.merge'),
     config = {
         bundle: {
@@ -67,11 +68,12 @@ gulp.task('clean_bundle', function () {
 });
 
 gulp.task('bundle', function() {
-    var bundleStream = browserify(config.bundle.srcFile).bundle({standalone: config.bundle.standalone});
+    var bundleStream = browserify({entries: config.bundle.srcFile, standalone: config.bundle.standalone}).bundle();
     return bundleStream
         .pipe(source(config.bundle.destName))
+        .pipe(derequire())
         .pipe(gulp.dest(config.bundle.destDir));
-})
+});
 
 gulp.task('clean_espower', function () {
     return gulp
