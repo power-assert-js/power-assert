@@ -1,7 +1,7 @@
 {
   "name": "power-assert",
   "description": "Power Assert in JavaScript",
-  "version": "0.7.2",
+  "version": "0.8.0",
   "keywords": [
     "power-assert",
     "test",
