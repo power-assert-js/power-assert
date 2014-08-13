@@ -47,28 +47,16 @@ API
 ---------------------------------------
 powert-assert provides these assert functions:
 
-* `assert(value)`
-* `assert.ok(value)`
-* `assert.equal(actual, expected)`
-* `assert.notEqual(actual, expected)`
-* `assert.strictEqual(actual, expected)`
-* `assert.notStrictEqual(actual, expected)`
-* `assert.deepEqual(actual, expected)`
-* `assert.notDeepEqual(actual, expected)`
+* `assert(value, [message])`
+* `assert.ok(value, [message])`
+* `assert.equal(actual, expected, [message])`
+* `assert.notEqual(actual, expected, [message])`
+* `assert.strictEqual(actual, expected, [message])`
+* `assert.notStrictEqual(actual, expected, [message])`
+* `assert.deepEqual(actual, expected, [message])`
+* `assert.notDeepEqual(actual, expected, [message])`
 
 As written below, power-assert is constructed with many family modules. See more details of [empower](http://github.com/twada/empower) and others.
-
-
-SEED PROJECTS
----------------------------------------
-
-Some seed projects are available to help you start with power-assert.
-
-| module | env | tech stack |
-|:-------|:------------|:------------|
-| [power-assert-node-seed](https://github.com/azu/power-assert-node-seed) | Node.js | power-assert + [intelli-espower-loader](https://github.com/azu/intelli-espower-loader) |
-| [power-assert-testem-seed](https://github.com/azu/power-assert-testem-seed) | Browsers(by [testem](https://github.com/airportyh/testem)) | power-assert + [gulp-espower](http://github.com/twada/gulp-espower) + [testem](https://github.com/airportyh/testem). |
-| [power-assert-karma-seed](https://github.com/azu/power-assert-karma-seed) | Browsers(by [Karma](http://karma-runner.github.io/)) | power-assert + [espowerify](http://github.com/twada/espowerify) + [browserify](http://browserify.org/) + [Karma](http://karma-runner.github.io/). |
 
 
 CHANGELOG
@@ -201,6 +189,18 @@ describe('various types', function(){
           at /path/to/node_modules/empower/lib/empower.js:202:20
           at powerAssert (/path/to/node_modules/empower/lib/empower.js:99:17)
           at Context.<anonymous> (/path/to/test/mocha_node.js:55:9)
+
+
+SEED PROJECTS
+---------------------------------------
+
+Some seed projects are available to help you start with power-assert.
+
+| module | env | tech stack |
+|:-------|:------------|:------------|
+| [power-assert-node-seed](https://github.com/azu/power-assert-node-seed) | Node.js | power-assert + [intelli-espower-loader](https://github.com/azu/intelli-espower-loader) |
+| [power-assert-testem-seed](https://github.com/azu/power-assert-testem-seed) | Browsers(by [testem](https://github.com/airportyh/testem)) | power-assert + [gulp-espower](http://github.com/twada/gulp-espower) + [testem](https://github.com/airportyh/testem). |
+| [power-assert-karma-seed](https://github.com/azu/power-assert-karma-seed) | Browsers(by [Karma](http://karma-runner.github.io/)) | power-assert + [espowerify](http://github.com/twada/espowerify) + [browserify](http://browserify.org/) + [Karma](http://karma-runner.github.io/). |
 
 
 HOW TO USE
