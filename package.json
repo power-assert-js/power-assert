@@ -21,7 +21,7 @@
     "power-assert-formatter": "~0.8.0"
   },
   "devDependencies": {
-    "browserify": "~5.9.1",
+    "browserify": "~5.9.3",
     "del": "~0.1.1",
     "espower-loader": "~0.8.0",
     "espower-source": "~0.8.0",
@@ -34,7 +34,7 @@
     "gulp-util": "~3.0.0",
     "gulp-webserver": "~0.6.0",
     "lodash.merge": "~2.4.1",
-    "mocha": "~1.20.1",
+    "mocha": "~1.21.4",
     "optimist": "~0.6.1",
     "qunit-tap": "1.4.2",
     "qunitjs": "1.14.0",

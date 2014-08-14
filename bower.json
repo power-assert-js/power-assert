@@ -45,7 +45,7 @@
     "power-assert-formatter": "~0.8.0",
     "qunit": "1.14.0",
     "qunit-tap": "1.4.2",
-    "requirejs": "~2.1.13",
+    "requirejs": "~2.1.14",
     "assert": "Jxck/assert"
   }
 }
