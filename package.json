@@ -2,19 +2,13 @@
   "name": "power-assert",
   "description": "Power Assert in JavaScript",
   "version": "0.8.0",
-  "keywords": [
-    "power-assert",
-    "test",
-    "assert",
-    "testing",
-    "ecmascript",
-    "ast"
-  ],
-  "homepage": "http://github.com/twada/power-assert",
   "author": {
     "name": "Takuto Wada",
     "email": "takuto.wada@gmail.com",
     "url": "http://github.com/twada"
+  },
+  "bugs": {
+    "url": "http://github.com/twada/power-assert/issues"
   },
   "contributors": [
     {
@@ -22,27 +16,6 @@
       "url": "https://github.com/azu"
     }
   ],
-  "main": "./index.js",
-  "files": [
-    "CHANGELOG.md",
-    "MIT-LICENSE.txt",
-    "README.md",
-    "gulpfile.js",
-    "index.js",
-    "package.json",
-    "test"
-  ],
-  "directories": {
-    "lib": "./lib"
-  },
-  "repository": {
-    "type": "git",
-    "url": "http://github.com/twada/power-assert.git"
-  },
-  "scripts": {
-    "bower": "bower install --config.interactive=false",
-    "test": "gulp test"
-  },
   "dependencies": {
     "empower": "~0.8.0",
     "power-assert-formatter": "~0.8.0"
@@ -68,13 +41,35 @@
     "run-sequence": "~0.3.6",
     "vinyl-source-stream": "~0.1.1"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/twada/power-assert/blob/master/MIT-LICENSE.txt"
-    }
+  "files": [
+    "CHANGELOG.md",
+    "MIT-LICENSE.txt",
+    "README.md",
+    "gulpfile.js",
+    "index.js",
+    "package.json",
+    "test"
   ],
-  "bugs": {
-    "url": "http://github.com/twada/power-assert/issues"
+  "homepage": "http://github.com/twada/power-assert",
+  "keywords": [
+    "power-assert",
+    "test",
+    "assert",
+    "testing",
+    "ecmascript",
+    "ast"
+  ],
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/twada/power-assert/blob/master/MIT-LICENSE.txt"
+  },
+  "main": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/twada/power-assert.git"
+  },
+  "scripts": {
+    "bower": "bower install --config.interactive=false",
+    "test": "gulp test"
   }
 }
