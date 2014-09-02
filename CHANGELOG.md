@@ -1,3 +1,83 @@
+## 0.9.0 (2014-09-02)
+
+
+#### Features
+
+Now power-assert 0.9.0 supports multi-stage sourcemaps.
+
+* **power-assert:**
+  * update empower and power-assert-formatter to 0.9.0 ([a84ca4e1](https://github.com/twada/power-assert/commit/a84ca4e1e67e6146452622743915bd78a5f417d0))
+
+* **empower:**
+  * There's no significant changes
+
+* **power-assert-formatter:**
+  * [Customizable Renderers](https://github.com/twada/power-assert-formatter/pull/10)
+  * move built-in renderers to ./built-in/ ([acf85109](https://github.com/twada/power-assert-formatter/commit/acf85109bcb579109b80a36a8a6439c4e028066d))
+  * customize rendering by using custom renderer constructor in `renderers` option ([265d3539](https://github.com/twada/power-assert-formatter/commit/265d353997f7321e9e24c5252c7aa0f4c696624a))
+  * use EventEmitter to make renderers customizable ([7c190e11](https://github.com/twada/power-assert-formatter/commit/7c190e1170de8c96129a2ccd3e67fd9f14623732))
+
+* **espower:**
+  * [SourceMap support](https://github.com/twada/espower/pull/11)
+  * adjust filepath in power-assert output if sourceMap option is given ([f919d59d](https://github.com/twada/espower/commit/f919d59d6eea764881e0266f562724b7142f7695))
+  * adjust line number in power-assert output if sourceMap option is given ([8c035d89](https://github.com/twada/espower/commit/8c035d89ae88c8554cb8ca0b6bd0f7d6fe2008b0))
+
+* **espower-source:**
+  * backport espowerify to support multi-stage sourcemaps ([71de737c](https://github.com/twada/espower-source/commit/71de737cb16231db852a44592e896a43c447298b))
+
+* **espower-loader:**
+  * use espower-source 0.9.0 ([c5329f39](https://github.com/twada/espower-loader/commit/c5329f397d4ab8e434a1788d0fa1c2eb7670a25c))
+
+* **grunt-espower:**
+  * [support multistage sourcemap by @vvakame](https://github.com/twada/grunt-espower/pull/2)
+  * Thanks @vvakame for the great contribution!
+
+* **gulp-espower:**
+  * [support gulp-sourcemaps](https://github.com/twada/gulp-espower/pull/2)
+
+* **espowerify:**
+  * use espower-source directly since espower-source 0.9.0 is backported from espowerify ([625cf55d](https://github.com/twada/espowerify/commit/625cf55d5b73893f4babd00c07489590ef786be0))
+  * use multi-stage-sourcemap module to generate more accurate sourcemaps ([b1f939fa](https://github.com/twada/espowerify/commit/b1f939faa84be7f4fde82313b2257042b336d25c))
+  * if upstream SourceMap is given, decode and offset it ([a1683475](https://github.com/twada/espowerify/commit/a1683475a588b0a5b0aee040f23dfb04ad902b11))
+
+* **espower-coffee:**
+  * interact with coffeescript compiler to adjust line number in power-assert output ([9c159205](https://github.com/twada/espower-coffee/commit/9c159205608e6a556f61167d1fb65123ae2421ab))
+
+
+#### Breaking Changes
+
+**No change is required if you are using default configuration.**
+
+* **power-assert-formatter:**
+  * built-in renderers are listed as relative path
+
+If you are customizing renderers by `options.renderers`, you may have to migrate.
+
+To migrate, change your code from the following:
+
+```
+[
+    'file',
+    'assertion',
+    'diagram',
+    'binary-expression'
+]
+```
+
+To:
+
+```
+ [
+    './built-in/file',
+    './built-in/assertion',
+    './built-in/diagram',
+    './built-in/binary-expression'
+ ]
+```
+
+ ([265d3539](https://github.com/twada/power-assert-formatter/commit/265d353997f7321e9e24c5252c7aa0f4c696624a)), ([acf85109](https://github.com/twada/power-assert-formatter/commit/acf85109bcb579109b80a36a8a6439c4e028066d))
+
+
 ## 0.8.0 (2014-08-12)
 
 

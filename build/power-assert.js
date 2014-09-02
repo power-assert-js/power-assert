@@ -16,7 +16,7 @@ var baseAssert = _dereq_('assert'),
 
 module.exports = empower(baseAssert, formatter(), {modifyMessageOnRethrow: true, saveContextOnRethrow: true});
 
-},{"assert":2,"empower":7,"power-assert-formatter":21}],2:[function(_dereq_,module,exports){
+},{"assert":2,"empower":10,"power-assert-formatter":24}],2:[function(_dereq_,module,exports){
 // http://wiki.commonjs.org/wiki/Unit_Testing/1.0
 //
 // THIS IS NOT TESTED NOR LIKELY TO WORK OUTSIDE V8!
@@ -975,7 +975,312 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,_dereq_('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":3,"_process":6,"inherits":5}],5:[function(_dereq_,module,exports){
+},{"./support/isBuffer":3,"_process":7,"inherits":6}],5:[function(_dereq_,module,exports){
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+function EventEmitter() {
+  this._events = this._events || {};
+  this._maxListeners = this._maxListeners || undefined;
+}
+module.exports = EventEmitter;
+
+// Backwards-compat with node 0.10.x
+EventEmitter.EventEmitter = EventEmitter;
+
+EventEmitter.prototype._events = undefined;
+EventEmitter.prototype._maxListeners = undefined;
+
+// By default EventEmitters will print a warning if more than 10 listeners are
+// added to it. This is a useful default which helps finding memory leaks.
+EventEmitter.defaultMaxListeners = 10;
+
+// Obviously not all Emitters should be limited to 10. This function allows
+// that to be increased. Set to zero for unlimited.
+EventEmitter.prototype.setMaxListeners = function(n) {
+  if (!isNumber(n) || n < 0 || isNaN(n))
+    throw TypeError('n must be a positive number');
+  this._maxListeners = n;
+  return this;
+};
+
+EventEmitter.prototype.emit = function(type) {
+  var er, handler, len, args, i, listeners;
+
+  if (!this._events)
+    this._events = {};
+
+  // If there is no 'error' event listener then throw.
+  if (type === 'error') {
+    if (!this._events.error ||
+        (isObject(this._events.error) && !this._events.error.length)) {
+      er = arguments[1];
+      if (er instanceof Error) {
+        throw er; // Unhandled 'error' event
+      } else {
+        throw TypeError('Uncaught, unspecified "error" event.');
+      }
+      return false;
+    }
+  }
+
+  handler = this._events[type];
+
+  if (isUndefined(handler))
+    return false;
+
+  if (isFunction(handler)) {
+    switch (arguments.length) {
+      // fast cases
+      case 1:
+        handler.call(this);
+        break;
+      case 2:
+        handler.call(this, arguments[1]);
+        break;
+      case 3:
+        handler.call(this, arguments[1], arguments[2]);
+        break;
+      // slower
+      default:
+        len = arguments.length;
+        args = new Array(len - 1);
+        for (i = 1; i < len; i++)
+          args[i - 1] = arguments[i];
+        handler.apply(this, args);
+    }
+  } else if (isObject(handler)) {
+    len = arguments.length;
+    args = new Array(len - 1);
+    for (i = 1; i < len; i++)
+      args[i - 1] = arguments[i];
+
+    listeners = handler.slice();
+    len = listeners.length;
+    for (i = 0; i < len; i++)
+      listeners[i].apply(this, args);
+  }
+
+  return true;
+};
+
+EventEmitter.prototype.addListener = function(type, listener) {
+  var m;
+
+  if (!isFunction(listener))
+    throw TypeError('listener must be a function');
+
+  if (!this._events)
+    this._events = {};
+
+  // To avoid recursion in the case that type === "newListener"! Before
+  // adding it to the listeners, first emit "newListener".
+  if (this._events.newListener)
+    this.emit('newListener', type,
+              isFunction(listener.listener) ?
+              listener.listener : listener);
+
+  if (!this._events[type])
+    // Optimize the case of one listener. Don't need the extra array object.
+    this._events[type] = listener;
+  else if (isObject(this._events[type]))
+    // If we've already got an array, just append.
+    this._events[type].push(listener);
+  else
+    // Adding the second element, need to change to array.
+    this._events[type] = [this._events[type], listener];
+
+  // Check for listener leak
+  if (isObject(this._events[type]) && !this._events[type].warned) {
+    var m;
+    if (!isUndefined(this._maxListeners)) {
+      m = this._maxListeners;
+    } else {
+      m = EventEmitter.defaultMaxListeners;
+    }
+
+    if (m && m > 0 && this._events[type].length > m) {
+      this._events[type].warned = true;
+      console.error('(node) warning: possible EventEmitter memory ' +
+                    'leak detected. %d listeners added. ' +
+                    'Use emitter.setMaxListeners() to increase limit.',
+                    this._events[type].length);
+      if (typeof console.trace === 'function') {
+        // not supported in IE 10
+        console.trace();
+      }
+    }
+  }
+
+  return this;
+};
+
+EventEmitter.prototype.on = EventEmitter.prototype.addListener;
+
+EventEmitter.prototype.once = function(type, listener) {
+  if (!isFunction(listener))
+    throw TypeError('listener must be a function');
+
+  var fired = false;
+
+  function g() {
+    this.removeListener(type, g);
+
+    if (!fired) {
+      fired = true;
+      listener.apply(this, arguments);
+    }
+  }
+
+  g.listener = listener;
+  this.on(type, g);
+
+  return this;
+};
+
+// emits a 'removeListener' event iff the listener was removed
+EventEmitter.prototype.removeListener = function(type, listener) {
+  var list, position, length, i;
+
+  if (!isFunction(listener))
+    throw TypeError('listener must be a function');
+
+  if (!this._events || !this._events[type])
+    return this;
+
+  list = this._events[type];
+  length = list.length;
+  position = -1;
+
+  if (list === listener ||
+      (isFunction(list.listener) && list.listener === listener)) {
+    delete this._events[type];
+    if (this._events.removeListener)
+      this.emit('removeListener', type, listener);
+
+  } else if (isObject(list)) {
+    for (i = length; i-- > 0;) {
+      if (list[i] === listener ||
+          (list[i].listener && list[i].listener === listener)) {
+        position = i;
+        break;
+      }
+    }
+
+    if (position < 0)
+      return this;
+
+    if (list.length === 1) {
+      list.length = 0;
+      delete this._events[type];
+    } else {
+      list.splice(position, 1);
+    }
+
+    if (this._events.removeListener)
+      this.emit('removeListener', type, listener);
+  }
+
+  return this;
+};
+
+EventEmitter.prototype.removeAllListeners = function(type) {
+  var key, listeners;
+
+  if (!this._events)
+    return this;
+
+  // not listening for removeListener, no need to emit
+  if (!this._events.removeListener) {
+    if (arguments.length === 0)
+      this._events = {};
+    else if (this._events[type])
+      delete this._events[type];
+    return this;
+  }
+
+  // emit removeListener for all listeners on all events
+  if (arguments.length === 0) {
+    for (key in this._events) {
+      if (key === 'removeListener') continue;
+      this.removeAllListeners(key);
+    }
+    this.removeAllListeners('removeListener');
+    this._events = {};
+    return this;
+  }
+
+  listeners = this._events[type];
+
+  if (isFunction(listeners)) {
+    this.removeListener(type, listeners);
+  } else {
+    // LIFO order
+    while (listeners.length)
+      this.removeListener(type, listeners[listeners.length - 1]);
+  }
+  delete this._events[type];
+
+  return this;
+};
+
+EventEmitter.prototype.listeners = function(type) {
+  var ret;
+  if (!this._events || !this._events[type])
+    ret = [];
+  else if (isFunction(this._events[type]))
+    ret = [this._events[type]];
+  else
+    ret = this._events[type].slice();
+  return ret;
+};
+
+EventEmitter.listenerCount = function(emitter, type) {
+  var ret;
+  if (!emitter._events || !emitter._events[type])
+    ret = 0;
+  else if (isFunction(emitter._events[type]))
+    ret = 1;
+  else
+    ret = emitter._events[type].length;
+  return ret;
+};
+
+function isFunction(arg) {
+  return typeof arg === 'function';
+}
+
+function isNumber(arg) {
+  return typeof arg === 'number';
+}
+
+function isObject(arg) {
+  return typeof arg === 'object' && arg !== null;
+}
+
+function isUndefined(arg) {
+  return arg === void 0;
+}
+
+},{}],6:[function(_dereq_,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -1000,7 +1305,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],6:[function(_dereq_,module,exports){
+},{}],7:[function(_dereq_,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -1065,7 +1370,11 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],7:[function(_dereq_,module,exports){
+},{}],8:[function(_dereq_,module,exports){
+module.exports=_dereq_(3)
+},{}],9:[function(_dereq_,module,exports){
+module.exports=_dereq_(4)
+},{"./support/isBuffer":8,"_process":7,"inherits":6}],10:[function(_dereq_,module,exports){
 /**
  * empower - Power Assert feature enhancer for assert function/object.
  *
@@ -1140,7 +1449,7 @@ function isEmpowered (assertObjectOrFunction) {
 empower.defaultOptions = defaultOptions;
 module.exports = empower;
 
-},{"./lib/decorator":10,"./lib/default-options":11,"xtend/mutable":42}],8:[function(_dereq_,module,exports){
+},{"./lib/decorator":13,"./lib/default-options":14,"xtend/mutable":46}],11:[function(_dereq_,module,exports){
 'use strict';
 
 module.exports = function capturable () {
@@ -1173,7 +1482,7 @@ module.exports = function capturable () {
     };
 };
 
-},{}],9:[function(_dereq_,module,exports){
+},{}],12:[function(_dereq_,module,exports){
 'use strict';
 
 var slice = Array.prototype.slice;
@@ -1181,7 +1490,7 @@ var slice = Array.prototype.slice;
 function decorate (callSpec, decorator) {
     var func = callSpec.func,
         thisObj = callSpec.thisObj,
-        numNonMessageArgs = callSpec.numArgsToCapture;
+        numArgsToCapture = callSpec.numArgsToCapture;
 
     return function () {
         var context, message, args = slice.apply(arguments);
@@ -1190,7 +1499,7 @@ function decorate (callSpec, decorator) {
             return func.apply(thisObj, args);
         }
 
-        var values = args.slice(0, numNonMessageArgs).map(function (arg) {
+        var values = args.slice(0, numArgsToCapture).map(function (arg) {
             if (isNotCaptured(arg)) {
                 return arg;
             }
@@ -1207,7 +1516,7 @@ function decorate (callSpec, decorator) {
             return arg.powerAssertContext.value;
         });
 
-        if (numNonMessageArgs === (args.length - 1)) {
+        if (numArgsToCapture === (args.length - 1)) {
             message = args[args.length - 1];
         }
 
@@ -1233,14 +1542,13 @@ function isCaptured (value) {
 
 module.exports = decorate;
 
-},{}],10:[function(_dereq_,module,exports){
+},{}],13:[function(_dereq_,module,exports){
 'use strict';
 
 var escallmatch = _dereq_('escallmatch'),
     extend = _dereq_('xtend/mutable'),
     capturable = _dereq_('./capturable'),
     decorate = _dereq_('./decorate'),
-    slice = Array.prototype.slice,
     isPhantom = typeof window !== 'undefined' && typeof window.callPhantom === 'function';
 
 
@@ -1372,7 +1680,7 @@ function methodCall (matcher) {
 
 module.exports = Decorator;
 
-},{"./capturable":8,"./decorate":9,"escallmatch":12,"xtend/mutable":42}],11:[function(_dereq_,module,exports){
+},{"./capturable":11,"./decorate":12,"escallmatch":15,"xtend/mutable":46}],14:[function(_dereq_,module,exports){
 'use strict';
 
 module.exports = function defaultOptions () {
@@ -1393,7 +1701,7 @@ module.exports = function defaultOptions () {
     };
 };
 
-},{}],12:[function(_dereq_,module,exports){
+},{}],15:[function(_dereq_,module,exports){
 /**
  * escallmatch:
  *   ECMAScript CallExpression matcher made from function/method signature
@@ -1440,14 +1748,23 @@ Matcher.prototype.test = function (currentNode) {
 };
 
 Matcher.prototype.matchArgument = function (currentNode, parentNode) {
-    var indexOfCurrentArg, argNode;
     if (isCalleeOfParent(currentNode, parentNode)) {
         return null;
     }
     if (this.test(parentNode)) {
-        indexOfCurrentArg = parentNode.arguments.indexOf(currentNode);
-        argNode = this.signatureAst.arguments[indexOfCurrentArg];
-        return toArgumentSignature(argNode);
+        var indexOfCurrentArg = parentNode.arguments.indexOf(currentNode);
+        var numOptional = parentNode.arguments.length - this.numMinArgs;
+        var matchedSignatures = this.argumentSignatures().reduce(function (accum, argSig) {
+            if (argSig.kind === 'mandatory') {
+                accum.push(argSig);
+            }
+            if (argSig.kind === 'optional' && 0 < numOptional) {
+                numOptional -= 1;
+                accum.push(argSig);
+            }
+            return accum;
+        }, []);
+        return matchedSignatures[indexOfCurrentArg];
     }
     return null;
 };
@@ -1579,7 +1896,7 @@ function extractExpressionFrom (tree) {
 
 module.exports = createMatcher;
 
-},{"deep-equal":13,"esprima":19,"espurify":16,"estraverse":20}],13:[function(_dereq_,module,exports){
+},{"deep-equal":16,"esprima":22,"espurify":19,"estraverse":23}],16:[function(_dereq_,module,exports){
 var pSlice = Array.prototype.slice;
 var objectKeys = _dereq_('./lib/keys.js');
 var isArguments = _dereq_('./lib/is_arguments.js');
@@ -1675,7 +1992,7 @@ function objEquiv(a, b, opts) {
   return true;
 }
 
-},{"./lib/is_arguments.js":14,"./lib/keys.js":15}],14:[function(_dereq_,module,exports){
+},{"./lib/is_arguments.js":17,"./lib/keys.js":18}],17:[function(_dereq_,module,exports){
 var supportsArgumentsClass = (function(){
   return Object.prototype.toString.call(arguments)
 })() == '[object Arguments]';
@@ -1697,7 +2014,7 @@ function unsupported(object){
     false;
 };
 
-},{}],15:[function(_dereq_,module,exports){
+},{}],18:[function(_dereq_,module,exports){
 exports = module.exports = typeof Object.keys === 'function'
   ? Object.keys : shim;
 
@@ -1708,7 +2025,7 @@ function shim (obj) {
   return keys;
 }
 
-},{}],16:[function(_dereq_,module,exports){
+},{}],19:[function(_dereq_,module,exports){
 /**
  * espurify - Clone new AST without extra properties
  * 
@@ -1750,7 +2067,7 @@ function isSupportedKey (type, key) {
 
 module.exports = espurify;
 
-},{"./lib/ast-deepcopy":17,"./lib/ast-properties":18,"traverse":40}],17:[function(_dereq_,module,exports){
+},{"./lib/ast-deepcopy":20,"./lib/ast-properties":21,"traverse":44}],20:[function(_dereq_,module,exports){
 /**
  * Copyright (C) 2012 Yusuke Suzuki (twitter: @Constellation) and other contributors.
  * Released under the BSD license.
@@ -1789,7 +2106,7 @@ function deepCopy (obj) {
 
 module.exports = deepCopy;
 
-},{}],18:[function(_dereq_,module,exports){
+},{}],21:[function(_dereq_,module,exports){
 module.exports = {
     AssignmentExpression: ['type', 'operator', 'left', 'right'],
     ArrayExpression: ['type', 'elements'],
@@ -1842,7 +2159,7 @@ module.exports = {
     YieldExpression: ['type', 'argument']
 };
 
-},{}],19:[function(_dereq_,module,exports){
+},{}],22:[function(_dereq_,module,exports){
 /*
   Copyright (C) 2013 Ariya Hidayat <ariya.hidayat@gmail.com>
   Copyright (C) 2013 Thaddee Tyl <thaddee.tyl@gmail.com>
@@ -5600,7 +5917,7 @@ parseStatement: true, parseSourceElement: true */
 }));
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-},{}],20:[function(_dereq_,module,exports){
+},{}],23:[function(_dereq_,module,exports){
 /*
   Copyright (C) 2012-2013 Yusuke Suzuki <utatane.tea@gmail.com>
   Copyright (C) 2012 Ariya Hidayat <ariya.hidayat@gmail.com>
@@ -6291,7 +6608,7 @@ parseStatement: true, parseSourceElement: true */
 }));
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-},{}],21:[function(_dereq_,module,exports){
+},{}],24:[function(_dereq_,module,exports){
 /**
  * power-assert-formatter.js - Power Assert output formatter
  *
@@ -6305,227 +6622,19 @@ parseStatement: true, parseSourceElement: true */
 
 module.exports = _dereq_('./lib/create');
 
-},{"./lib/create":22}],22:[function(_dereq_,module,exports){
+},{"./lib/create":29}],25:[function(_dereq_,module,exports){
 'use strict';
 
-var stringifier = _dereq_('stringifier'),
-    stringWidth = _dereq_('./string-width'),
-    StringWriter = _dereq_('./string-writer'),
-    traverseContext = _dereq_('./traverse'),
-    defaultOptions = _dereq_('./options'),
-    extend = _dereq_('xtend');
-
-(function() {
-    // "Browserify can only analyze static requires. It is not in the scope of browserify to handle dynamic requires."
-    // https://github.com/substack/node-browserify/issues/377
-    _dereq_('./renderers/assertion');
-    _dereq_('./renderers/binary-expression');
-    _dereq_('./renderers/diagram');
-    _dereq_('./renderers/file');
-})();
-
-function create (options) {
-    var config = extend(defaultOptions(), options);
-    if (typeof config.widthOf !== 'function') {
-        config.widthOf = stringWidth;
-    }
-    if (typeof config.stringify !== 'function') {
-        config.stringify = stringifier(config);
-    }
-    if (!config.writerClass) {
-        config.writerClass = StringWriter;
-    }
-    return function (context) {
-        var writer = new config.writerClass(extend(config)),
-            renderers = config.renderers.map(function (rendererName) {
-                var RendererClass = _dereq_('./renderers/' + rendererName);
-                return new RendererClass(extend(config));
-            });
-        renderers.forEach(function (renderer) {
-            renderer.init(context);
-        });
-        traverseContext(context, renderers);
-        renderers.forEach(function (renderer) {
-            renderer.render(writer);
-        });
+function AssertionRenderer (traversal, config) {
+    var assertionLine;
+    traversal.on('start', function (context) {
+        assertionLine = context.source.content;
+    });
+    traversal.on('render', function (writer) {
         writer.write('');
-        return writer.flush();
-    };
-}
-
-create.defaultOptions = defaultOptions;
-create.stringWidth = stringWidth;
-module.exports = create;
-
-},{"./options":24,"./renderers/assertion":25,"./renderers/binary-expression":26,"./renderers/diagram":27,"./renderers/file":28,"./string-width":29,"./string-writer":30,"./traverse":31,"stringifier":37,"xtend":41}],23:[function(_dereq_,module,exports){
-var syntax = _dereq_('estraverse').Syntax;
-
-function EsNode (path, currentNode, parentNode, espathToValue, jsCode, jsAST) {
-    if (path) {
-        this.espath = path.join('/');
-        this.parentEspath = path.slice(0, path.length - 1).join('/');
-        this.currentProp = path[path.length - 1];
-    } else {
-        this.espath = '';
-        this.parentEspath = '';
-        this.currentProp = null;
-    }
-    this.currentNode = currentNode;
-    this.parentNode = parentNode;
-    this.parentEsNode = null;
-    this.espathToValue = espathToValue;
-    this.jsCode = jsCode;
-    this.jsAST = jsAST;
-}
-EsNode.prototype.setParentEsNode = function (parentEsNode) {
-    this.parentEsNode = parentEsNode;
-};
-EsNode.prototype.getParentEsNode = function () {
-    return this.parentEsNode;
-};
-EsNode.prototype.code = function () {
-    return this.jsCode.slice(this.currentNode.loc.start.column, this.currentNode.loc.end.column);
-};
-EsNode.prototype.value = function () {
-    if (this.currentNode.type === syntax.Literal) {
-        return this.currentNode.value;
-    }
-    return this.espathToValue[this.espath];
-};
-EsNode.prototype.isCaptured = function () {
-    return this.espathToValue.hasOwnProperty(this.espath);
-};
-EsNode.prototype.location = function () {
-    return locationOf(this.currentNode, this.jsAST.tokens);
-};
-
-
-function locationOf(currentNode, tokens) {
-    switch(currentNode.type) {
-    case syntax.MemberExpression:
-        return propertyLocationOf(currentNode, tokens);
-    case syntax.CallExpression:
-        if (currentNode.callee.type === syntax.MemberExpression) {
-            return propertyLocationOf(currentNode.callee, tokens);
-        }
-        break;
-    case syntax.BinaryExpression:
-    case syntax.LogicalExpression:
-    case syntax.AssignmentExpression:
-        return infixOperatorLocationOf(currentNode, tokens);
-    default:
-        break;
-    }
-    return currentNode.loc;
-}
-
-function propertyLocationOf(memberExpression, tokens) {
-    var prop = memberExpression.property,
-        token;
-    if (!memberExpression.computed) {
-        return prop.loc;
-    }
-    token = findLeftBracketTokenOf(memberExpression, tokens);
-    return token ? token.loc : prop.loc;
-}
-
-
-// calculate location of infix operator for BinaryExpression, AssignmentExpression and LogicalExpression.
-function infixOperatorLocationOf (expression, tokens) {
-    var token = findOperatorTokenOf(expression, tokens);
-    return token ? token.loc : expression.left.loc;
-}
-
-
-function findLeftBracketTokenOf(expression, tokens) {
-    var fromLine = expression.loc.start.line,
-        toLine = expression.property.loc.start.line,
-        fromColumn = expression.property.loc.start.column;
-    return searchToken(tokens, fromLine, toLine, function (token, index) {
-        var prevToken;
-        if (token.loc.start.column === fromColumn) {
-            prevToken = tokens[index - 1];
-            if (prevToken.type === 'Punctuator' && prevToken.value === '[') {
-                return prevToken;
-            }
-        }
-        return undefined;
+        writer.write(assertionLine);
     });
 }
-
-
-function findOperatorTokenOf(expression, tokens) {
-    var fromLine = expression.left.loc.end.line,
-        toLine = expression.right.loc.start.line,
-        fromColumn = expression.left.loc.end.column,
-        toColumn = expression.right.loc.start.column;
-    return searchToken(tokens, fromLine, toLine, function (token, index) {
-        if (fromColumn < token.loc.start.column &&
-            token.loc.end.column < toColumn &&
-            token.type === 'Punctuator' &&
-            token.value === expression.operator) {
-            return token;
-        }
-        return undefined;
-    });
-}
-
-
-function searchToken(tokens, fromLine, toLine, predicate) {
-    var i, token, found;
-    for(i = 0; i < tokens.length; i += 1) {
-        token = tokens[i];
-        if (token.loc.start.line < fromLine) {
-            continue;
-        }
-        if (toLine < token.loc.end.line) {
-            break;
-        }
-        found = predicate(token, i);
-        if (found) {
-            return found;
-        }
-    }
-    return undefined;
-}
-
-
-module.exports = EsNode;
-
-},{"estraverse":20}],24:[function(_dereq_,module,exports){
-module.exports = function defaultOptions () {
-    'use strict';
-    return {
-        lineDiffThreshold: 5,
-        maxDepth: 1,
-        anonymous: 'Object',
-        circular: '#@Circular#',
-        lineSeparator: '\n',
-        renderers: [
-            'file',
-            'assertion',
-            'diagram',
-            'binary-expression'
-        ]
-    };
-};
-
-},{}],25:[function(_dereq_,module,exports){
-function AssertionRenderer (config) {
-}
-
-AssertionRenderer.prototype.init = function (context) {
-    this.assertionLine = context.source.content;
-};
-
-AssertionRenderer.prototype.onEachEsNode = function (esNode) {
-};
-
-AssertionRenderer.prototype.render = function (writer) {
-    writer.write('');
-    writer.write(this.assertionLine);
-};
-
 module.exports = AssertionRenderer;
 
 },{}],26:[function(_dereq_,module,exports){
@@ -6538,50 +6647,43 @@ var DiffMatchPatch = _dereq_('googlediff'),
     syntax = _dereq_('estraverse').Syntax;
 
 
-function BinaryExpressionRenderer(config) {
+function BinaryExpressionRenderer(traversal, config) {
     this.config = config;
     this.stringify = config.stringify;
     this.espathToPair = {};
+    var _this = this;
+    traversal.on('esnode', function (esNode) {
+        var pair;
+        if (!esNode.isCaptured()) {
+            if (isTargetBinaryExpression(esNode.getParent()) && esNode.currentNode.type === syntax.Literal) {
+                _this.espathToPair[esNode.parentEspath][esNode.currentProp] = {code: esNode.code(), value: esNode.value()};
+            }
+            return;
+        }
+        if (isTargetBinaryExpression(esNode.getParent())) {
+            _this.espathToPair[esNode.parentEspath][esNode.currentProp] = {code: esNode.code(), value: esNode.value()};
+        }
+        if (isTargetBinaryExpression(esNode)) {
+            pair = {
+                operator: esNode.currentNode.operator,
+                value: esNode.value()
+            };
+            _this.espathToPair[esNode.espath] = pair;
+        }
+    });
+    traversal.on('render', function (writer) {
+        var pairs = [];
+        keys(_this.espathToPair).forEach(function (espath) {
+            var pair = _this.espathToPair[espath];
+            if (pair.left && pair.right) {
+                pairs.push(pair);
+            }
+        });
+        pairs.forEach(function (pair) {
+            _this.compare(pair, writer);
+        });
+    });
 }
-
-BinaryExpressionRenderer.prototype.init = function (context) {
-};
-
-BinaryExpressionRenderer.prototype.onEachEsNode = function (esNode) {
-    var pair,
-        that = this;
-    if (!esNode.isCaptured()) {
-        if (isTargetBinaryExpression(esNode.getParentEsNode()) && esNode.currentNode.type === syntax.Literal) {
-            that.espathToPair[esNode.parentEspath][esNode.currentProp] = {code: esNode.code(), value: esNode.value()};
-        }
-        return;
-    }
-    if (isTargetBinaryExpression(esNode.getParentEsNode())) {
-        that.espathToPair[esNode.parentEspath][esNode.currentProp] = {code: esNode.code(), value: esNode.value()};
-    }
-    if (isTargetBinaryExpression(esNode)) {
-        pair = {
-            operator: esNode.currentNode.operator,
-            value: esNode.value()
-        };
-        that.espathToPair[esNode.espath] = pair;
-    }
-};
-
-BinaryExpressionRenderer.prototype.render = function (writer) {
-    var pairs = [],
-        that = this;
-    keys(that.espathToPair).forEach(function (espath) {
-        var pair = that.espathToPair[espath];
-        if (pair.left && pair.right) {
-            pairs.push(pair);
-        }
-    });
-
-    pairs.forEach(function (pair) {
-        that.compare(pair, writer);
-    });
-};
 
 BinaryExpressionRenderer.prototype.compare = function (pair, writer) {
     if (isStringDiffTarget(pair)) {
@@ -6647,35 +6749,35 @@ function udiffChars (text1, text2) {
 
 module.exports = BinaryExpressionRenderer;
 
-},{"estraverse":20,"googlediff":33,"object-keys":35,"type-name":39}],27:[function(_dereq_,module,exports){
-function DiagramRenderer (config) {
+},{"estraverse":23,"googlediff":37,"object-keys":39,"type-name":43}],27:[function(_dereq_,module,exports){
+'use strict';
+
+function DiagramRenderer (traversal, config) {
     this.config = config;
     this.events = [];
     this.stringify = config.stringify;
     this.widthOf = config.widthOf;
     this.initialVertivalBarLength = 1;
-}
-
-DiagramRenderer.prototype.init = function (context) {
-    this.context = context;
-    this.assertionLine = context.source.content;
-    this.initializeRows();
-};
-
-DiagramRenderer.prototype.onEachEsNode = function (esNode) {
-    if (!esNode.isCaptured()) {
-        return;
-    }
-    this.events.push({value: esNode.value(), loc: esNode.location()});
-};
-
-DiagramRenderer.prototype.render = function (writer) {
-    this.events.sort(rightToLeft);
-    this.constructRows(this.events);
-    this.rows.forEach(function (columns) {
-        writer.write(columns.join(''));
+    var _this = this;
+    traversal.on('start', function (context) {
+        _this.context = context;
+        _this.assertionLine = context.source.content;
+        _this.initializeRows();
     });
-};
+    traversal.on('esnode', function (esNode) {
+        if (!esNode.isCaptured()) {
+            return;
+        }
+        _this.events.push({value: esNode.value(), loc: esNode.location()});
+    });
+    traversal.on('render', function (writer) {
+        _this.events.sort(rightToLeft);
+        _this.constructRows(_this.events);
+        _this.rows.forEach(function (columns) {
+            writer.write(columns.join(''));
+        });
+    });
+}
 
 DiagramRenderer.prototype.initializeRows = function () {
     this.rows = [];
@@ -6747,28 +6849,245 @@ function rightToLeft (a, b) {
 module.exports = DiagramRenderer;
 
 },{}],28:[function(_dereq_,module,exports){
-function FileRenderer (config) {
+'use strict';
+
+function FileRenderer (traversal, config) {
+    var filepath, lineNumber;
+    traversal.on('start', function (context) {
+        filepath = context.source.filepath;
+        lineNumber = context.source.line;
+    });
+    traversal.on('render', function (writer) {
+        if (filepath) {
+            writer.write('# ' + [filepath, lineNumber].join(':'));
+        } else {
+            writer.write('# at line: ' + lineNumber);
+        }
+    });
 }
-
-FileRenderer.prototype.init = function (context) {
-    this.filepath = context.source.filepath;
-    this.lineNumber = context.source.line;
-};
-
-FileRenderer.prototype.onEachEsNode = function (esNode) {
-};
-
-FileRenderer.prototype.render = function (writer) {
-    if (this.filepath) {
-        writer.write('# ' + [this.filepath, this.lineNumber].join(':'));
-    } else {
-        writer.write('# at line: ' + this.lineNumber);
-    }
-};
-
 module.exports = FileRenderer;
 
 },{}],29:[function(_dereq_,module,exports){
+'use strict';
+
+var stringifier = _dereq_('stringifier'),
+    stringWidth = _dereq_('./string-width'),
+    StringWriter = _dereq_('./string-writer'),
+    ContextTraversal = _dereq_('./traverse'),
+    defaultOptions = _dereq_('./default-options'),
+    typeName = _dereq_('type-name'),
+    extend = _dereq_('xtend');
+
+(function() {
+    // "Browserify can only analyze static requires. It is not in the scope of browserify to handle dynamic requires."
+    // https://github.com/substack/node-browserify/issues/377
+    _dereq_('./built-in/assertion');
+    _dereq_('./built-in/binary-expression');
+    _dereq_('./built-in/diagram');
+    _dereq_('./built-in/file');
+})();
+
+function create (options) {
+    var config = extend(defaultOptions(), options);
+    if (typeof config.widthOf !== 'function') {
+        config.widthOf = stringWidth;
+    }
+    if (typeof config.stringify !== 'function') {
+        config.stringify = stringifier(config);
+    }
+    if (!config.writerClass) {
+        config.writerClass = StringWriter;
+    }
+    return function (context) {
+        var traversal = new ContextTraversal(context);
+        var writer = new config.writerClass(extend(config));
+        config.renderers.forEach(function (rendererName) {
+            var RendererClass;
+            if (typeName(rendererName) === 'function') {
+                RendererClass = rendererName;
+            } else if (typeName(rendererName) === 'string') {
+                RendererClass = _dereq_(rendererName);
+            }
+            new RendererClass(traversal, extend(config));
+        });
+        traversal.emit('start', context);
+        traversal.traverse();
+        traversal.emit('render', writer);
+        writer.write('');
+        return writer.flush();
+    };
+}
+
+create.defaultOptions = defaultOptions;
+create.stringWidth = stringWidth;
+module.exports = create;
+
+},{"./built-in/assertion":25,"./built-in/binary-expression":26,"./built-in/diagram":27,"./built-in/file":28,"./default-options":30,"./string-width":33,"./string-writer":34,"./traverse":35,"stringifier":41,"type-name":43,"xtend":45}],30:[function(_dereq_,module,exports){
+module.exports = function defaultOptions () {
+    'use strict';
+    return {
+        lineDiffThreshold: 5,
+        maxDepth: 1,
+        anonymous: 'Object',
+        circular: '#@Circular#',
+        lineSeparator: '\n',
+        renderers: [
+            './built-in/file',
+            './built-in/assertion',
+            './built-in/diagram',
+            './built-in/binary-expression'
+        ]
+    };
+};
+
+},{}],31:[function(_dereq_,module,exports){
+'use strict';
+
+var syntax = _dereq_('estraverse').Syntax,
+    locationOf = _dereq_('./location');
+
+function EsNode (path, currentNode, parentNode, espathToValue, jsCode, jsAST) {
+    if (path) {
+        this.espath = path.join('/');
+        this.parentEspath = path.slice(0, path.length - 1).join('/');
+        this.currentProp = path[path.length - 1];
+    } else {
+        this.espath = '';
+        this.parentEspath = '';
+        this.currentProp = null;
+    }
+    this.currentNode = currentNode;
+    this.parentNode = parentNode;
+    this.parentEsNode = null;
+    this.espathToValue = espathToValue;
+    this.jsCode = jsCode;
+    this.jsAST = jsAST;
+}
+
+EsNode.prototype.setParent = function (parentEsNode) {
+    this.parentEsNode = parentEsNode;
+};
+
+EsNode.prototype.getParent = function () {
+    return this.parentEsNode;
+};
+
+EsNode.prototype.code = function () {
+    return this.jsCode.slice(this.currentNode.loc.start.column, this.currentNode.loc.end.column);
+};
+
+EsNode.prototype.value = function () {
+    if (this.currentNode.type === syntax.Literal) {
+        return this.currentNode.value;
+    }
+    return this.espathToValue[this.espath];
+};
+
+EsNode.prototype.isCaptured = function () {
+    return this.espathToValue.hasOwnProperty(this.espath);
+};
+
+EsNode.prototype.location = function () {
+    return locationOf(this.currentNode, this.jsAST.tokens);
+};
+
+module.exports = EsNode;
+
+},{"./location":32,"estraverse":23}],32:[function(_dereq_,module,exports){
+'use strict';
+
+var syntax = _dereq_('estraverse').Syntax;
+
+function locationOf(currentNode, tokens) {
+    switch(currentNode.type) {
+    case syntax.MemberExpression:
+        return propertyLocationOf(currentNode, tokens);
+    case syntax.CallExpression:
+        if (currentNode.callee.type === syntax.MemberExpression) {
+            return propertyLocationOf(currentNode.callee, tokens);
+        }
+        break;
+    case syntax.BinaryExpression:
+    case syntax.LogicalExpression:
+    case syntax.AssignmentExpression:
+        return infixOperatorLocationOf(currentNode, tokens);
+    default:
+        break;
+    }
+    return currentNode.loc;
+}
+
+function propertyLocationOf(memberExpression, tokens) {
+    var prop = memberExpression.property,
+        token;
+    if (!memberExpression.computed) {
+        return prop.loc;
+    }
+    token = findLeftBracketTokenOf(memberExpression, tokens);
+    return token ? token.loc : prop.loc;
+}
+
+// calculate location of infix operator for BinaryExpression, AssignmentExpression and LogicalExpression.
+function infixOperatorLocationOf (expression, tokens) {
+    var token = findOperatorTokenOf(expression, tokens);
+    return token ? token.loc : expression.left.loc;
+}
+
+function findLeftBracketTokenOf(expression, tokens) {
+    var fromLine = expression.loc.start.line,
+        toLine = expression.property.loc.start.line,
+        fromColumn = expression.property.loc.start.column;
+    return searchToken(tokens, fromLine, toLine, function (token, index) {
+        var prevToken;
+        if (token.loc.start.column === fromColumn) {
+            prevToken = tokens[index - 1];
+            if (prevToken.type === 'Punctuator' && prevToken.value === '[') {
+                return prevToken;
+            }
+        }
+        return undefined;
+    });
+}
+
+function findOperatorTokenOf(expression, tokens) {
+    var fromLine = expression.left.loc.end.line,
+        toLine = expression.right.loc.start.line,
+        fromColumn = expression.left.loc.end.column,
+        toColumn = expression.right.loc.start.column;
+    return searchToken(tokens, fromLine, toLine, function (token, index) {
+        if (fromColumn < token.loc.start.column &&
+            token.loc.end.column < toColumn &&
+            token.type === 'Punctuator' &&
+            token.value === expression.operator) {
+            return token;
+        }
+        return undefined;
+    });
+}
+
+function searchToken(tokens, fromLine, toLine, predicate) {
+    var i, token, found;
+    for(i = 0; i < tokens.length; i += 1) {
+        token = tokens[i];
+        if (token.loc.start.line < fromLine) {
+            continue;
+        }
+        if (toLine < token.loc.end.line) {
+            break;
+        }
+        found = predicate(token, i);
+        if (found) {
+            return found;
+        }
+    }
+    return undefined;
+}
+
+module.exports = locationOf;
+
+},{"estraverse":23}],33:[function(_dereq_,module,exports){
+'use strict';
+
 var eaw = _dereq_('eastasianwidth');
 
 module.exports = function (str) {
@@ -6793,7 +7112,9 @@ module.exports = function (str) {
     return width;
 };
 
-},{"eastasianwidth":32}],30:[function(_dereq_,module,exports){
+},{"eastasianwidth":36}],34:[function(_dereq_,module,exports){
+'use strict';
+
 function StringWriter (config) {
     this.lines = [];
     this.lineSeparator = config.lineSeparator;
@@ -6811,22 +7132,29 @@ StringWriter.prototype.flush = function () {
 
 module.exports = StringWriter;
 
-},{}],31:[function(_dereq_,module,exports){
+},{}],35:[function(_dereq_,module,exports){
 'use strict';
 
 var estraverse = _dereq_('estraverse'),
     esprima = _dereq_('esprima'),
+    EventEmitter = _dereq_('events').EventEmitter,
+    util = _dereq_('util'),
     EsNode = _dereq_('./esnode');
 
-function traverseContext (context, handlers) {
-    context.args.forEach(function (arg) {
-        onEachEsNode(arg, context.source.content, function (esNode) {
-            handlers.forEach(function (handler) {
-                handler.onEachEsNode(esNode);
-            });
+function ContextTraversal (context) {
+    this.context = context;
+    EventEmitter.call(this);
+}
+util.inherits(ContextTraversal, EventEmitter);
+
+ContextTraversal.prototype.traverse = function () {
+    var _this = this;
+    this.context.args.forEach(function (arg) {
+        onEachEsNode(arg, _this.context.source.content, function (esNode) {
+            _this.emit('esnode', esNode);
         });
     });
-}
+};
 
 function onEachEsNode(arg, jsCode, callback) {
     var jsAST = esprima.parse(jsCode, {tolerant: true, loc: true, tokens: true, raw: true}),
@@ -6839,7 +7167,7 @@ function onEachEsNode(arg, jsCode, callback) {
         enter: function (currentNode, parentNode) {
             var esNode = new EsNode(this.path(), currentNode, parentNode, espathToValue, jsCode, jsAST);
             if (1 < nodeStack.length) {
-                esNode.setParentEsNode(nodeStack[nodeStack.length - 1]);
+                esNode.setParent(nodeStack[nodeStack.length - 1]);
             }
             nodeStack.push(esNode);
             callback(esNode);
@@ -6856,9 +7184,9 @@ function extractExpressionFrom (tree) {
     return expression;
 }
 
-module.exports = traverseContext;
+module.exports = ContextTraversal;
 
-},{"./esnode":23,"esprima":19,"estraverse":20}],32:[function(_dereq_,module,exports){
+},{"./esnode":31,"esprima":22,"estraverse":23,"events":5,"util":9}],36:[function(_dereq_,module,exports){
 var eaw = exports;
 
 eaw.eastAsianWidth = function(character) {
@@ -7131,10 +7459,10 @@ eaw.length = function(string) {
   return len;
 };
 
-},{}],33:[function(_dereq_,module,exports){
+},{}],37:[function(_dereq_,module,exports){
 module.exports = _dereq_('./javascript/diff_match_patch_uncompressed.js').diff_match_patch;
 
-},{"./javascript/diff_match_patch_uncompressed.js":34}],34:[function(_dereq_,module,exports){
+},{"./javascript/diff_match_patch_uncompressed.js":38}],38:[function(_dereq_,module,exports){
 /**
  * Diff Match and Patch
  *
@@ -9329,7 +9657,7 @@ this['DIFF_DELETE'] = DIFF_DELETE;
 this['DIFF_INSERT'] = DIFF_INSERT;
 this['DIFF_EQUAL'] = DIFF_EQUAL;
 
-},{}],35:[function(_dereq_,module,exports){
+},{}],39:[function(_dereq_,module,exports){
 "use strict";
 
 // modified from https://github.com/es-shims/es5-shim
@@ -9398,7 +9726,7 @@ keysShim.shim = function shimObjectKeys() {
 module.exports = keysShim;
 
 
-},{"./isArguments":36}],36:[function(_dereq_,module,exports){
+},{"./isArguments":40}],40:[function(_dereq_,module,exports){
 "use strict";
 
 var toString = Object.prototype.toString;
@@ -9418,7 +9746,7 @@ module.exports = function isArguments(value) {
 };
 
 
-},{}],37:[function(_dereq_,module,exports){
+},{}],41:[function(_dereq_,module,exports){
 /**
  * stringifier
  * 
@@ -9523,7 +9851,7 @@ stringifier.defaultOptions = defaultOptions;
 stringifier.defaultHandlers = defaultHandlers;
 module.exports = stringifier;
 
-},{"./strategies":38,"traverse":40,"type-name":39,"xtend":41}],38:[function(_dereq_,module,exports){
+},{"./strategies":42,"traverse":44,"type-name":43,"xtend":45}],42:[function(_dereq_,module,exports){
 'use strict';
 
 var typeName = _dereq_('type-name'),
@@ -9885,7 +10213,7 @@ module.exports = {
     }
 };
 
-},{"type-name":39}],39:[function(_dereq_,module,exports){
+},{"type-name":43}],43:[function(_dereq_,module,exports){
 /**
  * type-name - Just a reasonable typeof
  * 
@@ -9925,7 +10253,7 @@ function typeName (val) {
 
 module.exports = typeName;
 
-},{}],40:[function(_dereq_,module,exports){
+},{}],44:[function(_dereq_,module,exports){
 var traverse = module.exports = function (obj) {
     return new Traverse(obj);
 };
@@ -10241,7 +10569,7 @@ var hasOwnProperty = Object.hasOwnProperty || function (obj, key) {
     return key in obj;
 };
 
-},{}],41:[function(_dereq_,module,exports){
+},{}],45:[function(_dereq_,module,exports){
 module.exports = extend
 
 function extend() {
@@ -10260,7 +10588,7 @@ function extend() {
     return target
 }
 
-},{}],42:[function(_dereq_,module,exports){
+},{}],46:[function(_dereq_,module,exports){
 module.exports = extend
 
 function extend(target) {
