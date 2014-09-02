@@ -21,8 +21,8 @@ What is `power-assert`?
  * available via [npm](https://www.npmjs.org/) and [bower](http://bower.io/). 
  * provides [browserify](http://browserify.org/) transform.
  * provides [grunt](http://gruntjs.com/) task and [gulp](http://gulpjs.com/) plugin.
- * supports source-map so you can debug as usual.
- * supports [CoffeeScript](http://coffeescript.org/) (experimental).
+ * supports sourcemaps so you can debug as usual.
+ * supports [CoffeeScript](http://coffeescript.org/).
  * is a beta version product. Pull-requests, issue reports and patches are always welcomed.
 
 
@@ -141,9 +141,9 @@ describe('various types', function(){
         [number] this.ary.indexOf(zero)
         => -1
 
-          at doPowerAssert (/path/to/node_modules/empower/lib/empower.js:116:39)
-          at /path/to/node_modules/empower/lib/empower.js:202:20
-          at powerAssert (/path/to/node_modules/empower/lib/empower.js:99:17)
+          at Decorator.concreteAssert (/path/to/node_modules/power-assert/node_modules/empower/lib/decorator.js:62:21)
+          at /path/to/node_modules/power-assert/node_modules/empower/lib/decorate.js:44:26
+          at powerAssert (/path/to/node_modules/power-assert/node_modules/empower/index.js:57:32)
           at Context.<anonymous> (/path/to/test/mocha_node.js:13:13)
       
       
@@ -161,8 +161,8 @@ describe('various types', function(){
         [number] this.ary.indexOf(two)
         => 1
       
-          at doPowerAssert (/path/to/node_modules/empower/lib/empower.js:116:39)
-          at Function.ok (/path/to/node_modules/empower/lib/empower.js:202:20)
+          at Decorator.concreteAssert (/path/to/node_modules/power-assert/node_modules/empower/lib/decorator.js:62:21)
+          at Function.ok (/path/to/node_modules/empower/lib/decorate.js:44:26)
           at Context.<anonymous> (/path/to/test/mocha_node.js:21:20)
       
       
@@ -185,9 +185,9 @@ describe('various types', function(){
         +alice
         
         
-          at doPowerAssert (/path/to/node_modules/empower/lib/empower.js:116:39)
-          at /path/to/node_modules/empower/lib/empower.js:202:20
-          at powerAssert (/path/to/node_modules/empower/lib/empower.js:99:17)
+          at Decorator.concreteAssert (/path/to/node_modules/power-assert/node_modules/empower/lib/decorator.js:62:21)
+          at /path/to/node_modules/power-assert/node_modules/empower/lib/decorate.js:44:26
+          at powerAssert (/path/to/node_modules/power-assert/node_modules/empower/index.js:57:32)
           at Context.<anonymous> (/path/to/test/mocha_node.js:55:9)
 
 
@@ -441,6 +441,7 @@ AUTHOR
 CONTRIBUTORS
 ---------------------------------------
 * [azu](https://github.com/azu)
+* [vvakame](https://github.com/vvakame)
 
 
 LICENSE
