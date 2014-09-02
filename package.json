@@ -17,8 +17,8 @@
     }
   ],
   "dependencies": {
-    "empower": "~0.8.0",
-    "power-assert-formatter": "~0.8.0"
+    "empower": "~0.9.0",
+    "power-assert-formatter": "~0.9.0"
   },
   "devDependencies": {
     "browserify": "~5.9.3",
