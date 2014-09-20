@@ -17,6 +17,7 @@ What is `power-assert`?
 
  * is an implementation of "Power Assert" concept in JavaScript.
  * provides descriptive assertion messages through standard [assert](http://nodejs.org/api/assert.html) compatible interface.
+ * has [online demo site](http://azu.github.io/power-assert-demo/).
  * works both on server side and browser side.
  * available via [npm](https://www.npmjs.org/) and [bower](http://bower.io/). 
  * provides [browserify](http://browserify.org/) transform.
@@ -66,6 +67,8 @@ See [CHANGELOG](https://github.com/twada/power-assert/blob/master/CHANGELOG.md)
 
 EXAMPLE
 ---------------------------------------
+
+__Note:__ There is an [online demo site](http://azu.github.io/power-assert-demo/) available.
 
 ### Target test code (using Mocha in this example)
 
