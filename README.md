@@ -16,7 +16,8 @@ DESCRIPTION
 What is `power-assert`?
 
  * is an implementation of "Power Assert" concept in JavaScript.
- * provides descriptive assertion messages through standard [assert](http://nodejs.org/api/assert.html) compatible interface.
+ * provides descriptive assertion messages through standard [assert](http://nodejs.org/api/assert.html) interface.
+ * fully compatible with [assert](http://nodejs.org/api/assert.html). So you can stop using power-assert and back to assert easily.
  * has [online demo site](http://azu.github.io/power-assert-demo/).
  * works both on server side and browser side.
  * available via [npm](https://www.npmjs.org/) and [bower](http://bower.io/). 
@@ -46,7 +47,8 @@ What is `power-assert`?
 
 API
 ---------------------------------------
-powert-assert provides these assert functions:
+
+powert-assert enhances these assert functions:
 
 * `assert(value, [message])`
 * `assert.ok(value, [message])`
@@ -56,6 +58,13 @@ powert-assert provides these assert functions:
 * `assert.notStrictEqual(actual, expected, [message])`
 * `assert.deepEqual(actual, expected, [message])`
 * `assert.notDeepEqual(actual, expected, [message])`
+
+powert-assert is fully compatible with [assert](http://nodejs.org/api/assert.html). So functions below are also available though they are not enhanced (does not produce descriptive message).
+
+* `assert.fail(actual, expected, message, operator)`
+* `assert.throws(block, [error], [message])`
+* `assert.doesNotThrow(block, [message])`
+* `assert.ifError(value)`
 
 As written below, power-assert is constructed with many family modules. See more details of [empower](http://github.com/twada/empower) and others.
 
