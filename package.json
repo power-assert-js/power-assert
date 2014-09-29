@@ -57,8 +57,9 @@
   "homepage": "http://github.com/twada/power-assert",
   "keywords": [
     "power-assert",
-    "test",
     "assert",
+    "assertion",
+    "test",
     "testing",
     "ecmascript",
     "ast"
