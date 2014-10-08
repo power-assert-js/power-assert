@@ -1,3 +1,12 @@
+### 0.9.1 (2014-10-08)
+
+
+#### Bug Fixes
+
+* **empower:**
+  * power-assert output doesn't appear in Node 0.11.x ([53e882e0](https://github.com/twada/empower/commit/53e882e00ad3dd8b45f262ab14ac782ed582b954))
+
+
 ## 0.9.0 (2014-09-02)
 
 
