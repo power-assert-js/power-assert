@@ -77,7 +77,10 @@ See [CHANGELOG](https://github.com/twada/power-assert/blob/master/CHANGELOG.md)
 EXAMPLE
 ---------------------------------------
 
+See [HOW TO USE](https://github.com/twada/power-assert#how-to-use) section for more details.
+
 __Note:__ There is an [online demo site](http://azu.github.io/power-assert-demo/) available.
+
 
 ### Target test code (using Mocha in this example)
 
@@ -123,10 +126,36 @@ describe('various types', function(){
 });
 ```
 
-### Apply one of power assert instrumentors to code above then run tests. See the power-assert output appears.
+### Be sure to transform test code
+
+To use power-assert, you need to transform your test code for power-assert output.
+
+Code transform is done by instrumentors below:
+
+ - [espower-loader](http://github.com/twada/espower-loader) (with [intelli-espower-loader](https://github.com/azu/intelli-espower-loader))
+ - [espowerify](http://github.com/twada/espowerify)
+ - [grunt-espower](http://github.com/twada/grunt-espower)
+ - [gulp-espower](http://github.com/twada/gulp-espower)
+ - [espower-coffee](http://github.com/twada/espower-coffee)
+
+If you are using Node.js only, the easiest way is to use [intelli-espower-loader](https://github.com/azu/intelli-espower-loader). Steps are as follows.
 
 
-      $ mocha /path/to/espowered_examples/mocha_node.js
+### Setup
+
+`npm install --save-dev mocha power-assert intelli-espower-loader`
+
+### Add directories to package.json
+
+```json
+  "directories": {
+    "test": "test/"
+  },
+```
+
+### See the power-assert output appears.
+
+      $ mocha --require intelli-espower-loader /path/to/test/mocha_node.js
     
       Array
         #indexOf()
@@ -153,8 +182,7 @@ describe('various types', function(){
         [number] this.ary.indexOf(zero)
         => -1
 
-          at Decorator.concreteAssert (/path/to/node_modules/power-assert/node_modules/empower/lib/decorator.js:62:21)
-          at /path/to/node_modules/power-assert/node_modules/empower/lib/decorate.js:44:26
+          at decoratedAssert (/path/to/node_modules/power-assert/node_modules/empower/lib/decorate.js:44:26)
           at powerAssert (/path/to/node_modules/power-assert/node_modules/empower/index.js:57:32)
           at Context.<anonymous> (/path/to/test/mocha_node.js:13:13)
       
@@ -173,8 +201,7 @@ describe('various types', function(){
         [number] this.ary.indexOf(two)
         => 1
       
-          at Decorator.concreteAssert (/path/to/node_modules/power-assert/node_modules/empower/lib/decorator.js:62:21)
-          at Function.ok (/path/to/node_modules/empower/lib/decorate.js:44:26)
+          at Function.decoratedAssert [as ok] (/path/to/node_modules/power-assert/node_modules/empower/lib/decorate.js:44:26)
           at Context.<anonymous> (/path/to/test/mocha_node.js:21:20)
       
       
@@ -197,8 +224,7 @@ describe('various types', function(){
         +alice
         
         
-          at Decorator.concreteAssert (/path/to/node_modules/power-assert/node_modules/empower/lib/decorator.js:62:21)
-          at /path/to/node_modules/power-assert/node_modules/empower/lib/decorate.js:44:26
+          at decoratedAssert (/path/to/node_modules/power-assert/node_modules/empower/lib/decorate.js:44:26)
           at powerAssert (/path/to/node_modules/power-assert/node_modules/empower/index.js:57:32)
           at Context.<anonymous> (/path/to/test/mocha_node.js:55:9)
 
