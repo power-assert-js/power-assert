@@ -1,7 +1,7 @@
 power-assert
 ================================
 
-Power Assert in JavaScript. Less code, more information.
+Power Assert in JavaScript. Provides descriptive assertion messages through standard [assert](http://nodejs.org/api/assert.html) interface.
 
 [![Build Status](https://travis-ci.org/twada/power-assert.svg)](https://travis-ci.org/twada/power-assert)
 [![NPM version](https://badge.fury.io/js/power-assert.svg)](http://badge.fury.io/js/power-assert)
@@ -17,10 +17,12 @@ What is `power-assert`?
 
  * is an implementation of "Power Assert" concept in JavaScript.
  * provides descriptive assertion messages through standard [assert](http://nodejs.org/api/assert.html) interface.
+ * with power-assert, you don't need to learn many assertion library APIs. It's just [assert](http://nodejs.org/api/assert.html).
  * fully compatible with [assert](http://nodejs.org/api/assert.html). So you can stop using power-assert and back to assert easily.
  * has [online demo site](http://azu.github.io/power-assert-demo/).
  * works both on server side and browser side.
  * available via [npm](https://www.npmjs.org/) and [bower](http://bower.io/). 
+ * to use power-assert, you need to transform your test code for power-assert output.
  * provides [browserify](http://browserify.org/) transform.
  * provides [grunt](http://gruntjs.com/) task and [gulp](http://gulpjs.com/) plugin.
  * supports sourcemaps so you can debug as usual.
