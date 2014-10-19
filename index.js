@@ -11,6 +11,14 @@
 
 var baseAssert = require('assert'),
     empower = require('empower'),
-    formatter = require('power-assert-formatter');
+    formatter = require('power-assert-formatter'),
+    extend = require('xtend'),
+    empowerOptions = {modifyMessageOnRethrow: true, saveContextOnRethrow: true};
 
-module.exports = empower(baseAssert, formatter(), {modifyMessageOnRethrow: true, saveContextOnRethrow: true});
+var poweredAssert = empower(baseAssert, formatter(), empowerOptions);
+
+poweredAssert.customize = function (customOptions) {
+    return empower(baseAssert, formatter(customOptions.formatter), extend(empowerOptions, customOptions.empower));
+};
+
+module.exports = poweredAssert;
