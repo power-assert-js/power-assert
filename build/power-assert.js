@@ -12,11 +12,24 @@
 
 var baseAssert = _dereq_('assert'),
     empower = _dereq_('empower'),
-    formatter = _dereq_('power-assert-formatter');
+    formatter = _dereq_('power-assert-formatter'),
+    extend = _dereq_('xtend'),
+    empowerOptions = {modifyMessageOnRethrow: true, saveContextOnRethrow: true};
 
-module.exports = empower(baseAssert, formatter(), {modifyMessageOnRethrow: true, saveContextOnRethrow: true});
+function customize (customOptions) {
+    var options = customOptions || {};
+    var poweredAssert = empower(
+        baseAssert,
+        formatter(options.formatter),
+        extend(empowerOptions, options.empower)
+    );
+    poweredAssert.customize = customize;
+    return poweredAssert;
+};
 
-},{"assert":2,"empower":8,"power-assert-formatter":22}],2:[function(_dereq_,module,exports){
+module.exports = customize();
+
+},{"assert":2,"empower":8,"power-assert-formatter":22,"xtend":43}],2:[function(_dereq_,module,exports){
 // http://wiki.commonjs.org/wiki/Unit_Testing/1.0
 //
 // THIS IS NOT TESTED NOR LIKELY TO WORK OUTSIDE V8!
