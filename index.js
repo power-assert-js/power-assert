@@ -15,10 +15,15 @@ var baseAssert = require('assert'),
     extend = require('xtend'),
     empowerOptions = {modifyMessageOnRethrow: true, saveContextOnRethrow: true};
 
-var poweredAssert = empower(baseAssert, formatter(), empowerOptions);
-
-poweredAssert.customize = function (customOptions) {
-    return empower(baseAssert, formatter(customOptions.formatter), extend(empowerOptions, customOptions.empower));
+function customize (customOptions) {
+    var options = customOptions || {};
+    var poweredAssert = empower(
+        baseAssert,
+        formatter(options.formatter),
+        extend(empowerOptions, options.empower)
+    );
+    poweredAssert.customize = customize;
+    return poweredAssert;
 };
 
-module.exports = poweredAssert;
+module.exports = customize();

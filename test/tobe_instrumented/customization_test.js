@@ -27,18 +27,17 @@
     };
 
     describe('power-assert customization', function () {
+        beforeEach(function () {
+            this.foo = {name: 'foo'};
+            this.bar = {name: 'bar', parent: this.foo};
+            this.baz = {name: 'baz', parent: this.bar};
+            this.quux = {name: 'quux', parent: this.baz};
+        });
         afterEach(function () {
             assert = orininalAssert;
         });
         
         describe('formatter.maxDepth', function () {
-            beforeEach(function () {
-                this.foo = {name: 'foo'};
-                this.bar = {name: 'bar', parent: this.foo};
-                this.baz = {name: 'baz', parent: this.bar};
-                this.quux = {name: 'quux', parent: this.baz};
-            });
-            
             it('default', function () {
                 var expected = [this.foo, this.bar, this.baz];
                 var actual = [this.baz, this.quux, this.bar];
@@ -109,6 +108,39 @@
             });
         });
 
+
+        it('customized assert should also be customizable', function () {
+            var expected = [this.foo, this.bar, this.baz];
+            var actual = [this.baz, this.quux, this.bar];
+            assert = assert.customize({
+                formatter: {
+                    maxDepth: 2
+                }
+            });
+            expectPowerAssertMessage(function () {
+                assert.deepEqual(expected, actual);
+            },[
+                'assert.deepEqual(expected, actual)',
+                '                 |         |      ',
+                '                 |         [Object{name:"baz",parent:#Object#},Object{name:"quux",parent:#Object#},Object{name:"bar",parent:#Object#}]',
+                '                 [Object{name:"foo"},Object{name:"bar",parent:#Object#},Object{name:"baz",parent:#Object#}]'
+            ]);
+
+            assert = assert.customize({
+                formatter: {
+                    maxDepth: 3
+                }
+            });
+            expectPowerAssertMessage(function () {
+                assert.deepEqual(expected, actual);
+            },[
+                'assert.deepEqual(expected, actual)',
+                '                 |         |      ',
+                '                 |         [Object{name:"baz",parent:Object{name:"bar",parent:#Object#}},Object{name:"quux",parent:Object{name:"baz",parent:#Object#}},Object{name:"bar",parent:Object{name:"foo"}}]',
+                '                 [Object{name:"foo"},Object{name:"bar",parent:Object{name:"foo"}},Object{name:"baz",parent:Object{name:"bar",parent:#Object#}}]'
+            ]);
+        });
+        
     });
 
 }));
