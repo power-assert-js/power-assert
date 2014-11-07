@@ -53,7 +53,7 @@
 
             it('customize maxDepth', function () {
                 assert = assert.customize({
-                    formatter: {
+                    output: {
                         maxDepth: 2
                     }
                 });
@@ -72,7 +72,7 @@
 
             it('set maxDepth more deeper', function () {
                 assert = assert.customize({
-                    formatter: {
+                    output: {
                         maxDepth: 3
                     }
                 });
@@ -91,7 +91,7 @@
 
             it('maxDepth=0 means dump them all', function () {
                 assert = assert.customize({
-                    formatter: {
+                    output: {
                         maxDepth: 0
                     }
                 });
@@ -113,7 +113,7 @@
             var expected = [this.foo, this.bar, this.baz];
             var actual = [this.baz, this.quux, this.bar];
             assert = assert.customize({
-                formatter: {
+                output: {
                     maxDepth: 2
                 }
             });
@@ -127,7 +127,7 @@
             ]);
 
             assert = assert.customize({
-                formatter: {
+                output: {
                     maxDepth: 3
                 }
             });

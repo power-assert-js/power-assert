@@ -19,8 +19,8 @@ function customize (customOptions) {
     var options = customOptions || {};
     var poweredAssert = empower(
         baseAssert,
-        formatter(options.formatter),
-        extend(empowerOptions, options.empower)
+        formatter(options.output),
+        extend(empowerOptions, options.assertion)
     );
     poweredAssert.customize = customize;
     return poweredAssert;

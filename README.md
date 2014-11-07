@@ -427,7 +427,7 @@ Through this API, you can customize power-assert by changing some options.
 
 ```javascript
 var assert = require('power-assert').customize({
-    formatter: {
+    output: {
         maxDepth: 2
     }
 });
@@ -435,13 +435,13 @@ var assert = require('power-assert').customize({
 
 ### options
 
-`options` has two top-level keys. `empower` and `formatter`.
+`options` has two top-level keys. `assertion` and `output`.
 
-#### options.empower
+#### options.assertion
 
 customization options for [empower](http://github.com/twada/empower) module. See [empower API documentation](https://github.com/twada/empower#api) for details. Note that some default values are different from `empower`'s (`modifyMessageOnRethrow: true` and `saveContextOnRethrow: true`).
 
-#### options.formatter
+#### options.output
 
 customization options for [power-assert-formatter](http://github.com/twada/power-assert-formatter) module. See [power-assert-formatter API documentation](https://github.com/twada/power-assert-formatter#api) for details.
 
@@ -451,7 +451,7 @@ customizable properties and their default values are as follows.
 
 ```
 var assert = require('power-assert').customize({
-    empower: {
+    assertion: {
         destructive: false,
         modifyMessageOnRethrow: true,
         saveContextOnRethrow: true,
@@ -466,7 +466,7 @@ var assert = require('power-assert').customize({
             'assert.notDeepEqual(actual, expected, [message])'
         ]
     },
-    formatter: {
+    output: {
         lineDiffThreshold: 5,
         maxDepth: 1,
         anonymous: 'Object',
