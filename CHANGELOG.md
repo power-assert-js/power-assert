@@ -1,3 +1,20 @@
+## [0.10.0](https://github.com/twada/power-assert/releases/tag/v0.10.0) (2014-11-11)
+
+
+#### Features
+
+* **power-assert:**
+  * [provide API for customization](https://github.com/twada/power-assert/pull/14) (see [CUSTOMIZATION API](https://github.com/twada/power-assert#customization-api))
+
+* **power-assert-formatter:**
+  * [diff option to make string diff function pluggable](https://github.com/twada/power-assert-formatter/pull/11) (new option [options.diff](https://github.com/twada/power-assert-formatter#optionsdiff))
+  * [outputOffset option to configure number of spaces inserted at the left](https://github.com/twada/power-assert-formatter/pull/12) (new option [options.outputOffset](https://github.com/twada/power-assert-formatter#optionsoutputoffset))
+  * [ambiguousEastAsianCharWidth option to make ambiguous east asian character width configurable](https://github.com/twada/power-assert-formatter/pull/13) (new option [options.ambiguousEastAsianCharWidth](https://github.com/twada/power-assert-formatter#optionsambiguouseastasiancharwidth))
+
+* **espowerify:**
+  * [transform file if and only if it is listed in browserify entries](https://github.com/twada/espowerify/pull/5)
+
+
 ### 0.9.1 (2014-10-08)
 
 
