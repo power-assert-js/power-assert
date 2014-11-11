@@ -50,7 +50,7 @@ What is `power-assert`?
 API
 ---------------------------------------
 
-powert-assert enhances these assert functions:
+powert-assert enhances these assert functions. Produces descriptive message when assertion is failed.
 
 * `assert(value, [message])`
 * `assert.ok(value, [message])`
@@ -67,6 +67,10 @@ powert-assert is fully compatible with [assert](http://nodejs.org/api/assert.htm
 * `assert.throws(block, [error], [message])`
 * `assert.doesNotThrow(block, [message])`
 * `assert.ifError(value)`
+
+powert-assert provides an API for customization.
+
+* `assert.customize(options)`
 
 As written below, power-assert is constructed with many family modules. See more details of [empower](http://github.com/twada/empower) and others.
 
@@ -412,6 +416,78 @@ or
 
     $ mocha your_test_espowered.js
 
+
+
+CUSTOMIZATION API
+---------------------------------------
+
+`power-assert` provides an API for customization.
+
+### var assert = assert.customize(options)
+
+Through this API, you can customize power-assert by changing some options.
+
+```javascript
+var assert = require('power-assert').customize({
+    output: {
+        maxDepth: 2
+    }
+});
+```
+
+### options
+
+`options` has two top-level keys. `assertion` and `output`.
+
+#### options.assertion
+
+customization options for [empower](http://github.com/twada/empower) module. See [empower API documentation](https://github.com/twada/empower#api) for details. Note that some default values are different from `empower`'s (`modifyMessageOnRethrow: true` and `saveContextOnRethrow: true`).
+
+#### options.output
+
+customization options for [power-assert-formatter](http://github.com/twada/power-assert-formatter) module. See [power-assert-formatter API documentation](https://github.com/twada/power-assert-formatter#api) for details.
+
+#### default values
+
+customizable properties and their default values are as follows.
+
+```
+var assert = require('power-assert').customize({
+    assertion: {
+        destructive: false,
+        modifyMessageOnRethrow: true,
+        saveContextOnRethrow: true,
+        patterns: [
+            'assert(value, [message])',
+            'assert.ok(value, [message])',
+            'assert.equal(actual, expected, [message])',
+            'assert.notEqual(actual, expected, [message])',
+            'assert.strictEqual(actual, expected, [message])',
+            'assert.notStrictEqual(actual, expected, [message])',
+            'assert.deepEqual(actual, expected, [message])',
+            'assert.notDeepEqual(actual, expected, [message])'
+        ]
+    },
+    output: {
+        lineDiffThreshold: 5,
+        maxDepth: 1,
+        anonymous: 'Object',
+        circular: '#@Circular#',
+        lineSeparator: '\n',
+        ambiguousEastAsianCharWidth: 2,
+        widthOf: (Function to calculate width of string. Please see power-assert-formatter's documentation)
+        stringify: (Function to stringify any target value. Please see power-assert-formatter's documentation)
+        diff: (Function to create diff string between two strings. Please see power-assert-formatter's documentation)
+        writerClass: (Constructor Function for output writer class. Please see power-assert-formatter's documentation)
+        renderers: [
+            './built-in/file',
+            './built-in/assertion',
+            './built-in/diagram',
+            './built-in/binary-expression'
+        ]
+    }
+});
+```
 
 
 INTERNAL DESIGN

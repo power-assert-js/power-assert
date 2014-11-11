@@ -69,10 +69,10 @@ it('QUnit output', function (mochaDone) {
         var falsyStr = '';
         assert.ok(falsyStr);
     }, [
-        '# assert.ok(falsyStr)',
-        '#           |        ',
-        '#           ""       ',
-        '# '
+        '#   assert.ok(falsyStr)',
+        '#             |        ',
+        '#             ""       ',
+        '#   '
     ]);
 
 
@@ -80,10 +80,10 @@ it('QUnit output', function (mochaDone) {
         var falsyNum = 0;
         assert.ok(falsyNum);
     }, [
-        '# assert.ok(falsyNum)',
-        '#           |        ',
-        '#           0        ',
-        '# '
+        '#   assert.ok(falsyNum)',
+        '#             |        ',
+        '#             0        ',
+        '#   '
     ]);
 
 
@@ -91,11 +91,11 @@ it('QUnit output', function (mochaDone) {
         var truth = true;
         assert.ok(!truth);
     }, [
-        '# assert.ok(!truth)',
-        '#           ||     ',
-        '#           |true  ',
-        '#           false  ',
-        '# '
+        '#   assert.ok(!truth)',
+        '#             ||     ',
+        '#             |true  ',
+        '#             false  ',
+        '#   '
     ]);
 
 
@@ -103,23 +103,23 @@ it('QUnit output', function (mochaDone) {
         var some = '';
         assert.ok(!!some);
     }, [
-        '# assert.ok(!!some)',
-        '#           |||    ',
-        '#           ||""   ',
-        '#           |true  ',
-        '#           false  ',
-        '# '
+        '#   assert.ok(!!some)',
+        '#             |||    ',
+        '#             ||""   ',
+        '#             |true  ',
+        '#             false  ',
+        '#   '
     ]);
 
 
     doQUnitTest('typeof operator: assert.ok(typeof foo !== "undefined");', function (assert) {
         assert.ok(typeof foo !== "undefined");
     }, [
-        '# assert.ok(typeof foo !== "undefined")',
-        '#           |          |               ',
-        '#           |          false           ',
-        '#           "undefined"                ',
-        '# '
+        '#   assert.ok(typeof foo !== "undefined")',
+        '#             |          |               ',
+        '#             |          false           ',
+        '#             "undefined"                ',
+        '#   '
     ]);
 
 
@@ -132,18 +132,18 @@ it('QUnit output', function (mochaDone) {
             };
         assert.ok((delete foo.bar) === falsy);
     }, [
-        '# assert.ok(delete foo.bar === falsy)',
-        '#           |      |   |   |   |     ',
-        '#           |      |   |   |   0     ',
-        '#           |      |   |   false     ',
-        '#           |      |   Object{baz:false}',
-        '#           true   Object{bar:#Object#}',
-        '# ',
-        '# [number] falsy',
-        '# => 0',
-        '# [boolean] delete foo.bar',
-        '# => true',
-        '# '
+        '#   assert.ok(delete foo.bar === falsy)',
+        '#             |      |   |   |   |     ',
+        '#             |      |   |   |   0     ',
+        '#             |      |   |   false     ',
+        '#             |      |   Object{baz:false}',
+        '#             true   Object{bar:#Object#}',
+        '#   ',
+        '#   [number] falsy',
+        '#   => 0',
+        '#   [boolean] delete foo.bar',
+        '#   => true',
+        '#   '
     ]);
 
 
@@ -152,17 +152,17 @@ it('QUnit output', function (mochaDone) {
             piyo = 8;
         assert.ok(fuga === piyo);
     }, [
-        '# assert.ok(fuga === piyo)',
-        '#           |    |   |    ',
-        '#           |    |   8    ',
-        '#           |    false    ',
-        '#           "foo"         ',
-        '# ',
-        '# [number] piyo',
-        '# => 8',
-        '# [string] fuga',
-        '# => "foo"',
-        '# '
+        '#   assert.ok(fuga === piyo)',
+        '#             |    |   |    ',
+        '#             |    |   8    ',
+        '#             |    false    ',
+        '#             "foo"         ',
+        '#   ',
+        '#   [number] piyo',
+        '#   => 8',
+        '#   [string] fuga',
+        '#   => "foo"',
+        '#   '
     ]);
 
 
@@ -172,12 +172,12 @@ it('QUnit output', function (mochaDone) {
             piyo = 'foo';
         assert.ok(fuga !== piyo);
     }, [
-        '# assert.ok(fuga !== piyo)',
-        '#           |    |   |    ',
-        '#           |    |   "foo"',
-        '#           |    false    ',
-        '#           "foo"         ',
-        '# '
+        '#   assert.ok(fuga !== piyo)',
+        '#             |    |   |    ',
+        '#             |    |   "foo"',
+        '#             |    false    ',
+        '#             "foo"         ',
+        '#   '
     ]);
 
 
@@ -186,10 +186,10 @@ it('QUnit output', function (mochaDone) {
         var fuga = 4;
         assert.ok(fuga !== 4);
     }, [
-        '# assert.ok(fuga !== 4)',
-        '#           |    |     ',
-        '#           4    false ',
-        '# '
+        '#   assert.ok(fuga !== 4)',
+        '#             |    |     ',
+        '#             4    false ',
+        '#   '
     ]);
 
 
@@ -197,10 +197,10 @@ it('QUnit output', function (mochaDone) {
     doQUnitTest('assert.ok(4 !== 4);', function (assert) {
         assert.ok(4 !== 4);
     }, [
-        '# assert.ok(4 !== 4)',
-        '#             |     ',
-        '#             false ',
-        '# '
+        '#   assert.ok(4 !== 4)',
+        '#               |     ',
+        '#               false ',
+        '#   '
     ]);
 
 
@@ -210,18 +210,18 @@ it('QUnit output', function (mochaDone) {
         var ary2 = ['aaa', 'bbb', 'ccc'];
         assert.ok(ary1.length === ary2.length);
     }, [
-        '# assert.ok(ary1.length === ary2.length)',
-        '#           |    |      |   |    |      ',
-        '#           |    |      |   |    3      ',
-        '#           |    |      |   ["aaa","bbb","ccc"]',
-        '#           |    2      false           ',
-        '#           ["foo","bar"]               ',
-        '# ',
-        '# [number] ary2.length',
-        '# => 3',
-        '# [number] ary1.length',
-        '# => 2',
-        '# '
+        '#   assert.ok(ary1.length === ary2.length)',
+        '#             |    |      |   |    |      ',
+        '#             |    |      |   |    3      ',
+        '#             |    |      |   ["aaa","bbb","ccc"]',
+        '#             |    2      false           ',
+        '#             ["foo","bar"]               ',
+        '#   ',
+        '#   [number] ary2.length',
+        '#   => 3',
+        '#   [number] ary1.length',
+        '#   => 2',
+        '#   '
     ]);
 
 
@@ -230,12 +230,12 @@ it('QUnit output', function (mochaDone) {
         var actual = 16;
         assert.ok(5 < actual && actual < 13);
     }, [
-        '# assert.ok(5 < actual && actual < 13)',
-        '#             | |      |  |      |    ',
-        '#             | |      |  16     false',
-        '#             | 16     false          ',
-        '#             true                    ',
-        '# '
+        '#   assert.ok(5 < actual && actual < 13)',
+        '#               | |      |  |      |    ',
+        '#               | |      |  16     false',
+        '#               | 16     false          ',
+        '#               true                    ',
+        '#   '
     ]);
 
 
@@ -244,12 +244,12 @@ it('QUnit output', function (mochaDone) {
         var actual = 10;
         assert.ok(actual < 5 || 13 < actual);
     }, [
-        '# assert.ok(actual < 5 || 13 < actual)',
-        '#           |      |   |     | |      ',
-        '#           |      |   |     | 10     ',
-        '#           |      |   false false    ',
-        '#           10     false              ',
-        '# '
+        '#   assert.ok(actual < 5 || 13 < actual)',
+        '#             |      |   |     | |      ',
+        '#             |      |   |     | 10     ',
+        '#             |      |   false false    ',
+        '#             10     false              ',
+        '#   '
     ]);
 
 
@@ -258,11 +258,11 @@ it('QUnit output', function (mochaDone) {
         var actual = 5;
         assert.ok(2 > actual && actual < 13);
     }, [
-        '# assert.ok(2 > actual && actual < 13)',
-        '#             | |      |              ',
-        '#             | 5      false          ',
-        '#             false                   ',
-        '# '
+        '#   assert.ok(2 > actual && actual < 13)',
+        '#               | |      |              ',
+        '#               | 5      false          ',
+        '#               false                   ',
+        '#   '
     ]);
 
 
@@ -275,12 +275,12 @@ it('QUnit output', function (mochaDone) {
         };
         assert.ok(foo.bar.baz);
     }, [
-        '# assert.ok(foo.bar.baz)',
-        '#           |   |   |   ',
-        '#           |   |   false',
-        '#           |   Object{baz:false}',
-        '#           Object{bar:#Object#}',
-        '# '
+        '#   assert.ok(foo.bar.baz)',
+        '#             |   |   |   ',
+        '#             |   |   false',
+        '#             |   Object{baz:false}',
+        '#             Object{bar:#Object#}',
+        '#   '
     ]);
 
 
@@ -289,10 +289,10 @@ it('QUnit output', function (mochaDone) {
         var func = function () { return false; };
         assert.ok(func());
     }, [
-        '# assert.ok(func())',
-        '#           |      ',
-        '#           false  ',
-        '# '
+        '#   assert.ok(func())',
+        '#             |      ',
+        '#             false  ',
+        '#   '
     ]);
 
 
@@ -305,11 +305,11 @@ it('QUnit output', function (mochaDone) {
         };
         assert.ok(obj.age());
     }, [
-        '# assert.ok(obj.age())',
-        '#           |   |     ',
-        '#           |   0     ',
-        '#           Object{age:#function#}',
-        '# '
+        '#   assert.ok(obj.age())',
+        '#             |   |     ',
+        '#             |   0     ',
+        '#             Object{age:#function#}',
+        '#   '
     ]);
 
 
@@ -321,10 +321,10 @@ it('QUnit output', function (mochaDone) {
         var positiveInt = 50;
         assert.ok(isFalsy(positiveInt));
     }, [
-        '# assert.ok(isFalsy(positiveInt))',
-        '#           |       |            ',
-        '#           false   50           ',
-        '# '
+        '#   assert.ok(isFalsy(positiveInt))',
+        '#             |       |            ',
+        '#             false   50           ',
+        '#   '
     ]);
 
 
@@ -340,16 +340,16 @@ it('QUnit output', function (mochaDone) {
         var one = 1, two = 2, three = 3, seven = 7, ten = 10;
         assert.ok(sum(one, two, three) === seven);
     }, [
-        '# assert.ok(sum(one, two, three) === seven)',
-        '#           |   |    |    |      |   |     ',
-        '#           |   |    |    |      |   7     ',
-        '#           6   1    2    3      false     ',
-        '# ',
-        '# [number] seven',
-        '# => 7',
-        '# [number] sum(one, two, three)',
-        '# => 6',
-        '# '
+        '#   assert.ok(sum(one, two, three) === seven)',
+        '#             |   |    |    |      |   |     ',
+        '#             |   |    |    |      |   7     ',
+        '#             6   1    2    3      false     ',
+        '#   ',
+        '#   [number] seven',
+        '#   => 7',
+        '#   [number] sum(one, two, three)',
+        '#   => 6',
+        '#   '
     ]);
 
 
@@ -365,16 +365,16 @@ it('QUnit output', function (mochaDone) {
         var one = 1, two = 2, three = 3, seven = 7, ten = 10;
         assert.ok(sum(sum(one, two), three) === sum(sum(two, three), seven));
     }, [
-        '# assert.ok(sum(sum(one, two), three) === sum(sum(two, three), seven))',
-        '#           |   |   |    |     |      |   |   |   |    |       |      ',
-        '#           |   |   |    |     |      |   12  5   2    3       7      ',
-        '#           6   3   1    2     3      false                           ',
-        '# ',
-        '# [number] sum(sum(two, three), seven)',
-        '# => 12',
-        '# [number] sum(sum(one, two), three)',
-        '# => 6',
-        '# '
+        '#   assert.ok(sum(sum(one, two), three) === sum(sum(two, three), seven))',
+        '#             |   |   |    |     |      |   |   |   |    |       |      ',
+        '#             |   |   |    |     |      |   12  5   2    3       7      ',
+        '#             6   3   1    2     3      false                           ',
+        '#   ',
+        '#   [number] sum(sum(two, three), seven)',
+        '#   => 12',
+        '#   [number] sum(sum(one, two), three)',
+        '#   => 6',
+        '#   '
     ]);
 
 
@@ -394,18 +394,18 @@ it('QUnit output', function (mochaDone) {
         var one = 1, two = 2, three = 3, seven = 7, ten = 10;
         assert.ok(math.calc.sum(one, two, three) === seven);
     }, [
-        '# assert.ok(math.calc.sum(one, two, three) === seven)',
-        '#           |    |    |   |    |    |      |   |     ',
-        '#           |    |    |   |    |    |      |   7     ',
-        '#           |    |    6   1    2    3      false     ',
-        '#           |    Object{sum:#function#}              ',
-        '#           Object{calc:#Object#}                    ',
-        '# ',
-        '# [number] seven',
-        '# => 7',
-        '# [number] math.calc.sum(one, two, three)',
-        '# => 6',
-        '# '
+        '#   assert.ok(math.calc.sum(one, two, three) === seven)',
+        '#             |    |    |   |    |    |      |   |     ',
+        '#             |    |    |   |    |    |      |   7     ',
+        '#             |    |    6   1    2    3      false     ',
+        '#             |    Object{sum:#function#}              ',
+        '#             Object{calc:#Object#}                    ',
+        '#   ',
+        '#   [number] seven',
+        '#   => 7',
+        '#   [number] math.calc.sum(one, two, three)',
+        '#   => 6',
+        '#   '
     ]);
 
 
@@ -414,18 +414,18 @@ it('QUnit output', function (mochaDone) {
         var one = 1, two = 2, three = 3, seven = 7, ten = 10;
         assert.ok((three * (seven * ten)) === three);
     }, [
-        '# assert.ok(three * (seven * ten) === three)',
-        '#           |     |  |     | |    |   |     ',
-        '#           |     |  |     | |    |   3     ',
-        '#           |     |  |     | 10   false     ',
-        '#           |     |  7     70               ',
-        '#           3     210                       ',
-        '# ',
-        '# [number] three',
-        '# => 3',
-        '# [number] three * (seven * ten)',
-        '# => 210',
-        '# '
+        '#   assert.ok(three * (seven * ten) === three)',
+        '#             |     |  |     | |    |   |     ',
+        '#             |     |  |     | |    |   3     ',
+        '#             |     |  |     | 10   false     ',
+        '#             |     |  7     70               ',
+        '#             3     210                       ',
+        '#   ',
+        '#   [number] three',
+        '#   => 3',
+        '#   [number] three * (seven * ten)',
+        '#   => 210',
+        '#   '
     ]);
 
 
@@ -435,19 +435,19 @@ it('QUnit output', function (mochaDone) {
         var fuga = 'bar';
         assert.ok(hoge === fuga, "comment");
     }, [
-        '# assert.ok(hoge === fuga, "comment")',
-        '#           |    |   |               ',
-        '#           |    |   "bar"           ',
-        '#           |    false               ',
-        '#           "foo"                    ',
-        '# ',
-        '# --- [string] fuga',
-        '# +++ [string] hoge',
-        '# @@ -1,3 +1,3 @@',
-        '# -bar',
-        '# +foo',
-        '# ',
-        '# '
+        '#   assert.ok(hoge === fuga, "comment")',
+        '#             |    |   |               ',
+        '#             |    |   "bar"           ',
+        '#             |    false               ',
+        '#             "foo"                    ',
+        '#   ',
+        '#   --- [string] fuga',
+        '#   +++ [string] hoge',
+        '#   @@ -1,3 +1,3 @@',
+        '#   -bar',
+        '#   +foo',
+        '#   ',
+        '#   '
     ]);
 
 
@@ -457,22 +457,22 @@ it('QUnit output', function (mochaDone) {
         var anotherLongString = 'yet another loooooooooooooooooooooooooooooooooooooooooooooooooooong message';
         assert.ok(longString === anotherLongString);
     }, [
-        '# assert.ok(longString === anotherLongString)',
-        '#           |          |   |                 ',
-        '#           |          |   "yet another loooooooooooooooooooooooooooooooooooooooooooooooooooong message"',
-        '#           |          false                 ',
-        '#           "very very loooooooooooooooooooooooooooooooooooooooooooooooooooong message"',
-        '# ',
-        '# --- [string] anotherLongString',
-        '# +++ [string] longString',
-        '# @@ -1,15 +1,13 @@',
-        '# -yet anoth',
-        '# +very v',
-        '#  er',
-        '# +y',
-        '#   loo',
-        '# ',
-        '# '
+        '#   assert.ok(longString === anotherLongString)',
+        '#             |          |   |                 ',
+        '#             |          |   "yet another loooooooooooooooooooooooooooooooooooooooooooooooooooong message"',
+        '#             |          false                 ',
+        '#             "very very loooooooooooooooooooooooooooooooooooooooooooooooooooong message"',
+        '#   ',
+        '#   --- [string] anotherLongString',
+        '#   +++ [string] longString',
+        '#   @@ -1,15 +1,13 @@',
+        '#   -yet anoth',
+        '#   +very v',
+        '#    er',
+        '#   +y',
+        '#     loo',
+        '#   ',
+        '#   '
     ]);
 
 
@@ -485,13 +485,13 @@ it('QUnit output', function (mochaDone) {
         };
         assert.ok(!concat(fuga, piyo));
     }, [
-        '# assert.ok(!concat(fuga, piyo))',
-        '#           ||      |     |     ',
-        '#           ||      |     "うえお"',
-        '#           ||      "あい"      ',
-        '#           |"あいうえお"       ',
-        '#           false               ',
-        '# '
+        '#   assert.ok(!concat(fuga, piyo))',
+        '#             ||      |     |     ',
+        '#             ||      |     "うえお"',
+        '#             ||      "あい"      ',
+        '#             |"あいうえお"       ',
+        '#             false               ',
+        '#   '
     ]);
 
 
@@ -504,12 +504,12 @@ it('QUnit output', function (mochaDone) {
         };
         assert.ok(!concat(fuga, piyo));
     }, [
-        '# assert.ok(!concat(fuga, piyo))',
-        '#           ||      |     |     ',
-        '#           ||      "ｱｲ"  "ｳｴｵ" ',
-        '#           |"ｱｲｳｴｵ"            ',
-        '#           false               ',
-        '# '
+        '#   assert.ok(!concat(fuga, piyo))',
+        '#             ||      |     |     ',
+        '#             ||      "ｱｲ"  "ｳｴｵ" ',
+        '#             |"ｱｲｳｴｵ"            ',
+        '#             false               ',
+        '#   '
     ]);
 
 
@@ -520,10 +520,10 @@ it('QUnit output', function (mochaDone) {
         var minusOne = -1;
         assert.equal(1, minusOne);
     },[
-        '# assert.equal(1, minusOne)',
-        '#                 |        ',
-        '#                 -1       ',
-        '# , expected: -1, got: 1'
+        '#   assert.equal(1, minusOne)',
+        '#                   |        ',
+        '#                   -1       ',
+        '#   , expected: -1, got: 1'
     ]);
 
 
@@ -531,10 +531,10 @@ it('QUnit output', function (mochaDone) {
         var minusOne = -1;
         assert.equal(++minusOne, 1);
     },[
-        '# assert.equal(++minusOne, 1)',
-        '#              |             ',
-        '#              0             ',
-        '# , expected: 1, got: 0'
+        '#   assert.equal(++minusOne, 1)',
+        '#                |             ',
+        '#                0             ',
+        '#   , expected: 1, got: 0'
     ]);
 
 
@@ -542,10 +542,10 @@ it('QUnit output', function (mochaDone) {
         var truthy = 3, fiveInStr = '5', tenInStr = '10', four = 4;
         assert.notEqual(truthy ? fiveInStr : tenInStr, four += 1);
     },[
-        '# assert.notEqual(truthy ? fiveInStr : tenInStr, four += 1)',
-        '#                 |        |                          |    ',
-        '#                 3        "5"                        5    ',
-        '# , expected: 5, got: "5"'
+        '#   assert.notEqual(truthy ? fiveInStr : tenInStr, four += 1)',
+        '#                   |        |                          |    ',
+        '#                   3        "5"                        5    ',
+        '#   , expected: 5, got: "5"'
     ]);
 
 
@@ -553,12 +553,12 @@ it('QUnit output', function (mochaDone) {
         var obj = { truthy: function () { return 'true'; }}, three = 3, threeInStr = '3';
         assert.strictEqual(obj.truthy(), three == threeInStr);
     },[
-        '# assert.strictEqual(obj.truthy(), three == threeInStr)',
-        '#                    |   |         |     |  |          ',
-        '#                    |   |         |     |  "3"        ',
-        '#                    |   "true"    3     true          ',
-        '#                    Object{truthy:#function#}         ',
-        '# , expected: true, got: "true"'
+        '#   assert.strictEqual(obj.truthy(), three == threeInStr)',
+        '#                      |   |         |     |  |          ',
+        '#                      |   |         |     |  "3"        ',
+        '#                      |   "true"    3     true          ',
+        '#                      Object{truthy:#function#}         ',
+        '#   , expected: true, got: "true"'
     ]);
 
 
@@ -566,11 +566,11 @@ it('QUnit output', function (mochaDone) {
         var types = { undef: 'undefined' };
         assert.notStrictEqual(typeof undefinedVar, types.undef);
     },[
-        '# assert.notStrictEqual(typeof undefinedVar, types.undef)',
-        '#                       |                    |     |     ',
-        '#                       |                    |     "undefined"',
-        '#                       "undefined"          Object{undef:"undefined"}',
-        '# , expected: "undefined", got: "undefined"'
+        '#   assert.notStrictEqual(typeof undefinedVar, types.undef)',
+        '#                         |                    |     |     ',
+        '#                         |                    |     "undefined"',
+        '#                         "undefined"          Object{undef:"undefined"}',
+        '#   , expected: "undefined", got: "undefined"'
     ]);
 
 
@@ -584,12 +584,12 @@ it('QUnit output', function (mochaDone) {
             kenName = 'ken', four = 4;
         assert.deepEqual(alice || bob, {name: kenName, age: four});
     },[
-        '# assert.deepEqual(alice || bob, {name: kenName,age: four})',
-        '#                  |     |              |            |     ',
-        '#                  |     |              "ken"        4     ',
-        '#                  |     Person{name:"alice",age:3}        ',
-        '#                  Person{name:"alice",age:3}              ',
-        '# , expected: {',
+        '#   assert.deepEqual(alice || bob, {name: kenName,age: four})',
+        '#                    |     |              |            |     ',
+        '#                    |     |              "ken"        4     ',
+        '#                    |     Person{name:"alice",age:3}        ',
+        '#                    Person{name:"alice",age:3}              ',
+        '#   , expected: {',
         '#   "age": 4,',
         '#   "name": "ken"',
         '# }, got: {',
@@ -603,16 +603,16 @@ it('QUnit output', function (mochaDone) {
         var foo = 'foo', bar = ['toto', 'tata'], baz = {name: 'hoge'};
         assert.notDeepEqual([foo, bar, baz], new Array(foo, bar, baz));
     },[
-        '# assert.notDeepEqual([foo,bar,baz], new Array(foo, bar, baz))',
-        '#                      |   |   |     |         |    |    |    ',
-        '#                      |   |   |     |         |    |    Object{name:"hoge"}',
-        '#                      |   |   |     |         |    ["toto","tata"]',
-        '#                      |   |   |     |         "foo"          ',
-        '#                      |   |   |     ["foo",#Array#,#Object#] ',
-        '#                      |   |   Object{name:"hoge"}            ',
-        '#                      |   ["toto","tata"]                    ',
-        '#                      "foo"                                  ',
-        '# , expected: [',
+        '#   assert.notDeepEqual([foo,bar,baz], new Array(foo, bar, baz))',
+        '#                        |   |   |     |         |    |    |    ',
+        '#                        |   |   |     |         |    |    Object{name:"hoge"}',
+        '#                        |   |   |     |         |    ["toto","tata"]',
+        '#                        |   |   |     |         "foo"          ',
+        '#                        |   |   |     ["foo",#Array#,#Object#] ',
+        '#                        |   |   Object{name:"hoge"}            ',
+        '#                        |   ["toto","tata"]                    ',
+        '#                        "foo"                                  ',
+        '#   , expected: [',
         '#   "foo",',
         '#   [',
         '#     "toto",',
