@@ -22,7 +22,7 @@
   ],
   "dependencies": {
     "empower": "~0.10.0",
-    "power-assert-formatter": "~0.10.0",
+    "power-assert-formatter": "~0.10.1",
     "xtend": "~4.0.0"
   },
   "devDependencies": {
