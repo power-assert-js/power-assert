@@ -472,6 +472,7 @@ var assert = require('power-assert').customize({
         anonymous: 'Object',
         circular: '#@Circular#',
         lineSeparator: '\n',
+        ambiguousEastAsianCharWidth: 2,
         widthOf: (Function to calculate width of string. Please see power-assert-formatter's documentation)
         stringify: (Function to stringify any target value. Please see power-assert-formatter's documentation)
         diff: (Function to create diff string between two strings. Please see power-assert-formatter's documentation)
