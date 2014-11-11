@@ -44,10 +44,10 @@
                 expectPowerAssertMessage(function () {
                     assert.deepEqual(expected, actual);
                 },[
-                    'assert.deepEqual(expected, actual)',
-                    '                 |         |      ',
-                    '                 |         [#Object#,#Object#,#Object#]',
-                    '                 [#Object#,#Object#,#Object#]'
+                    '  assert.deepEqual(expected, actual)',
+                    '                   |         |      ',
+                    '                   |         [#Object#,#Object#,#Object#]',
+                    '                   [#Object#,#Object#,#Object#]'
                 ]);
             });
 
@@ -62,10 +62,10 @@
                 expectPowerAssertMessage(function () {
                     assert.deepEqual(expected, actual);
                 },[
-                    'assert.deepEqual(expected, actual)',
-                    '                 |         |      ',
-                    '                 |         [Object{name:"baz",parent:#Object#},Object{name:"quux",parent:#Object#},Object{name:"bar",parent:#Object#}]',
-                    '                 [Object{name:"foo"},Object{name:"bar",parent:#Object#},Object{name:"baz",parent:#Object#}]'
+                    '  assert.deepEqual(expected, actual)',
+                    '                   |         |      ',
+                    '                   |         [Object{name:"baz",parent:#Object#},Object{name:"quux",parent:#Object#},Object{name:"bar",parent:#Object#}]',
+                    '                   [Object{name:"foo"},Object{name:"bar",parent:#Object#},Object{name:"baz",parent:#Object#}]'
                 ]);
             });
 
@@ -81,10 +81,10 @@
                 expectPowerAssertMessage(function () {
                     assert.deepEqual(expected, actual);
                 },[
-                    'assert.deepEqual(expected, actual)',
-                    '                 |         |      ',
-                    '                 |         [Object{name:"baz",parent:Object{name:"bar",parent:#Object#}},Object{name:"quux",parent:Object{name:"baz",parent:#Object#}},Object{name:"bar",parent:Object{name:"foo"}}]',
-                    '                 [Object{name:"foo"},Object{name:"bar",parent:Object{name:"foo"}},Object{name:"baz",parent:Object{name:"bar",parent:#Object#}}]'
+                    '  assert.deepEqual(expected, actual)',
+                    '                   |         |      ',
+                    '                   |         [Object{name:"baz",parent:Object{name:"bar",parent:#Object#}},Object{name:"quux",parent:Object{name:"baz",parent:#Object#}},Object{name:"bar",parent:Object{name:"foo"}}]',
+                    '                   [Object{name:"foo"},Object{name:"bar",parent:Object{name:"foo"}},Object{name:"baz",parent:Object{name:"bar",parent:#Object#}}]'
                 ]);
             });
 
@@ -100,10 +100,10 @@
                 expectPowerAssertMessage(function () {
                     assert.deepEqual(expected, actual);
                 },[
-                    'assert.deepEqual(expected, actual)',
-                    '                 |         |      ',
-                    '                 |         [Object{name:"baz",parent:Object{name:"bar",parent:Object{name:"foo"}}},Object{name:"quux",parent:Object{name:"baz",parent:Object{name:"bar",parent:Object{name:"foo"}}}},Object{name:"bar",parent:Object{name:"foo"}}]',
-                    '                 [Object{name:"foo"},Object{name:"bar",parent:Object{name:"foo"}},Object{name:"baz",parent:Object{name:"bar",parent:Object{name:"foo"}}}]'
+                    '  assert.deepEqual(expected, actual)',
+                    '                   |         |      ',
+                    '                   |         [Object{name:"baz",parent:Object{name:"bar",parent:Object{name:"foo"}}},Object{name:"quux",parent:Object{name:"baz",parent:Object{name:"bar",parent:Object{name:"foo"}}}},Object{name:"bar",parent:Object{name:"foo"}}]',
+                    '                   [Object{name:"foo"},Object{name:"bar",parent:Object{name:"foo"}},Object{name:"baz",parent:Object{name:"bar",parent:Object{name:"foo"}}}]'
                 ]);
             });
         });
@@ -120,10 +120,10 @@
             expectPowerAssertMessage(function () {
                 assert.deepEqual(expected, actual);
             },[
-                'assert.deepEqual(expected, actual)',
-                '                 |         |      ',
-                '                 |         [Object{name:"baz",parent:#Object#},Object{name:"quux",parent:#Object#},Object{name:"bar",parent:#Object#}]',
-                '                 [Object{name:"foo"},Object{name:"bar",parent:#Object#},Object{name:"baz",parent:#Object#}]'
+                '  assert.deepEqual(expected, actual)',
+                '                   |         |      ',
+                '                   |         [Object{name:"baz",parent:#Object#},Object{name:"quux",parent:#Object#},Object{name:"bar",parent:#Object#}]',
+                '                   [Object{name:"foo"},Object{name:"bar",parent:#Object#},Object{name:"baz",parent:#Object#}]'
             ]);
 
             assert = assert.customize({
@@ -134,10 +134,10 @@
             expectPowerAssertMessage(function () {
                 assert.deepEqual(expected, actual);
             },[
-                'assert.deepEqual(expected, actual)',
-                '                 |         |      ',
-                '                 |         [Object{name:"baz",parent:Object{name:"bar",parent:#Object#}},Object{name:"quux",parent:Object{name:"baz",parent:#Object#}},Object{name:"bar",parent:Object{name:"foo"}}]',
-                '                 [Object{name:"foo"},Object{name:"bar",parent:Object{name:"foo"}},Object{name:"baz",parent:Object{name:"bar",parent:#Object#}}]'
+                '  assert.deepEqual(expected, actual)',
+                '                   |         |      ',
+                '                   |         [Object{name:"baz",parent:Object{name:"bar",parent:#Object#}},Object{name:"quux",parent:Object{name:"baz",parent:#Object#}},Object{name:"bar",parent:Object{name:"foo"}}]',
+                '                   [Object{name:"foo"},Object{name:"bar",parent:Object{name:"foo"}},Object{name:"baz",parent:Object{name:"bar",parent:#Object#}}]'
             ]);
         });
         
