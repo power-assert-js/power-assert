@@ -1,4 +1,4 @@
-## [0.10.0](https://github.com/twada/power-assert/releases/tag/v0.10.0) (2014-11-11)
+## [0.10.0](https://github.com/twada/power-assert/releases/tag/v0.10.0) (2014-11-12)
 
 
 #### Features
