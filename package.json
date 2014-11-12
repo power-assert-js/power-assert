@@ -36,7 +36,6 @@
     "CHANGELOG.md",
     "MIT-LICENSE.txt",
     "README.md",
-    "gulpfile.js",
     "index.js",
     "package.json",
     "test"
