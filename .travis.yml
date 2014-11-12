@@ -3,9 +3,12 @@ node_js:
   - "0.10"
   - "0.11"
 before_install:
-  - "npm install -g gulp"
   - "npm install -g bower"
+  - "npm install -g browserify"
+  - "npm install -g derequire"
+  - "npm install -g mocha"
+  - "npm install -g mocha-phantomjs"
 before_script:
-  - "npm run-script bower"
+  - "npm run bower"
 script:
   - "npm test"

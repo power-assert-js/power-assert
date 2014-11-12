@@ -7,7 +7,6 @@ Power Assert in JavaScript. Provides descriptive assertion messages through stan
 [![NPM version](https://badge.fury.io/js/power-assert.svg)](http://badge.fury.io/js/power-assert)
 [![Dependency Status](https://gemnasium.com/twada/power-assert.svg)](https://gemnasium.com/twada/power-assert)
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/twada/power-assert/blob/master/MIT-LICENSE.txt)
-[![Built with Gulp](http://img.shields.io/badge/built_with-gulp-brightgreen.svg)](http://gulpjs.com/)
 
 
 DESCRIPTION

@@ -8,9 +8,8 @@
  *   https://github.com/twada/power-assert/blob/master/MIT-LICENSE.txt
  */
 var espowerSource = require('espower-source'),
-    argv = require('optimist').argv,
     fs = require('fs'),
-    file = argv._[0],
+    file = process.argv[2],
     path = fs.realpathSync(file),
     code = fs.readFileSync(file, 'utf-8');
 

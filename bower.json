@@ -43,13 +43,8 @@
     "url": "git://github.com/twada/power-assert.git"
   },
   "devDependencies": {
-    "empower": "~0.10.0",
     "expect": "~0.3.1",
     "mocha": "~2.0.1",
-    "power-assert-formatter": "~0.10.1",
-    "qunit": "1.14.0",
-    "qunit-tap": "1.4.2",
-    "requirejs": "~2.1.15",
-    "assert": "Jxck/assert"
+    "requirejs": "~2.1.15"
   }
 }
