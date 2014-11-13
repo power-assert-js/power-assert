@@ -6,6 +6,7 @@ before_install:
   - "npm install -g bower"
   - "npm install -g browserify"
   - "npm install -g derequire"
+  - "npm install -g espower-cli"
   - "npm install -g mocha"
   - "npm install -g mocha-phantomjs"
 before_script:

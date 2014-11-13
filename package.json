@@ -27,7 +27,6 @@
   },
   "devDependencies": {
     "espower-loader": "~0.10.0",
-    "espower-source": "~0.10.0",
     "expect.js": "0.3.1",
     "qunit-tap": "1.4.2",
     "qunitjs": "1.14.0"
@@ -64,7 +63,7 @@
     "build": "npm prune && npm dedupe && browserify --standalone assert ./index.js | derequire > build/power-assert.js",
     "clean": "rm -rf ./espowered_tests && rm -rf ./build",
     "setup-dir": "mkdir -p ./build && mkdir -p ./espowered_tests/tobe_instrumented && cp -r test/not_tobe_instrumented/ ./espowered_tests/not_tobe_instrumented/",
-    "setup-espower": "for i in $(find ./test/tobe_instrumented -name '*_test.js'); do node ./scripts/espower-cli.js $i > ./espowered_tests/tobe_instrumented/$(basename $i); done",
+    "setup-espower": "for i in $(find ./test/tobe_instrumented -name '*_test.js'); do espower $i > ./espowered_tests/tobe_instrumented/$(basename $i); done",
     "setup": "npm run clean && npm run setup-dir && npm run setup-espower && npm run build",
     "test-unit": "mocha --reporter dot --require ./enable_power_assert.js ./test/**/*_test.js",
     "test-generated": "mocha --reporter dot ./espowered_tests/**/*_test.js",
