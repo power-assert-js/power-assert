@@ -50,7 +50,7 @@ What is `power-assert`?
 API
 ---------------------------------------
 
-powert-assert enhances these assert functions. Produces descriptive message when assertion is failed.
+power-assert enhances these assert functions. Produces descriptive message when assertion is failed.
 
 * `assert(value, [message])`
 * `assert.ok(value, [message])`
@@ -61,14 +61,14 @@ powert-assert enhances these assert functions. Produces descriptive message when
 * `assert.deepEqual(actual, expected, [message])`
 * `assert.notDeepEqual(actual, expected, [message])`
 
-powert-assert is fully compatible with [assert](http://nodejs.org/api/assert.html). So functions below are also available though they are not enhanced (does not produce descriptive message).
+power-assert is fully compatible with [assert](http://nodejs.org/api/assert.html). So functions below are also available though they are not enhanced (does not produce descriptive message).
 
 * `assert.fail(actual, expected, message, operator)`
 * `assert.throws(block, [error], [message])`
 * `assert.doesNotThrow(block, [message])`
 * `assert.ifError(value)`
 
-powert-assert provides an API for customization.
+power-assert provides an API for customization.
 
 * `assert.customize(options)`
 
