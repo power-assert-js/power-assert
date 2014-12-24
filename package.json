@@ -26,31 +26,15 @@
     "xtend": "~4.0.0"
   },
   "devDependencies": {
-    "browserify": "~6.3.2",
-    "del": "~0.1.3",
     "espower-loader": "~0.10.0",
-    "espower-source": "~0.10.0",
     "expect.js": "0.3.1",
-    "gulp": "~3.8.10",
-    "gulp-derequire": "~2.0.0",
-    "gulp-espower": "~0.10.0",
-    "gulp-mocha-phantomjs": "~0.5.1",
-    "gulp-spawn-mocha": "~0.5.1",
-    "gulp-util": "~3.0.1",
-    "gulp-webserver": "~0.8.3",
-    "lodash.merge": "~2.4.1",
-    "mocha": "~2.0.1",
-    "optimist": "~0.6.1",
     "qunit-tap": "1.4.2",
-    "qunitjs": "1.14.0",
-    "run-sequence": "~1.0.1",
-    "vinyl-source-stream": "~1.0.0"
+    "qunitjs": "1.14.0"
   },
   "files": [
     "CHANGELOG.md",
     "MIT-LICENSE.txt",
     "README.md",
-    "gulpfile.js",
     "index.js",
     "package.json",
     "test"
@@ -76,6 +60,16 @@
   },
   "scripts": {
     "bower": "bower install --config.interactive=false",
-    "test": "gulp test"
+    "build": "npm prune && npm dedupe && browserify --standalone assert ./index.js | dereserve | derequire > build/power-assert.js",
+    "clean": "rm -rf ./espowered_tests && rm -rf ./build",
+    "setup-dir": "mkdir -p ./build && mkdir -p ./espowered_tests/tobe_instrumented && cp -r test/not_tobe_instrumented/ ./espowered_tests/not_tobe_instrumented/",
+    "setup-espower": "for i in $(find ./test/tobe_instrumented -name '*_test.js'); do espower $i > ./espowered_tests/tobe_instrumented/$(basename $i); done",
+    "setup": "npm run clean && npm run setup-dir && npm run setup-espower && npm run build",
+    "test-unit": "mocha --reporter dot --require ./enable_power_assert.js ./test/**/*_test.js",
+    "test-generated": "mocha --reporter dot ./espowered_tests/**/*_test.js",
+    "test-browser": "mocha-phantomjs --reporter dot test/test-browser.html",
+    "test-amd": "mocha-phantomjs --reporter dot test/test-amd.html",
+    "test-all": "npm run test-unit && npm run test-generated && npm run test-browser && npm run test-amd",
+    "test": "npm run setup && npm run test-all"
   }
 }

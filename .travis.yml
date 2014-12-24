@@ -1,11 +1,17 @@
 language: node_js
+sudo: false
 node_js:
   - "0.10"
   - "0.11"
 before_install:
-  - "npm install -g gulp"
   - "npm install -g bower"
+  - "npm install -g browserify"
+  - "npm install -g dereserve"
+  - "npm install -g derequire"
+  - "npm install -g espower-cli"
+  - "npm install -g mocha"
+  - "npm install -g mocha-phantomjs"
 before_script:
-  - "npm run-script bower"
+  - "npm run bower"
 script:
   - "npm test"

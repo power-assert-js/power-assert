@@ -5,7 +5,6 @@
   "license": "MIT",
   "ignore": [
     "**/.*",
-    "gulpfile.js",
     "espowered_tests",
     "node_modules",
     "package.json",
@@ -49,7 +48,6 @@
     "power-assert-formatter": "~0.10.1",
     "qunit": "1.14.0",
     "qunit-tap": "1.4.2",
-    "requirejs": "~2.1.15",
-    "assert": "Jxck/assert"
+    "requirejs": "~2.1.15"
   }
 }

@@ -7,7 +7,6 @@ Power Assert in JavaScript. Provides descriptive assertion messages through stan
 [![NPM version](https://badge.fury.io/js/power-assert.svg)](http://badge.fury.io/js/power-assert)
 [![Dependency Status](https://gemnasium.com/twada/power-assert.svg)](https://gemnasium.com/twada/power-assert)
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/twada/power-assert/blob/master/MIT-LICENSE.txt)
-[![Built with Gulp](http://img.shields.io/badge/built_with-gulp-brightgreen.svg)](http://gulpjs.com/)
 
 
 DESCRIPTION
@@ -143,6 +142,7 @@ Code transform is done by instrumentors below:
  - [grunt-espower](http://github.com/twada/grunt-espower)
  - [gulp-espower](http://github.com/twada/gulp-espower)
  - [espower-coffee](http://github.com/twada/espower-coffee)
+ - [espower-cli](http://github.com/twada/espower-cli)
 
 If you are using Node.js only, the easiest way is to use [intelli-espower-loader](https://github.com/azu/intelli-espower-loader). Steps are as follows.
 
@@ -254,7 +254,7 @@ There are three ways to use power-assert. (If you want to see running examples, 
 
 1. `power-assert` + `espower-loader`: Highly recommended but only works under Node.
 2. `power-assert` + `espowerify` : Recommended if you are using [browserify](http://browserify.org/).
-3. `power-assert` + `grunt-espower` or `gulp-espower` : Generate instrumented code so works anywhere.
+3. `power-assert` + `espower-cli` or `grunt-espower` or `gulp-espower` : Generate instrumented code so works anywhere.
 
 
 ### using `espower-loader`
@@ -320,10 +320,32 @@ Lastly, run your test in your way. For example,
 
 
 
+### using `espower-cli`
+
+On the browser side and you don't want to use grunt,gulp or browserify, you can use `power-assert` via bower, with generated code by `espower-cli`
+
+First, install `power-assert` via bower and `espower-cli` via npm. This means that you run `espower` command (on Node), then run tests on browser.
+
+    $ bower install --save-dev power-assert
+    $ npm install --save-dev gulp-espower
+
+Second, require `build/power-assert.js` (all-in-one build for browsers) in your test html.
+
+    <script type="text/javascript" src="./path/to/bower_components/power-assert/build/power-assert.js"></script>
+
+Then, generate espowered code.
+
+    $ espower test/your_test.js > powered/your_test.js
+
+Lastly, run your test in your way. For example,
+
+    $ mocha-phantomjs path/to/test.html
+
+
+
 ### using `grunt-espower`
 
 On the browser side and you are not using [browserify](http://browserify.org/) but [bower](http://bower.io/) and [Grunt](http://gruntjs.com/), you can use `power-assert` via bower, with generated code by `grunt-espower`
-(If you prefer more small steps, [espower runner](https://gist.github.com/azu/6309397) and [its variation for Windows](https://gist.github.com/gooocho/6317135) may be useful to start with.)
 
 First, install `power-assert` via bower and `grunt-espower` via npm. This means that you run grunt (on Node), then run tests on browser.
 
@@ -368,16 +390,12 @@ Lastly, run your test in your way. For example,
 
     $ grunt test
 
-or
-
-    $ mocha your_test_espowered.js
 
 
 
 ### using `gulp-espower`
 
 On the browser side and you are not using [browserify](http://browserify.org/) but [bower](http://bower.io/) and [gulp](http://gulpjs.com/), you can use `power-assert` via bower, with generated code by `gulp-espower`
-(If you prefer more small steps, [espower runner](https://gist.github.com/azu/6309397) and [its variation for Windows](https://gist.github.com/gooocho/6317135) may be useful to start with.)
 
 First, install `power-assert` via bower and `gulp-espower` via npm. This means that you run gulp (on Node), then run tests on browser.
 
@@ -412,9 +430,6 @@ Lastly, run your test in your way. For example,
 
     $ gulp test
 
-or
-
-    $ mocha your_test_espowered.js
 
 
 
@@ -520,6 +535,7 @@ and instrumentors are,
 | [grunt-espower](http://github.com/twada/grunt-espower) | Grunt task to apply `espower` to target files. |
 | [gulp-espower](http://github.com/twada/gulp-espower) | Gulp plugin to apply `espower` to target files. |
 | [espower-coffee](http://github.com/twada/espower-coffee) | Experimental power-assert instrumentor for CoffeeScript. |
+| [espower-cli](http://github.com/twada/espower-cli) | Command line tool for power-assert. |
 
 
 `power-assert` provides standard [assert](http://nodejs.org/api/assert.html) compatible function with Power Assert feature.
