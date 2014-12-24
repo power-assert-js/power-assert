@@ -5,6 +5,7 @@ node_js:
 before_install:
   - "npm install -g bower"
   - "npm install -g browserify"
+  - "npm install -g dereserve"
   - "npm install -g derequire"
   - "npm install -g espower-cli"
   - "npm install -g mocha"

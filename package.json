@@ -60,7 +60,7 @@
   },
   "scripts": {
     "bower": "bower install --config.interactive=false",
-    "build": "npm prune && npm dedupe && browserify --standalone assert ./index.js | derequire > build/power-assert.js",
+    "build": "npm prune && npm dedupe && browserify --standalone assert ./index.js | dereserve | derequire > build/power-assert.js",
     "clean": "rm -rf ./espowered_tests && rm -rf ./build",
     "setup-dir": "mkdir -p ./build && mkdir -p ./espowered_tests/tobe_instrumented && cp -r test/not_tobe_instrumented/ ./espowered_tests/not_tobe_instrumented/",
     "setup-espower": "for i in $(find ./test/tobe_instrumented -name '*_test.js'); do espower $i > ./espowered_tests/tobe_instrumented/$(basename $i); done",
