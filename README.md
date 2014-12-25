@@ -16,6 +16,7 @@ What is `power-assert`?
 
  * is an implementation of "Power Assert" concept in JavaScript.
  * provides descriptive assertion messages through standard [assert](http://nodejs.org/api/assert.html) interface.
+ * see slides: ["power-assert, mechanism and philosophy"](http://www.slideshare.net/t_wada/power-assert-nodefest-2014) -- talk at NodeFest 2014.
  * to use power-assert, you need to transform your test code to show power-assert output.
  * with power-assert, you don't need to learn many assertion library APIs. It's just [assert](http://nodejs.org/api/assert.html).
  * fully compatible with [assert](http://nodejs.org/api/assert.html). So you can stop using power-assert and back to assert easily.
