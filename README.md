@@ -28,6 +28,7 @@ What is `power-assert`?
  * provides [command](http://github.com/twada/espower-cli).
  * provides [custom module loader](http://github.com/twada/espower-loader).
  * supports [CoffeeScript](http://github.com/twada/espower-coffee).
+ * has [TypeScript type definition](https://github.com/borisyankov/DefinitelyTyped/blob/master/power-assert/power-assert.d.ts)
  * is a beta version product. Pull-requests, issue reports and patches are always welcomed.
 
 
