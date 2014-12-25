@@ -16,16 +16,18 @@ What is `power-assert`?
 
  * is an implementation of "Power Assert" concept in JavaScript.
  * provides descriptive assertion messages through standard [assert](http://nodejs.org/api/assert.html) interface.
- * to use power-assert, you need to transform your test code for power-assert output.
+ * to use power-assert, you need to transform your test code to show power-assert output.
  * with power-assert, you don't need to learn many assertion library APIs. It's just [assert](http://nodejs.org/api/assert.html).
  * fully compatible with [assert](http://nodejs.org/api/assert.html). So you can stop using power-assert and back to assert easily.
  * has [online demo site](http://azu.github.io/power-assert-demo/).
  * works both on server side and browser side.
  * available via [npm](https://www.npmjs.org/) and [bower](http://bower.io/). 
- * provides [browserify](http://browserify.org/) transform.
- * provides [grunt](http://gruntjs.com/) task and [gulp](http://gulpjs.com/) plugin.
  * supports sourcemaps so you can debug as usual.
- * supports [CoffeeScript](http://coffeescript.org/).
+ * provides [browserify transform](http://github.com/twada/espowerify).
+ * provides [grunt task](http://github.com/twada/grunt-espower) and [gulp plugin](http://github.com/twada/gulp-espower).
+ * provides [command](http://github.com/twada/espower-cli).
+ * provides [custom module loader](http://github.com/twada/espower-loader).
+ * supports [CoffeeScript](http://github.com/twada/espower-coffee).
  * is a beta version product. Pull-requests, issue reports and patches are always welcomed.
 
 
@@ -67,7 +69,7 @@ power-assert is fully compatible with [assert](http://nodejs.org/api/assert.html
 * `assert.doesNotThrow(block, [message])`
 * `assert.ifError(value)`
 
-power-assert provides an API for customization.
+power-assert provides an [API for customization](https://github.com/twada/power-assert#customization-api).
 
 * `assert.customize(options)`
 
