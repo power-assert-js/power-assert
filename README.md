@@ -27,7 +27,9 @@ What is `power-assert`?
  * provides [browserify transform](http://github.com/twada/espowerify).
  * provides [grunt task](http://github.com/twada/grunt-espower) and [gulp plugin](http://github.com/twada/gulp-espower).
  * provides [command](http://github.com/twada/espower-cli).
- * provides [custom module loader](http://github.com/twada/espower-loader).
+ * provides [custom module loader](http://github.com/twada/espower-loader) and its [convenient config module](https://github.com/azu/intelli-espower-loader).
+ * provides [karma preprocessor](https://github.com/vvakame/karma-espower-preprocessor).
+ * supports [ES6](https://github.com/yosuke-furukawa/espower-traceur).
  * supports [CoffeeScript](http://github.com/twada/espower-coffee).
  * has [TypeScript type definition](https://github.com/borisyankov/DefinitelyTyped/blob/master/power-assert/power-assert.d.ts)
  * is a beta version product. Pull-requests, issue reports and patches are always welcomed.
@@ -512,7 +514,7 @@ var assert = require('power-assert').customize({
 INTERNAL DESIGN
 ---------------------------------------
 
-`power-assert` family provides 10 modules. 1 main module, 4 core modules and 5 instrumentors.
+`power-assert` family provides 1 main module, 4 core modules and many more instrumentors.
 
 
 Main (facade) module is,
@@ -534,12 +536,15 @@ and instrumentors are,
 
 | module | description |
 |:-------|:------------|
+| [espower-cli](http://github.com/twada/espower-cli) | Command line tool for power-assert. |
 | [espower-loader](http://github.com/twada/espower-loader) | Node module loader to apply `espower` on the fly. |
+| [intelli-espower-loader](https://github.com/azu/intelli-espower-loader) | configure `espower-loader` with ease. |
 | [espowerify](http://github.com/twada/espowerify) | [Browserify](http://browserify.org/) transform to apply `espower` to target files. |
 | [grunt-espower](http://github.com/twada/grunt-espower) | Grunt task to apply `espower` to target files. |
 | [gulp-espower](http://github.com/twada/gulp-espower) | Gulp plugin to apply `espower` to target files. |
-| [espower-coffee](http://github.com/twada/espower-coffee) | Experimental power-assert instrumentor for CoffeeScript. |
-| [espower-cli](http://github.com/twada/espower-cli) | Command line tool for power-assert. |
+| [karma-espower-preprocessor](https://github.com/vvakame/karma-espower-preprocessor) | karma-preprocessor for power-assert. |
+| [espower-coffee](http://github.com/twada/espower-coffee) | power-assert instrumentor for CoffeeScript. |
+| [espower-traceur](https://github.com/yosuke-furukawa/espower-traceur) | power-assert instrumentor for ES6. |
 
 
 `power-assert` provides standard [assert](http://nodejs.org/api/assert.html) compatible function with Power Assert feature.
