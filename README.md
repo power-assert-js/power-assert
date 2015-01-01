@@ -22,7 +22,7 @@ What is `power-assert`?
  * fully compatible with [assert](http://nodejs.org/api/assert.html). So you can stop using power-assert and back to assert easily.
  * has [online demo site](http://azu.github.io/power-assert-demo/).
  * works both on server side and browser side.
- * available via [npm](https://www.npmjs.org/) and [bower](http://bower.io/). 
+ * available via [npm](https://www.npmjs.com/package/power-assert) and [bower](http://bower.io/search/?q=power-assert). 
  * supports sourcemaps so you can debug as usual.
  * provides [browserify transform](http://github.com/twada/espowerify).
  * provides [grunt task](http://github.com/twada/grunt-espower) and [gulp plugin](http://github.com/twada/gulp-espower).
