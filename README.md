@@ -3,10 +3,10 @@ power-assert
 
 Power Assert in JavaScript. Provides descriptive assertion messages through standard [assert](http://nodejs.org/api/assert.html) interface.
 
-[![Build Status](https://travis-ci.org/twada/power-assert.svg)](https://travis-ci.org/twada/power-assert)
-[![NPM version](https://badge.fury.io/js/power-assert.svg)](http://badge.fury.io/js/power-assert)
-[![Dependency Status](https://gemnasium.com/twada/power-assert.svg)](https://gemnasium.com/twada/power-assert)
-[![License](http://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/twada/power-assert/blob/master/MIT-LICENSE.txt)
+[![Build Status][travis-image]][travis-url]
+[![NPM version][npm-image]][npm-url]
+[![Dependency Status][depstat-image]][depstat-url]
+[![License][license-image]][license-url]
 
 
 DESCRIPTION
@@ -218,7 +218,7 @@ If you are using Node.js only, the easiest way is to use [intelli-espower-loader
       
       
       3) various types demo:
-         AssertionError: # /Users/takuto/work/git-sandbox/github/POWERASSERT/power-assert/sandbox/mocha_node.js:37
+         AssertionError: # /path/to/test/mocha_node.js:37
     
         assert(this.types[index].name === bob.name)
                     |    ||      |    |   |   |
@@ -953,3 +953,16 @@ not ok 24 - # /path/to/examples/qunit_node.js:110
 ```
 
 Have fun!
+
+
+[npm-url]: https://npmjs.org/package/power-assert
+[npm-image]: https://badge.fury.io/js/power-assert.svg
+
+[travis-url]: http://travis-ci.org/twada/power-assert
+[travis-image]: https://secure.travis-ci.org/twada/power-assert.svg?branch=master
+
+[depstat-url]: https://gemnasium.com/twada/power-assert
+[depstat-image]: https://gemnasium.com/twada/power-assert.svg
+
+[license-url]: https://github.com/twada/power-assert/blob/master/MIT-LICENSE.txt
+[license-image]: http://img.shields.io/badge/license-MIT-brightgreen.svg
