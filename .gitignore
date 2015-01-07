@@ -1,15 +1,6 @@
 /node_modules
 /bower_components
 /.idea
-/sandbox/plain_node_espowered.js
-/sandbox/qunit_node_espowered.js
-/sandbox/qunit_rhino_espowered.js
-/sandbox/dog.test.espowered.js
-/sandbox/dog.test.node.espowered.js
-/sandbox/mocha_node_espowered.js
-/sandbox/mocha_node.coffee.espowered.js
-/expr.js
-/js.jar
 /TODO.txt
 /espowered_tests
 /npm-debug.log
