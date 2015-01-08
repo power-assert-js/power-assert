@@ -144,11 +144,14 @@ To use power-assert, you need to transform your test code for power-assert outpu
 Code transform is done by instrumentors below:
 
  - [espower-loader](http://github.com/twada/espower-loader) (with [intelli-espower-loader](https://github.com/azu/intelli-espower-loader))
+ - [espower-cli](http://github.com/twada/espower-cli)
  - [espowerify](http://github.com/twada/espowerify)
  - [grunt-espower](http://github.com/twada/grunt-espower)
  - [gulp-espower](http://github.com/twada/gulp-espower)
+ - [karma-espower-preprocessor](https://github.com/vvakame/karma-espower-preprocessor)
  - [espower-coffee](http://github.com/twada/espower-coffee)
- - [espower-cli](http://github.com/twada/espower-cli)
+ - [espower-traceur](https://github.com/yosuke-furukawa/espower-traceur)
+ - [espower-6to5](https://github.com/azu/espower-6to5)
 
 If you are using Node.js only, the easiest way is to use [intelli-espower-loader](https://github.com/azu/intelli-espower-loader). Steps are as follows.
 
