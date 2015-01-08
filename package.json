@@ -27,8 +27,8 @@
   },
   "devDependencies": {
     "espower-loader": "~0.10.0",
-    "expect.js": "0.3.1",
-    "qunit-tap": "1.4.2",
+    "expect.js": "~0.3.1",
+    "qunit-tap": "~1.5.0",
     "qunitjs": "1.14.0"
   },
   "files": [

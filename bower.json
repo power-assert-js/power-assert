@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "expect": "~0.3.1",
-    "mocha": "~2.0.1",
+    "mocha": "~2.1.0",
     "requirejs": "~2.1.15"
   }
 }
