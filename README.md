@@ -966,4 +966,4 @@ Have fun!
 [depstat-image]: https://gemnasium.com/twada/power-assert.svg
 
 [license-url]: https://github.com/twada/power-assert/blob/master/MIT-LICENSE.txt
-[license-image]: http://img.shields.io/badge/license-MIT-brightgreen.svg
+[license-image]: http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat
