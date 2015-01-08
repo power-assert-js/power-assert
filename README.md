@@ -29,7 +29,7 @@ What is `power-assert`?
  * provides [command](http://github.com/twada/espower-cli).
  * provides [custom module loader](http://github.com/twada/espower-loader) and its [convenient config module](https://github.com/azu/intelli-espower-loader).
  * provides [karma preprocessor](https://github.com/vvakame/karma-espower-preprocessor).
- * supports [ES6](https://github.com/yosuke-furukawa/espower-traceur).
+ * supports ES6 through [Traceur Compiler](https://github.com/yosuke-furukawa/espower-traceur) or [6to5](https://github.com/azu/espower-6to5).
  * supports [CoffeeScript](http://github.com/twada/espower-coffee).
  * has [TypeScript type definition](https://github.com/borisyankov/DefinitelyTyped/blob/master/power-assert/power-assert.d.ts)
  * is a beta version product. Pull-requests, issue reports and patches are always welcomed.
@@ -544,7 +544,8 @@ and instrumentors are,
 | [gulp-espower](http://github.com/twada/gulp-espower) | Gulp plugin to apply `espower` to target files. |
 | [karma-espower-preprocessor](https://github.com/vvakame/karma-espower-preprocessor) | karma-preprocessor for power-assert. |
 | [espower-coffee](http://github.com/twada/espower-coffee) | power-assert instrumentor for CoffeeScript. |
-| [espower-traceur](https://github.com/yosuke-furukawa/espower-traceur) | power-assert instrumentor for ES6. |
+| [espower-traceur](https://github.com/yosuke-furukawa/espower-traceur) | power-assert instrumentor for ES6 using [Traceur Compiler](https://github.com/google/traceur-compiler/). |
+| [espower-6to5](https://github.com/azu/espower-6to5) | power-assert instrumentor for ES6 using [6to5](https://6to5.org/). |
 
 
 `power-assert` provides standard [assert](http://nodejs.org/api/assert.html) compatible function with Power Assert feature.
