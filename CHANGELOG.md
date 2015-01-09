@@ -1,3 +1,13 @@
+### [0.10.1](https://github.com/twada/power-assert/releases/tag/v0.10.1) (2015-01-09)
+
+
+#### Bug Fixes
+
+* **power-assert:**
+  * apply [assert.deepEqual fix](https://github.com/substack/node-browserify/pull/1041) in browserify 8.1.0 ([96302406](https://github.com/twada/power-assert/commit/963024062e6c144f2d5487d788e883f418a9c746))
+  * apply [dereserve](https://github.com/twada/dereserve) to browser build
+
+
 ## [0.10.0](https://github.com/twada/power-assert/releases/tag/v0.10.0) (2014-11-12)
 
 
