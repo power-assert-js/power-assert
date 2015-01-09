@@ -259,11 +259,12 @@ Some seed projects are available to help you start with power-assert.
 HOW TO USE
 ---------------------------------------
 
-There are three ways to use power-assert. (If you want to see running examples, see [SEED PROJECTS](#seed-projects))
+There are four ways to use power-assert. (If you want to see running examples, see [SEED PROJECTS](#seed-projects))
 
 1. `power-assert` + `espower-loader`: Highly recommended but only works under Node.
-2. `power-assert` + `espowerify` : Recommended if you are using [browserify](http://browserify.org/).
-3. `power-assert` + `espower-cli` or `grunt-espower` or `gulp-espower` : Generate instrumented code so works anywhere.
+2. `power-assert` + `espower-coffee` or `espower-traceur` or `espower-6to5` : Use power-assert through transpilers. Recommended but only works under Node.
+3. `power-assert` + `espowerify` : Recommended if you are using [browserify](http://browserify.org/).
+4. `power-assert` + `espower-cli` or `grunt-espower` or `gulp-espower` : Generate instrumented code so works anywhere.
 
 
 ### using `espower-loader`
@@ -301,6 +302,19 @@ Then run mocha, with `--require` option. No code generation required.
 
 FYI: You may be interested in [intelli-espower-loader](https://github.com/azu/intelli-espower-loader) to go one step further. With [intelli-espower-loader](https://github.com/azu/intelli-espower-loader), you don't need to create loader file (like `enable-power-assert.js`). Just define test directory in `package.json` wow!
 
+
+### using `espower-coffee`
+
+If you are writing Node.js app/module in CoffeeScript, you can instrument Power Assert feature without code generation by using `espower-coffee`.
+
+see [espower-coffee README](https://github.com/twada/espower-coffee).
+
+
+### using `espower-traceur` or `espower-6to5`
+
+If you are writing Node.js app/module in ES6, you can instrument Power Assert feature without code generation by using `espower-traceur` or `espower-6to5`. `espower-traceur` uses [Traceur Compiler](https://github.com/google/traceur-compiler/), `espower-6to5` uses [6to5](https://6to5.org/).
+
+see [espower-traceur README](https://github.com/yosuke-furukawa/espower-traceur) or [espower-6to5 README](https://github.com/azu/espower-6to5).
 
 
 ### using `espowerify`
