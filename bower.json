@@ -6,6 +6,7 @@
   "ignore": [
     "**/.*",
     "package.json",
+    "index.js",
     "test",
     "enable_power_assert.js"
   ],
