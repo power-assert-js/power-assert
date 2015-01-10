@@ -4,7 +4,8 @@ power-assert
 Power Assert in JavaScript. Provides descriptive assertion messages through standard [assert](http://nodejs.org/api/assert.html) interface.
 
 [![Build Status][travis-image]][travis-url]
-[![NPM version][npm-image]][npm-url]
+[![NPM package][npm-image]][npm-url]
+[![Bower package][bower-image]][bower-url]
 [![Dependency Status][depstat-image]][depstat-url]
 [![License][license-image]][license-url]
 
@@ -975,6 +976,9 @@ Have fun!
 
 [npm-url]: https://npmjs.org/package/power-assert
 [npm-image]: https://badge.fury.io/js/power-assert.svg
+
+[bower-url]: http://badge.fury.io/bo/power-assert
+[bower-image]: https://badge.fury.io/bo/power-assert.svg
 
 [travis-url]: http://travis-ci.org/twada/power-assert
 [travis-image]: https://secure.travis-ci.org/twada/power-assert.svg?branch=master
