@@ -24,6 +24,6 @@ function customize (customOptions) {
     );
     poweredAssert.customize = customize;
     return poweredAssert;
-};
+}
 
 module.exports = customize();
