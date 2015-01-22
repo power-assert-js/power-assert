@@ -26,6 +26,7 @@ What is `power-assert`?
  * available via [npm](https://www.npmjs.com/package/power-assert) and [bower](http://bower.io/search/?q=power-assert). 
  * supports sourcemaps so you can debug as usual.
  * provides [browserify transform](http://github.com/twada/espowerify).
+ * provides [webpack loader](https://github.com/zoncoen/webpack-espower-loader).
  * provides [grunt task](http://github.com/twada/grunt-espower) and [gulp plugin](http://github.com/twada/gulp-espower).
  * provides [command](http://github.com/twada/espower-cli).
  * provides [custom module loader](http://github.com/twada/espower-loader) and its [convenient config module](https://github.com/azu/intelli-espower-loader).
@@ -147,6 +148,7 @@ Code transform is done by instrumentors below:
  - [espower-loader](http://github.com/twada/espower-loader) (with [intelli-espower-loader](https://github.com/azu/intelli-espower-loader))
  - [espower-cli](http://github.com/twada/espower-cli)
  - [espowerify](http://github.com/twada/espowerify)
+ - [webpack-espower-loader](https://github.com/zoncoen/webpack-espower-loader).
  - [grunt-espower](http://github.com/twada/grunt-espower)
  - [gulp-espower](http://github.com/twada/gulp-espower)
  - [karma-espower-preprocessor](https://github.com/vvakame/karma-espower-preprocessor)
@@ -264,7 +266,7 @@ There are four ways to use power-assert. (If you want to see running examples, s
 
 1. `power-assert` + `espower-loader`: Highly recommended but only works under Node.
 2. `power-assert` + `espower-coffee` or `espower-traceur` or `espower-6to5` : Use power-assert through transpilers. Recommended but only works under Node.
-3. `power-assert` + `espowerify` : Recommended if you are using [browserify](http://browserify.org/).
+3. `power-assert` + `espowerify` or `webpack-espower-loader`: Recommended if you are using [browserify](http://browserify.org/) or [webpack](http://webpack.github.io/).
 4. `power-assert` + `espower-cli` or `grunt-espower` or `gulp-espower` : Generate instrumented code so works anywhere.
 
 
@@ -342,6 +344,12 @@ Lastly, run your test in your way. For example,
 
     $ mocha-phantomjs path/to/test.html
 
+
+### using `webpack-espower-loader`
+
+If you are using [webpack](http://webpack.github.io/), you can instrument Power Assert feature via `webpack-espower-loader`.
+
+see [webpack-espower-loader README](https://github.com/zoncoen/webpack-espower-loader).
 
 
 ### using `espower-cli`
@@ -558,6 +566,7 @@ and instrumentors are,
 | [espower-loader](http://github.com/twada/espower-loader) | Node module loader to apply `espower` on the fly. |
 | [intelli-espower-loader](https://github.com/azu/intelli-espower-loader) | configure `espower-loader` with ease. |
 | [espowerify](http://github.com/twada/espowerify) | [Browserify](http://browserify.org/) transform to apply `espower` to target files. |
+| [webpack-espower-loader](https://github.com/zoncoen/webpack-espower-loader) | Power Assert instrumentor module for [webpack](http://webpack.github.io/). |
 | [grunt-espower](http://github.com/twada/grunt-espower) | Grunt task to apply `espower` to target files. |
 | [gulp-espower](http://github.com/twada/gulp-espower) | Gulp plugin to apply `espower` to target files. |
 | [karma-espower-preprocessor](https://github.com/vvakame/karma-espower-preprocessor) | karma-preprocessor for power-assert. |
