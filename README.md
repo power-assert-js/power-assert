@@ -324,25 +324,7 @@ see [espower-traceur README](https://github.com/yosuke-furukawa/espower-traceur)
 
 On the browser side and you are using [browserify](http://browserify.org/), you can instrument Power Assert feature via `espowerify`.
 
-First, install `power-assert` and `espowerify` via npm.
-
-    $ npm install --save-dev power-assert espowerify
-
-Second, require `power-assert` in your test.
-
-    --- a/test/your_test.js
-    +++ b/test/your_test.js
-    @@ -1,4 +1,4 @@
-    -var assert = require('assert');
-    +var assert = require('power-assert');
-
-Third, apply `espowerify` through browserify transform.
-
-    $ browserify -t espowerify test/your_test.js > dist/your_test.js
-
-Lastly, run your test in your way. For example,
-
-    $ mocha-phantomjs path/to/test.html
+see [espowerify README](https://github.com/twada/espowerify).
 
 
 ### using `webpack-espower-loader`
@@ -352,6 +334,7 @@ If you are using [webpack](http://webpack.github.io/), you can instrument Power 
 see [webpack-espower-loader README](https://github.com/zoncoen/webpack-espower-loader).
 
 
+
 ### using `espower-cli`
 
 On the browser side and you don't want to use grunt,gulp or browserify, you can use `power-assert` via bower, with generated code by `espower-cli`
@@ -359,7 +342,7 @@ On the browser side and you don't want to use grunt,gulp or browserify, you can 
 First, install `power-assert` via bower and `espower-cli` via npm. This means that you run `espower` command (on Node), then run tests on browser.
 
     $ bower install --save-dev power-assert
-    $ npm install --save-dev gulp-espower
+    $ npm install --save-dev espower-cli
 
 Second, require `build/power-assert.js` (all-in-one build for browsers) in your test html.
 
