@@ -1,3 +1,19 @@
+### [0.10.2](https://github.com/twada/power-assert/releases/tag/v0.10.2) (2015-02-16)
+
+
+#### Bug Fixes
+
+* **power-assert:**
+  * update power-assert-formatter to 0.10.2 ([2c0f9624](https://github.com/twada/power-assert/commit/2c0f962415d60e59affb8f009ae4822f7b503c92)) to apply [stringifier fix]([67a9fa72](https://github.com/twada/stringifier/commit/67a9fa725c7602f948772f4f5f5a74806809ee34))
+
+
+#### Features
+
+* **power-assert:**
+  * ship npm module with built bundle for browsers ([431769f3](https://github.com/twada/power-assert/commit/431769f3d5da68c279ebf59b0cfd1231fa385361))
+  * add Node 0.12 and io.js to Travis build ([dd9629f9](https://github.com/twada/power-assert/commit/dd9629f96f3a204f6c24156f648b172f7c6abd4c))
+
+
 ### [0.10.1](https://github.com/twada/power-assert/releases/tag/v0.10.1) (2015-01-09)
 
 
