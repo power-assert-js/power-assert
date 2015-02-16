@@ -36,6 +36,7 @@
     "MIT-LICENSE.txt",
     "README.md",
     "index.js",
+    "build/power-assert.js",
     "package.json",
     "test"
   ],
