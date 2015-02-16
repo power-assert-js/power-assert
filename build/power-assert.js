@@ -6753,7 +6753,7 @@ parseStatement: true, parseSourceElement: true */
  *
  * https://github.com/twada/power-assert-formatter
  *
- * Copyright (c) 2013-2014 Takuto Wada
+ * Copyright (c) 2013-2015 Takuto Wada
  * Licensed under the MIT license.
  *   https://github.com/twada/power-assert-formatter/blob/master/MIT-LICENSE.txt
  */
@@ -10759,9 +10759,9 @@ module.exports = function isArguments(value) {
  * 
  * https://github.com/twada/stringifier
  *
- * Copyright (c) 2014 Takuto Wada
+ * Copyright (c) 2014-2015 Takuto Wada
  * Licensed under the MIT license.
- *   http://twada.mit-license.org/
+ *   http://twada.mit-license.org/2014-2015
  */
 'use strict';
 
@@ -10943,6 +10943,28 @@ function allowedKeys (orderedWhiteList) {
             if (!isIteratingArray && typeName(orderedWhiteList) === 'Array') {
                 acc.context.keys = orderedWhiteList.filter(function (propKey) {
                     return acc.context.keys.indexOf(propKey) !== -1;
+                });
+            }
+            return next(acc, x);
+        };
+    };
+}
+
+function safeKeys () {
+    return function (next) {
+        return function (acc, x) {
+            if (typeName(x) !== 'Array') {
+                acc.context.keys = acc.context.keys.filter(function (propKey) {
+                    // Error handling for unsafe property access.
+                    // For example, on PhantomJS,
+                    // accessing HTMLInputElement.selectionEnd causes TypeError
+                    try {
+                        var val = x[propKey];
+                        return true;
+                    } catch (e) {
+                        // skip unsafe key
+                        return false;
+                    }
                 });
             }
             return next(acc, x);
@@ -11165,6 +11187,7 @@ module.exports = {
         compose: compose,
         when: when,
         allowedKeys: allowedKeys,
+        safeKeys: safeKeys,
         filter: filter,
         iterate: iterate,
         end: end
@@ -11220,6 +11243,7 @@ module.exports = {
             constructorName(),
             decorateObject(),
             allowedKeys(orderedWhiteList),
+            safeKeys(),
             filter(predicate),
             iterate()
         );
