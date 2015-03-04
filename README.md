@@ -163,17 +163,12 @@ If you are using Node.js only, the easiest way is to use [intelli-espower-loader
 
 `npm install --save-dev mocha power-assert intelli-espower-loader`
 
-### Add directories to package.json
 
-```json
-  "directories": {
-    "test": "test/"
-  },
-```
+### Run
 
-### See the power-assert output appears.
+Put tests into `test` directory then run. You will see the power-assert output appears.
 
-      $ mocha --require intelli-espower-loader /path/to/test/mocha_node.js
+      $ ./node_modules/.bin/mocha --require intelli-espower-loader /path/to/test/mocha_node.js
     
       Array
         #indexOf()
@@ -300,7 +295,7 @@ require('espower-loader')({
 
 Then run mocha, with `--require` option. No code generation required.
 
-    $ mocha --require ./path/to/enable-power-assert test/your_test.js
+    $ ./node_modules/.bin/mocha --require ./path/to/enable-power-assert test/your_test.js
 
 
 FYI: You may be interested in [intelli-espower-loader](https://github.com/azu/intelli-espower-loader) to go one step further. With [intelli-espower-loader](https://github.com/azu/intelli-espower-loader), you don't need to create loader file (like `enable-power-assert.js`). Just define test directory in `package.json` wow!
