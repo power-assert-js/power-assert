@@ -101,22 +101,6 @@ describe('power-assert message', function () {
     });
 
 
-    it('assert((delete nonexistent) === false);', function () {
-        this.expectPowerAssertMessage(function () {
-            assert((delete nonexistent) === false);
-        }, [
-            '  assert(delete nonexistent === false)',
-            '         |                  |         ',
-            '         true               false     ',
-            '  ',
-            '  [boolean] false',
-            '  => false',
-            '  [boolean] delete nonexistent',
-            '  => true'
-        ]);
-    });
-
-
     it('assert((delete foo.bar) === falsy);', function () {
         var falsy = 0,
             foo = {
@@ -624,11 +608,12 @@ describe('power-assert message', function () {
             assert([foo, bar].length === four);
         }, [
             '  assert([foo,bar].length === four)',
-            '          |   |    |      |   |    ',
-            '          |   |    |      |   4    ',
-            '          |   |    2      false    ',
-            '          |   "fuga"               ',
-            '          "hoge"                   ',
+            '         ||   |    |      |   |    ',
+            '         ||   |    |      |   4    ',
+            '         ||   |    2      false    ',
+            '         ||   "fuga"               ',
+            '         |"hoge"                   ',
+            '         ["hoge","fuga"]           ',
             '  ',
             '  [number] four',
             '  => 4',
@@ -645,12 +630,15 @@ describe('power-assert message', function () {
             assert(typeof [[foo.bar, baz(moo)], + fourStr] === "number");
         }, [
             '  assert(typeof [[foo.bar,baz(moo)],+fourStr] === "number")',
-            '         |        |   |   |   |     ||        |            ',
-            '         |        |   |   |   |     |"4"      false        ',
-            '         |        |   |   |   "boo" 4                      ',
-            '         |        |   |   null                             ',
-            '         |        |   "fuga"                               ',
-            '         "object" Object{bar:"fuga"}                       ',
+            '         |      |||   |   |   |     ||        |            ',
+            '         |      |||   |   |   |     |"4"      false        ',
+            '         |      |||   |   |   "boo" 4                      ',
+            '         |      |||   |   null                             ',
+            '         |      |||   "fuga"                               ',
+            '         |      ||Object{bar:"fuga"}                       ',
+            '         |      |["fuga",null]                             ',
+            '         |      [#Array#,4]                                ',
+            '         "object"                                          ',
             '  ',
             '  --- [string] "number"',
             '  +++ [string] typeof [[foo.bar,baz(moo)],+fourStr]',
@@ -717,9 +705,13 @@ describe('power-assert message', function () {
             assert(!({ foo: bar.baz, name: nameOf({firstName: first, lastName: last}) }));
         }, [
             '  assert(!{foo: bar.baz,name: nameOf({firstName: first,lastName: last})})',
-            '         |      |   |         |                  |               |       ',
-            '         |      |   "BAZ"     "Brendan Eich"     "Brendan"       "Eich"  ',
-            '         false  Object{baz:"BAZ"}                                        '
+            '         ||     |   |         |      |           |               |       ',
+            '         ||     |   |         |      |           "Brendan"       "Eich"  ',
+            '         ||     |   |         |      Object{firstName:"Brendan",lastName:"Eich"}',
+            '         ||     |   "BAZ"     "Brendan Eich"                             ',
+            '         ||     Object{baz:"BAZ"}                                        ',
+            '         |Object{foo:"BAZ",name:"Brendan Eich"}                          ',
+            '         false                                                           ',
         ]);
     });
 
@@ -849,8 +841,9 @@ describe('power-assert message', function () {
             assert.deepEqual(alice || bob, {name: kenName, age: four});
         },[
             '  assert.deepEqual(alice || bob, {name: kenName,age: four})',
-            '                   |     |              |            |     ',
-            '                   |     |              "ken"        4     ',
+            '                   |     |       |      |            |     ',
+            '                   |     |       |      "ken"        4     ',
+            '                   |     |       Object{name:"ken",age:4}  ',
             '                   |     Person{name:"alice",age:3}        ',
             '                   Person{name:"alice",age:3}              '
         ]);
@@ -863,14 +856,15 @@ describe('power-assert message', function () {
             assert.notDeepEqual([foo, bar, baz], new Array(foo, bar, baz));
         },[
             '  assert.notDeepEqual([foo,bar,baz], new Array(foo, bar, baz))',
-            '                       |   |   |     |         |    |    |    ',
-            '                       |   |   |     |         |    |    Object{name:"hoge"}',
-            '                       |   |   |     |         |    ["toto","tata"]',
-            '                       |   |   |     |         "foo"          ',
-            '                       |   |   |     ["foo",#Array#,#Object#] ',
-            '                       |   |   Object{name:"hoge"}            ',
-            '                       |   ["toto","tata"]                    ',
-            '                       "foo"                                  '
+            '                      ||   |   |     |         |    |    |    ',
+            '                      ||   |   |     |         |    |    Object{name:"hoge"}',
+            '                      ||   |   |     |         |    ["toto","tata"]',
+            '                      ||   |   |     |         "foo"          ',
+            '                      ||   |   |     ["foo",#Array#,#Object#] ',
+            '                      ||   |   Object{name:"hoge"}            ',
+            '                      ||   ["toto","tata"]                    ',
+            '                      |"foo"                                  ',
+            '                      ["foo",#Array#,#Object#]                '
         ]);
     });
 
