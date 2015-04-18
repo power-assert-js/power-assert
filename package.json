@@ -21,14 +21,14 @@
     }
   ],
   "dependencies": {
-    "empower": "~0.10.0",
-    "power-assert-formatter": "~0.10.2",
-    "xtend": "~4.0.0"
+    "empower": "^0.10.0",
+    "power-assert-formatter": "^0.10.2",
+    "xtend": "^4.0.0"
   },
   "devDependencies": {
-    "espower-loader": "~0.10.0",
-    "expect.js": "~0.3.1",
-    "qunit-tap": "~1.5.0",
+    "espower-loader": "^0.10.0",
+    "expect.js": "^0.3.1",
+    "qunit-tap": "^1.5.0",
     "qunitjs": "1.14.0"
   },
   "files": [
