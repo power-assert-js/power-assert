@@ -1,3 +1,11 @@
+## [0.11.0](https://github.com/twada/power-assert/releases/tag/v0.11.0) (2015-04-18)
+
+
+#### Features
+
+* [ES6 support](https://github.com/twada/power-assert/pull/17)
+
+
 ### [0.10.2](https://github.com/twada/power-assert/releases/tag/v0.10.2) (2015-02-16)
 
 
