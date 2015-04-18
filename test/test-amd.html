@@ -16,6 +16,7 @@
       mocha.setup('bdd');
       require([
         "../espowered_tests/tobe_instrumented/power_assert_test",
+        "../espowered_tests/tobe_instrumented/es6_test",
         "../espowered_tests/not_tobe_instrumented/not_instrumented_test"
       ], function() {
         mocha.checkLeaks();
