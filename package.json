@@ -28,7 +28,7 @@
   "devDependencies": {
     "babel": "^5.1.10",
     "babel-core": "^5.1.10",
-    "babel-plugin-espower": "^0.1.0",
+    "babel-plugin-espower": "^0.2.0",
     "expect.js": "^0.3.1",
     "qunit-tap": "^1.5.0",
     "qunitjs": "1.14.0"
