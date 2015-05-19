@@ -25,15 +25,15 @@ What is `power-assert`?
  * works both on server side and browser side.
  * available via [npm](https://www.npmjs.com/package/power-assert) and [bower](http://bower.io/search/?q=power-assert). 
  * supports sourcemaps so you can debug as usual.
- * Now supports ES6 through [babel plugin](https://github.com/twada/babel-plugin-espower).
- * provides [browserify transform](http://github.com/twada/espowerify).
+ * Now supports ES6 through [babel plugin](https://github.com/power-assert-js/babel-plugin-espower).
+ * provides [browserify transform](http://github.com/power-assert-js/espowerify).
  * provides [webpack loader](https://github.com/zoncoen/webpack-espower-loader).
- * provides [grunt task](http://github.com/twada/grunt-espower) and [gulp plugin](http://github.com/twada/gulp-espower).
- * provides [command](http://github.com/twada/espower-cli).
- * provides [custom module loader](http://github.com/twada/espower-loader) and its [convenient config module](https://github.com/azu/intelli-espower-loader).
- * provides [karma preprocessor](https://github.com/vvakame/karma-espower-preprocessor).
- * supports ES6 through [babel plugin](https://github.com/twada/babel-plugin-espower), [module loader for Traceur Compiler](https://github.com/yosuke-furukawa/espower-traceur), and [module loader for Babel](https://github.com/azu/espower-babel).
- * supports [CoffeeScript](http://github.com/twada/espower-coffee).
+ * provides [grunt task](http://github.com/power-assert-js/grunt-espower) and [gulp plugin](http://github.com/power-assert-js/gulp-espower).
+ * provides [command](http://github.com/power-assert-js/espower-cli).
+ * provides [custom module loader](http://github.com/power-assert-js/espower-loader) and its [convenient config module](https://github.com/power-assert-js/intelli-espower-loader).
+ * provides [karma preprocessor](https://github.com/power-assert-js/karma-espower-preprocessor).
+ * supports ES6 through [babel plugin](https://github.com/power-assert-js/babel-plugin-espower), [module loader for Traceur Compiler](https://github.com/yosuke-furukawa/espower-traceur), and [module loader for Babel](https://github.com/power-assert-js/espower-babel).
+ * supports [CoffeeScript](http://github.com/power-assert-js/espower-coffee).
  * has [TypeScript type definition](https://github.com/borisyankov/DefinitelyTyped/blob/master/power-assert/power-assert.d.ts)
  * is a beta version product. Pull-requests, issue reports and patches are always welcomed.
 
@@ -76,22 +76,22 @@ power-assert is fully compatible with [assert](http://nodejs.org/api/assert.html
 * `assert.doesNotThrow(block, [message])`
 * `assert.ifError(value)`
 
-power-assert provides an [API for customization](https://github.com/twada/power-assert#customization-api).
+power-assert provides an [API for customization](https://github.com/power-assert-js/power-assert#customization-api).
 
 * `assert.customize(options)`
 
-As written below, power-assert is constructed with many family modules. See more details of [empower](http://github.com/twada/empower) and others.
+As written below, power-assert is constructed with many family modules. See more details of [empower](http://github.com/power-assert-js/empower) and others.
 
 
 CHANGELOG
 ---------------------------------------
-See [CHANGELOG](https://github.com/twada/power-assert/blob/master/CHANGELOG.md)
+See [CHANGELOG](https://github.com/power-assert-js/power-assert/blob/master/CHANGELOG.md)
 
 
 EXAMPLE
 ---------------------------------------
 
-See [HOW TO USE](https://github.com/twada/power-assert#how-to-use) section for more details.
+See [HOW TO USE](https://github.com/power-assert-js/power-assert#how-to-use) section for more details.
 
 __Note:__ There is an [online demo site](http://azu.github.io/power-assert-demo/) available.
 
@@ -146,19 +146,19 @@ To use power-assert, you need to transform your test code for power-assert outpu
 
 Code transform is done by instrumentors below:
 
- - [espower-loader](http://github.com/twada/espower-loader) (with [intelli-espower-loader](https://github.com/azu/intelli-espower-loader))
- - [espower-cli](http://github.com/twada/espower-cli)
- - [espowerify](http://github.com/twada/espowerify)
+ - [espower-loader](http://github.com/power-assert-js/espower-loader) (with [intelli-espower-loader](https://github.com/power-assert-js/intelli-espower-loader))
+ - [espower-cli](http://github.com/power-assert-js/espower-cli)
+ - [espowerify](http://github.com/power-assert-js/espowerify)
  - [webpack-espower-loader](https://github.com/zoncoen/webpack-espower-loader).
- - [grunt-espower](http://github.com/twada/grunt-espower)
- - [gulp-espower](http://github.com/twada/gulp-espower)
- - [karma-espower-preprocessor](https://github.com/vvakame/karma-espower-preprocessor)
- - [espower-coffee](http://github.com/twada/espower-coffee)
+ - [grunt-espower](http://github.com/power-assert-js/grunt-espower)
+ - [gulp-espower](http://github.com/power-assert-js/gulp-espower)
+ - [karma-espower-preprocessor](https://github.com/power-assert-js/karma-espower-preprocessor)
+ - [espower-coffee](http://github.com/power-assert-js/espower-coffee)
  - [espower-traceur](https://github.com/yosuke-furukawa/espower-traceur)
- - [espower-babel](https://github.com/azu/espower-babel)
- - [babel-plugin-espower](https://github.com/twada/babel-plugin-espower)
+ - [espower-babel](https://github.com/power-assert-js/espower-babel)
+ - [babel-plugin-espower](https://github.com/power-assert-js/babel-plugin-espower)
 
-If you are using Node.js only, the easiest way is to use [intelli-espower-loader](https://github.com/azu/intelli-espower-loader). Steps are as follows.
+If you are using Node.js only, the easiest way is to use [intelli-espower-loader](https://github.com/power-assert-js/intelli-espower-loader). Steps are as follows.
 
 
 ### Setup
@@ -251,9 +251,9 @@ Some seed projects are available to help you start with power-assert.
 
 | module | env | tech stack |
 |:-------|:------------|:------------|
-| [power-assert-node-seed](https://github.com/azu/power-assert-node-seed) | Node.js | power-assert + [intelli-espower-loader](https://github.com/azu/intelli-espower-loader) |
-| [power-assert-testem-seed](https://github.com/azu/power-assert-testem-seed) | Browsers(by [testem](https://github.com/airportyh/testem)) | power-assert + [gulp-espower](http://github.com/twada/gulp-espower) + [testem](https://github.com/airportyh/testem). |
-| [power-assert-karma-seed](https://github.com/azu/power-assert-karma-seed) | Browsers(by [Karma](http://karma-runner.github.io/)) | power-assert + [espowerify](http://github.com/twada/espowerify) + [browserify](http://browserify.org/) + [Karma](http://karma-runner.github.io/). |
+| [power-assert-node-seed](https://github.com/azu/power-assert-node-seed) | Node.js | power-assert + [intelli-espower-loader](https://github.com/power-assert-js/intelli-espower-loader) |
+| [power-assert-testem-seed](https://github.com/azu/power-assert-testem-seed) | Browsers(by [testem](https://github.com/airportyh/testem)) | power-assert + [gulp-espower](http://github.com/power-assert-js/gulp-espower) + [testem](https://github.com/airportyh/testem). |
+| [power-assert-karma-seed](https://github.com/azu/power-assert-karma-seed) | Browsers(by [Karma](http://karma-runner.github.io/)) | power-assert + [espowerify](http://github.com/power-assert-js/espowerify) + [browserify](http://browserify.org/) + [Karma](http://karma-runner.github.io/). |
 
 
 HOW TO USE
@@ -301,35 +301,35 @@ Then run mocha, with `--require` option. No code generation required.
     $ ./node_modules/.bin/mocha --require ./path/to/enable-power-assert test/your_test.js
 
 
-FYI: You may be interested in [intelli-espower-loader](https://github.com/azu/intelli-espower-loader) to go one step further. With [intelli-espower-loader](https://github.com/azu/intelli-espower-loader), you don't need to create loader file (like `enable-power-assert.js`). Just define test directory in `package.json` wow!
+FYI: You may be interested in [intelli-espower-loader](https://github.com/power-assert-js/intelli-espower-loader) to go one step further. With [intelli-espower-loader](https://github.com/power-assert-js/intelli-espower-loader), you don't need to create loader file (like `enable-power-assert.js`). Just define test directory in `package.json` wow!
 
 
 ### using `espower-coffee`
 
 If you are writing Node.js app/module in CoffeeScript, you can instrument Power Assert feature without code generation by using `espower-coffee`.
 
-see [espower-coffee README](https://github.com/twada/espower-coffee).
+see [espower-coffee README](https://github.com/power-assert-js/espower-coffee).
 
 
 ### using `babel-plugin-espower`
 
 If you are writing your code in ES6, you can instrument Power Assert feature with Babel and babel-plugin-espower.
 
-see [babel-plugin-espower README](https://github.com/twada/babel-plugin-espower).
+see [babel-plugin-espower README](https://github.com/power-assert-js/babel-plugin-espower).
 
 
 ### using `espower-traceur` or `espower-babel`
 
 If you are writing Node.js app/module in ES6, you can instrument Power Assert feature without code generation by using `espower-traceur` or `espower-babel`. `espower-traceur` uses [Traceur Compiler](https://github.com/google/traceur-compiler/), `espower-babel` uses [Babel](https://babeljs.io/).
 
-see [espower-traceur README](https://github.com/yosuke-furukawa/espower-traceur) or [espower-babel README](https://github.com/azu/espower-babel).
+see [espower-traceur README](https://github.com/yosuke-furukawa/espower-traceur) or [espower-babel README](https://github.com/power-assert-js/espower-babel).
 
 
 ### using `espowerify`
 
 On the browser side and you are using [browserify](http://browserify.org/), you can instrument Power Assert feature via `espowerify`.
 
-see [espowerify README](https://github.com/twada/espowerify).
+see [espowerify README](https://github.com/power-assert-js/espowerify).
 
 
 ### using `webpack-espower-loader`
@@ -476,11 +476,11 @@ var assert = require('power-assert').customize({
 
 #### options.assertion
 
-customization options for [empower](http://github.com/twada/empower) module. See [empower API documentation](https://github.com/twada/empower#api) for details. Note that some default values are different from `empower`'s (`modifyMessageOnRethrow: true` and `saveContextOnRethrow: true`).
+customization options for [empower](http://github.com/power-assert-js/empower) module. See [empower API documentation](https://github.com/power-assert-js/empower#api) for details. Note that some default values are different from `empower`'s (`modifyMessageOnRethrow: true` and `saveContextOnRethrow: true`).
 
 #### options.output
 
-customization options for [power-assert-formatter](http://github.com/twada/power-assert-formatter) module. See [power-assert-formatter API documentation](https://github.com/twada/power-assert-formatter#api) for details.
+customization options for [power-assert-formatter](http://github.com/power-assert-js/power-assert-formatter) module. See [power-assert-formatter API documentation](https://github.com/power-assert-js/power-assert-formatter#api) for details.
 
 #### default values
 
@@ -535,40 +535,40 @@ Main (facade) module is,
 
 | module | description |
 |:-------|:------------|
-| [power-assert](http://github.com/twada/power-assert) | Standard `assert` function on top of `empower` and `power-assert-formatter` |
+| [power-assert](http://github.com/power-assert-js/power-assert) | Standard `assert` function on top of `empower` and `power-assert-formatter` |
 
 core modules are,
 
 | module | description |
 |:-------|:------------|
-| [empower](http://github.com/twada/empower) | Power Assert feature enhancer for assert function/object. |
-| [power-assert-formatter](http://github.com/twada/power-assert-formatter) | Power Assert output formatter. |
-| [espower](http://github.com/twada/espower) | Power Assert feature instrumentor core based on the [Mozilla JavaScript AST](https://developer.mozilla.org/en-US/docs/SpiderMonkey/Parser_API). |
-| [espower-source](http://github.com/twada/espower-source) | Power Assert instrumentor from source to source, with source-map. (Thin wrapper of `espower`). |
+| [empower](http://github.com/power-assert-js/empower) | Power Assert feature enhancer for assert function/object. |
+| [power-assert-formatter](http://github.com/power-assert-js/power-assert-formatter) | Power Assert output formatter. |
+| [espower](http://github.com/power-assert-js/espower) | Power Assert feature instrumentor core based on the [Mozilla JavaScript AST](https://developer.mozilla.org/en-US/docs/SpiderMonkey/Parser_API). |
+| [espower-source](http://github.com/power-assert-js/espower-source) | Power Assert instrumentor from source to source, with source-map. (Thin wrapper of `espower`). |
 
 and instrumentors are,
 
 | module | description |
 |:-------|:------------|
-| [espower-cli](http://github.com/twada/espower-cli) | Command line tool for power-assert. |
-| [espower-loader](http://github.com/twada/espower-loader) | Node module loader to apply `espower` on the fly. |
-| [intelli-espower-loader](https://github.com/azu/intelli-espower-loader) | configure `espower-loader` with ease. |
-| [babel-plugin-espower](https://github.com/twada/babel-plugin-espower) | [Babel](https://babeljs.io/) plugin to instrument power-assert feature into target files. |
-| [espowerify](http://github.com/twada/espowerify) | [Browserify](http://browserify.org/) transform to apply `espower` to target files. |
+| [espower-cli](http://github.com/power-assert-js/espower-cli) | Command line tool for power-assert. |
+| [espower-loader](http://github.com/power-assert-js/espower-loader) | Node module loader to apply `espower` on the fly. |
+| [intelli-espower-loader](https://github.com/power-assert-js/intelli-espower-loader) | configure `espower-loader` with ease. |
+| [babel-plugin-espower](https://github.com/power-assert-js/babel-plugin-espower) | [Babel](https://babeljs.io/) plugin to instrument power-assert feature into target files. |
+| [espowerify](http://github.com/power-assert-js/espowerify) | [Browserify](http://browserify.org/) transform to apply `espower` to target files. |
 | [webpack-espower-loader](https://github.com/zoncoen/webpack-espower-loader) | Power Assert instrumentor module for [webpack](http://webpack.github.io/). |
-| [grunt-espower](http://github.com/twada/grunt-espower) | Grunt task to apply `espower` to target files. |
-| [gulp-espower](http://github.com/twada/gulp-espower) | Gulp plugin to apply `espower` to target files. |
-| [karma-espower-preprocessor](https://github.com/vvakame/karma-espower-preprocessor) | karma-preprocessor for power-assert. |
-| [espower-coffee](http://github.com/twada/espower-coffee) | power-assert instrumentor for CoffeeScript. |
+| [grunt-espower](http://github.com/power-assert-js/grunt-espower) | Grunt task to apply `espower` to target files. |
+| [gulp-espower](http://github.com/power-assert-js/gulp-espower) | Gulp plugin to apply `espower` to target files. |
+| [karma-espower-preprocessor](https://github.com/power-assert-js/karma-espower-preprocessor) | karma-preprocessor for power-assert. |
+| [espower-coffee](http://github.com/power-assert-js/espower-coffee) | power-assert instrumentor for CoffeeScript. |
 | [espower-traceur](https://github.com/yosuke-furukawa/espower-traceur) | power-assert instrumentor for ES6 using [Traceur Compiler](https://github.com/google/traceur-compiler/). |
-| [espower-babel](https://github.com/azu/espower-babel) | power-assert instrumentor for ES6 using [Babel](https://babeljs.io/). |
+| [espower-babel](https://github.com/power-assert-js/espower-babel) | power-assert instrumentor for ES6 using [Babel](https://babeljs.io/). |
 
 
 `power-assert` provides standard [assert](http://nodejs.org/api/assert.html) compatible function with Power Assert feature.
-(Best fit with [Mocha](http://visionmedia.github.io/mocha/). If you use assert-like objects provided by various testing frameworks such as [QUnit](http://qunitjs.com/) or [nodeunit](https://github.com/caolan/nodeunit). Please use [empower](http://github.com/twada/empower) and [power-assert-formatter](http://github.com/twada/power-assert-formatter) modules directly).
+(Best fit with [Mocha](http://visionmedia.github.io/mocha/). If you use assert-like objects provided by various testing frameworks such as [QUnit](http://qunitjs.com/) or [nodeunit](https://github.com/caolan/nodeunit). Please use [empower](http://github.com/power-assert-js/empower) and [power-assert-formatter](http://github.com/power-assert-js/power-assert-formatter) modules directly).
 
 
-Internally, `power-assert` uses [empower](http://github.com/twada/empower) module to enhance power assert feature into the standard [assert](http://nodejs.org/api/assert.html) module, to run with the power assert feature added code by [espower](http://github.com/twada/espower) module, and prettify output using [power-assert-formatter](http://github.com/twada/power-assert-formatter).
+Internally, `power-assert` uses [empower](http://github.com/power-assert-js/empower) module to enhance power assert feature into the standard [assert](http://nodejs.org/api/assert.html) module, to run with the power assert feature added code by [espower](http://github.com/power-assert-js/espower) module, and prettify output using [power-assert-formatter](http://github.com/power-assert-js/power-assert-formatter).
 
 
 See [power-assert-demo](http://github.com/twada/power-assert-demo) project for power-assert Demo running with mocha.
@@ -604,7 +604,7 @@ CONTRIBUTORS
 
 LICENSE
 ---------------------------------------
-Licensed under the [MIT](https://github.com/twada/power-assert/blob/master/MIT-LICENSE.txt) license.
+Licensed under the [MIT](https://github.com/power-assert-js/power-assert/blob/master/MIT-LICENSE.txt) license.
 
 
 
@@ -978,11 +978,11 @@ Have fun!
 [bower-url]: http://badge.fury.io/bo/power-assert
 [bower-image]: https://badge.fury.io/bo/power-assert.svg
 
-[travis-url]: http://travis-ci.org/twada/power-assert
-[travis-image]: https://secure.travis-ci.org/twada/power-assert.svg?branch=master
+[travis-url]: http://travis-ci.org/power-assert-js/power-assert
+[travis-image]: https://secure.travis-ci.org/power-assert-js/power-assert.svg?branch=master
 
-[depstat-url]: https://gemnasium.com/twada/power-assert
-[depstat-image]: https://gemnasium.com/twada/power-assert.svg
+[depstat-url]: https://gemnasium.com/power-assert-js/power-assert
+[depstat-image]: https://gemnasium.com/power-assert-js/power-assert.svg
 
-[license-url]: https://github.com/twada/power-assert/blob/master/MIT-LICENSE.txt
+[license-url]: https://github.com/power-assert-js/power-assert/blob/master/MIT-LICENSE.txt
 [license-image]: http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat

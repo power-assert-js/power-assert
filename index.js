@@ -1,11 +1,11 @@
 /**
  * power-assert.js - Power Assert in JavaScript.
  *
- * https://github.com/twada/power-assert
+ * https://github.com/power-assert-js/power-assert
  *
  * Copyright (c) 2013-2015 Takuto Wada
  * Licensed under the MIT license.
- *   https://github.com/twada/power-assert/blob/master/MIT-LICENSE.txt
+ *   https://github.com/power-assert-js/power-assert/blob/master/MIT-LICENSE.txt
  */
 'use strict';
 

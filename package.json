@@ -8,7 +8,7 @@
     "url": "http://github.com/twada"
   },
   "bugs": {
-    "url": "http://github.com/twada/power-assert/issues"
+    "url": "http://github.com/power-assert-js/power-assert/issues"
   },
   "contributors": [
     {
@@ -42,7 +42,7 @@
     "package.json",
     "test"
   ],
-  "homepage": "http://github.com/twada/power-assert",
+  "homepage": "http://github.com/power-assert-js/power-assert",
   "keywords": [
     "power-assert",
     "assert",
@@ -54,12 +54,12 @@
   ],
   "license": {
     "type": "MIT",
-    "url": "https://github.com/twada/power-assert/blob/master/MIT-LICENSE.txt"
+    "url": "https://github.com/power-assert-js/power-assert/blob/master/MIT-LICENSE.txt"
   },
   "main": "./index.js",
   "repository": {
     "type": "git",
-    "url": "http://github.com/twada/power-assert.git"
+    "url": "http://github.com/power-assert-js/power-assert.git"
   },
   "scripts": {
     "bower": "bower install --config.interactive=false",

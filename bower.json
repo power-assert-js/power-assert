@@ -33,10 +33,10 @@
       "url": "https://github.com/vvakame"
     }
   ],
-  "homepage": "https://github.com/twada/power-assert",
+  "homepage": "https://github.com/power-assert-js/power-assert",
   "repository": {
     "type": "git",
-    "url": "git://github.com/twada/power-assert.git"
+    "url": "git://github.com/power-assert-js/power-assert.git"
   },
   "devDependencies": {
     "expect": "~0.3.1",
