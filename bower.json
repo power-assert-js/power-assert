@@ -31,6 +31,18 @@
     {
       "name": "vvakame",
       "url": "https://github.com/vvakame"
+    },
+    {
+      "name": "yosuke-furukawa",
+      "url": "https://github.com/yosuke-furukawa"
+    },
+    {
+      "name": "teppeis",
+      "url": "https://github.com/teppeis"
+    },
+    {
+      "name": "zoncoen",
+      "url": "https://github.com/zoncoen"
     }
   ],
   "homepage": "https://github.com/power-assert-js/power-assert",

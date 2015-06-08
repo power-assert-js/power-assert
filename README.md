@@ -598,8 +598,11 @@ AUTHOR
 
 CONTRIBUTORS
 ---------------------------------------
-* [azu](https://github.com/azu)
-* [vvakame](https://github.com/vvakame)
+* [azu (azu)](https://github.com/azu)
+* [vvakame (Masahiro Wakame)](https://github.com/vvakame)
+* [yosuke-furukawa (Yosuke Furukawa)](https://github.com/yosuke-furukawa)
+* [teppeis (Teppei Sato)](https://github.com/teppeis)
+* [zoncoen (Kenta Mori)](https://github.com/zoncoen)
 
 
 LICENSE
