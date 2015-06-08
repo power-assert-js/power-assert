@@ -262,7 +262,7 @@ HOW TO USE
 There are four ways to use power-assert. (If you want to see running examples, see [SEED PROJECTS](#seed-projects))
 
 1. `power-assert` + `espower-loader`: Highly recommended but only works under Node.
-2. `power-assert` + `Babel` + `babel-plugin-espower`:  Recommended if you are writing ES6 with [Babel](https://babeljs.io/)
+2. `power-assert` + `Babel` + `babel-plugin-espower`:  Recommended if you are writing ES6 with [Babel](https://babeljs.io/) or [babelify](https://github.com/babel/babelify) with [browserify](http://browserify.org/)
 3. `power-assert` + `espower-coffee` or `espower-traceur` or `espower-babel` : Use power-assert through transpilers. Recommended but only works under Node.
 4. `power-assert` + `espowerify` or `webpack-espower-loader`: Recommended if you are using [browserify](http://browserify.org/) or [webpack](http://webpack.github.io/).
 5. `power-assert` + `espower-cli` or `grunt-espower` or `gulp-espower` : Generate instrumented code so works anywhere.
