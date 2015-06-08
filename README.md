@@ -27,7 +27,7 @@ What is `power-assert`?
  * supports sourcemaps so you can debug as usual.
  * Now supports ES6 through [babel plugin](https://github.com/power-assert-js/babel-plugin-espower).
  * provides [browserify transform](http://github.com/power-assert-js/espowerify).
- * provides [webpack loader](https://github.com/zoncoen/webpack-espower-loader).
+ * provides [webpack loader](https://github.com/power-assert-js/webpack-espower-loader).
  * provides [grunt task](http://github.com/power-assert-js/grunt-espower) and [gulp plugin](http://github.com/power-assert-js/gulp-espower).
  * provides [command](http://github.com/power-assert-js/espower-cli).
  * provides [custom module loader](http://github.com/power-assert-js/espower-loader) and its [convenient config module](https://github.com/power-assert-js/intelli-espower-loader).
@@ -149,7 +149,7 @@ Code transform is done by instrumentors below:
  - [espower-loader](http://github.com/power-assert-js/espower-loader) (with [intelli-espower-loader](https://github.com/power-assert-js/intelli-espower-loader))
  - [espower-cli](http://github.com/power-assert-js/espower-cli)
  - [espowerify](http://github.com/power-assert-js/espowerify)
- - [webpack-espower-loader](https://github.com/zoncoen/webpack-espower-loader).
+ - [webpack-espower-loader](https://github.com/power-assert-js/webpack-espower-loader).
  - [grunt-espower](http://github.com/power-assert-js/grunt-espower)
  - [gulp-espower](http://github.com/power-assert-js/gulp-espower)
  - [karma-espower-preprocessor](https://github.com/power-assert-js/karma-espower-preprocessor)
@@ -336,7 +336,7 @@ see [espowerify README](https://github.com/power-assert-js/espowerify).
 
 If you are using [webpack](http://webpack.github.io/), you can instrument Power Assert feature via `webpack-espower-loader`.
 
-see [webpack-espower-loader README](https://github.com/zoncoen/webpack-espower-loader).
+see [webpack-espower-loader README](https://github.com/power-assert-js/webpack-espower-loader).
 
 
 
@@ -555,7 +555,7 @@ and instrumentors are,
 | [intelli-espower-loader](https://github.com/power-assert-js/intelli-espower-loader) | configure `espower-loader` with ease. |
 | [babel-plugin-espower](https://github.com/power-assert-js/babel-plugin-espower) | [Babel](https://babeljs.io/) plugin to instrument power-assert feature into target files. |
 | [espowerify](http://github.com/power-assert-js/espowerify) | [Browserify](http://browserify.org/) transform to apply `espower` to target files. |
-| [webpack-espower-loader](https://github.com/zoncoen/webpack-espower-loader) | Power Assert instrumentor module for [webpack](http://webpack.github.io/). |
+| [webpack-espower-loader](https://github.com/power-assert-js/webpack-espower-loader) | Power Assert instrumentor module for [webpack](http://webpack.github.io/). |
 | [grunt-espower](http://github.com/power-assert-js/grunt-espower) | Grunt task to apply `espower` to target files. |
 | [gulp-espower](http://github.com/power-assert-js/gulp-espower) | Gulp plugin to apply `espower` to target files. |
 | [karma-espower-preprocessor](https://github.com/power-assert-js/karma-espower-preprocessor) | karma-preprocessor for power-assert. |
