@@ -1,4 +1,4 @@
-![power-assert](https://raw.githubusercontent.com/power-assert-js/power-assert-js-logo/master/banner/banner-official-fullcolor.png)
+[![power-assert][power-assert-banner]][power-assert-url]
 
 Power Assert in JavaScript. Provides descriptive assertion messages through standard [assert](http://nodejs.org/api/assert.html) interface.
 
@@ -973,6 +973,9 @@ not ok 24 - # /path/to/examples/qunit_node.js:110
 
 Have fun!
 
+
+[power-assert-url]: https://github.com/power-assert-js/power-assert
+[power-assert-banner]: https://raw.githubusercontent.com/power-assert-js/power-assert-js-logo/master/banner/banner-official-fullcolor.png
 
 [npm-url]: https://npmjs.org/package/power-assert
 [npm-image]: https://badge.fury.io/js/power-assert.svg
