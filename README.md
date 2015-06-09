@@ -1,6 +1,8 @@
 power-assert
 ================================
 
+![power-assert-logo](https://raw.githubusercontent.com/power-assert-js/power-assert-js-logo/master/banner/banner-official-fullcolor.png)
+
 Power Assert in JavaScript. Provides descriptive assertion messages through standard [assert](http://nodejs.org/api/assert.html) interface.
 
 [![Build Status][travis-image]][travis-url]
