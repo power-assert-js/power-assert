@@ -33,6 +33,7 @@ What is `power-assert`?
  * provides [karma preprocessor](https://github.com/power-assert-js/karma-espower-preprocessor).
  * supports ES6 through [babel plugin](https://github.com/power-assert-js/babel-plugin-espower), [module loader for Traceur Compiler](https://github.com/yosuke-furukawa/espower-traceur), and [module loader for Babel](https://github.com/power-assert-js/espower-babel).
  * supports [CoffeeScript](http://github.com/power-assert-js/espower-coffee).
+ * supports [TypeScript](http://github.com/power-assert-js/espower-typescript).
  * has [TypeScript type definition](https://github.com/borisyankov/DefinitelyTyped/blob/master/power-assert/power-assert.d.ts)
  * is a beta version product. Pull-requests, issue reports and patches are always welcomed.
 
@@ -153,6 +154,7 @@ Code transform is done by instrumentors below:
  - [gulp-espower](http://github.com/power-assert-js/gulp-espower)
  - [karma-espower-preprocessor](https://github.com/power-assert-js/karma-espower-preprocessor)
  - [espower-coffee](http://github.com/power-assert-js/espower-coffee)
+ - [espower-typescript](http://github.com/power-assert-js/espower-typescript)
  - [espower-traceur](https://github.com/yosuke-furukawa/espower-traceur)
  - [espower-babel](https://github.com/power-assert-js/espower-babel)
  - [babel-plugin-espower](https://github.com/power-assert-js/babel-plugin-espower)
@@ -262,7 +264,7 @@ There are four ways to use power-assert. (If you want to see running examples, s
 
 1. `power-assert` + `espower-loader`: Highly recommended but only works under Node.
 2. `power-assert` + `Babel` + `babel-plugin-espower`:  Recommended if you are writing ES6 with [Babel](https://babeljs.io/) or [babelify](https://github.com/babel/babelify) with [browserify](http://browserify.org/)
-3. `power-assert` + `espower-coffee` or `espower-traceur` or `espower-babel` : Use power-assert through transpilers. Recommended but only works under Node.
+3. `power-assert` + `espower-coffee` or `espower-typescript` or `espower-traceur` or `espower-babel` : Use power-assert through transpilers. Recommended but only works under Node.
 4. `power-assert` + `espowerify` or `webpack-espower-loader`: Recommended if you are using [browserify](http://browserify.org/) or [webpack](http://webpack.github.io/).
 5. `power-assert` + `espower-cli` or `grunt-espower` or `gulp-espower` : Generate instrumented code so works anywhere.
 
@@ -308,6 +310,13 @@ FYI: You may be interested in [intelli-espower-loader](https://github.com/power-
 If you are writing Node.js app/module in CoffeeScript, you can instrument Power Assert feature without code generation by using `espower-coffee`.
 
 see [espower-coffee README](https://github.com/power-assert-js/espower-coffee).
+
+
+### using `espower-typescript`
+
+If you are writing Node.js app/module in TypeScript, you can instrument Power Assert feature without code generation by using `espower-typescript`.
+
+see [espower-typescript README](https://github.com/power-assert-js/espower-typescript).
 
 
 ### using `babel-plugin-espower`
@@ -559,6 +568,7 @@ and instrumentors are,
 | [gulp-espower](http://github.com/power-assert-js/gulp-espower) | Gulp plugin to apply `espower` to target files. |
 | [karma-espower-preprocessor](https://github.com/power-assert-js/karma-espower-preprocessor) | karma-preprocessor for power-assert. |
 | [espower-coffee](http://github.com/power-assert-js/espower-coffee) | power-assert instrumentor for CoffeeScript. |
+| [espower-typescript](http://github.com/power-assert-js/espower-typescript) | power-assert instrumentor for TypeScript. |
 | [espower-traceur](https://github.com/yosuke-furukawa/espower-traceur) | power-assert instrumentor for ES6 using [Traceur Compiler](https://github.com/google/traceur-compiler/). |
 | [espower-babel](https://github.com/power-assert-js/espower-babel) | power-assert instrumentor for ES6 using [Babel](https://babeljs.io/). |
 
