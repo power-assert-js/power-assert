@@ -63,10 +63,7 @@
     "ecmascript",
     "ast"
   ],
-  "license": {
-    "type": "MIT",
-    "url": "https://github.com/power-assert-js/power-assert/blob/master/MIT-LICENSE.txt"
-  },
+  "license": "MIT",
   "main": "./index.js",
   "repository": {
     "type": "git",
