@@ -35,7 +35,7 @@ What is `power-assert`?
  * supports [CoffeeScript](http://github.com/power-assert-js/espower-coffee).
  * supports [TypeScript](http://github.com/power-assert-js/espower-typescript).
  * has [TypeScript type definition](https://github.com/borisyankov/DefinitelyTyped/blob/master/power-assert/power-assert.d.ts)
- * is a beta version product. Pull-requests, issue reports and patches are always welcomed.
+ * pull-requests, issue reports and patches are always welcomed.
 
 
 `power-assert` provides descriptive assertion messages for your tests, like this.
