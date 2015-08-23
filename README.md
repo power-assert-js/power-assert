@@ -88,6 +88,13 @@ CHANGELOG
 See [CHANGELOG](https://github.com/power-assert-js/power-assert/blob/master/CHANGELOG.md)
 
 
+FAQ
+---------------------------------------
+
+- [Support other assertion styles?](https://github.com/power-assert-js/power-assert/issues/22)
+- [Are all dependencies required at runtime?](https://github.com/power-assert-js/power-assert/issues/24)
+
+
 EXAMPLE
 ---------------------------------------
 
