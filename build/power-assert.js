@@ -232,11 +232,14 @@
  */
 'use strict';
 
-var baseAssert = _dereq_('assert'),
-    empower = _dereq_('empower'),
-    formatter = _dereq_('power-assert-formatter'),
-    extend = _dereq_('xtend'),
-    empowerOptions = {modifyMessageOnRethrow: true, saveContextOnRethrow: true};
+var baseAssert = _dereq_('assert');
+var empower = _dereq_('empower');
+var formatter = _dereq_('power-assert-formatter');
+var extend = _dereq_('xtend');
+var empowerOptions = {
+    modifyMessageOnRethrow: true,
+    saveContextOnRethrow: true
+};
 
 function customize (customOptions) {
     var options = customOptions || {};
