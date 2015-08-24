@@ -9,11 +9,14 @@
  */
 'use strict';
 
-var baseAssert = require('assert'),
-    empower = require('empower'),
-    formatter = require('power-assert-formatter'),
-    extend = require('xtend'),
-    empowerOptions = {modifyMessageOnRethrow: true, saveContextOnRethrow: true};
+var baseAssert = require('assert');
+var empower = require('empower');
+var formatter = require('power-assert-formatter');
+var extend = require('xtend');
+var empowerOptions = {
+    modifyMessageOnRethrow: true,
+    saveContextOnRethrow: true
+};
 
 function customize (customOptions) {
     var options = customOptions || {};
