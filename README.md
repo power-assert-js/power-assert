@@ -624,7 +624,6 @@ TESTED FRAMEWORKS
 TESTED ENVIRONMENTS
 ---------------------------------------
 * [Node.js](http://nodejs.org/)
-* [Rhino](https://developer.mozilla.org/en/Rhino)
 * [PhantomJS](http://phantomjs.org/)
 * [RequireJS](http://requirejs.org/)
 * [Browserify](http://browserify.org/)
