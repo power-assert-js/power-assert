@@ -1,6 +1,6 @@
 [![power-assert][power-assert-banner]][power-assert-url]
 
-Power Assert in JavaScript. Provides descriptive assertion messages through standard [assert](http://nodejs.org/api/assert.html) interface.
+Power Assert in JavaScript. Provides descriptive assertion messages through standard [assert](http://nodejs.org/api/assert.html) interface. No API is the best API.
 
 [![Build Status][travis-image]][travis-url]
 [![NPM package][npm-image]][npm-url]
@@ -16,15 +16,17 @@ What is `power-assert`?
 
  * is an implementation of "Power Assert" concept in JavaScript.
  * provides descriptive assertion messages through standard [assert](http://nodejs.org/api/assert.html) interface.
+ * with power-assert, you don't need to learn many assertion library APIs.
+ * in most cases, all you need to remember is just an `assert(value)` function. No API is the best API.
+ * the core value of power-assert is absolute simplicity and stability. Especially, power-assert sticks to the simplest form of testing, `assert(value)`.
  * see slides: ["power-assert, mechanism and philosophy"](http://www.slideshare.net/t_wada/power-assert-nodefest-2014) -- talk at NodeFest 2014.
  * to gain power-assert output, you need to transform your test code to produce power-assert output (without transformation, power-assert works just as normal `assert` does).
- * with power-assert, you don't need to learn many assertion library APIs. It's just [assert](http://nodejs.org/api/assert.html).
  * fully compatible with [assert](http://nodejs.org/api/assert.html). So you can stop using power-assert and back to assert easily.
  * has [online demo site](http://azu.github.io/power-assert-demo/).
  * works both on server side and browser side.
  * available via [npm](https://www.npmjs.com/package/power-assert) and [bower](http://bower.io/search/?q=power-assert). 
  * supports sourcemaps so you can debug as usual.
- * Now supports ES6 through [babel plugin](https://github.com/power-assert-js/babel-plugin-espower).
+ * provides [babel plugin](https://github.com/power-assert-js/babel-plugin-espower).
  * provides [browserify transform](http://github.com/power-assert-js/espowerify).
  * provides [webpack loader](https://github.com/power-assert-js/webpack-espower-loader).
  * provides [grunt task](http://github.com/power-assert-js/grunt-espower) and [gulp plugin](http://github.com/power-assert-js/gulp-espower).
@@ -80,7 +82,28 @@ power-assert provides an [API for customization](https://github.com/power-assert
 
 * `assert.customize(options)`
 
-As written below, power-assert is constructed with many family modules. See more details of [empower](http://github.com/power-assert-js/empower) and others.
+
+### No API is the best API
+
+Though power-assert is fully compatible with standard [assert](http://nodejs.org/api/assert.html) interface, all you need to remember is just an `assert(value)` function in most cases.
+
+The core value of power-assert is absolute simplicity and stability. Especially, power-assert sticks to the simplest form of testing, `assert(value)`.
+
+
+        assert(this.types[index].name === bob.name)
+                    |    ||      |    |   |   |
+                    |    ||      |    |   |   "bob"
+                    |    ||      |    |   Person{name:"bob",age:5}
+                    |    ||      |    false
+                    |    |11     "alice"
+                    |    Person{name:"alice",age:3}
+                    ["string",98.6,true,false,null,undefined,#Array#,#Object#,NaN,Infinity,/^not/,#Person#]
+        
+        --- [string] bob.name
+        +++ [string] this.types[index].name
+        @@ -1,3 +1,5 @@
+        -bob
+        +alice
 
 
 CHANGELOG
