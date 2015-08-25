@@ -43,7 +43,7 @@ What is `power-assert`?
 `power-assert` provides descriptive assertion messages for your tests, like this.
 
       1) Array #indexOf() should return index when the value is present:
-         AssertionError: # /path/to/test/mocha_node.js:10
+         AssertionError: # relative/path/to/test/mocha_node.js:10
     
       assert(this.ary.indexOf(zero) === two)
                   |   |       |     |   |
@@ -201,7 +201,7 @@ If you are using Node.js only, the easiest way is to use [intelli-espower-loader
 
 Put tests into `test` directory then run. You will see the power-assert output appears.
 
-      $ ./node_modules/.bin/mocha --require intelli-espower-loader /path/to/test/mocha_node.js
+      $ ./node_modules/.bin/mocha --require intelli-espower-loader path/to/test/mocha_node.js
     
       Array
         #indexOf()
@@ -215,7 +215,7 @@ Put tests into `test` directory then run. You will see the power-assert output a
       3 failing
     
       1) Array #indexOf() should return index when the value is present:
-         AssertionError: # /path/to/test/mocha_node.js:10
+         AssertionError: # relative/path/to/test/mocha_node.js:10
       
         assert(this.ary.indexOf(zero) === two)
                     |   |       |     |   |
@@ -234,7 +234,7 @@ Put tests into `test` directory then run. You will see the power-assert output a
       
       
       2) Array #indexOf() should return -1 when the value is not present:
-         AssertionError: THIS IS AN ASSERTION MESSAGE # /path/to/test/mocha_node.js:14
+         AssertionError: THIS IS AN ASSERTION MESSAGE # relative/path/to/test/mocha_node.js:14
     
         assert.ok(this.ary.indexOf(two) === minusOne, 'THIS IS AN ASSERTION MESSAGE')
                        |   |       |    |   |
@@ -252,7 +252,7 @@ Put tests into `test` directory then run. You will see the power-assert output a
       
       
       3) various types demo:
-         AssertionError: # /path/to/test/mocha_node.js:37
+         AssertionError: # relative/path/to/test/mocha_node.js:37
     
         assert(this.types[index].name === bob.name)
                     |    ||      |    |   |   |
@@ -524,7 +524,7 @@ customization options for [power-assert-formatter](http://github.com/power-asser
 
 customizable properties and their default values are as follows.
 
-```
+```javascript
 var assert = require('power-assert').customize({
     assertion: {
         destructive: false,
@@ -777,7 +777,7 @@ q.load();
 # module: undefined
 # test: spike
 ok 1 - okay
-not ok 2 - comment # /path/to/examples/qunit_node.js:17
+not ok 2 - comment # relative/path/to/examples/qunit_node.js:17
 #
 # assert.ok(hoge === fuga, 'comment')
 #           |    |   |
@@ -792,7 +792,7 @@ not ok 2 - comment # /path/to/examples/qunit_node.js:17
 # +foo
 #
 # , test: spike
-not ok 3 - # /path/to/examples/qunit_node.js:20
+not ok 3 - # relative/path/to/examples/qunit_node.js:20
 #
 # assert.ok(fuga === piyo)
 #           |    |   |
@@ -806,7 +806,7 @@ not ok 3 - # /path/to/examples/qunit_node.js:20
 # => "bar"
 
 # , test: spike
-not ok 4 - # /path/to/examples/qunit_node.js:24
+not ok 4 - # relative/path/to/examples/qunit_node.js:24
 #
 # assert.ok(longString === anotherLongString)
 #           |          |   |
@@ -824,7 +824,7 @@ not ok 4 - # /path/to/examples/qunit_node.js:24
 #   loo
 #
 # , test: spike
-not ok 5 - # /path/to/examples/qunit_node.js:26
+not ok 5 - # relative/path/to/examples/qunit_node.js:26
 #
 # assert.ok(4 === piyo)
 #             |   |
@@ -836,25 +836,25 @@ not ok 5 - # /path/to/examples/qunit_node.js:26
 # [number] 4
 # => 4
 # , test: spike
-not ok 6 - # /path/to/examples/qunit_node.js:28
+not ok 6 - # relative/path/to/examples/qunit_node.js:28
 #
 # assert.ok(4 !== 4)
 #             |
 #             false
 # , test: spike
-not ok 7 - # /path/to/examples/qunit_node.js:31
+not ok 7 - # relative/path/to/examples/qunit_node.js:31
 #
 # assert.ok(falsyStr)
 #           |
 #           ""
 # , test: spike
-not ok 8 - # /path/to/examples/qunit_node.js:34
+not ok 8 - # relative/path/to/examples/qunit_node.js:34
 #
 # assert.ok(falsyNum)
 #           |
 #           0
 # , test: spike
-not ok 9 - # /path/to/examples/qunit_node.js:38
+not ok 9 - # relative/path/to/examples/qunit_node.js:38
 #
 # assert.ok(ary1.length === ary2.length)
 #           |    |      |   |    |
@@ -868,7 +868,7 @@ not ok 9 - # /path/to/examples/qunit_node.js:38
 # [number] ary1.length
 # => 2
 # , test: spike
-not ok 10 - # /path/to/examples/qunit_node.js:39
+not ok 10 - # relative/path/to/examples/qunit_node.js:39
 #
 # assert.deepEqual(ary1, ary2)
 #                  |     |
@@ -882,7 +882,7 @@ not ok 10 - # /path/to/examples/qunit_node.js:39
 #   "foo",
 #   "bar"
 # ], test: spike
-not ok 11 - # /path/to/examples/qunit_node.js:42
+not ok 11 - # relative/path/to/examples/qunit_node.js:42
 #
 # assert.ok(5 < actual && actual < 13)
 #             | |      |  |      |
@@ -890,14 +890,14 @@ not ok 11 - # /path/to/examples/qunit_node.js:42
 #             | 16     false
 #             true
 # , test: spike
-not ok 12 - # /path/to/examples/qunit_node.js:45
+not ok 12 - # relative/path/to/examples/qunit_node.js:45
 #
 # assert.ok(5 < actual && actual < 13)
 #             | |      |
 #             | 4      false
 #             false
 # , test: spike
-not ok 13 - # /path/to/examples/qunit_node.js:48
+not ok 13 - # relative/path/to/examples/qunit_node.js:48
 #
 # assert.ok(actual < 5 || 13 < actual)
 #           |      |   |     | |
@@ -905,7 +905,7 @@ not ok 13 - # /path/to/examples/qunit_node.js:48
 #           |      |   false false
 #           10     false
 # , test: spike
-not ok 14 - # /path/to/examples/qunit_node.js:58
+not ok 14 - # relative/path/to/examples/qunit_node.js:58
 #
 # assert.ok(foo.bar.baz)
 #           |   |   |
@@ -913,7 +913,7 @@ not ok 14 - # /path/to/examples/qunit_node.js:58
 #           |   Object{baz:false}
 #           Object{bar:#Object#}
 # , test: spike
-not ok 15 - # /path/to/examples/qunit_node.js:59
+not ok 15 - # relative/path/to/examples/qunit_node.js:59
 #
 # assert.ok(foo['bar'].baz)
 #           |  |       |
@@ -921,7 +921,7 @@ not ok 15 - # /path/to/examples/qunit_node.js:59
 #           |  Object{baz:false}
 #           Object{bar:#Object#}
 # , test: spike
-not ok 16 - # /path/to/examples/qunit_node.js:60
+not ok 16 - # relative/path/to/examples/qunit_node.js:60
 #
 # assert.ok(foo[propName]['baz'])
 #           |  ||        |
@@ -929,33 +929,33 @@ not ok 16 - # /path/to/examples/qunit_node.js:60
 #           |  Object{baz:false}
 #           Object{bar:#Object#}
 # , test: spike
-not ok 17 - # /path/to/examples/qunit_node.js:64
+not ok 17 - # relative/path/to/examples/qunit_node.js:64
 #
 # assert.ok(!truth)
 #           ||
 #           |true
 #           false
 # , test: spike
-not ok 18 - # /path/to/examples/qunit_node.js:68
+not ok 18 - # relative/path/to/examples/qunit_node.js:68
 #
 # assert.ok(func())
 #           |
 #           false
 # , test: spike
-not ok 19 - # /path/to/examples/qunit_node.js:76
+not ok 19 - # relative/path/to/examples/qunit_node.js:76
 #
 # assert.ok(obj.age())
 #           |   |
 #           |   0
 #           Object{age:#function#}
 # , test: spike
-not ok 20 - # /path/to/examples/qunit_node.js:83
+not ok 20 - # relative/path/to/examples/qunit_node.js:83
 #
 # assert.ok(isFalsy(positiveInt))
 #           |       |
 #           false   50
 # , test: spike
-not ok 21 - # /path/to/examples/qunit_node.js:94
+not ok 21 - # relative/path/to/examples/qunit_node.js:94
 #
 # assert.ok(sum(one, two, three) === seven)
 #           |   |    |    |      |   |
@@ -967,7 +967,7 @@ not ok 21 - # /path/to/examples/qunit_node.js:94
 # [number] sum(one, two, three)
 # => 6
 # , test: spike
-not ok 22 - # /path/to/examples/qunit_node.js:95
+not ok 22 - # relative/path/to/examples/qunit_node.js:95
 #
 # assert.ok(sum(sum(one, two), three) === sum(sum(two, three), seven))
 #           |   |   |    |     |      |   |   |   |    |       |
@@ -979,7 +979,7 @@ not ok 22 - # /path/to/examples/qunit_node.js:95
 # [number] sum(sum(one, two), three)
 # => 6
 # , test: spike
-not ok 23 - # /path/to/examples/qunit_node.js:96
+not ok 23 - # relative/path/to/examples/qunit_node.js:96
 #
 # assert.ok(three * (seven * ten) === three)
 #           |     |  |     | |    |   |
@@ -993,7 +993,7 @@ not ok 23 - # /path/to/examples/qunit_node.js:96
 # [number] three * (seven * ten)
 # => 210
 # , test: spike
-not ok 24 - # /path/to/examples/qunit_node.js:110
+not ok 24 - # relative/path/to/examples/qunit_node.js:110
 #
 # assert.ok(math.calc.sum(one, two, three) === seven)
 #           |    |    |   |    |    |      |   |
