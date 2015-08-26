@@ -613,20 +613,16 @@ Internally, `power-assert` uses [empower](http://github.com/power-assert-js/empo
 See [power-assert-demo](http://github.com/twada/power-assert-demo) project for power-assert Demo running with mocha.
 
 
-TESTED FRAMEWORKS
+SUPPORTED FRAMEWORK
 ---------------------------------------
+
 * [Mocha](http://visionmedia.github.io/mocha/)
+
+### FRAMEWORKS KNOWN TO WORK
+
 * [QUnit](http://qunitjs.com/)
 * [nodeunit](https://github.com/caolan/nodeunit)
 * [buster-assertions](http://docs.busterjs.org/en/latest/modules/buster-assertions/)
-
-
-TESTED ENVIRONMENTS
----------------------------------------
-* [Node.js](http://nodejs.org/)
-* [PhantomJS](http://phantomjs.org/)
-* [RequireJS](http://requirejs.org/)
-* [Browserify](http://browserify.org/)
 
 
 AUTHOR
