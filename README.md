@@ -57,6 +57,14 @@ What is `power-assert`?
       => -1
 
 
+INSTALL
+---------------------------------------
+
+`npm install --save-dev power-assert <one of instrumentors>`
+
+see [list of instrumentors](https://github.com/power-assert-js/power-assert#be-sure-to-transform-test-code)
+
+
 API
 ---------------------------------------
 
