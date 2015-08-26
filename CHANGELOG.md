@@ -1,3 +1,17 @@
+## [1.0.0](https://github.com/power-assert-js/power-assert/releases/tag/v1.0.0) (2015-08-26)
+
+
+#### Bug Fixes
+
+  * upgrade power-assert-formatter for native ES6 Symbol support ([d8ba0a1b](https://github.com/power-assert-js/power-assert/commit/d8ba0a1bb6809fecd4900af6ade1213ad58f5db0))
+
+
+#### Features
+
+  * transfer to power-assert-js organization ([64b2fe2e](https://github.com/power-assert-js/power-assert/commit/64b2fe2ea510ba06088d2f07531370af63f195e2))
+  * [official logo!](https://github.com/power-assert-js/power-assert-js-logo)
+
+
 ## [0.11.0](https://github.com/power-assert-js/power-assert/releases/tag/v0.11.0) (2015-04-18)
 
 
