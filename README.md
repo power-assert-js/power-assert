@@ -62,6 +62,13 @@ INSTALL
 
 `npm install --save-dev power-assert <one of instrumentors>`
 
+or
+
+```
+bower install --save-dev power-assert
+npm install --save-dev <one of instrumentors>
+```
+
 see [list of instrumentors](https://github.com/power-assert-js/power-assert#be-sure-to-transform-test-code)
 
 
