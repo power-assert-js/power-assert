@@ -17,8 +17,8 @@ What is `power-assert`?
  * is an implementation of "Power Assert" concept in JavaScript.
  * provides descriptive assertion messages through standard [assert](http://nodejs.org/api/assert.html) interface.
  * with power-assert, you don't need to learn many assertion library APIs.
- * in most cases, all you need to remember is just an `assert(value)` function. No API is the best API.
- * the core value of power-assert is absolute simplicity and stability. Especially, power-assert sticks to the simplest form of testing, `assert(value)`.
+ * in most cases, all you need to remember is just an `assert(any_expression)` function. No API is the best API.
+ * the core value of power-assert is absolute simplicity and stability. Especially, power-assert sticks to the simplest form of testing, `assert(any_expression)`.
  * see slides: ["power-assert, mechanism and philosophy"](http://www.slideshare.net/t_wada/power-assert-nodefest-2014) -- talk at NodeFest 2014.
  * to gain power-assert output, you need to transform your test code to produce power-assert output (without transformation, power-assert works just as normal `assert` does).
  * fully compatible with [assert](http://nodejs.org/api/assert.html). So you can stop using power-assert and back to assert easily.
@@ -102,9 +102,9 @@ power-assert provides an [API for customization](https://github.com/power-assert
 
 ### No API is the best API
 
-Though power-assert is fully compatible with standard [assert](http://nodejs.org/api/assert.html) interface, all you need to remember is just an `assert(value)` function in most cases.
+Though power-assert is fully compatible with standard [assert](http://nodejs.org/api/assert.html) interface, all you need to remember is just an `assert(any_expression)` function in most cases.
 
-The core value of power-assert is absolute simplicity and stability. Especially, power-assert sticks to the simplest form of testing, `assert(value)`.
+The core value of power-assert is absolute simplicity and stability. Especially, power-assert sticks to the simplest form of testing, `assert(any_expression)`.
 
 
         assert(this.types[index].name === bob.name)
