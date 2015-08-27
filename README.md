@@ -555,7 +555,9 @@ var assert = require('power-assert').customize({
             'assert.strictEqual(actual, expected, [message])',
             'assert.notStrictEqual(actual, expected, [message])',
             'assert.deepEqual(actual, expected, [message])',
-            'assert.notDeepEqual(actual, expected, [message])'
+            'assert.notDeepEqual(actual, expected, [message])',
+            'assert.deepStrictEqual(actual, expected, [message])',
+            'assert.notDeepStrictEqual(actual, expected, [message])'
         ]
     },
     output: {
