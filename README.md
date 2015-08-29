@@ -218,78 +218,91 @@ If you are using Node.js only, the easiest way is to use [intelli-espower-loader
 
 Put tests into `test` directory then run. You will see the power-assert output appears.
 
-      $ ./node_modules/.bin/mocha --require intelli-espower-loader path/to/test/mocha_node.js
+      $ $(npm bin)/mocha --require intelli-espower-loader path/to/test/mocha_node.js
+    
     
       Array
         #indexOf()
           1) should return index when the value is present
           2) should return -1 when the value is not present
-      
-      various types
-        3) demo    
     
-      0 passing (14 ms)
+      various types
+        3) demo
+    
+    
+      0 passing (43ms)
       3 failing
     
       1) Array #indexOf() should return index when the value is present:
-         AssertionError: # path/to/test/mocha_node.js:10
-      
-        assert(this.ary.indexOf(zero) === two)
-                    |   |       |     |   |
-                    |   |       |     |   2
-                    |   -1      0     false
-                    [1,2,3]
-        
-        [number] two
-        => 2
-        [number] this.ary.indexOf(zero)
-        => -1
-
-          at decoratedAssert (/path/to/node_modules/power-assert/node_modules/empower/lib/decorate.js:44:26)
-          at powerAssert (/path/to/node_modules/power-assert/node_modules/empower/index.js:57:32)
-          at Context.<anonymous> (/path/to/test/mocha_node.js:13:13)
-      
-      
+    
+          AssertionError:   # test/mocha_node.js:10
+    
+      assert(this.ary.indexOf(zero) === two)
+                  |   |       |     |   |
+                  |   |       |     |   2
+                  |   -1      0     false
+                  [1,2,3]
+    
+      [number] two
+      => 2
+      [number] this.ary.indexOf(zero)
+      => -1
+    
+          + expected - actual
+    
+          -false
+          +true
+    
+          at Context.<anonymous> (test/mocha_node.js:10:13)
+    
       2) Array #indexOf() should return -1 when the value is not present:
-         AssertionError: THIS IS AN ASSERTION MESSAGE # path/to/test/mocha_node.js:14
     
-        assert.ok(this.ary.indexOf(two) === minusOne, 'THIS IS AN ASSERTION MESSAGE')
-                       |   |       |    |   |
-                       |   |       |    |   -1
-                       |   1       2    false
-                       [1,2,3]
-        
-        [number] minusOne
-        => -1
-        [number] this.ary.indexOf(two)
-        => 1
-      
-          at Function.decoratedAssert [as ok] (/path/to/node_modules/power-assert/node_modules/empower/lib/decorate.js:44:26)
-          at Context.<anonymous> (/path/to/test/mocha_node.js:21:20)
-      
-      
+          AssertionError: THIS IS AN ASSERTION MESSAGE   # test/mocha_node.js:14
+    
+      assert.ok(this.ary.indexOf(two) === minusOne, 'THIS IS AN ASSERTION MESSAGE')
+                     |   |       |    |   |
+                     |   |       |    |   -1
+                     |   1       2    false
+                     [1,2,3]
+    
+      [number] minusOne
+      => -1
+      [number] this.ary.indexOf(two)
+      => 1
+    
+          + expected - actual
+    
+          -false
+          +true
+    
+          at Context.<anonymous> (test/mocha_node.js:14:20)
+    
       3) various types demo:
-         AssertionError: # path/to/test/mocha_node.js:37
     
-        assert(this.types[index].name === bob.name)
-                    |    ||      |    |   |   |
-                    |    ||      |    |   |   "bob"
-                    |    ||      |    |   Person{name:"bob",age:5}
-                    |    ||      |    false
-                    |    |11     "alice"
-                    |    Person{name:"alice",age:3}
-                    ["string",98.6,true,false,null,undefined,#Array#,#Object#,NaN,Infinity,/^not/,#Person#]
-        
-        --- [string] bob.name
-        +++ [string] this.types[index].name
-        @@ -1,3 +1,5 @@
-        -bob
-        +alice
-        
-        
-          at decoratedAssert (/path/to/node_modules/power-assert/node_modules/empower/lib/decorate.js:44:26)
-          at powerAssert (/path/to/node_modules/power-assert/node_modules/empower/index.js:57:32)
-          at Context.<anonymous> (/path/to/test/mocha_node.js:55:9)
+          AssertionError:   # test/mocha_node.js:37
+    
+      assert(this.types[index].name === bob.name)
+                  |    ||      |    |   |   |
+                  |    ||      |    |   |   "bob"
+                  |    ||      |    |   Person{name:"bob",age:5}
+                  |    ||      |    false
+                  |    |11     "alice"
+                  |    Person{name:"alice",age:3}
+                  ["string",98.6,true,false,null,undefined,#Array#,#Object#,NaN,Infinity,/^not/,#Person#]
+    
+      --- [string] bob.name
+      +++ [string] this.types[index].name
+      @@ -1,3 +1,5 @@
+      -bob
+      +alice
+    
+    
+          + expected - actual
+    
+          -false
+          +true
+    
+          at Context.<anonymous> (test/mocha_node.js:37:9)
 
 
 SEED PROJECTS
@@ -346,7 +359,7 @@ require('espower-loader')({
 
 Then run mocha, with `--require` option. No code generation required.
 
-    $ ./node_modules/.bin/mocha --require ./path/to/enable-power-assert test/your_test.js
+    $ $(npm bin)/mocha --require ./path/to/enable-power-assert test/your_test.js
 
 
 FYI: You may be interested in [intelli-espower-loader](https://github.com/power-assert-js/intelli-espower-loader) to go one step further. With [intelli-espower-loader](https://github.com/power-assert-js/intelli-espower-loader), you don't need to create loader file (like `enable-power-assert.js`). Just define test directory in `package.json` wow!
