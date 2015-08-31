@@ -613,7 +613,7 @@ core modules are,
 |:-------|:------------|
 | [empower](http://github.com/power-assert-js/empower) | Power Assert feature enhancer for assert function/object. |
 | [power-assert-formatter](http://github.com/power-assert-js/power-assert-formatter) | Power Assert output formatter. |
-| [espower](http://github.com/power-assert-js/espower) | Power Assert feature instrumentor core based on the [Mozilla JavaScript AST](https://developer.mozilla.org/en-US/docs/SpiderMonkey/Parser_API). |
+| [espower](http://github.com/power-assert-js/espower) | Power Assert feature instrumentor core based on the ECMAScript AST defined in [The ESTree Spec](https://github.com/estree/estree) (formerly known as [Mozilla SpiderMonkey Parser API](https://developer.mozilla.org/en-US/docs/SpiderMonkey/Parser_API)). |
 | [espower-source](http://github.com/power-assert-js/espower-source) | Power Assert instrumentor from source to source, with source-map. (Thin wrapper of `espower`). |
 
 and instrumentors are,
