@@ -33,8 +33,8 @@
     }
   ],
   "dependencies": {
-    "empower": "^1.0.0",
-    "power-assert-formatter": "^1.0.2",
+    "empower": "^1.0.1",
+    "power-assert-formatter": "^1.1.0",
     "xtend": "^4.0.0"
   },
   "devDependencies": {
