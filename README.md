@@ -17,7 +17,7 @@ What is `power-assert`?
  * is an implementation of "Power Assert" concept in JavaScript.
  * provides descriptive assertion messages through standard [assert](http://nodejs.org/api/assert.html) interface.
  * with power-assert, you don't need to learn many assertion library APIs.
- * in most cases, all you need to remember is just an `assert(any_expression)` function. No API is the best API.
+ * in most cases, all you need to remember is just an `assert(any_expression)` function. __No API is the best API__.
  * the core value of power-assert is absolute simplicity and stability. Especially, power-assert sticks to the simplest form of testing, `assert(any_expression)`.
  * see slides: ["power-assert, mechanism and philosophy"](http://www.slideshare.net/t_wada/power-assert-nodefest-2014) -- talk at NodeFest 2014.
  * to gain power-assert output, you need to transform your test code to produce power-assert output (without transformation, power-assert works just as normal `assert` does).
@@ -85,8 +85,8 @@ power-assert enhances these assert functions by [espower](https://github.com/pow
 * `assert.notStrictEqual(actual, expected, [message])`
 * `assert.deepEqual(actual, expected, [message])`
 * `assert.notDeepEqual(actual, expected, [message])`
-* `assert.deepStrictEqual(actual, expected, [message])` (io.js v1.2.0~)
-* `assert.notDeepStrictEqual(actual, expected, [message])` (io.js v1.2.0~)
+* `assert.deepStrictEqual(actual, expected, [message])` (io.js v1.2.0~, Node.js v4.0.0~)
+* `assert.notDeepStrictEqual(actual, expected, [message])` (io.js v1.2.0~, Node.js v4.0.0~)
 
 power-assert is fully compatible with [assert](http://nodejs.org/api/assert.html). So functions below are also available though they are not enhanced (does not produce descriptive message).
 
