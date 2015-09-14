@@ -1,3 +1,11 @@
+### [1.0.1](https://github.com/power-assert-js/power-assert/releases/tag/v1.0.1) (2015-09-14)
+
+
+#### Bug Fixes
+
+  * update empower and power-assert-formatter ([f118c4f](https://github.com/power-assert-js/power-assert/commit/f118c4f74a130a4adfd8014a10a707ac36381289)) to [fix location detection of infix operator](https://github.com/power-assert-js/power-assert-formatter/commit/f6e0d6919ee32045c18983c00d60011d0dc4a0d1)
+
+
 ## [1.0.0](https://github.com/power-assert-js/power-assert/releases/tag/v1.0.0) (2015-08-26)
 
 
