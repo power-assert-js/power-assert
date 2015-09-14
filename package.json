@@ -41,7 +41,7 @@
     "babel": "^5.2.0",
     "babel-plugin-espower": "^1.0.0",
     "expect.js": "^0.3.1",
-    "licensify": "^1.4.0",
+    "licensify": "^2.0.1",
     "qunit-tap": "^1.5.0",
     "qunitjs": "1.14.0"
   },
