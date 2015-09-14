@@ -1,12 +1,13 @@
 /**
  * Modules in this bundle
+ * @license
  * 
  * power-assert:
  *   license: MIT
  *   author: Takuto Wada <takuto.wada@gmail.com>
  *   contributors: azu, vvakame, yosuke-furukawa, teppeis, zoncoen
  *   homepage: http://github.com/power-assert-js/power-assert
- *   version: 1.0.0
+ *   version: 1.0.1
  * 
  * array-filter:
  *   license: MIT
@@ -57,8 +58,8 @@
  *   license: MIT
  *   author: James Halliday <mail@substack.net>
  *   maintainers: substack <mail@substack.net>
- *   homepage: https://github.com/substack/node-deep-equal
- *   version: 1.0.0
+ *   homepage: https://github.com/substack/node-deep-equal#readme
+ *   version: 1.0.1
  * 
  * eastasianwidth:
  *   license: MIT
@@ -71,7 +72,7 @@
  *   license: MIT
  *   author: Takuto Wada <takuto.wada@gmail.com>
  *   homepage: http://github.com/power-assert-js/empower
- *   version: 1.0.0
+ *   version: 1.0.1
  * 
  * escallmatch:
  *   license: MIT
@@ -84,7 +85,7 @@
  *   author: Ariya Hidayat <ariya.hidayat@gmail.com>
  *   maintainers: ariya <ariya.hidayat@gmail.com>
  *   homepage: http://esprima.org
- *   version: 2.5.0
+ *   version: 2.6.0
  * 
  * espurify:
  *   license: MIT
@@ -168,7 +169,7 @@
  *   license: MIT
  *   author: Takuto Wada <takuto.wada@gmail.com>
  *   homepage: http://github.com/power-assert-js/power-assert-formatter
- *   version: 1.0.2
+ *   version: 1.1.0
  * 
  * process:
  *   author: Roman Shtylman <shtylman@gmail.com>
@@ -2278,7 +2279,7 @@ var deepEqual = module.exports = function (actual, expected, opts) {
 
   // 7.3. Other pairs that do not both pass typeof value == 'object',
   // equivalence is determined by ==.
-  } else if (typeof actual != 'object' && typeof expected != 'object') {
+  } else if (!actual || !expected || typeof actual != 'object' && typeof expected != 'object') {
     return opts.strict ? actual === expected : actual == expected;
 
   // 7.4. For all other Object pairs, including Array objects, equivalence is
@@ -2919,7 +2920,6 @@ module.exports = function has(obj, property) {
         Regex,
         source,
         strict,
-        sourceType,
         index,
         lineNumber,
         lineStart,
@@ -4291,8 +4291,8 @@ module.exports = function has(obj, property) {
     }
 
     function scanRegExp() {
-        scanning = true;
         var start, body, flags, value;
+        scanning = true;
 
         lookahead = null;
         skipComment();
@@ -5003,13 +5003,10 @@ module.exports = function has(obj, property) {
             return this;
         },
 
-        finishProgram: function (body) {
+        finishProgram: function (body, sourceType) {
             this.type = Syntax.Program;
             this.body = body;
-            if (sourceType === 'module') {
-                // very restrictive for now
-                this.sourceType = sourceType;
-            }
+            this.sourceType = sourceType;
             this.finish();
             return this;
         },
@@ -5117,7 +5114,7 @@ module.exports = function has(obj, property) {
             this.type = Syntax.TryStatement;
             this.block = block;
             this.guardedHandlers = [];
-            this.handlers = handler ? [ handler ] : [];
+            this.handlers = handler ? [handler] : [];
             this.handler = handler;
             this.finalizer = finalizer;
             this.finish();
@@ -5259,12 +5256,30 @@ module.exports = function has(obj, property) {
         extra.errors.push(error);
     }
 
+    function constructError(msg, column) {
+        var error = new Error(msg);
+        try {
+            throw error;
+        } catch (base) {
+            /* istanbul ignore else */
+            if (Object.create && Object.defineProperty) {
+                error = Object.create(base);
+                Object.defineProperty(error, 'column', { value: column });
+            }
+        } finally {
+            return error;
+        }
+    }
+
     function createError(line, pos, description) {
-        var error = new Error('Line ' + line + ': ' + description);
-        error.index = pos;
+        var msg, column, error;
+
+        msg = 'Line ' + line + ': ' + description;
+        column = pos - (scanning ? lineStart : lastLineStart) + 1;
+        error = constructError(msg, column);
         error.lineNumber = line;
-        error.column = pos - (scanning ? lineStart : lastLineStart) + 1;
         error.description = description;
+        error.index = pos;
         return error;
     }
 
@@ -5525,7 +5540,7 @@ module.exports = function has(obj, property) {
 
     // ECMA-262 13.3.3 Destructuring Binding Patterns
 
-    function parseArrayPattern(params) {
+    function parseArrayPattern(params, kind) {
         var node = new Node(), elements = [], rest, restNode;
         expect('[');
 
@@ -5538,11 +5553,11 @@ module.exports = function has(obj, property) {
                     restNode = new Node();
                     lex();
                     params.push(lookahead);
-                    rest = parseVariableIdentifier(params);
+                    rest = parseVariableIdentifier(params, kind);
                     elements.push(restNode.finishRestElement(rest));
                     break;
                 } else {
-                    elements.push(parsePatternWithDefault(params));
+                    elements.push(parsePatternWithDefault(params, kind));
                 }
                 if (!match(']')) {
                     expect(',');
@@ -5556,7 +5571,7 @@ module.exports = function has(obj, property) {
         return node.finishArrayPattern(elements);
     }
 
-    function parsePropertyPattern(params) {
+    function parsePropertyPattern(params, kind) {
         var node = new Node(), key, keyToken, computed = match('['), init;
         if (lookahead.type === Token.Identifier) {
             keyToken = lookahead;
@@ -5574,20 +5589,20 @@ module.exports = function has(obj, property) {
                 return node.finishProperty('init', key, false, key, false, true);
             }
         } else {
-            key = parseObjectPropertyKey(params);
+            key = parseObjectPropertyKey(params, kind);
         }
         expect(':');
-        init = parsePatternWithDefault(params);
+        init = parsePatternWithDefault(params, kind);
         return node.finishProperty('init', key, computed, init, false, false);
     }
 
-    function parseObjectPattern(params) {
+    function parseObjectPattern(params, kind) {
         var node = new Node(), properties = [];
 
         expect('{');
 
         while (!match('}')) {
-            properties.push(parsePropertyPattern(params));
+            properties.push(parsePropertyPattern(params, kind));
             if (!match('}')) {
                 expect(',');
             }
@@ -5598,19 +5613,19 @@ module.exports = function has(obj, property) {
         return node.finishObjectPattern(properties);
     }
 
-    function parsePattern(params) {
+    function parsePattern(params, kind) {
         if (match('[')) {
-            return parseArrayPattern(params);
+            return parseArrayPattern(params, kind);
         } else if (match('{')) {
-            return parseObjectPattern(params);
+            return parseObjectPattern(params, kind);
         }
         params.push(lookahead);
-        return parseVariableIdentifier();
+        return parseVariableIdentifier(kind);
     }
 
-    function parsePatternWithDefault(params) {
+    function parsePatternWithDefault(params, kind) {
         var startToken = lookahead, pattern, previousAllowYield, right;
-        pattern = parsePattern(params);
+        pattern = parsePattern(params, kind);
         if (match('=')) {
             lex();
             previousAllowYield = state.allowYield;
@@ -5947,7 +5962,7 @@ module.exports = function has(obj, property) {
         var quasi, quasis, expressions, node = new Node();
 
         quasi = parseTemplateElement({ head: true });
-        quasis = [ quasi ];
+        quasis = [quasi];
         expressions = [];
 
         while (!quasi.tail) {
@@ -6084,7 +6099,7 @@ module.exports = function has(obj, property) {
         node = new Node();
 
         if (type === Token.Identifier) {
-            if (sourceType === 'module' && lookahead.value === 'await') {
+            if (state.sourceType === 'module' && lookahead.value === 'await') {
                 tolerateUnexpectedToken(lookahead);
             }
             expr = node.finishIdentifier(lex().value);
@@ -6738,9 +6753,14 @@ module.exports = function has(obj, property) {
                 tolerateError(Messages.InvalidLHSInAssignment);
             }
 
-            // ECMA-262 11.13.1
-            if (strict && expr.type === Syntax.Identifier && isRestrictedWord(expr.name)) {
-                tolerateUnexpectedToken(token, Messages.StrictLHSAssignment);
+            // ECMA-262 12.1.1
+            if (strict && expr.type === Syntax.Identifier) {
+                if (isRestrictedWord(expr.name)) {
+                    tolerateUnexpectedToken(token, Messages.StrictLHSAssignment);
+                }
+                if (isStrictModeReservedWord(expr.name)) {
+                    tolerateUnexpectedToken(token, Messages.StrictReservedWord);
+                }
             }
 
             if (!match('=')) {
@@ -6788,12 +6808,12 @@ module.exports = function has(obj, property) {
         if (lookahead.type === Token.Keyword) {
             switch (lookahead.value) {
             case 'export':
-                if (sourceType !== 'module') {
+                if (state.sourceType !== 'module') {
                     tolerateUnexpectedToken(lookahead, Messages.IllegalExportDeclaration);
                 }
                 return parseExportDeclaration();
             case 'import':
-                if (sourceType !== 'module') {
+                if (state.sourceType !== 'module') {
                     tolerateUnexpectedToken(lookahead, Messages.IllegalImportDeclaration);
                 }
                 return parseImportDeclaration();
@@ -6836,7 +6856,7 @@ module.exports = function has(obj, property) {
 
     // ECMA-262 13.3.2 Variable Statement
 
-    function parseVariableIdentifier() {
+    function parseVariableIdentifier(kind) {
         var token, node = new Node();
 
         token = lex();
@@ -6851,19 +6871,21 @@ module.exports = function has(obj, property) {
             if (strict && token.type === Token.Keyword && isStrictModeReservedWord(token.value)) {
                 tolerateUnexpectedToken(token, Messages.StrictReservedWord);
             } else {
-                throwUnexpectedToken(token);
+                if (strict || token.value !== 'let' || kind !== 'var') {
+                    throwUnexpectedToken(token);
+                }
             }
-        } else if (sourceType === 'module' && token.type === Token.Identifier && token.value === 'await') {
+        } else if (state.sourceType === 'module' && token.type === Token.Identifier && token.value === 'await') {
             tolerateUnexpectedToken(token);
         }
 
         return node.finishIdentifier(token.value);
     }
 
-    function parseVariableDeclaration() {
+    function parseVariableDeclaration(options) {
         var init = null, id, node = new Node(), params = [];
 
-        id = parsePattern(params);
+        id = parsePattern(params, 'var');
 
         // ECMA-262 12.2.1
         if (strict && isRestrictedWord(id.name)) {
@@ -6873,18 +6895,18 @@ module.exports = function has(obj, property) {
         if (match('=')) {
             lex();
             init = isolateCoverGrammar(parseAssignmentExpression);
-        } else if (id.type !== Syntax.Identifier) {
+        } else if (id.type !== Syntax.Identifier && !options.inFor) {
             expect('=');
         }
 
         return node.finishVariableDeclarator(id, init);
     }
 
-    function parseVariableDeclarationList() {
+    function parseVariableDeclarationList(options) {
         var list = [];
 
         do {
-            list.push(parseVariableDeclaration());
+            list.push(parseVariableDeclaration({ inFor: options.inFor }));
             if (!match(',')) {
                 break;
             }
@@ -6899,7 +6921,7 @@ module.exports = function has(obj, property) {
 
         expectKeyword('var');
 
-        declarations = parseVariableDeclarationList();
+        declarations = parseVariableDeclarationList({ inFor: false });
 
         consumeSemicolon();
 
@@ -6911,7 +6933,7 @@ module.exports = function has(obj, property) {
     function parseLexicalBinding(kind, options) {
         var init = null, id, node = new Node(), params = [];
 
-        id = parsePattern(params);
+        id = parsePattern(params, kind);
 
         // ECMA-262 12.2.1
         if (strict && id.type === Syntax.Identifier && isRestrictedWord(id.name)) {
@@ -7091,21 +7113,24 @@ module.exports = function has(obj, property) {
                 lex();
 
                 state.allowIn = false;
-                init = init.finishVariableDeclaration(parseVariableDeclarationList());
+                declarations = parseVariableDeclarationList({ inFor: true });
                 state.allowIn = previousAllowIn;
 
-                if (init.declarations.length === 1 && matchKeyword('in')) {
+                if (declarations.length === 1 && matchKeyword('in')) {
+                    init = init.finishVariableDeclaration(declarations);
                     lex();
                     left = init;
                     right = parseExpression();
                     init = null;
-                } else if (init.declarations.length === 1 && init.declarations[0].init === null && matchContextualKeyword('of')) {
+                } else if (declarations.length === 1 && declarations[0].init === null && matchContextualKeyword('of')) {
+                    init = init.finishVariableDeclaration(declarations);
                     lex();
                     left = init;
                     right = parseAssignmentExpression();
                     init = null;
                     forIn = false;
                 } else {
+                    init = init.finishVariableDeclaration(declarations);
                     expect(';');
                 }
             } else if (matchKeyword('const') || matchKeyword('let')) {
@@ -8271,7 +8296,7 @@ module.exports = function has(obj, property) {
         node = new Node();
 
         body = parseScriptBody();
-        return node.finishProgram(body);
+        return node.finishProgram(body, state.sourceType);
     }
 
     function filterTokenLocation() {
@@ -8416,9 +8441,9 @@ module.exports = function has(obj, property) {
             inIteration: false,
             inSwitch: false,
             lastCommentStart: -1,
-            curlyStack: []
+            curlyStack: [],
+            sourceType: 'script'
         };
-        sourceType = 'script';
         strict = false;
 
         extra = {};
@@ -8449,7 +8474,7 @@ module.exports = function has(obj, property) {
             }
             if (options.sourceType === 'module') {
                 // very restrictive condition for now
-                sourceType = options.sourceType;
+                state.sourceType = options.sourceType;
                 strict = true;
             }
         }
@@ -8476,7 +8501,7 @@ module.exports = function has(obj, property) {
     }
 
     // Sync with *.json manifests.
-    exports.version = '2.5.0';
+    exports.version = '2.6.0';
 
     exports.tokenize = tokenize;
 
@@ -9592,7 +9617,10 @@ module.exports = _dereq_('./lib/create');
 },{"./lib/create":44}],40:[function(_dereq_,module,exports){
 'use strict';
 
-function AssertionRenderer (traversal, config) {
+function AssertionRenderer (config) {
+}
+
+AssertionRenderer.prototype.init = function (traversal) {
     var assertionLine;
     traversal.on('start', function (context) {
         assertionLine = context.source.content;
@@ -9601,7 +9629,8 @@ function AssertionRenderer (traversal, config) {
         writer.write('');
         writer.write(assertionLine);
     });
-}
+};
+
 module.exports = AssertionRenderer;
 
 },{}],41:[function(_dereq_,module,exports){
@@ -9613,11 +9642,14 @@ var syntax = _dereq_('estraverse').Syntax;
 var forEach = _dereq_('array-foreach');
 
 
-function BinaryExpressionRenderer(traversal, config) {
+function BinaryExpressionRenderer(config) {
     this.config = config;
     this.stringify = config.stringify;
     this.diff = config.diff;
     this.espathToPair = {};
+}
+
+BinaryExpressionRenderer.prototype.init = function (traversal) {
     var _this = this;
     traversal.on('esnode', function (esNode) {
         var pair;
@@ -9650,7 +9682,7 @@ function BinaryExpressionRenderer(traversal, config) {
             _this.compare(pair, writer);
         });
     });
-}
+};
 
 BinaryExpressionRenderer.prototype.compare = function (pair, writer) {
     if (isStringDiffTarget(pair)) {
@@ -9694,12 +9726,15 @@ module.exports = BinaryExpressionRenderer;
 
 var forEach = _dereq_('array-foreach');
 
-function DiagramRenderer (traversal, config) {
+function DiagramRenderer (config) {
     this.config = config;
     this.events = [];
     this.stringify = config.stringify;
     this.widthOf = config.widthOf;
     this.initialVertivalBarLength = 1;
+}
+
+DiagramRenderer.prototype.init = function (traversal) {
     var _this = this;
     traversal.on('start', function (context) {
         _this.context = context;
@@ -9719,7 +9754,7 @@ function DiagramRenderer (traversal, config) {
             writer.write(columns.join(''));
         });
     });
-}
+};
 
 DiagramRenderer.prototype.initializeRows = function () {
     this.rows = [];
@@ -9793,7 +9828,10 @@ module.exports = DiagramRenderer;
 },{"array-foreach":9}],43:[function(_dereq_,module,exports){
 'use strict';
 
-function FileRenderer (traversal, config) {
+function FileRenderer (config) {
+}
+
+FileRenderer.prototype.init = function (traversal) {
     var filepath, lineNumber;
     traversal.on('start', function (context) {
         filepath = context.source.filepath;
@@ -9806,7 +9844,8 @@ function FileRenderer (traversal, config) {
             writer.write('# at line: ' + lineNumber);
         }
     });
-}
+};
+
 module.exports = FileRenderer;
 
 },{}],44:[function(_dereq_,module,exports){
@@ -9822,13 +9861,18 @@ var typeName = _dereq_('type-name');
 var extend = _dereq_('xtend');
 var map = _dereq_('array-map');
 
+var AssertionRenderer = _dereq_('./built-in/assertion');
+var FileRenderer = _dereq_('./built-in/file');
+var DiagramRenderer = _dereq_('./built-in/diagram');
+var BinaryExpressionRenderer = _dereq_('./built-in/binary-expression');
+
 // "Browserify can only analyze static requires. It is not in the scope of browserify to handle dynamic requires."
 // https://github.com/substack/node-browserify/issues/377
 var defaultRendererClasses = {
-    './built-in/file': _dereq_('./built-in/file'),
-    './built-in/assertion': _dereq_('./built-in/assertion'),
-    './built-in/diagram': _dereq_('./built-in/diagram'),
-    './built-in/binary-expression': _dereq_('./built-in/binary-expression')
+    './built-in/file': FileRenderer,
+    './built-in/assertion': AssertionRenderer,
+    './built-in/diagram': DiagramRenderer,
+    './built-in/binary-expression': BinaryExpressionRenderer
 };
 
 function findRendererClass (rendererName, config) {
@@ -9871,7 +9915,14 @@ function create (options) {
         var traversal = new ContextTraversal(context);
         var writer = new config.writerClass(extend(config));
         var renderers = map(rendererClasses, function (RendererClass) {
-            return new RendererClass(traversal, extend(config));
+            var renderer;
+            if (RendererClass.length === 2) {
+                renderer = new RendererClass(traversal, extend(config));
+            } else {
+                renderer = new RendererClass(extend(config));
+                renderer.init(traversal);
+            }
+            return renderer;
         });
         traversal.emit('start', context);
         traversal.traverse();
@@ -9882,6 +9933,12 @@ function create (options) {
     };
 }
 
+create.renderers = {
+    AssertionRenderer: AssertionRenderer,
+    FileRenderer: FileRenderer,
+    DiagramRenderer: DiagramRenderer,
+    BinaryExpressionRenderer: BinaryExpressionRenderer
+};
 create.defaultOptions = defaultOptions;
 create.stringWidth = stringWidth;
 module.exports = create;
@@ -10024,7 +10081,6 @@ function findOperatorTokenOf(expression, tokens) {
     return searchToken(tokens, fromLine, toLine, function (token, index) {
         if (fromColumn < token.loc.start.column &&
             token.loc.end.column < toColumn &&
-            token.type === 'Punctuator' &&  // esprima
             token.value === expression.operator) {
             return token;
         }
