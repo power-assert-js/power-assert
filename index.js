@@ -26,8 +26,9 @@ function customize (customOptions) {
         extend(empowerOptions, options.assertion)
     );
     poweredAssert.customize = customize;
-    poweredAssert.default = poweredAssert;
     return poweredAssert;
 }
 
-module.exports = customize();
+var defaultAssert = customize();
+defaultAssert.default = defaultAssert;
+module.exports = defaultAssert;
