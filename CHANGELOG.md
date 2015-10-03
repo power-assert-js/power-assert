@@ -1,3 +1,11 @@
+## [1.1.0](https://github.com/power-assert-js/power-assert/releases/tag/v1.1.0) (2015-10-04)
+
+
+#### Features
+
+  * [Support `import from` syntax of ES6 module](https://github.com/power-assert-js/power-assert/pull/28) by @falsandtru
+
+
 ### [1.0.1](https://github.com/power-assert-js/power-assert/releases/tag/v1.0.1) (2015-09-14)
 
 
