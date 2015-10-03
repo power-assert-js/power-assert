@@ -5,9 +5,9 @@
  * power-assert:
  *   license: MIT
  *   author: Takuto Wada <takuto.wada@gmail.com>
- *   contributors: azu, vvakame, yosuke-furukawa, teppeis, zoncoen
+ *   contributors: azu, vvakame, yosuke-furukawa, teppeis, zoncoen, falsandtru
  *   homepage: http://github.com/power-assert-js/power-assert
- *   version: 1.0.1
+ *   version: 1.1.0
  * 
  * array-filter:
  *   license: MIT
@@ -65,8 +65,8 @@
  *   license: MIT
  *   author: Masaki Komagata
  *   maintainers: komagata <komagata@gmail.com>
- *   homepage: https://github.com/komagata/eastasianwidth
- *   version: 0.1.0
+ *   homepage: https://github.com/komagata/eastasianwidth#readme
+ *   version: 0.1.1
  * 
  * empower:
  *   license: MIT
@@ -246,7 +246,9 @@ function customize (customOptions) {
     return poweredAssert;
 }
 
-module.exports = customize();
+var defaultAssert = customize();
+defaultAssert["default"] = defaultAssert;
+module.exports = defaultAssert;
 
 },{"assert":2,"empower":12,"power-assert-formatter":39,"xtend":60}],2:[function(_dereq_,module,exports){
 // http://wiki.commonjs.org/wiki/Unit_Testing/1.0
@@ -10268,7 +10270,13 @@ function udiffChars (text1, text2) {
 module.exports = udiff;
 
 },{"googlediff":53}],52:[function(_dereq_,module,exports){
-var eaw = exports;
+var eaw = {};
+
+if ('undefined' == typeof module) {
+  window.eastasianwidth = eaw;
+} else {
+  module.exports = eaw;
+}
 
 eaw.eastAsianWidth = function(character) {
   var x = character.charCodeAt(0);
@@ -10538,6 +10546,20 @@ eaw.length = function(string) {
     len = len + this.characterLength(string.charAt(i));
   }
   return len;
+};
+
+eaw.slice = function(text, start, end) {
+  start = start ? start : 0;
+  end = end ? end : 1;
+  var result = '';
+  for (var i = 0; i < text.length; i++) {
+    var char = text.charAt(i);
+    var eawLen = eaw.length(result + char);
+    if (eawLen >= 1 + start && eawLen < 1 + end) {
+      result += char
+    }
+  }
+  return result;
 };
 
 },{}],53:[function(_dereq_,module,exports){
