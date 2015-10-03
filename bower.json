@@ -43,6 +43,10 @@
     {
       "name": "zoncoen",
       "url": "https://github.com/zoncoen"
+    },
+    {
+      "name": "falsandtru",
+      "url": "https://github.com/falsandtru"
     }
   ],
   "homepage": "https://github.com/power-assert-js/power-assert",
