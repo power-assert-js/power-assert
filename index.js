@@ -29,4 +29,6 @@ function customize (customOptions) {
     return poweredAssert;
 }
 
-module.exports = customize();
+var defaultAssert = customize();
+defaultAssert.default = defaultAssert;
+module.exports = defaultAssert;
