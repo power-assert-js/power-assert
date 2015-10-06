@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "noImplicitAny": true
+  },
+  "files": [
+    "index.d.ts"
+  ]
+}

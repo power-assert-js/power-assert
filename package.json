@@ -44,10 +44,12 @@
   "devDependencies": {
     "babel": "^5.2.0",
     "babel-plugin-espower": "^1.0.0",
+    "dtsm": "^0.11.0",
     "expect.js": "^0.3.1",
     "licensify": "^2.0.1",
     "qunit-tap": "^1.5.0",
-    "qunitjs": "1.14.0"
+    "qunitjs": "1.14.0",
+    "typescript": "^1.6.2"
   },
   "files": [
     "CHANGELOG.md",
@@ -85,7 +87,8 @@
     "test-generated": "mocha --reporter dot ./espowered_tests/**/*_test.js",
     "test-browser": "mocha-phantomjs --reporter dot test/test-browser.html",
     "test-amd": "mocha-phantomjs --reporter dot test/test-amd.html",
-    "test-all": "npm run test-unit && npm run test-generated && npm run test-browser && npm run test-amd",
+    "test-typings": "node node_modules/typescript/lib/tsc -p ./",
+    "test-all": "npm run test-unit && npm run test-generated && npm run test-browser && npm run test-amd && npm run test-typings",
     "test": "npm run setup && npm run test-all"
   }
 }
