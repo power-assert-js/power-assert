@@ -14,10 +14,10 @@
   },
   "dependencies": {
     "empower/empower.d.ts": {
-      "ref": "98d3168c2c570352a3a7393788e2ec9fbb08ade6"
+      "ref": "3fc1377ce29dd9670975cb68615edf1b819fc4a5"
     },
     "power-assert-formatter/power-assert-formatter.d.ts": {
-      "ref": "98d3168c2c570352a3a7393788e2ec9fbb08ade6"
+      "ref": "3fc1377ce29dd9670975cb68615edf1b819fc4a5"
     }
   }
 }

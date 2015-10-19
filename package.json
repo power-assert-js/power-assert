@@ -56,6 +56,8 @@
     "MIT-LICENSE.txt",
     "README.md",
     "index.js",
+    "index.d.ts",
+    "typings/**/*.d.ts",
     "build/power-assert.js",
     "package.json",
     "test"
@@ -79,7 +81,7 @@
   "scripts": {
     "bower": "bower install --config.interactive=false",
     "build": "npm prune && npm dedupe && browserify -p licensify --standalone assert ./index.js | dereserve | derequire > build/power-assert.js",
-    "clean": "rm -rf ./espowered_tests && rm -rf ./build",
+    "clean": "rm -rf ./espowered_tests && rm -rf ./build && rm test/test-typings.js",
     "setup-dir": "mkdir -p ./build && mkdir -p ./espowered_tests/tobe_instrumented && cp -r test/not_tobe_instrumented/ ./espowered_tests/not_tobe_instrumented/",
     "setup-espower": "for i in $(find ./test/tobe_instrumented -name '*_test.js'); do babel --plugins babel-plugin-espower --blacklist strict $i > ./espowered_tests/tobe_instrumented/$(basename $i); done",
     "setup": "npm run clean && npm run setup-dir && npm run setup-espower && npm run build",
@@ -87,7 +89,7 @@
     "test-generated": "mocha --reporter dot ./espowered_tests/**/*_test.js",
     "test-browser": "mocha-phantomjs --reporter dot test/test-browser.html",
     "test-amd": "mocha-phantomjs --reporter dot test/test-amd.html",
-    "test-typings": "node node_modules/typescript/lib/tsc -p ./",
+    "test-typings": "node node_modules/typescript/lib/tsc -p ./ && node test/test-typings && rm test/test-typings.js",
     "test-all": "npm run test-unit && npm run test-generated && npm run test-browser && npm run test-amd && npm run test-typings",
     "test": "npm run setup && npm run test-all"
   }
