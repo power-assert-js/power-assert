@@ -37,6 +37,7 @@ What is `power-assert`?
  * supports [CoffeeScript](http://github.com/power-assert-js/espower-coffee).
  * supports [TypeScript](http://github.com/power-assert-js/espower-typescript).
  * has [TypeScript type definition](https://github.com/borisyankov/DefinitelyTyped/blob/master/power-assert/power-assert.d.ts)
+ * [AVA](https://github.com/sindresorhus/ava), futuristic test runner, now [comes with power-assert builtin](https://github.com/sindresorhus/ava#enhanced-asserts)
  * pull-requests, issue reports and patches are always welcomed.
 
 
