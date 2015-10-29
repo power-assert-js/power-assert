@@ -648,10 +648,12 @@ Internally, `power-assert` uses [empower](http://github.com/power-assert-js/empo
 See [power-assert-demo](http://github.com/twada/power-assert-demo) project for power-assert Demo running with mocha.
 
 
-SUPPORTED FRAMEWORK
+SUPPORTED FRAMEWORKS
 ---------------------------------------
 
 * [Mocha](http://visionmedia.github.io/mocha/)
+* [AVA](https://github.com/sindresorhus/ava)
+
 
 ### FRAMEWORKS KNOWN TO WORK
 
