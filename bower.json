@@ -47,6 +47,10 @@
     {
       "name": "falsandtru",
       "url": "https://github.com/falsandtru"
+    },
+    {
+      "name": "James Talmage",
+      "homepage": "https://github.com/jamestalmage"
     }
   ],
   "homepage": "https://github.com/power-assert-js/power-assert",

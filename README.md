@@ -675,6 +675,7 @@ CONTRIBUTORS
 * [teppeis (Teppei Sato)](https://github.com/teppeis)
 * [zoncoen (Kenta Mori)](https://github.com/zoncoen)
 * [falsandtru (falsandtru)](https://github.com/falsandtru)
+* [James Talmage (jamestalmage)](https://github.com/jamestalmage)
 
 
 LICENSE
