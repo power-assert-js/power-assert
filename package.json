@@ -5,10 +5,10 @@
   "author": {
     "name": "Takuto Wada",
     "email": "takuto.wada@gmail.com",
-    "url": "http://github.com/twada"
+    "url": "https://github.com/twada"
   },
   "bugs": {
-    "url": "http://github.com/power-assert-js/power-assert/issues"
+    "url": "https://github.com/power-assert-js/power-assert/issues"
   },
   "contributors": [
     {
@@ -62,7 +62,7 @@
     "package.json",
     "test"
   ],
-  "homepage": "http://github.com/power-assert-js/power-assert",
+  "homepage": "https://github.com/power-assert-js/power-assert",
   "keywords": [
     "power-assert",
     "assert",
@@ -76,7 +76,7 @@
   "main": "./index.js",
   "repository": {
     "type": "git",
-    "url": "http://github.com/power-assert-js/power-assert.git"
+    "url": "https://github.com/power-assert-js/power-assert.git"
   },
   "scripts": {
     "bower": "bower install --config.interactive=false",
