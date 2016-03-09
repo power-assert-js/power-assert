@@ -13,6 +13,7 @@ var baseAssert = require('assert');
 var empower = require('empower');
 var formatter = require('power-assert-formatter');
 var extend = require('xtend');
+var define = require('define-properties');
 var empowerOptions = {
     modifyMessageOnRethrow: true,
     saveContextOnRethrow: true
@@ -30,5 +31,6 @@ function customize (customOptions) {
 }
 
 var defaultAssert = customize();
+define(defaultAssert, { '__esModule': true });
 defaultAssert.default = defaultAssert;
 module.exports = defaultAssert;
