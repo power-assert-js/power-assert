@@ -1,3 +1,11 @@
+### [1.3.1](https://github.com/power-assert-js/power-assert/releases/tag/v1.3.1) (2016-03-10)
+
+
+#### Bug Fixes
+
+  * [Access property `default` using bracket notation](https://github.com/power-assert-js/power-assert/pull/40) by [@LeshaKoss](https://github.com/LeshaKoss), since using dot notation to access the property `default` causes an error in Internet Explorer 8.
+
+
 ## [1.3.0](https://github.com/power-assert-js/power-assert/releases/tag/v1.3.0) (2016-03-09)
 
 
