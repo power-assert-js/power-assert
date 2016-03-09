@@ -678,6 +678,7 @@ CONTRIBUTORS
 * [zoncoen (Kenta Mori)](https://github.com/zoncoen)
 * [falsandtru (falsandtru)](https://github.com/falsandtru)
 * [James Talmage (jamestalmage)](https://github.com/jamestalmage)
+* [LeshaKoss (Lesha Koss)](https://github.com/LeshaKoss)
 
 
 LICENSE
