@@ -5,6 +5,8 @@
 
   * Module style interop. [Support standard style definitions of transpirable es6 modules](https://github.com/power-assert-js/power-assert/pull/37) by [@falsandtru](https://github.com/falsandtru)
 
+  refs: [Babel and CommonJS modules](http://www.2ality.com/2015/12/babel-commonjs.html)
+
 
 ## [1.2.0](https://github.com/power-assert-js/power-assert/releases/tag/v1.2.0) (2015-11-14)
 
