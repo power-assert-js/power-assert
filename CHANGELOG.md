@@ -1,3 +1,11 @@
+## [1.3.0](https://github.com/power-assert-js/power-assert/releases/tag/v1.3.0) (2016-03-09)
+
+
+#### Features
+
+  * Module style interop. [Support standard style definitions of transpirable es6 modules](https://github.com/power-assert-js/power-assert/pull/37) by [@falsandtru](https://github.com/falsandtru)
+
+
 ## [1.2.0](https://github.com/power-assert-js/power-assert/releases/tag/v1.2.0) (2015-11-14)
 
 
