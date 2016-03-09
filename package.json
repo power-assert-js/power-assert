@@ -64,8 +64,7 @@
     "README.md",
     "index.js",
     "build/power-assert.js",
-    "package.json",
-    "test"
+    "package.json"
   ],
   "homepage": "https://github.com/power-assert-js/power-assert",
   "keywords": [
