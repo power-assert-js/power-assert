@@ -3,97 +3,97 @@
  * @license
  * 
  * power-assert:
- *   license: MIT
+ *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Takuto Wada <takuto.wada@gmail.com>
  *   contributors: azu, vvakame, yosuke-furukawa, teppeis, zoncoen, falsandtru, James Talmage
- *   homepage: http://github.com/power-assert-js/power-assert
- *   version: 1.2.0
+ *   homepage: https://github.com/power-assert-js/power-assert
+ *   version: 1.2.1
  * 
  * acorn:
- *   license: MIT
+ *   license: MIT (http://opensource.org/licenses/MIT)
  *   maintainers: marijn <marijnh@gmail.com>, rreverser <me@rreverser.com>
  *   contributors: keeyipchan, List of Acorn contributors. Updated before every release., Alistair Braidwood, Andres Suarez, Aparajita Fishman, Arian Stolwijk, Artem Govorov, Brandon Mills, Charles Hughes, Conrad Irwin, David Bonnet, ForbesLindesay, Forbes Lindesay, Gilad Peleg, impinball, Ingvar Stepanyan, Jesse McCarthy, Jiaxing Wang, Joel Kemp, Johannes Herr, Jürg Lehni, Adrian Rakovsky, Kevin Kwok, krator, Marijn Haverbeke, Martin Carlberg, Mathias Bynens, Mathieu 'p01' Henri, Max Schaefer, Max Zerzouri, Mihai Bazon, Mike Rennie, Nick Fitzgerald, Oskar Schöldström, Paul Harper, Peter Rust, PlNG, r-e-d, Rich Harris, Sebastian McKenzie, Timothy Gu, zsjforcn
- *   homepage: https://github.com/marijnh/acorn
- *   version: 2.5.2
+ *   homepage: https://github.com/ternjs/acorn
+ *   version: 2.7.0
  * 
  * acorn-es7-plugin:
- *   license: MIT
+ *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: matatbread
  *   maintainers: matatbread <npm@mailed.me.uk>
  *   homepage: https://github.com/MatAtBread/acorn-es7-plugin#readme
- *   version: 1.0.9
+ *   version: 1.0.12
  * 
  * array-filter:
- *   license: MIT
+ *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Julian Gruber <mail@juliangruber.com>
  *   maintainers: juliangruber <julian@juliangruber.com>
  *   homepage: https://github.com/juliangruber/array-filter
  *   version: 1.0.0
  * 
  * array-foreach:
- *   license: MIT
+ *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Takuto Wada <takuto.wada@gmail.com>
  *   maintainers: twada <takuto.wada@gmail.com>
  *   homepage: https://github.com/twada/array-foreach
  *   version: 1.0.1
  * 
  * array-map:
- *   license: MIT
+ *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: James Halliday <mail@substack.net>
  *   maintainers: substack <mail@substack.net>
  *   homepage: https://github.com/substack/array-map
  *   version: 0.0.0
  * 
  * array-reduce:
- *   license: MIT
+ *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: James Halliday <mail@substack.net>
  *   maintainers: substack <mail@substack.net>
  *   homepage: https://github.com/substack/array-reduce
  *   version: 0.0.0
  * 
  * array-reduce-right:
- *   license: MIT
+ *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Takuto Wada <takuto.wada@gmail.com>
  *   maintainers: twada <takuto.wada@gmail.com>
  *   homepage: https://github.com/twada/array-reduce-right
  *   version: 1.0.0
  * 
  * array-some:
- *   license: MIT
+ *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Takuto Wada <takuto.wada@gmail.com>
  *   maintainers: twada <takuto.wada@gmail.com>
  *   homepage: https://github.com/twada/array-some
  *   version: 1.0.0
  * 
  * assert:
- *   license: MIT
+ *   license: MIT (http://opensource.org/licenses/MIT)
  *   maintainers: coolaj86 <coolaj86@gmail.com>, shtylman <shtylman@gmail.com>
  *   homepage: https://github.com/defunctzombie/commonjs-assert
  *   version: 1.3.0
  * 
  * deep-equal:
- *   license: MIT
+ *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: James Halliday <mail@substack.net>
  *   maintainers: substack <mail@substack.net>
  *   homepage: https://github.com/substack/node-deep-equal#readme
  *   version: 1.0.1
  * 
  * define-properties:
- *   license: MIT
+ *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Jordan Harband
  *   maintainers: ljharb <ljharb@gmail.com>
  *   homepage: https://github.com/ljharb/define-properties#readme
  *   version: 1.1.2
  * 
  * eastasianwidth:
- *   license: MIT
+ *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Masaki Komagata
  *   maintainers: komagata <komagata@gmail.com>
  *   homepage: https://github.com/komagata/eastasianwidth#readme
  *   version: 0.1.1
  * 
  * empower:
- *   license: MIT
+ *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Takuto Wada <takuto.wada@gmail.com>
  *   maintainers: twada <takuto.wada@gmail.com>
  *   contributors: James Talmage
@@ -101,41 +101,41 @@
  *   version: 1.1.0
  * 
  * escallmatch:
- *   license: MIT
+ *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Takuto Wada <takuto.wada@gmail.com>
  *   maintainers: twada <takuto.wada@gmail.com>
  *   homepage: https://github.com/twada/escallmatch
  *   version: 1.4.2
  * 
  * esprima:
- *   license: BSD-2-Clause
+ *   license: BSD-2-Clause (http://opensource.org/licenses/BSD-2-Clause)
  *   author: Ariya Hidayat <ariya.hidayat@gmail.com>
  *   maintainers: ariya <ariya.hidayat@gmail.com>
  *   homepage: http://esprima.org
- *   version: 2.7.0
+ *   version: 2.7.2
  * 
  * espurify:
- *   license: MIT
+ *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Takuto Wada <takuto.wada@gmail.com>
  *   maintainers: twada <takuto.wada@gmail.com>
  *   homepage: https://github.com/estools/espurify
- *   version: 1.3.0
+ *   version: 1.5.0
  * 
  * estraverse:
- *   license: BSD-2-Clause
+ *   license: BSD-2-Clause (http://opensource.org/licenses/BSD-2-Clause)
  *   maintainers: constellation <utatane.tea@gmail.com>, michaelficarra <npm@michael.ficarra.me>, nzakas <nicholas@nczconsulting.com>
  *   homepage: https://github.com/estools/estraverse
  *   version: 4.1.1
  * 
  * events:
- *   license: MIT
+ *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Irakli Gozalishvili <rfobic@gmail.com>
  *   maintainers: gozala <rfobic@gmail.com>, defunctzombie <shtylman@gmail.com>
  *   homepage: https://github.com/Gozala/events#readme
  *   version: 1.1.0
  * 
  * foreach:
- *   license: MIT
+ *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Manuel Stofer <manuel@takimata.ch>
  *   maintainers: manuelstofer <manuel@takimata.ch>
  *   contributors: Manuel Stofer, Jordan Harband
@@ -143,7 +143,7 @@
  *   version: 2.0.5
  * 
  * function-bind:
- *   licenses: MIT
+ *   licenses: MIT (http://opensource.org/licenses/MIT)
  *   author: Raynos <raynos2@gmail.com>
  *   maintainers: raynos <raynos2@gmail.com>
  *   contributors: Raynos
@@ -151,7 +151,7 @@
  *   version: 0.1.0
  * 
  * googlediff:
- *   licenses: Apache
+ *   licenses: Apache (http://opensource.org/licenses/Apache-2.0)
  *   author: Neil Fraser <root@neil.fraser.name>
  *   maintainers: shimondoodkin <helpmepro1@gmail.com>
  *   contributors: Shimon Doodkin <helpmepro1@gmail.com>, Ryan Graham <r.m.graham@gmail.com>
@@ -159,7 +159,7 @@
  *   version: 0.1.0
  * 
  * has:
- *   licenses: MIT
+ *   licenses: MIT (http://opensource.org/licenses/MIT)
  *   author: Thiago de Arruda <tpadilha84@gmail.com>
  *   maintainers: tarruda <tpadilha84@gmail.com>
  *   homepage: https://github.com/tarruda/has
@@ -170,33 +170,34 @@
  *   version: 0.0.1
  * 
  * inherits:
- *   license: ISC
+ *   license: ISC (http://opensource.org/licenses/ISC)
  *   maintainers: isaacs <i@izs.me>
+ *   homepage: https://github.com/isaacs/inherits#readme
  *   version: 2.0.1
  * 
  * isarray:
- *   license: MIT
+ *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Julian Gruber <mail@juliangruber.com>
  *   maintainers: juliangruber <julian@juliangruber.com>
  *   homepage: https://github.com/juliangruber/isarray
- *   version: 0.0.1
+ *   version: 1.0.0
  * 
  * object-create:
- *   licenses: MIT
+ *   licenses: MIT (http://opensource.org/licenses/MIT)
  *   author: Thiago de Arruda <tpadilha84@gmail.com>
  *   maintainers: tarruda <tpadilha84@gmail.com>
  *   homepage: https://github.com/tarruda/object-create
  *   version: 0.1.0
  * 
  * object-define-property:
- *   licenses: MIT
+ *   licenses: MIT (http://opensource.org/licenses/MIT)
  *   author: Thiago de Arruda <tpadilha84@gmail.com>
  *   maintainers: tarruda <tpadilha84@gmail.com>
  *   homepage: https://github.com/tarruda/object-define-property
  *   version: 0.1.0
  * 
  * object-keys:
- *   license: MIT
+ *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Jordan Harband <ljharb@gmail.com>
  *   maintainers: ljharb <ljharb@gmail.com>
  *   contributors: Jordan Harband <ljharb@gmail.com>, Raynos <raynos2@gmail.com>, Nathan Rajlich <nathan@tootallnate.net>, Ivan Starkov <istarkov@gmail.com>, Gary Katsevman <git@gkatsev.com>
@@ -204,36 +205,36 @@
  *   version: 1.0.9
  * 
  * power-assert-formatter:
- *   license: MIT
+ *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Takuto Wada <takuto.wada@gmail.com>
  *   maintainers: twada <takuto.wada@gmail.com>
  *   contributors: James Talmage
  *   homepage: http://github.com/power-assert-js/power-assert-formatter
- *   version: 1.3.1
+ *   version: 1.3.2
  * 
  * process:
- *   license: MIT
+ *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Roman Shtylman <shtylman@gmail.com>
  *   maintainers: coolaj86 <coolaj86@gmail.com>, defunctzombie <shtylman@gmail.com>
  *   homepage: https://github.com/shtylman/node-process#readme
  *   version: 0.11.2
  * 
  * stringifier:
- *   license: MIT
+ *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Takuto Wada <takuto.wada@gmail.com>
  *   maintainers: twada <takuto.wada@gmail.com>
  *   homepage: https://github.com/twada/stringifier
  *   version: 1.2.1
  * 
  * traverse:
- *   license: MIT
+ *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: James Halliday <mail@substack.net>
  *   maintainers: substack <mail@substack.net>
  *   homepage: https://github.com/substack/js-traverse
  *   version: 0.6.6
  * 
  * type-name:
- *   license: MIT
+ *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Takuto Wada <takuto.wada@gmail.com>
  *   maintainers: twada <takuto.wada@gmail.com>
  *   contributors: azu, Yosuke Furukawa
@@ -241,14 +242,14 @@
  *   version: 1.1.0
  * 
  * util:
- *   license: MIT
+ *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Joyent
  *   maintainers: shtylman <shtylman@gmail.com>
  *   homepage: https://github.com/defunctzombie/node-util
  *   version: 0.10.3
  * 
  * xtend:
- *   license: MIT
+ *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Raynos <raynos2@gmail.com>
  *   maintainers: raynos <raynos2@gmail.com>
  *   contributors: Jake Verbaten, Matt Esch
@@ -1639,7 +1640,7 @@ function hasOwnProperty(obj, prop) {
  *
  * https://github.com/power-assert-js/power-assert
  *
- * Copyright (c) 2013-2015 Takuto Wada
+ * Copyright (c) 2013-2016 Takuto Wada
  * Licensed under the MIT license.
  *   https://github.com/power-assert-js/power-assert/blob/master/MIT-LICENSE.txt
  */
@@ -1649,6 +1650,7 @@ var baseAssert = _dereq_('assert');
 var empower = _dereq_('empower');
 var formatter = _dereq_('power-assert-formatter');
 var extend = _dereq_('xtend');
+var define = _dereq_('define-properties');
 var empowerOptions = {
     modifyMessageOnRethrow: true,
     saveContextOnRethrow: true
@@ -1666,14 +1668,15 @@ function customize (customOptions) {
 }
 
 var defaultAssert = customize();
+define(defaultAssert, { '__esModule': true });
 defaultAssert["default"] = defaultAssert;
 module.exports = defaultAssert;
 
-},{"assert":1,"empower":21,"power-assert-formatter":47,"xtend":64}],8:[function(_dereq_,module,exports){
+},{"assert":1,"define-properties":19,"empower":21,"power-assert-formatter":45,"xtend":62}],8:[function(_dereq_,module,exports){
 var NotAsync = {} ;
 var asyncExit = /^async[\t ]+(return|throw)/ ;
 var asyncFunction = /^async[\t ]+function/ ;
-var atomOrPropertyOrLabel = /^\s*[:;]/ ;
+var atomOrPropertyOrLabel = /^\s*[):;]/ ;
 var asyncAtEndOfLine = /^async[\t ]*\n/ ;
 
 /* Return the object holding the parser's 'State'. This is different between acorn ('this')
@@ -1717,6 +1720,9 @@ function asyncAwaitPlugin (parser,options){
 					parser.raise(node.start,"async/await keywords only available when ecmaVersion>=7") ;
 				} ;
 			}
+      this.reservedWords = new RegExp(this.reservedWords.toString().replace(/await|async/g,"").replace("|/","/").replace("/|","/").replace("||","|")) ;
+      this.reservedWordsStrict = new RegExp(this.reservedWordsStrict.toString().replace(/await|async/g,"").replace("|/","/").replace("/|","/").replace("||","|")) ;
+      this.reservedWordsStrictBind = new RegExp(this.reservedWordsStrictBind.toString().replace(/await|async/g,"").replace("|/","/").replace("/|","/").replace("||","|")) ;
 			return base.apply(this,arguments);
 		}
 	}) ;
@@ -1757,6 +1763,19 @@ function asyncAwaitPlugin (parser,options){
 		}
 	}) ;
 
+  parser.extend("parseIdent",function(base){
+		return function(liberal){
+				var id = base.apply(this,arguments);
+				var st = state(this) ;
+				if (st.inAsyncFunction && id.name==='await') {
+					if (arguments.length===0) {
+						this.raise(id.start,"'await' is reserved within async functions") ;
+					}
+				}
+				return id ;
+		}
+	}) ;
+
 	parser.extend("parseExprAtom",function(base){
 		return function(refShorthandDefaultPos){
 			var st = state(this) ;
@@ -1773,7 +1792,7 @@ function asyncAwaitPlugin (parser,options){
 						var inBody = false ;
 
 						var parseHooks = {
-							parseFunctionBody:function(){
+							parseFunctionBody:function(node,isArrowFunction){
 								try {
 									var wasInBody = inBody ;
 									inBody = true ;
@@ -1894,6 +1913,7 @@ function asyncAwaitPlugin (parser,options){
 
 module.exports = function(acorn) {
 	acorn.plugins.asyncawait = asyncAwaitPlugin ;
+	return acorn
 }
 
 },{}],9:[function(_dereq_,module,exports){
@@ -1980,14 +2000,14 @@ pp.checkPropClash = function (prop, propHash) {
 // and object pattern might appear (so it's possible to raise
 // delayed syntax error at correct position).
 
-pp.parseExpression = function (noIn, refShorthandDefaultPos) {
+pp.parseExpression = function (noIn, refDestructuringErrors) {
   var startPos = this.start,
       startLoc = this.startLoc;
-  var expr = this.parseMaybeAssign(noIn, refShorthandDefaultPos);
+  var expr = this.parseMaybeAssign(noIn, refDestructuringErrors);
   if (this.type === _tokentype.types.comma) {
     var node = this.startNodeAt(startPos, startLoc);
     node.expressions = [expr];
-    while (this.eat(_tokentype.types.comma)) node.expressions.push(this.parseMaybeAssign(noIn, refShorthandDefaultPos));
+    while (this.eat(_tokentype.types.comma)) node.expressions.push(this.parseMaybeAssign(noIn, refDestructuringErrors));
     return this.finishNode(node, "SequenceExpression");
   }
   return expr;
@@ -1996,43 +2016,42 @@ pp.parseExpression = function (noIn, refShorthandDefaultPos) {
 // Parse an assignment expression. This includes applications of
 // operators like `+=`.
 
-pp.parseMaybeAssign = function (noIn, refShorthandDefaultPos, afterLeftParse) {
+pp.parseMaybeAssign = function (noIn, refDestructuringErrors, afterLeftParse) {
   if (this.type == _tokentype.types._yield && this.inGenerator) return this.parseYield();
 
-  var failOnShorthandAssign = undefined;
-  if (!refShorthandDefaultPos) {
-    refShorthandDefaultPos = { start: 0 };
-    failOnShorthandAssign = true;
-  } else {
-    failOnShorthandAssign = false;
+  var validateDestructuring = false;
+  if (!refDestructuringErrors) {
+    refDestructuringErrors = { shorthandAssign: 0, trailingComma: 0 };
+    validateDestructuring = true;
   }
   var startPos = this.start,
       startLoc = this.startLoc;
   if (this.type == _tokentype.types.parenL || this.type == _tokentype.types.name) this.potentialArrowAt = this.start;
-  var left = this.parseMaybeConditional(noIn, refShorthandDefaultPos);
+  var left = this.parseMaybeConditional(noIn, refDestructuringErrors);
   if (afterLeftParse) left = afterLeftParse.call(this, left, startPos, startLoc);
   if (this.type.isAssign) {
+    if (validateDestructuring) this.checkPatternErrors(refDestructuringErrors, true);
     var node = this.startNodeAt(startPos, startLoc);
     node.operator = this.value;
     node.left = this.type === _tokentype.types.eq ? this.toAssignable(left) : left;
-    refShorthandDefaultPos.start = 0; // reset because shorthand default was used correctly
+    refDestructuringErrors.shorthandAssign = 0; // reset because shorthand default was used correctly
     this.checkLVal(left);
     this.next();
     node.right = this.parseMaybeAssign(noIn);
     return this.finishNode(node, "AssignmentExpression");
-  } else if (failOnShorthandAssign && refShorthandDefaultPos.start) {
-    this.unexpected(refShorthandDefaultPos.start);
+  } else {
+    if (validateDestructuring) this.checkExpressionErrors(refDestructuringErrors, true);
   }
   return left;
 };
 
 // Parse a ternary conditional (`?:`) operator.
 
-pp.parseMaybeConditional = function (noIn, refShorthandDefaultPos) {
+pp.parseMaybeConditional = function (noIn, refDestructuringErrors) {
   var startPos = this.start,
       startLoc = this.startLoc;
-  var expr = this.parseExprOps(noIn, refShorthandDefaultPos);
-  if (refShorthandDefaultPos && refShorthandDefaultPos.start) return expr;
+  var expr = this.parseExprOps(noIn, refDestructuringErrors);
+  if (this.checkExpressionErrors(refDestructuringErrors)) return expr;
   if (this.eat(_tokentype.types.question)) {
     var node = this.startNodeAt(startPos, startLoc);
     node.test = expr;
@@ -2046,11 +2065,11 @@ pp.parseMaybeConditional = function (noIn, refShorthandDefaultPos) {
 
 // Start the precedence parser.
 
-pp.parseExprOps = function (noIn, refShorthandDefaultPos) {
+pp.parseExprOps = function (noIn, refDestructuringErrors) {
   var startPos = this.start,
       startLoc = this.startLoc;
-  var expr = this.parseMaybeUnary(refShorthandDefaultPos);
-  if (refShorthandDefaultPos && refShorthandDefaultPos.start) return expr;
+  var expr = this.parseMaybeUnary(refDestructuringErrors);
+  if (this.checkExpressionErrors(refDestructuringErrors)) return expr;
   return this.parseExprOp(expr, startPos, startLoc, -1, noIn);
 };
 
@@ -2081,7 +2100,7 @@ pp.parseExprOp = function (left, leftStartPos, leftStartLoc, minPrec, noIn) {
 
 // Parse unary operators, both prefix and postfix.
 
-pp.parseMaybeUnary = function (refShorthandDefaultPos) {
+pp.parseMaybeUnary = function (refDestructuringErrors) {
   if (this.type.prefix) {
     var node = this.startNode(),
         update = this.type === _tokentype.types.incDec;
@@ -2089,14 +2108,14 @@ pp.parseMaybeUnary = function (refShorthandDefaultPos) {
     node.prefix = true;
     this.next();
     node.argument = this.parseMaybeUnary();
-    if (refShorthandDefaultPos && refShorthandDefaultPos.start) this.unexpected(refShorthandDefaultPos.start);
+    this.checkExpressionErrors(refDestructuringErrors, true);
     if (update) this.checkLVal(node.argument);else if (this.strict && node.operator === "delete" && node.argument.type === "Identifier") this.raise(node.start, "Deleting local variable in strict mode");
     return this.finishNode(node, update ? "UpdateExpression" : "UnaryExpression");
   }
   var startPos = this.start,
       startLoc = this.startLoc;
-  var expr = this.parseExprSubscripts(refShorthandDefaultPos);
-  if (refShorthandDefaultPos && refShorthandDefaultPos.start) return expr;
+  var expr = this.parseExprSubscripts(refDestructuringErrors);
+  if (this.checkExpressionErrors(refDestructuringErrors)) return expr;
   while (this.type.postfix && !this.canInsertSemicolon()) {
     var node = this.startNodeAt(startPos, startLoc);
     node.operator = this.value;
@@ -2111,12 +2130,12 @@ pp.parseMaybeUnary = function (refShorthandDefaultPos) {
 
 // Parse call, dot, and `[]`-subscript expressions.
 
-pp.parseExprSubscripts = function (refShorthandDefaultPos) {
+pp.parseExprSubscripts = function (refDestructuringErrors) {
   var startPos = this.start,
       startLoc = this.startLoc;
-  var expr = this.parseExprAtom(refShorthandDefaultPos);
+  var expr = this.parseExprAtom(refDestructuringErrors);
   var skipArrowSubscripts = expr.type === "ArrowFunctionExpression" && this.input.slice(this.lastTokStart, this.lastTokEnd) !== ")";
-  if (refShorthandDefaultPos && refShorthandDefaultPos.start || skipArrowSubscripts) return expr;
+  if (this.checkExpressionErrors(refDestructuringErrors) || skipArrowSubscripts) return expr;
   return this.parseSubscripts(expr, startPos, startLoc);
 };
 
@@ -2156,7 +2175,7 @@ pp.parseSubscripts = function (base, startPos, startLoc, noCalls) {
 // `new`, or an expression wrapped in punctuation like `()`, `[]`,
 // or `{}`.
 
-pp.parseExprAtom = function (refShorthandDefaultPos) {
+pp.parseExprAtom = function (refDestructuringErrors) {
   var node = undefined,
       canBeArrow = this.potentialArrowAt == this.start;
   switch (this.type) {
@@ -2204,11 +2223,11 @@ pp.parseExprAtom = function (refShorthandDefaultPos) {
       if (this.options.ecmaVersion >= 7 && this.type === _tokentype.types._for) {
         return this.parseComprehension(node, false);
       }
-      node.elements = this.parseExprList(_tokentype.types.bracketR, true, true, refShorthandDefaultPos);
+      node.elements = this.parseExprList(_tokentype.types.bracketR, true, true, refDestructuringErrors);
       return this.finishNode(node, "ArrayExpression");
 
     case _tokentype.types.braceL:
-      return this.parseObj(false, refShorthandDefaultPos);
+      return this.parseObj(false, refDestructuringErrors);
 
     case _tokentype.types._function:
       node = this.startNode();
@@ -2259,7 +2278,7 @@ pp.parseParenAndDistinguishExpression = function (canBeArrow) {
         innerStartLoc = this.startLoc;
     var exprList = [],
         first = true;
-    var refShorthandDefaultPos = { start: 0 },
+    var refDestructuringErrors = { shorthandAssign: 0, trailingComma: 0 },
         spreadStart = undefined,
         innerParenStart = undefined;
     while (this.type !== _tokentype.types.parenR) {
@@ -2272,7 +2291,7 @@ pp.parseParenAndDistinguishExpression = function (canBeArrow) {
         if (this.type === _tokentype.types.parenL && !innerParenStart) {
           innerParenStart = this.start;
         }
-        exprList.push(this.parseMaybeAssign(false, refShorthandDefaultPos, this.parseParenItem));
+        exprList.push(this.parseMaybeAssign(false, refDestructuringErrors, this.parseParenItem));
       }
     }
     var innerEndPos = this.start,
@@ -2280,13 +2299,14 @@ pp.parseParenAndDistinguishExpression = function (canBeArrow) {
     this.expect(_tokentype.types.parenR);
 
     if (canBeArrow && !this.canInsertSemicolon() && this.eat(_tokentype.types.arrow)) {
+      this.checkPatternErrors(refDestructuringErrors, true);
       if (innerParenStart) this.unexpected(innerParenStart);
       return this.parseParenArrowList(startPos, startLoc, exprList);
     }
 
     if (!exprList.length) this.unexpected(this.lastTokStart);
     if (spreadStart) this.unexpected(spreadStart);
-    if (refShorthandDefaultPos.start) this.unexpected(refShorthandDefaultPos.start);
+    this.checkExpressionErrors(refDestructuringErrors, true);
 
     if (exprList.length > 1) {
       val = this.startNodeAt(innerStartPos, innerStartLoc);
@@ -2316,9 +2336,11 @@ pp.parseParenArrowList = function (startPos, startLoc, exprList) {
   return this.parseArrowExpression(this.startNodeAt(startPos, startLoc), exprList);
 };
 
-// New's precedence is slightly tricky. It must allow its argument
-// to be a `[]` or dot subscript expression, but not a call — at
-// least, not without wrapping it in parentheses. Thus, it uses the
+// New's precedence is slightly tricky. It must allow its argument to
+// be a `[]` or dot subscript expression, but not a call — at least,
+// not without wrapping it in parentheses. Thus, it uses the noCalls
+// argument to parseSubscripts to prevent it from consuming the
+// argument list.
 
 var empty = [];
 
@@ -2370,7 +2392,7 @@ pp.parseTemplate = function () {
 
 // Parse an object literal or binding pattern.
 
-pp.parseObj = function (isPattern, refShorthandDefaultPos) {
+pp.parseObj = function (isPattern, refDestructuringErrors) {
   var node = this.startNode(),
       first = true,
       propHash = {};
@@ -2389,23 +2411,23 @@ pp.parseObj = function (isPattern, refShorthandDefaultPos) {
     if (this.options.ecmaVersion >= 6) {
       prop.method = false;
       prop.shorthand = false;
-      if (isPattern || refShorthandDefaultPos) {
+      if (isPattern || refDestructuringErrors) {
         startPos = this.start;
         startLoc = this.startLoc;
       }
       if (!isPattern) isGenerator = this.eat(_tokentype.types.star);
     }
     this.parsePropertyName(prop);
-    this.parsePropertyValue(prop, isPattern, isGenerator, startPos, startLoc, refShorthandDefaultPos);
+    this.parsePropertyValue(prop, isPattern, isGenerator, startPos, startLoc, refDestructuringErrors);
     this.checkPropClash(prop, propHash);
     node.properties.push(this.finishNode(prop, "Property"));
   }
   return this.finishNode(node, isPattern ? "ObjectPattern" : "ObjectExpression");
 };
 
-pp.parsePropertyValue = function (prop, isPattern, isGenerator, startPos, startLoc, refShorthandDefaultPos) {
+pp.parsePropertyValue = function (prop, isPattern, isGenerator, startPos, startLoc, refDestructuringErrors) {
   if (this.eat(_tokentype.types.colon)) {
-    prop.value = isPattern ? this.parseMaybeDefault(this.start, this.startLoc) : this.parseMaybeAssign(false, refShorthandDefaultPos);
+    prop.value = isPattern ? this.parseMaybeDefault(this.start, this.startLoc) : this.parseMaybeAssign(false, refDestructuringErrors);
     prop.kind = "init";
   } else if (this.options.ecmaVersion >= 6 && this.type === _tokentype.types.parenL) {
     if (isPattern) this.unexpected();
@@ -2422,13 +2444,14 @@ pp.parsePropertyValue = function (prop, isPattern, isGenerator, startPos, startL
       var start = prop.value.start;
       if (prop.kind === "get") this.raise(start, "getter should have no params");else this.raise(start, "setter should have exactly one param");
     }
+    if (prop.kind === "set" && prop.value.params[0].type === "RestElement") this.raise(prop.value.params[0].start, "Setter cannot use rest params");
   } else if (this.options.ecmaVersion >= 6 && !prop.computed && prop.key.type === "Identifier") {
     prop.kind = "init";
     if (isPattern) {
       if (this.keywords.test(prop.key.name) || (this.strict ? this.reservedWordsStrictBind : this.reservedWords).test(prop.key.name)) this.raise(prop.key.start, "Binding " + prop.key.name);
       prop.value = this.parseMaybeDefault(startPos, startLoc, prop.key);
-    } else if (this.type === _tokentype.types.eq && refShorthandDefaultPos) {
-      if (!refShorthandDefaultPos.start) refShorthandDefaultPos.start = this.start;
+    } else if (this.type === _tokentype.types.eq && refDestructuringErrors) {
+      if (!refDestructuringErrors.shorthandAssign) refDestructuringErrors.shorthandAssign = this.start;
       prop.value = this.parseMaybeDefault(startPos, startLoc, prop.key);
     } else {
       prop.value = prop.key;
@@ -2532,17 +2555,20 @@ pp.checkParams = function (node) {
 // nothing in between them to be parsed as `null` (which is needed
 // for array literals).
 
-pp.parseExprList = function (close, allowTrailingComma, allowEmpty, refShorthandDefaultPos) {
+pp.parseExprList = function (close, allowTrailingComma, allowEmpty, refDestructuringErrors) {
   var elts = [],
       first = true;
   while (!this.eat(close)) {
     if (!first) {
       this.expect(_tokentype.types.comma);
+      if (this.type === close && refDestructuringErrors && !refDestructuringErrors.trailingComma) {
+        refDestructuringErrors.trailingComma = this.lastTokStart;
+      }
       if (allowTrailingComma && this.afterTrailingComma(close)) break;
     } else first = false;
 
     var elt = undefined;
-    if (allowEmpty && this.type === _tokentype.types.comma) elt = null;else if (this.type === _tokentype.types.ellipsis) elt = this.parseSpread(refShorthandDefaultPos);else elt = this.parseMaybeAssign(false, refShorthandDefaultPos);
+    if (allowEmpty && this.type === _tokentype.types.comma) elt = null;else if (this.type === _tokentype.types.ellipsis) elt = this.parseSpread(refDestructuringErrors);else elt = this.parseMaybeAssign(false, refDestructuringErrors);
     elts.push(elt);
   }
   return elts;
@@ -2646,7 +2672,7 @@ exports.keywords = keywords;
 // whitespace, identifier, and identifier-start categories. These
 // are only applied when a character is found to actually have a
 // code point above 128.
-// Generated by `tools/generate-identifier-regex.js`.
+// Generated by `bin/generate-identifier-regex.js`.
 
 var nonASCIIidentifierStartChars = "ªµºÀ-ÖØ-öø-ˁˆ-ˑˠ-ˤˬˮͰ-ʹͶͷͺ-ͽͿΆΈ-ΊΌΎ-ΡΣ-ϵϷ-ҁҊ-ԯԱ-Ֆՙա-ևא-תװ-ײؠ-يٮٯٱ-ۓەۥۦۮۯۺ-ۼۿܐܒ-ܯݍ-ޥޱߊ-ߪߴߵߺࠀ-ࠕࠚࠤࠨࡀ-ࡘࢠ-ࢲऄ-हऽॐक़-ॡॱ-ঀঅ-ঌএঐও-নপ-রলশ-হঽৎড়ঢ়য়-ৡৰৱਅ-ਊਏਐਓ-ਨਪ-ਰਲਲ਼ਵਸ਼ਸਹਖ਼-ੜਫ਼ੲ-ੴઅ-ઍએ-ઑઓ-નપ-રલળવ-હઽૐૠૡଅ-ଌଏଐଓ-ନପ-ରଲଳଵ-ହଽଡ଼ଢ଼ୟ-ୡୱஃஅ-ஊஎ-ஐஒ-கஙசஜஞடணதந-பம-ஹௐఅ-ఌఎ-ఐఒ-నప-హఽౘౙౠౡಅ-ಌಎ-ಐಒ-ನಪ-ಳವ-ಹಽೞೠೡೱೲഅ-ഌഎ-ഐഒ-ഺഽൎൠൡൺ-ൿඅ-ඖක-නඳ-රලව-ෆก-ะาำเ-ๆກຂຄງຈຊຍດ-ທນ-ຟມ-ຣລວສຫອ-ະາຳຽເ-ໄໆໜ-ໟༀཀ-ཇཉ-ཬྈ-ྌက-ဪဿၐ-ၕၚ-ၝၡၥၦၮ-ၰၵ-ႁႎႠ-ჅჇჍა-ჺჼ-ቈቊ-ቍቐ-ቖቘቚ-ቝበ-ኈኊ-ኍነ-ኰኲ-ኵኸ-ኾዀዂ-ዅወ-ዖዘ-ጐጒ-ጕጘ-ፚᎀ-ᎏᎠ-Ᏼᐁ-ᙬᙯ-ᙿᚁ-ᚚᚠ-ᛪᛮ-ᛸᜀ-ᜌᜎ-ᜑᜠ-ᜱᝀ-ᝑᝠ-ᝬᝮ-ᝰក-ឳៗៜᠠ-ᡷᢀ-ᢨᢪᢰ-ᣵᤀ-ᤞᥐ-ᥭᥰ-ᥴᦀ-ᦫᧁ-ᧇᨀ-ᨖᨠ-ᩔᪧᬅ-ᬳᭅ-ᭋᮃ-ᮠᮮᮯᮺ-ᯥᰀ-ᰣᱍ-ᱏᱚ-ᱽᳩ-ᳬᳮ-ᳱᳵᳶᴀ-ᶿḀ-ἕἘ-Ἕἠ-ὅὈ-Ὅὐ-ὗὙὛὝὟ-ώᾀ-ᾴᾶ-ᾼιῂ-ῄῆ-ῌῐ-ΐῖ-Ίῠ-Ῥῲ-ῴῶ-ῼⁱⁿₐ-ₜℂℇℊ-ℓℕ℘-ℝℤΩℨK-ℹℼ-ℿⅅ-ⅉⅎⅠ-ↈⰀ-Ⱞⰰ-ⱞⱠ-ⳤⳫ-ⳮⳲⳳⴀ-ⴥⴧⴭⴰ-ⵧⵯⶀ-ⶖⶠ-ⶦⶨ-ⶮⶰ-ⶶⶸ-ⶾⷀ-ⷆⷈ-ⷎⷐ-ⷖⷘ-ⷞ々-〇〡-〩〱-〵〸-〼ぁ-ゖ゛-ゟァ-ヺー-ヿㄅ-ㄭㄱ-ㆎㆠ-ㆺㇰ-ㇿ㐀-䶵一-鿌ꀀ-ꒌꓐ-ꓽꔀ-ꘌꘐ-ꘟꘪꘫꙀ-ꙮꙿ-ꚝꚠ-ꛯꜗ-ꜟꜢ-ꞈꞋ-ꞎꞐ-ꞭꞰꞱꟷ-ꠁꠃ-ꠅꠇ-ꠊꠌ-ꠢꡀ-ꡳꢂ-ꢳꣲ-ꣷꣻꤊ-ꤥꤰ-ꥆꥠ-ꥼꦄ-ꦲꧏꧠ-ꧤꧦ-ꧯꧺ-ꧾꨀ-ꨨꩀ-ꩂꩄ-ꩋꩠ-ꩶꩺꩾ-ꪯꪱꪵꪶꪹ-ꪽꫀꫂꫛ-ꫝꫠ-ꫪꫲ-ꫴꬁ-ꬆꬉ-ꬎꬑ-ꬖꬠ-ꬦꬨ-ꬮꬰ-ꭚꭜ-ꭟꭤꭥꯀ-ꯢ가-힣ힰ-ퟆퟋ-ퟻ豈-舘並-龎ﬀ-ﬆﬓ-ﬗיִײַ-ﬨשׁ-זּטּ-לּמּנּסּףּפּצּ-ﮱﯓ-ﴽﵐ-ﶏﶒ-ﷇﷰ-ﷻﹰ-ﹴﹶ-ﻼＡ-Ｚａ-ｚｦ-ﾾￂ-ￇￊ-ￏￒ-ￗￚ-ￜ";
 var nonASCIIidentifierChars = "‌‍·̀-ͯ·҃-֑҇-ׇֽֿׁׂׅׄؐ-ًؚ-٩ٰۖ-ۜ۟-۪ۤۧۨ-ۭ۰-۹ܑܰ-݊ަ-ް߀-߉߫-߳ࠖ-࠙ࠛ-ࠣࠥ-ࠧࠩ-࡙࠭-࡛ࣤ-ःऺ-़ा-ॏ॑-ॗॢॣ०-९ঁ-ঃ়া-ৄেৈো-্ৗৢৣ০-৯ਁ-ਃ਼ਾ-ੂੇੈੋ-੍ੑ੦-ੱੵઁ-ઃ઼ા-ૅે-ૉો-્ૢૣ૦-૯ଁ-ଃ଼ା-ୄେୈୋ-୍ୖୗୢୣ୦-୯ஂா-ூெ-ைொ-்ௗ௦-௯ఀ-ఃా-ౄె-ైొ-్ౕౖౢౣ౦-౯ಁ-ಃ಼ಾ-ೄೆ-ೈೊ-್ೕೖೢೣ೦-೯ഁ-ഃാ-ൄെ-ൈൊ-്ൗൢൣ൦-൯ංඃ්ා-ුූෘ-ෟ෦-෯ෲෳัิ-ฺ็-๎๐-๙ັິ-ູົຼ່-ໍ໐-໙༘༙༠-༩༹༵༷༾༿ཱ-྄྆྇ྍ-ྗྙ-ྼ࿆ါ-ှ၀-၉ၖ-ၙၞ-ၠၢ-ၤၧ-ၭၱ-ၴႂ-ႍႏ-ႝ፝-፟፩-፱ᜒ-᜔ᜲ-᜴ᝒᝓᝲᝳ឴-៓៝០-៩᠋-᠍᠐-᠙ᢩᤠ-ᤫᤰ-᤻᥆-᥏ᦰ-ᧀᧈᧉ᧐-᧚ᨗ-ᨛᩕ-ᩞ᩠-᩿᩼-᪉᪐-᪙᪰-᪽ᬀ-ᬄ᬴-᭄᭐-᭙᭫-᭳ᮀ-ᮂᮡ-ᮭ᮰-᮹᯦-᯳ᰤ-᰷᱀-᱉᱐-᱙᳐-᳔᳒-᳨᳭ᳲ-᳴᳸᳹᷀-᷵᷼-᷿‿⁀⁔⃐-⃥⃜⃡-⃰⳯-⵿⳱ⷠ-〪ⷿ-゙゚〯꘠-꘩꙯ꙴ-꙽ꚟ꛰꛱ꠂ꠆ꠋꠣ-ꠧꢀꢁꢴ-꣄꣐-꣙꣠-꣱꤀-꤉ꤦ-꤭ꥇ-꥓ꦀ-ꦃ꦳-꧀꧐-꧙ꧥ꧰-꧹ꨩ-ꨶꩃꩌꩍ꩐-꩙ꩻ-ꩽꪰꪲ-ꪴꪷꪸꪾ꪿꫁ꫫ-ꫯꫵ꫶ꯣ-ꯪ꯬꯭꯰-꯹ﬞ︀-️︠-︭︳︴﹍-﹏０-９＿";
@@ -2712,11 +2738,11 @@ function isIdentifierChar(code, astral) {
 // Git repositories for Acorn are available at
 //
 //     http://marijnhaverbeke.nl/git/acorn
-//     https://github.com/marijnh/acorn.git
+//     https://github.com/ternjs/acorn.git
 //
 // Please use the [github bug tracker][ghbt] to report issues.
 //
-// [ghbt]: https://github.com/marijnh/acorn/issues
+// [ghbt]: https://github.com/ternjs/acorn/issues
 //
 // This file defines the main parser interface. The library also comes
 // with a [error-tolerant parser][dammit] and an
@@ -2785,7 +2811,7 @@ var _whitespace = _dereq_("./whitespace");
 exports.isNewLine = _whitespace.isNewLine;
 exports.lineBreak = _whitespace.lineBreak;
 exports.lineBreakG = _whitespace.lineBreakG;
-var version = "2.5.2";
+var version = "2.7.0";
 
 exports.version = version;
 // The main exported interface (under `self.acorn` when in the
@@ -2926,7 +2952,6 @@ pp.toAssignable = function (node, isBinding) {
       case "Identifier":
       case "ObjectPattern":
       case "ArrayPattern":
-      case "AssignmentPattern":
         break;
 
       case "ObjectExpression":
@@ -2947,9 +2972,14 @@ pp.toAssignable = function (node, isBinding) {
         if (node.operator === "=") {
           node.type = "AssignmentPattern";
           delete node.operator;
+          // falls through to AssignmentPattern
         } else {
-          this.raise(node.left.end, "Only '=' operator can be used for specifying default value.");
-        }
+            this.raise(node.left.end, "Only '=' operator can be used for specifying default value.");
+            break;
+          }
+
+      case "AssignmentPattern":
+        if (node.right.type === "YieldExpression") this.raise(node.right.start, "Yield expression cannot be a default value");
         break;
 
       case "ParenthesizedExpression":
@@ -2993,10 +3023,10 @@ pp.toAssignableList = function (exprList, isBinding) {
 
 // Parses spread element.
 
-pp.parseSpread = function (refShorthandDefaultPos) {
+pp.parseSpread = function (refDestructuringErrors) {
   var node = this.startNode();
   this.next();
-  node.argument = this.parseMaybeAssign(refShorthandDefaultPos);
+  node.argument = this.parseMaybeAssign(refDestructuringErrors);
   return this.finishNode(node, "SpreadElement");
 };
 
@@ -3274,7 +3304,7 @@ function getOptions(opts) {
   var options = {};
   for (var opt in defaultOptions) {
     options[opt] = opts && _util.has(opts, opt) ? opts[opt] : defaultOptions[opt];
-  }if (options.allowReserved == null) options.allowReserved = options.ecmaVersion >= 5;
+  }if (options.allowReserved == null) options.allowReserved = options.ecmaVersion < 5;
 
   if (_util.isArray(options.onToken)) {
     (function () {
@@ -3393,6 +3423,18 @@ pp.unexpected = function (pos) {
   this.raise(pos != null ? pos : this.start, "Unexpected token");
 };
 
+pp.checkPatternErrors = function (refDestructuringErrors, andThrow) {
+  var pos = refDestructuringErrors && refDestructuringErrors.trailingComma;
+  if (!andThrow) return !!pos;
+  if (pos) this.raise(pos, "Trailing comma is not permitted in destructuring patterns");
+};
+
+pp.checkExpressionErrors = function (refDestructuringErrors, andThrow) {
+  var pos = refDestructuringErrors && refDestructuringErrors.shorthandAssign;
+  if (!andThrow) return !!pos;
+  if (pos) this.raise(pos, "Shorthand property assignments are valid only in destructuring patterns");
+};
+
 },{"./state":10,"./tokentype":14,"./whitespace":16}],10:[function(_dereq_,module,exports){
 "use strict";
 
@@ -3420,10 +3462,10 @@ var Parser = (function () {
   function Parser(options, input, startPos) {
     _classCallCheck(this, Parser);
 
-    this.options = _options.getOptions(options);
-    this.sourceFile = this.options.sourceFile;
-    this.keywords = keywordRegexp(_identifier.keywords[this.options.ecmaVersion >= 6 ? 6 : 5]);
-    var reserved = this.options.allowReserved ? "" : _identifier.reservedWords[this.options.ecmaVersion] + (options.sourceType == "module" ? " await" : "");
+    this.options = options = _options.getOptions(options);
+    this.sourceFile = options.sourceFile;
+    this.keywords = keywordRegexp(_identifier.keywords[options.ecmaVersion >= 6 ? 6 : 5]);
+    var reserved = options.allowReserved ? "" : _identifier.reservedWords[options.ecmaVersion] + (options.sourceType == "module" ? " await" : "");
     this.reservedWords = keywordRegexp(reserved);
     var reservedStrict = (reserved ? reserved + " " : "") + _identifier.reservedWords.strict;
     this.reservedWordsStrict = keywordRegexp(reservedStrict);
@@ -3436,7 +3478,7 @@ var Parser = (function () {
     this.containsEsc = false;
 
     // Load plugins
-    this.loadPlugins(this.options.plugins);
+    this.loadPlugins(options.plugins);
 
     // Set up token state
 
@@ -3472,7 +3514,7 @@ var Parser = (function () {
     this.exprAllowed = true;
 
     // Figure out if it's a module code.
-    this.strict = this.inModule = this.options.sourceType === "module";
+    this.strict = this.inModule = options.sourceType === "module";
 
     // Used to signify the start of a potential arrow function
     this.potentialArrowAt = -1;
@@ -3483,7 +3525,7 @@ var Parser = (function () {
     this.labels = [];
 
     // If enabled, skip leading hashbang line.
-    if (this.pos === 0 && this.options.allowHashBang && this.input.slice(0, 2) === '#!') this.skipLineComment(2);
+    if (this.pos === 0 && options.allowHashBang && this.input.slice(0, 2) === '#!') this.skipLineComment(2);
   }
 
   // DEPRECATED Kept for backwards compatibility until 3.0 in case a plugin uses them
@@ -3690,14 +3732,15 @@ pp.parseForStatement = function (node) {
     if ((this.type === _tokentype.types._in || this.options.ecmaVersion >= 6 && this.isContextual("of")) && _init.declarations.length === 1 && !(varKind !== _tokentype.types._var && _init.declarations[0].init)) return this.parseForIn(node, _init);
     return this.parseFor(node, _init);
   }
-  var refShorthandDefaultPos = { start: 0 };
-  var init = this.parseExpression(true, refShorthandDefaultPos);
+  var refDestructuringErrors = { shorthandAssign: 0, trailingComma: 0 };
+  var init = this.parseExpression(true, refDestructuringErrors);
   if (this.type === _tokentype.types._in || this.options.ecmaVersion >= 6 && this.isContextual("of")) {
+    this.checkPatternErrors(refDestructuringErrors, true);
     this.toAssignable(init);
     this.checkLVal(init);
     return this.parseForIn(node, init);
-  } else if (refShorthandDefaultPos.start) {
-    this.unexpected(refShorthandDefaultPos.start);
+  } else {
+    this.checkExpressionErrors(refDestructuringErrors, true);
   }
   return this.parseFor(node, init);
 };
@@ -3996,6 +4039,7 @@ pp.parseClass = function (node, isStatement) {
         var start = method.value.start;
         if (method.kind === "get") this.raise(start, "getter should have no params");else this.raise(start, "setter should have exactly one param");
       }
+      if (method.kind === "set" && method.value.params[0].type === "RestElement") this.raise(method.value.params[0].start, "Setter cannot use rest params");
     }
   }
   node.body = this.finishNode(classBody, "ClassBody");
@@ -4139,7 +4183,13 @@ pp.parseImportSpecifiers = function () {
 
     var node = this.startNode();
     node.imported = this.parseIdent(true);
-    node.local = this.eatContextual("as") ? this.parseIdent() : node.imported;
+    if (this.eatContextual("as")) {
+      node.local = this.parseIdent();
+    } else {
+      node.local = node.imported;
+      if (this.isKeyword(node.local.name)) this.unexpected(node.local.start);
+      if (this.reservedWordsStrict.test(node.local.name)) this.raise(node.local.start, "The keyword '" + node.local.name + "' is reserved");
+    }
     this.checkLVal(node.local, true);
     nodes.push(this.finishNode(node, "ImportSpecifier"));
   }
@@ -4710,8 +4760,8 @@ pp.readRegexp = function () {
   var mods = this.readWord1();
   var tmp = content;
   if (mods) {
-    var validFlags = /^[gmsiy]*$/;
-    if (this.options.ecmaVersion >= 6) validFlags = /^[gmsiyu]*$/;
+    var validFlags = /^[gim]*$/;
+    if (this.options.ecmaVersion >= 6) validFlags = /^[gimuy]*$/;
     if (!validFlags.test(mods)) this.raise(start, "Invalid regular expression flag");
     if (mods.indexOf('u') >= 0 && !regexpUnicodeSupport) {
       // Replace each astral symbol and every Unicode escape sequence that
@@ -4939,7 +4989,7 @@ pp.readEscapedChar = function (inTemplate) {
           octalStr = octalStr.slice(0, -1);
           octal = parseInt(octalStr, 8);
         }
-        if (octal > 0 && (this.strict || inTemplate)) {
+        if (octalStr !== "0" && (this.strict || inTemplate)) {
           this.raise(this.pos - 2, "Octal literal in strict mode");
         }
         this.pos += octalStr.length - 1;
@@ -5549,7 +5599,7 @@ defineProperties.supportsDescriptors = !!supportsDescriptors;
 
 module.exports = defineProperties;
 
-},{"foreach":34,"object-keys":45}],20:[function(_dereq_,module,exports){
+},{"foreach":34,"object-keys":43}],20:[function(_dereq_,module,exports){
 var eaw = {};
 
 if ('undefined' == typeof module) {
@@ -5925,7 +5975,7 @@ function isEmpowered (assertObjectOrFunction) {
 empower.defaultOptions = defaultOptions;
 module.exports = empower;
 
-},{"./lib/capturable":22,"./lib/decorator":24,"./lib/default-options":25,"define-properties":19,"object-create":42,"xtend/mutable":65}],22:[function(_dereq_,module,exports){
+},{"./lib/capturable":22,"./lib/decorator":24,"./lib/default-options":25,"define-properties":19,"object-create":41,"xtend/mutable":63}],22:[function(_dereq_,module,exports){
 'use strict';
 
 module.exports = function capturable () {
@@ -6154,7 +6204,7 @@ function methodCall (matcher) {
 
 module.exports = Decorator;
 
-},{"./decorate":23,"array-filter":10,"array-foreach":11,"array-map":12,"escallmatch":26,"xtend/mutable":65}],25:[function(_dereq_,module,exports){
+},{"./decorate":23,"array-filter":10,"array-foreach":11,"array-map":12,"escallmatch":26,"xtend/mutable":63}],25:[function(_dereq_,module,exports){
 'use strict';
 
 module.exports = function defaultOptions () {
@@ -7520,6 +7570,7 @@ module.exports = createMatcher;
         }
 
         if (quote !== '') {
+            index = start;
             throwUnexpectedToken();
         }
 
@@ -9112,7 +9163,7 @@ module.exports = createMatcher;
 
                 return node.finishProperty(
                     'init', key, false,
-                    new WrappingNode(keyToken).finishAssignmentPattern(key, init), false, false);
+                    new WrappingNode(keyToken).finishAssignmentPattern(key, init), false, true);
             } else if (!match(':')) {
                 params.push(keyToken);
                 return node.finishProperty('init', key, false, key, false, true);
@@ -9647,6 +9698,9 @@ module.exports = createMatcher;
             if (!strict && state.allowYield && matchKeyword('yield')) {
                 return parseNonComputedProperty();
             }
+            if (!strict && matchKeyword('let')) {
+                return node.finishIdentifier(lex().value);
+            }
             isAssignmentTarget = isBindingElement = false;
             if (matchKeyword('function')) {
                 return parseFunctionExpression();
@@ -9657,9 +9711,6 @@ module.exports = createMatcher;
             }
             if (matchKeyword('class')) {
                 return parseClassExpression();
-            }
-            if (!strict && matchKeyword('let')) {
-                return node.finishIdentifier(lex().value);
             }
             throwUnexpectedToken(lex());
         } else if (type === Token.BooleanLiteral) {
@@ -10238,6 +10289,7 @@ module.exports = createMatcher;
 
         argument = null;
         expr = new Node();
+        delegate = false;
 
         expectKeyword('yield');
 
@@ -10443,15 +10495,15 @@ module.exports = createMatcher;
     }
 
     function parseVariableDeclarationList(options) {
-        var list = [];
+        var opt, list;
 
-        do {
-            list.push(parseVariableDeclaration({ inFor: options.inFor }));
-            if (!match(',')) {
-                break;
-            }
+        opt = { inFor: options.inFor };
+        list = [parseVariableDeclaration(opt)];
+
+        while (match(',')) {
             lex();
-        } while (startIndex < length);
+            list.push(parseVariableDeclaration(opt));
+        }
 
         return list;
     }
@@ -10494,15 +10546,12 @@ module.exports = createMatcher;
     }
 
     function parseBindingList(kind, options) {
-        var list = [];
+        var list = [parseLexicalBinding(kind, options)];
 
-        do {
-            list.push(parseLexicalBinding(kind, options));
-            if (!match(',')) {
-                break;
-            }
+        while (match(',')) {
             lex();
-        } while (startIndex < length);
+            list.push(parseLexicalBinding(kind, options));
+        }
 
         return list;
     }
@@ -11206,7 +11255,7 @@ module.exports = createMatcher;
 
     function parseFunctionSourceElements() {
         var statement, body = [], token, directive, firstRestricted,
-            oldLabelSet, oldInIteration, oldInSwitch, oldInFunctionBody, oldParenthesisCount,
+            oldLabelSet, oldInIteration, oldInSwitch, oldInFunctionBody,
             node = new Node();
 
         expect('{');
@@ -11240,13 +11289,11 @@ module.exports = createMatcher;
         oldInIteration = state.inIteration;
         oldInSwitch = state.inSwitch;
         oldInFunctionBody = state.inFunctionBody;
-        oldParenthesisCount = state.parenthesizedCount;
 
         state.labelSet = {};
         state.inIteration = false;
         state.inSwitch = false;
         state.inFunctionBody = true;
-        state.parenthesizedCount = 0;
 
         while (startIndex < length) {
             if (match('}')) {
@@ -11261,7 +11308,6 @@ module.exports = createMatcher;
         state.inIteration = oldInIteration;
         state.inSwitch = oldInSwitch;
         state.inFunctionBody = oldInFunctionBody;
-        state.parenthesizedCount = oldParenthesisCount;
 
         return node.finishBlockStatement(body);
     }
@@ -12095,7 +12141,7 @@ module.exports = createMatcher;
     }
 
     // Sync with *.json manifests.
-    exports.version = '2.7.0';
+    exports.version = '2.7.2';
 
     exports.tokenize = tokenize;
 
@@ -12147,6 +12193,7 @@ function createCloneFunction (options) {
 
 var espurify = createCloneFunction();
 espurify.customize = createCloneFunction;
+espurify.cloneWithWhitelist = cloneWithWhitelist;
 module.exports = espurify;
 
 },{"./lib/clone-ast":30,"./lib/create-whitelist":31}],29:[function(_dereq_,module,exports){
@@ -12222,8 +12269,20 @@ module.exports = {
 'use strict';
 
 var isArray = _dereq_('isarray');
+var objectKeys = _dereq_('object-keys');
+var indexOf = _dereq_('indexof');
+var reduce = _dereq_('array-reduce');
 
-module.exports = function cloneWithWhitelist (whitelist) {
+module.exports = function cloneWithWhitelist (astWhiteList) {
+    var whitelist = reduce(objectKeys(astWhiteList), function (props, key) {
+        var currentProps = astWhiteList[key];
+        var prepend = [];
+        if (indexOf(currentProps, 'type') === -1) {
+            prepend.push('type');
+        }
+        props[key] = prepend.concat(currentProps);
+        return props;
+    }, {});
 
     function cloneRoot (ast) {
         return cloneContainer({}, ast);
@@ -12284,7 +12343,7 @@ module.exports = function cloneWithWhitelist (whitelist) {
     return cloneRoot;
 };
 
-},{"isarray":40}],31:[function(_dereq_,module,exports){
+},{"array-reduce":14,"indexof":39,"isarray":40,"object-keys":43}],31:[function(_dereq_,module,exports){
 'use strict';
 
 var defaultProps = _dereq_('./ast-properties');
@@ -12303,7 +12362,7 @@ module.exports = function createWhitelist (options) {
     return result;
 };
 
-},{"./ast-properties":29,"object-keys":45,"xtend":64}],32:[function(_dereq_,module,exports){
+},{"./ast-properties":29,"object-keys":43,"xtend":62}],32:[function(_dereq_,module,exports){
 /*
   Copyright (C) 2012-2013 Yusuke Suzuki <utatane.tea@gmail.com>
   Copyright (C) 2012 Ariya Hidayat <ariya.hidayat@gmail.com>
@@ -13159,6 +13218,7 @@ module.exports={
   "_from": "estraverse@>=4.0.0 <5.0.0",
   "_id": "estraverse@4.1.1",
   "_inCache": true,
+  "_installable": true,
   "_location": "/estraverse",
   "_nodeVersion": "4.1.1",
   "_npmUser": {
@@ -13212,7 +13272,6 @@ module.exports={
   },
   "gitHead": "bbcccbfe98296585e4311c8755e1d00dcd581e3c",
   "homepage": "https://github.com/estools/estraverse",
-  "installable": true,
   "license": "BSD-2-Clause",
   "main": "estraverse.js",
   "maintainers": [
@@ -13231,6 +13290,7 @@ module.exports={
   ],
   "name": "estraverse",
   "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/estools/estraverse.git"
@@ -15521,19 +15581,13 @@ module.exports = function(arr, obj){
   return -1;
 };
 },{}],40:[function(_dereq_,module,exports){
+var toString = {}.toString;
+
 module.exports = Array.isArray || function (arr) {
-  return Object.prototype.toString.call(arr) == '[object Array]';
+  return toString.call(arr) == '[object Array]';
 };
 
 },{}],41:[function(_dereq_,module,exports){
-var objectCreate = Object.create;
-
-
-module.exports = function create(prototype, properties) {
-  return objectCreate.call(Object, prototype, properties);
-};
-
-},{}],42:[function(_dereq_,module,exports){
 /* jshint proto: true, scripturl: true */
 
 var objectCreate = Object.create;
@@ -15620,20 +15674,7 @@ if (!objectCreate) {
   module.exports = _dereq_('./index');
 }
 
-},{"./index":41,"object-define-property":44}],43:[function(_dereq_,module,exports){
-var defProp = Object.defineProperty, defProps = Object.defineProperties;
-
-
-module.exports = {
-  defineProperty: function defineProperty(object, property, descriptor) {
-    defProp.call(Object, object, property, descriptor);
-  },
-  defineProperties: function defineProperties(object, properties) {
-    defProps.call(Object, object, properties);
-  }
-};
-
-},{}],44:[function(_dereq_,module,exports){
+},{"./index":41,"object-define-property":42}],42:[function(_dereq_,module,exports){
 /* jshint proto:true */
 // ES5 15.2.3.6
 // http://es5.github.com/#x15.2.3.6
@@ -15776,7 +15817,7 @@ if (!defProp || definePropertyFallback) {
   module.exports = _dereq_('./index');
 }
 
-},{"./index":43,"function-bind":35,"has":38}],45:[function(_dereq_,module,exports){
+},{"./index":42,"function-bind":35,"has":38}],43:[function(_dereq_,module,exports){
 'use strict';
 
 // modified from https://github.com/es-shims/es5-shim
@@ -15906,7 +15947,7 @@ keysShim.shim = function shimObjectKeys() {
 
 module.exports = keysShim;
 
-},{"./isArguments":46}],46:[function(_dereq_,module,exports){
+},{"./isArguments":44}],44:[function(_dereq_,module,exports){
 'use strict';
 
 var toStr = Object.prototype.toString;
@@ -15925,7 +15966,7 @@ module.exports = function isArguments(value) {
 	return isArgs;
 };
 
-},{}],47:[function(_dereq_,module,exports){
+},{}],45:[function(_dereq_,module,exports){
 /**
  * power-assert-formatter.js - Power Assert output formatter
  *
@@ -15939,7 +15980,7 @@ module.exports = function isArguments(value) {
 
 module.exports = _dereq_('./lib/create');
 
-},{"./lib/create":52}],48:[function(_dereq_,module,exports){
+},{"./lib/create":50}],46:[function(_dereq_,module,exports){
 'use strict';
 
 function AssertionRenderer (config) {
@@ -15958,7 +15999,7 @@ AssertionRenderer.prototype.init = function (traversal) {
 
 module.exports = AssertionRenderer;
 
-},{}],49:[function(_dereq_,module,exports){
+},{}],47:[function(_dereq_,module,exports){
 'use strict';
 
 var typeName = _dereq_('type-name');
@@ -16046,7 +16087,7 @@ function isStringDiffTarget(pair) {
 
 module.exports = BinaryExpressionRenderer;
 
-},{"array-foreach":11,"estraverse":32,"object-keys":45,"type-name":63}],50:[function(_dereq_,module,exports){
+},{"array-foreach":11,"estraverse":32,"object-keys":43,"type-name":61}],48:[function(_dereq_,module,exports){
 'use strict';
 
 var forEach = _dereq_('array-foreach');
@@ -16150,7 +16191,7 @@ function rightToLeft (a, b) {
 
 module.exports = DiagramRenderer;
 
-},{"array-foreach":11}],51:[function(_dereq_,module,exports){
+},{"array-foreach":11}],49:[function(_dereq_,module,exports){
 'use strict';
 
 function FileRenderer (config) {
@@ -16173,7 +16214,7 @@ FileRenderer.prototype.init = function (traversal) {
 
 module.exports = FileRenderer;
 
-},{}],52:[function(_dereq_,module,exports){
+},{}],50:[function(_dereq_,module,exports){
 'use strict';
 
 var stringifier = _dereq_('stringifier');
@@ -16266,9 +16307,10 @@ create.defaultOptions = defaultOptions;
 create.stringWidth = stringWidth;
 module.exports = create;
 
-},{"./built-in/assertion":48,"./built-in/binary-expression":49,"./built-in/diagram":50,"./built-in/file":51,"./default-options":53,"./string-width":56,"./string-writer":57,"./traverse":58,"./udiff":59,"array-map":12,"stringifier":60,"type-name":63,"xtend":64}],53:[function(_dereq_,module,exports){
+},{"./built-in/assertion":46,"./built-in/binary-expression":47,"./built-in/diagram":48,"./built-in/file":49,"./default-options":51,"./string-width":54,"./string-writer":55,"./traverse":56,"./udiff":57,"array-map":12,"stringifier":58,"type-name":61,"xtend":62}],51:[function(_dereq_,module,exports){
+'use strict';
+
 module.exports = function defaultOptions () {
-    'use strict';
     return {
         lineDiffThreshold: 5,
         maxDepth: 1,
@@ -16286,7 +16328,7 @@ module.exports = function defaultOptions () {
     };
 };
 
-},{}],54:[function(_dereq_,module,exports){
+},{}],52:[function(_dereq_,module,exports){
 'use strict';
 
 var syntax = _dereq_('estraverse').Syntax;
@@ -16339,7 +16381,7 @@ EsNode.prototype.location = function () {
 
 module.exports = EsNode;
 
-},{"./location":55,"estraverse":32}],55:[function(_dereq_,module,exports){
+},{"./location":53,"estraverse":32}],53:[function(_dereq_,module,exports){
 'use strict';
 
 var syntax = _dereq_('estraverse').Syntax;
@@ -16431,7 +16473,7 @@ function searchToken(tokens, fromLine, toLine, predicate) {
 
 module.exports = locationOf;
 
-},{"estraverse":32}],56:[function(_dereq_,module,exports){
+},{"estraverse":32}],54:[function(_dereq_,module,exports){
 'use strict';
 
 var eaw = _dereq_('eastasianwidth');
@@ -16463,7 +16505,7 @@ function stringWidth (config) {
 
 module.exports = stringWidth;
 
-},{"eastasianwidth":20}],57:[function(_dereq_,module,exports){
+},{"eastasianwidth":20}],55:[function(_dereq_,module,exports){
 'use strict';
 
 function spacerStr (len) {
@@ -16493,7 +16535,7 @@ StringWriter.prototype.flush = function () {
 
 module.exports = StringWriter;
 
-},{}],58:[function(_dereq_,module,exports){
+},{}],56:[function(_dereq_,module,exports){
 'use strict';
 
 var estraverse = _dereq_('estraverse');
@@ -16590,7 +16632,7 @@ function parse(source) {
 
 module.exports = ContextTraversal;
 
-},{"./esnode":54,"acorn":9,"acorn-es7-plugin":8,"array-foreach":11,"array-reduce":14,"estraverse":32,"events":2,"util":6}],59:[function(_dereq_,module,exports){
+},{"./esnode":52,"acorn":9,"acorn-es7-plugin":8,"array-foreach":11,"array-reduce":14,"estraverse":32,"events":2,"util":6}],57:[function(_dereq_,module,exports){
 'use strict';
 
 var DiffMatchPatch = _dereq_('googlediff');
@@ -16630,7 +16672,7 @@ function udiffChars (text1, text2) {
 
 module.exports = udiff;
 
-},{"googlediff":36}],60:[function(_dereq_,module,exports){
+},{"googlediff":36}],58:[function(_dereq_,module,exports){
 /**
  * stringifier
  * 
@@ -16739,7 +16781,7 @@ stringifier.defaultOptions = defaultOptions;
 stringifier.defaultHandlers = defaultHandlers;
 module.exports = stringifier;
 
-},{"./strategies":61,"traverse":62,"type-name":63,"xtend":64}],61:[function(_dereq_,module,exports){
+},{"./strategies":59,"traverse":60,"type-name":61,"xtend":62}],59:[function(_dereq_,module,exports){
 'use strict';
 
 var typeName = _dereq_('type-name');
@@ -17152,7 +17194,7 @@ module.exports = {
     }
 };
 
-},{"array-filter":10,"array-foreach":11,"array-reduce-right":13,"indexof":39,"type-name":63}],62:[function(_dereq_,module,exports){
+},{"array-filter":10,"array-foreach":11,"array-reduce-right":13,"indexof":39,"type-name":61}],60:[function(_dereq_,module,exports){
 var traverse = module.exports = function (obj) {
     return new Traverse(obj);
 };
@@ -17468,7 +17510,7 @@ var hasOwnProperty = Object.hasOwnProperty || function (obj, key) {
     return key in obj;
 };
 
-},{}],63:[function(_dereq_,module,exports){
+},{}],61:[function(_dereq_,module,exports){
 /**
  * type-name - Just a reasonable typeof
  * 
@@ -17508,7 +17550,7 @@ function typeName (val) {
 
 module.exports = typeName;
 
-},{}],64:[function(_dereq_,module,exports){
+},{}],62:[function(_dereq_,module,exports){
 module.exports = extend
 
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -17529,7 +17571,7 @@ function extend() {
     return target
 }
 
-},{}],65:[function(_dereq_,module,exports){
+},{}],63:[function(_dereq_,module,exports){
 module.exports = extend
 
 var hasOwnProperty = Object.prototype.hasOwnProperty;
