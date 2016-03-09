@@ -5,9 +5,9 @@
  * power-assert:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Takuto Wada <takuto.wada@gmail.com>
- *   contributors: azu, vvakame, yosuke-furukawa, teppeis, zoncoen, falsandtru, James Talmage
+ *   contributors: azu, vvakame, yosuke-furukawa, teppeis, zoncoen, falsandtru, James Talmage, Lesha Koss
  *   homepage: https://github.com/power-assert-js/power-assert
- *   version: 1.3.0
+ *   version: 1.3.1
  * 
  * acorn:
  *   license: MIT (http://opensource.org/licenses/MIT)
@@ -1669,7 +1669,7 @@ function customize (customOptions) {
 
 var defaultAssert = customize();
 define(defaultAssert, { '__esModule': true });
-defaultAssert["default"] = defaultAssert;
+defaultAssert['default'] = defaultAssert;
 module.exports = defaultAssert;
 
 },{"assert":1,"define-properties":19,"empower":21,"power-assert-formatter":45,"xtend":62}],8:[function(_dereq_,module,exports){
