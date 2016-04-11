@@ -139,6 +139,7 @@ FAQ
 - [Incomplete increment/decrement assertion messages?](https://github.com/power-assert-js/power-assert/issues/32)
 - [Cannot capture not invokable method error](https://github.com/power-assert-js/power-assert/issues/36)
 - What is the ['Critical dependencies' warning shown by webpack](https://github.com/power-assert-js/babel-plugin-espower/issues/14#issuecomment-197272436) and how to [suppress warnings](https://github.com/power-assert-js/babel-plugin-espower/issues/14#issuecomment-197909419)?
+- [Causes `TypeError: assert._capt is not a function`](https://github.com/power-assert-js/power-assert/issues/42)
 
 
 EXAMPLE
