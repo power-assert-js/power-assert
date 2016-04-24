@@ -54,7 +54,16 @@
     "babel": "^5.2.0",
     "babel-plugin-espower": "^1.1.0",
     "expect.js": "^0.3.1",
+    "karma": "^0.13.22",
+    "karma-chrome-launcher": "^0.2.3",
+    "karma-espower-preprocessor": "0.0.4",
+    "karma-expect": "^1.1.2",
+    "karma-firefox-launcher": "^0.1.7",
+    "karma-mocha": "^0.2.2",
+    "karma-phantomjs-launcher": "^1.0.0",
     "licensify": "^3.0.0",
+    "mocha": "^2.4.5",
+    "phantomjs-prebuilt": "^2.1.7",
     "qunit-tap": "^1.5.0",
     "qunitjs": "1.14.0"
   },
@@ -93,7 +102,8 @@
     "test-generated": "mocha --reporter dot ./espowered_tests/**/*_test.js",
     "test-browser": "mocha-phantomjs --reporter dot test/test-browser.html",
     "test-amd": "mocha-phantomjs --reporter dot test/test-amd.html",
-    "test-all": "npm run test-unit && npm run test-generated && npm run test-browser && npm run test-amd",
+    "test-karma": "karma start",
+    "test-all": "npm run test-unit && npm run test-generated && npm run test-browser && npm run test-amd && npm run test-karma",
     "test": "npm run setup && npm run test-all"
   }
 }
