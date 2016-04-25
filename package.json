@@ -56,7 +56,6 @@
     "expect.js": "^0.3.1",
     "karma": "^0.13.22",
     "karma-chrome-launcher": "^0.2.3",
-    "karma-espower-preprocessor": "0.0.4",
     "karma-expect": "^1.1.2",
     "karma-firefox-launcher": "^0.1.7",
     "karma-mocha": "^0.2.2",
@@ -100,10 +99,9 @@
     "setup": "npm run clean && npm run setup-dir && npm run setup-espower && npm run build",
     "test-unit": "mocha --reporter dot --require ./enable_power_assert.js ./test/**/*_test.js",
     "test-generated": "mocha --reporter dot ./espowered_tests/**/*_test.js",
-    "test-browser": "mocha-phantomjs --reporter dot test/test-browser.html",
+    "test-browser": "karma start",
     "test-amd": "mocha-phantomjs --reporter dot test/test-amd.html",
-    "test-karma": "karma start",
-    "test-all": "npm run test-unit && npm run test-generated && npm run test-browser && npm run test-amd && npm run test-karma",
+    "test-all": "npm run test-unit && npm run test-generated && npm run test-browser && npm run test-amd",
     "test": "npm run setup && npm run test-all"
   }
 }
