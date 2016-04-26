@@ -9,6 +9,7 @@
         factory(root.assert, root.expect);
     }
 }(this, (assert, expect) => {
+    'use strict';
 
     function expectPowerAssertMessage (body, expectedLines) {
         try {
