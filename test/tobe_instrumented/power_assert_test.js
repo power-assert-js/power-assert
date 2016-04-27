@@ -21,9 +21,7 @@ describe('power-assert message', function () {
                     expect(e.actual).to.not.be.ok();
                     expect(e.expected).to.be.ok();
                 } else {
-                    expect(e.message.split('\n').slice(2, -1)).to.eql(expectedLines.map(function (line) {
-                        return line;
-                    }));
+                    expect(e.message.split('\n').slice(2, -1)).to.eql(expectedLines);
                 }
             }
         };

@@ -16,9 +16,7 @@
             body();
             expect().fail("AssertionError should be thrown");
         } catch (e) {
-            expect(e.message.split('\n').slice(2, -1)).to.eql(expectedLines.map(function (line) {
-                return line;
-            }));
+            expect(e.message.split('\n').slice(2, -1)).to.eql(expectedLines);
         }
     }
 
