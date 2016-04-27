@@ -64,7 +64,8 @@
     "mocha": "^2.4.5",
     "phantomjs-prebuilt": "^2.1.7",
     "qunit-tap": "^1.5.0",
-    "qunitjs": "1.14.0"
+    "qunitjs": "1.14.0",
+    "requirejs": "^2.2.0"
   },
   "files": [
     "CHANGELOG.md",
@@ -91,17 +92,15 @@
     "url": "https://github.com/power-assert-js/power-assert.git"
   },
   "scripts": {
-    "bower": "bower install --config.interactive=false",
     "build": "mkdir -p ./build && npm prune && npm dedupe && browserify -p licensify --standalone assert ./index.js | dereserve | derequire > build/power-assert.js",
     "clean": "rm -rf ./espowered_tests && rm -rf ./build",
     "setup-dir": "mkdir -p ./build && mkdir -p ./espowered_tests/tobe_instrumented && cp -r test/not_tobe_instrumented/ ./espowered_tests/not_tobe_instrumented/",
-    "setup-espower": "for i in $(find ./test/tobe_instrumented -name '*_test.js'); do babel --plugins babel-plugin-espower --blacklist strict $i > ./espowered_tests/tobe_instrumented/$(basename $i); done",
+    "setup-espower": "for i in $(find ./test/tobe_instrumented -name '*.js'); do babel --plugins babel-plugin-espower --blacklist strict $i > ./espowered_tests/tobe_instrumented/$(basename $i); done",
     "setup": "npm run clean && npm run setup-dir && npm run setup-espower && npm run build",
-    "test-unit": "mocha --reporter dot --require ./enable_power_assert.js ./test/**/*_test.js",
-    "test-generated": "mocha --reporter dot ./espowered_tests/**/*_test.js",
+    "test-unit": "mocha --reporter dot --require ./enable_power_assert.js ./test/**/*.js",
+    "test-generated": "mocha --reporter dot ./espowered_tests/**/*.js",
     "test-browser": "karma start",
-    "test-amd": "mocha-phantomjs --reporter dot test/test-amd.html",
-    "test-all": "npm run test-unit && npm run test-generated && npm run test-browser && npm run test-amd",
+    "test-all": "npm run test-unit && npm run test-generated && npm run test-browser",
     "test": "npm run setup && npm run test-all"
   }
 }

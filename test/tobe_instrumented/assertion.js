@@ -1,14 +1,7 @@
-(function (root, factory) {
-    'use strict';
-
-    if (typeof define === 'function' && define.amd) {
-        define(['power-assert', 'expect'], factory);
-    } else if (typeof exports === 'object') {
-        factory(require('../..'), require('expect.js'));
-    } else {
-        factory(root.assert, root.expect);
-    }
-}(this, function (assert, expect) {
+if (typeof window === 'undefined') {
+    var expect = require('expect.js');
+    var assert = require('../..');
+}
 
 describe('power-assert message', function () {
     beforeEach(function () {
@@ -27,14 +20,12 @@ describe('power-assert message', function () {
         };
     });
 
-
     it('assert(false);', function () {
         this.expectPowerAssertMessage(function () {
             assert(false);
         }, [
         ]);
     });
-
 
     it('Identifier with empty string', function () {
         var falsyStr = '';
@@ -47,7 +38,6 @@ describe('power-assert message', function () {
         ]);
     });
 
-
     it('Identifier with falsy number', function () {
         var falsyNum = 0;
         this.expectPowerAssertMessage(function () {
@@ -58,7 +48,6 @@ describe('power-assert message', function () {
             '         0        '
         ]);
     });
-
 
     it('UnaryExpression, negation', function () {
         var truth = true;
@@ -71,7 +60,6 @@ describe('power-assert message', function () {
             '         false  '
         ]);
     });
-
 
     it('UnaryExpression, double negative', function () {
         var some = '';
@@ -86,7 +74,6 @@ describe('power-assert message', function () {
         ]);
     });
 
-
     it('typeof operator: assert(typeof foo !== "undefined");', function () {
         this.expectPowerAssertMessage(function () {
             assert(typeof foo !== "undefined");
@@ -97,7 +84,6 @@ describe('power-assert message', function () {
             '         "undefined"                '
         ]);
     });
-
 
     it('assert((delete foo.bar) === falsy);', function () {
         var falsy = 0,
@@ -123,7 +109,6 @@ describe('power-assert message', function () {
         ]);
     });
 
-
     it('assert(fuga === piyo);', function () {
         var fuga = 'foo',
             piyo = 8;
@@ -143,7 +128,6 @@ describe('power-assert message', function () {
         ]);
     });
 
-
     it('assert(fuga !== piyo);', function () {
         var fuga = 'foo',
             piyo = 'foo';
@@ -158,7 +142,6 @@ describe('power-assert message', function () {
         ]);
     });
 
-
     it('BinaryExpression with Literal and Identifier: assert(fuga !== 4);', function () {
         var fuga = 4;
         this.expectPowerAssertMessage(function () {
@@ -170,7 +153,6 @@ describe('power-assert message', function () {
         ]);
     });
 
-
     it('assert(4 !== 4);', function () {
         this.expectPowerAssertMessage(function () {
             assert(4 !== 4);
@@ -180,7 +162,6 @@ describe('power-assert message', function () {
             '           false '
         ]);
     });
-
 
     it('MemberExpression: assert(ary1.length === ary2.length);', function () {
         var ary1 = ['foo', 'bar'];
@@ -202,7 +183,6 @@ describe('power-assert message', function () {
         ]);
     });
 
-
     it('LogicalExpression: assert(5 < actual && actual < 13);', function () {
         var actual = 16;
         this.expectPowerAssertMessage(function () {
@@ -215,7 +195,6 @@ describe('power-assert message', function () {
             '           true                    '
         ]);
     });
-
 
     it('LogicalExpression OR: assert.ok(actual < 5 || 13 < actual);', function () {
         var actual = 10;
@@ -230,7 +209,6 @@ describe('power-assert message', function () {
         ]);
     });
 
-
     it('Characterization test of LogicalExpression current spec: assert(2 > actual && actual < 13);', function () {
         var actual = 5;
         this.expectPowerAssertMessage(function () {
@@ -242,7 +220,6 @@ describe('power-assert message', function () {
             '           false                   '
         ]);
     });
-
 
     it('Deep MemberExpression chain: assert(foo.bar.baz);', function () {
         var foo = {
@@ -261,7 +238,6 @@ describe('power-assert message', function () {
         ]);
     });
 
-
     it('computed MemberExpression: assert(foo["bar"]);', function () {
         var foo = {
             bar: false
@@ -275,7 +251,6 @@ describe('power-assert message', function () {
             '         Object{bar:false}'
         ]);
     });
-
 
     it('computed MemberExpression chain: assert(foo[key].baz);', function () {
         var key = 'bar',
@@ -295,7 +270,6 @@ describe('power-assert message', function () {
             '         Object{bar:#Object#}'
         ]);
     });
-
 
     it('deep chained computed MemberExpression: assert(foo[propName]["baz"][keys()[0]]);', function () {
         var keys = function () { return ["toto"]; },
@@ -321,7 +295,6 @@ describe('power-assert message', function () {
         ]);
     });
 
-
     it('deep chained computed MemberExpression with whitespaces: assert(  foo [   propName   ]  [  "baz"   ]  [   keys ( )  [ 0 ] ] );', function () {
         var keys = function () { return ["toto"]; },
             propName = "bar",
@@ -346,7 +319,6 @@ describe('power-assert message', function () {
         ]);
     });
 
-
     it('assert(func());', function () {
         var func = function () { return false; };
         this.expectPowerAssertMessage(function () {
@@ -357,7 +329,6 @@ describe('power-assert message', function () {
             '         false  '
         ]);
     });
-
 
     it('assert(obj.age());', function () {
         var obj = {
@@ -375,7 +346,6 @@ describe('power-assert message', function () {
         ]);
     });
 
-
     it('CallExpression with arguments: assert(isFalsy(positiveInt));', function () {
         var isFalsy = function (arg) {
             return !(arg);
@@ -389,7 +359,6 @@ describe('power-assert message', function () {
             '         false   50           '
         ]);
     });
-
 
     it('assert(sum(one, two, three) === seven);', function () {
         var sum = function () {
@@ -415,7 +384,6 @@ describe('power-assert message', function () {
         ]);
     });
 
-
     it('CallExpression with CallExpressions as arguments: assert(sum(sum(one, two), three) === sum(sum(two, three), seven));', function () {
         var sum = function () {
             var result = 0;
@@ -439,7 +407,6 @@ describe('power-assert message', function () {
             '  => 6'
         ]);
     });
-
 
     it('assert(math.calc.sum(one, two, three) === seven);', function () {
         var math = {
@@ -471,7 +438,6 @@ describe('power-assert message', function () {
         ]);
     });
 
-
     it('Nested CallExpression with BinaryExpression: assert((three * (seven * ten)) === three);', function () {
         var one = 1, two = 2, three = 3, seven = 7, ten = 10;
         this.expectPowerAssertMessage(function () {
@@ -490,7 +456,6 @@ describe('power-assert message', function () {
             '  => 210'
         ]);
     });
-
 
     it('Simple BinaryExpression with comment', function () {
         var hoge = 'foo';
@@ -512,7 +477,6 @@ describe('power-assert message', function () {
             '  '
         ]);
     });
-
 
     it('Looooong string', function () {
         var longString = 'very very loooooooooooooooooooooooooooooooooooooooooooooooooooong message';
@@ -538,7 +502,6 @@ describe('power-assert message', function () {
         ]);
     });
 
-
     it('double byte character width', function () {
         var fuga = 'あい',
             piyo = 'うえお';
@@ -557,7 +520,6 @@ describe('power-assert message', function () {
         ]);
     });
 
-
     it('Japanese hankaku width', function () {
         var fuga = 'ｱｲ',
             piyo = 'ｳｴｵ';
@@ -574,7 +536,6 @@ describe('power-assert message', function () {
             '         false               '
         ]);
     });
-
 
     it('Object having circular structure', function () {
         var cyclic = [], two = 2;
@@ -598,8 +559,6 @@ describe('power-assert message', function () {
         ]);
     });
 
-
-
     it('ArrayExpression: assert([foo, bar].length === four);', function () {
         var foo = 'hoge', bar = 'fuga', four = 4;
         this.expectPowerAssertMessage(function () {
@@ -619,8 +578,6 @@ describe('power-assert message', function () {
             '  => 2'
         ]);
     });
-
-
 
     it('various expressions in ArrayExpression: assert(typeof [[foo.bar, baz(moo)], + fourStr] === "number");', function () {
         var foo = {bar: 'fuga'}, baz = function (arg) { return null; }, moo = 'boo', fourStr = '4';
@@ -647,7 +604,6 @@ describe('power-assert message', function () {
         ]);
     });
 
-
     it('prefix UpdateExpression: assert(++minusOne);', function () {
         var minusOne = -1;
         this.expectPowerAssertMessage(function () {
@@ -658,7 +614,6 @@ describe('power-assert message', function () {
             '         0          '
         ]);
     });
-
 
     it('suffix UpdateExpression: assert(zero--);', function () {
         var zero = 0;
@@ -671,7 +626,6 @@ describe('power-assert message', function () {
         ]);
     });
 
-
     it('ConditionalExpression of ConditionalExpression: assert(falsy ? truthy : truthy ? anotherFalsy : truthy);', function () {
         var truthy = 'truthy', falsy = 0, anotherFalsy = null;
         this.expectPowerAssertMessage(function () {
@@ -683,7 +637,6 @@ describe('power-assert message', function () {
         ]);
     });
 
-
     it('RegularExpression will not be instrumented: assert(/^not/.exec(str));', function () {
         var str = 'ok';
         this.expectPowerAssertMessage(function () {
@@ -694,7 +647,6 @@ describe('power-assert message', function () {
             '                null "ok" '
         ]);
     });
-
 
     it('complex ObjectExpression: assert(!({ foo: bar.baz, name: nameOf({firstName: first, lastName: last}) }));', function () {
         var bar = { baz: 'BAZ' },  first = 'Brendan', last = 'Eich',
@@ -712,7 +664,6 @@ describe('power-assert message', function () {
             '         false                                                           ',
         ]);
     });
-
 
     it('NewExpression: assert(baz === new Array(foo, bar, baz)[1]);', function () {
         var foo = 'foo', bar = 'bar', baz = 'baz';
@@ -739,7 +690,6 @@ describe('power-assert message', function () {
         ]);
     });
 
-
     it('FunctionExpression will not be instrumented: assert(baz === (function (a, b) { return a + b; })(foo, bar));', function () {
         var foo = 'foo', bar = 'bar', baz = 'baz';
         this.expectPowerAssertMessage(function () {
@@ -763,7 +713,6 @@ describe('power-assert message', function () {
         ]);
     });
 
-
     it('equal with Literal and Identifier: assert.equal(1, minusOne);', function () {
         var minusOne = -1;
         this.expectPowerAssertMessage(function () {
@@ -774,7 +723,6 @@ describe('power-assert message', function () {
             '                  -1       '
         ]);
     });
-
 
     it('equal with UpdateExpression and Literal: assert.equal(++minusOne, 1);', function () {
         var minusOne = -1;
@@ -787,7 +735,6 @@ describe('power-assert message', function () {
         ]);
     });
 
-
     it('notEqual with ConditionalExpression and AssignmentExpression: assert.notEqual(truthy ? fiveInStr : tenInStr, four += 1);', function () {
         var truthy = 3, fiveInStr = '5', tenInStr = '10', four = 4;
         this.expectPowerAssertMessage(function () {
@@ -798,7 +745,6 @@ describe('power-assert message', function () {
             '                  3        "5"                        5    '
         ]);
     });
-
 
     it('strictEqual with CallExpression and BinaryExpression, Identifier: assert.strictEqual(obj.truthy(), three == threeInStr);', function () {
         var obj = { truthy: function () { return 'true'; }}, three = 3, threeInStr = '3';
@@ -813,7 +759,6 @@ describe('power-assert message', function () {
         ]);
     });
 
-
     it('notStrictEqual with MemberExpression and UnaryExpression: assert.notStrictEqual(typeof undefinedVar, types.undef);', function () {
         var types = { undef: 'undefined' };
         this.expectPowerAssertMessage(function () {
@@ -825,7 +770,6 @@ describe('power-assert message', function () {
             '                        "undefined"          Object{undef:"undefined"}'
         ]);
     });
-
 
     it('deepEqual with LogicalExpression and ObjectExpression: assert.deepEqual(alice || bob, {name: kenName, age: four});', function () {
         function Person(name, age) {
@@ -847,7 +791,6 @@ describe('power-assert message', function () {
         ]);
     });
 
-
     it('notDeepEqual with ArrayExpression and NewExpression: assert.notDeepEqual([foo, bar, baz], new Array(foo, bar, baz));', function () {
         var foo = 'foo', bar = ['toto', 'tata'], baz = {name: 'hoge'};
         this.expectPowerAssertMessage(function () {
@@ -867,5 +810,3 @@ describe('power-assert message', function () {
     });
 
 });
-
-}));

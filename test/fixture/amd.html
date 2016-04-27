@@ -1,0 +1,13 @@
+﻿<script type="text/javascript" src="/base/node_modules/requirejs/require.js"></script>
+<script type="text/javascript">
+  require.config({
+    paths: {
+      "power-assert": "/base/build/power-assert"
+    },
+    shim: {
+      "power-assert": {
+        exports: "assert"
+      }
+    }
+  });
+</script>
