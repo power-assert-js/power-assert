@@ -1,14 +1,7 @@
-(function (root, factory) {
-    'use strict';
-
-    if (typeof define === 'function' && define.amd) {
-        define(['power-assert', 'expect'], factory);
-    } else if (typeof exports === 'object') {
-        factory(require('../..'), require('expect.js'));
-    } else {
-        factory(root.assert, root.expect);
-    }
-}(this, function (assert, expect) {
+if (typeof window === 'undefined') {
+    var expect = require('expect.js');
+    var assert = require('../..');
+}
 
 describe('power-assert message', function () {
     beforeEach(function () {
@@ -867,5 +860,3 @@ describe('power-assert message', function () {
     });
 
 });
-
-}));

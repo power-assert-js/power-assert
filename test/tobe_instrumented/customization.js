@@ -1,15 +1,9 @@
-(function (root, factory) {
-    'use strict';
+if (typeof window === 'undefined') {
+    var expect = require('expect.js');
+    var assert = require('../..');
+}
 
-    if (typeof define === 'function' && define.amd) {
-        define(['power-assert', 'expect'], factory);
-    } else if (typeof exports === 'object') {
-        factory(require('../..'), require('expect.js'));
-    } else {
-        factory(root.assert, root.expect);
-    }
-}(this, function (assert, expect) {
-
+describe('power-assert customization', function () {
     var orininalAssert = assert;
 
     function expectPowerAssertMessage (body, expectedLines) {
@@ -20,9 +14,7 @@
             if (e.message === 'AssertionError should be thrown') {
                 throw e;
             }
-            expect(e.message.split('\n').slice(2, -1)).to.eql(expectedLines.map(function (line) {
-                return line;
-            }));
+            expect(e.message.split('\n').slice(2, -1)).to.eql(expectedLines);
         }
     };
 
@@ -143,4 +135,4 @@
         
     });
 
-}));
+});
