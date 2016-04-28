@@ -1,5 +1,5 @@
 /node_modules
-/npm-debug.log
-/espowered_tests
 /.idea
 /TODO.txt
+/espowered_tests
+/npm-debug.log

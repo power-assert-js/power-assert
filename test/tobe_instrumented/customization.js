@@ -61,6 +61,7 @@ describe('power-assert customization', function () {
                 ]);
             });
 
+
             it('set maxDepth more deeper', function () {
                 assert = assert.customize({
                     output: {
@@ -78,6 +79,7 @@ describe('power-assert customization', function () {
                     '                   [Object{name:"foo"},Object{name:"bar",parent:Object{name:"foo"}},Object{name:"baz",parent:Object{name:"bar",parent:#Object#}}]'
                 ]);
             });
+
 
             it('maxDepth=0 means dump them all', function () {
                 assert = assert.customize({
@@ -97,6 +99,7 @@ describe('power-assert customization', function () {
                 ]);
             });
         });
+
 
         it('customized assert should also be customizable', function () {
             var expected = [this.foo, this.bar, this.baz];
