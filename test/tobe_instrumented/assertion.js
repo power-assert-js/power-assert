@@ -859,4 +859,15 @@ describe('power-assert message', function () {
         ]);
     });
 
+
+    it('ObjectExpression with Literals', function () {
+        this.expectPowerAssertMessage(function () {
+            assert.deepEqual({ foo: 0 }, { foo: 1 });
+        },[
+            '  assert.deepEqual({ foo: 0 }, { foo: 1 })',
+            '                   |           |          ',
+            '                   |           Object{foo:1}',
+            '                   Object{foo:0}          '
+        ]);
+    });
 });
