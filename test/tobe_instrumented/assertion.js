@@ -860,6 +860,18 @@ describe('power-assert message', function () {
     });
 
 
+    it('deepStrictEqual', function () {
+        this.expectPowerAssertMessage(function () {
+            assert.deepStrictEqual({a:1}, {a:'1'});
+        },[
+            '  assert.deepStrictEqual({ a: 1 }, { a: \'1\' })',
+            '                         |         |          ',
+            '                         |         Object{a:\"1\"}',
+            '                         Object{a:1}          '
+        ]);
+    });
+
+
     it('ObjectExpression with Literals', function () {
         this.expectPowerAssertMessage(function () {
             assert.deepEqual({ foo: 0 }, { foo: 1 });

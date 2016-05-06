@@ -10,6 +10,7 @@
 'use strict';
 
 var baseAssert = require('assert');
+var _deepEqual = require('universal-deep-strict-equal');
 var empower = require('empower');
 var formatter = require('power-assert-formatter');
 var extend = require('xtend');
@@ -18,6 +19,21 @@ var empowerOptions = {
     modifyMessageOnRethrow: true,
     saveContextOnRethrow: true
 };
+
+if (typeof baseAssert.deepStrictEqual !== 'function') {
+    baseAssert.deepStrictEqual = function deepStrictEqual (actual, expected, message) {
+        if (!_deepEqual(actual, expected, true)) {
+            baseAssert.fail(actual, expected, message, 'deepStrictEqual', deepStrictEqual);
+        }
+    };
+}
+if (typeof baseAssert.notDeepStrictEqual !== 'function') {
+    baseAssert.notDeepStrictEqual = function notDeepStrictEqual (actual, expected, message) {
+        if (_deepEqual(actual, expected, true)) {
+            baseAssert.fail(actual, expected, message, 'notDeepStrictEqual', notDeepStrictEqual);
+        }
+    };
+}
 
 function customize (customOptions) {
     var options = customOptions || {};
