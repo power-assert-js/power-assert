@@ -102,6 +102,8 @@
     "test-generated": "mocha --reporter dot ./espowered_tests/**/*.js",
     "test-browser": "karma start",
     "test-all": "npm run test-unit && npm run test-generated && npm run test-browser",
-    "test": "npm run setup && npm run test-all"
+    "test": "npm run setup && npm run test-all",
+    "preversion": "npm test",
+    "version": "npm run build && git add -A build"
   }
 }
