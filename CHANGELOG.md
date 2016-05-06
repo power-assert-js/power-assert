@@ -1,3 +1,11 @@
+## [1.4.0](https://github.com/power-assert-js/power-assert/releases/tag/v1.4.0) (2016-05-06)
+
+
+#### Features
+
+  * [Integrate universal-deep-strict-equal to enable `deepStrictEqual` on browsers](https://github.com/power-assert-js/power-assert/pull/54)
+
+
 ### [1.3.1](https://github.com/power-assert-js/power-assert/releases/tag/v1.3.1) (2016-03-10)
 
 
