@@ -58,6 +58,20 @@ What is `power-assert`?
       => -1
 
 
+FAQ
+---------------------------------------
+
+- [Support other assertion styles?](https://github.com/power-assert-js/power-assert/issues/22)
+- [Does this work with substack/tape?](https://github.com/power-assert-js/power-assert/issues/30)
+- [Are all dependencies required at runtime?](https://github.com/power-assert-js/power-assert/issues/24)
+- [Descriptive assertion message does not appear when writing tests in ES6 with Babel](https://github.com/power-assert-js/webpack-espower-loader/issues/4#issuecomment-139605343)
+- [Incomplete increment/decrement assertion messages?](https://github.com/power-assert-js/power-assert/issues/32)
+- [Cannot capture not invokable method error](https://github.com/power-assert-js/power-assert/issues/36)
+- What is the ['Critical dependencies' warning shown by webpack](https://github.com/power-assert-js/babel-plugin-espower/issues/14#issuecomment-197272436) and how to [suppress warnings](https://github.com/power-assert-js/babel-plugin-espower/issues/14#issuecomment-197909419)?
+- [Causes `TypeError: assert._capt is not a function`](https://github.com/power-assert-js/power-assert/issues/42)
+- [How to deal with `assert` calls in production](https://github.com/power-assert-js/power-assert/issues/43#issuecomment-208851919)
+
+
 INSTALL
 ---------------------------------------
 
@@ -127,20 +141,6 @@ The core value of power-assert is absolute simplicity and stability. Especially,
 CHANGELOG
 ---------------------------------------
 See [CHANGELOG](https://github.com/power-assert-js/power-assert/blob/master/CHANGELOG.md)
-
-
-FAQ
----------------------------------------
-
-- [Support other assertion styles?](https://github.com/power-assert-js/power-assert/issues/22)
-- [Does this work with substack/tape?](https://github.com/power-assert-js/power-assert/issues/30)
-- [Are all dependencies required at runtime?](https://github.com/power-assert-js/power-assert/issues/24)
-- [Descriptive assertion message does not appear when writing tests in ES6 with Babel](https://github.com/power-assert-js/webpack-espower-loader/issues/4#issuecomment-139605343)
-- [Incomplete increment/decrement assertion messages?](https://github.com/power-assert-js/power-assert/issues/32)
-- [Cannot capture not invokable method error](https://github.com/power-assert-js/power-assert/issues/36)
-- What is the ['Critical dependencies' warning shown by webpack](https://github.com/power-assert-js/babel-plugin-espower/issues/14#issuecomment-197272436) and how to [suppress warnings](https://github.com/power-assert-js/babel-plugin-espower/issues/14#issuecomment-197909419)?
-- [Causes `TypeError: assert._capt is not a function`](https://github.com/power-assert-js/power-assert/issues/42)
-- [How to deal with `assert` calls in production](https://github.com/power-assert-js/power-assert/issues/43#issuecomment-208851919)
 
 
 EXAMPLE
