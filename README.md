@@ -26,7 +26,7 @@ What is `power-assert`?
  * works both on server side and browser side.
  * available via [npm](https://www.npmjs.com/package/power-assert) and [bower](http://bower.io/search/?q=power-assert). 
  * supports sourcemaps so you can debug as usual.
- * provides [babel plugin](https://github.com/power-assert-js/babel-plugin-espower).
+ * provides [babel plugin](https://github.com/power-assert-js/babel-plugin-espower) and [babel preset](https://github.com/power-assert-js/babel-preset-power-assert).
  * provides [browserify transform](https://github.com/power-assert-js/espowerify).
  * provides [webpack loader](https://github.com/power-assert-js/webpack-espower-loader).
  * provides [grunt task](https://github.com/power-assert-js/grunt-espower) and [gulp plugin](https://github.com/power-assert-js/gulp-espower).
@@ -213,6 +213,7 @@ Code transform is done by instrumentors below:
  - [espower-traceur](https://github.com/power-assert-js/espower-traceur)
  - [espower-babel](https://github.com/power-assert-js/espower-babel)
  - [babel-plugin-espower](https://github.com/power-assert-js/babel-plugin-espower)
+ - [babel-preset-power-assert](https://github.com/power-assert-js/babel-preset-power-assert)
 
 If you are using Node.js only, the easiest way is to use [intelli-espower-loader](https://github.com/power-assert-js/intelli-espower-loader). Steps are as follows.
 
@@ -331,7 +332,7 @@ HOW TO USE
 There are four ways to use power-assert. (If you want to see running examples, see [SEED PROJECTS](#seed-projects))
 
 1. `power-assert` + `espower-loader`: Highly recommended but only works under Node.
-2. `power-assert` + `Babel` + `babel-plugin-espower`:  Recommended if you are writing ES6 with [Babel](https://babeljs.io/) or [babelify](https://github.com/babel/babelify) with [browserify](http://browserify.org/)
+2. `power-assert` + `Babel` + `babel-preset-power-assert`:  Recommended if you are writing ES6 with [Babel](https://babeljs.io/) or [babelify](https://github.com/babel/babelify) with [browserify](http://browserify.org/)
 3. `power-assert` + `espower-coffee` or `espower-typescript` or `espower-traceur` or `espower-babel` : Use power-assert through transpilers. Recommended but only works under Node.
 4. `power-assert` + `espowerify` or `webpack-espower-loader`: Recommended if you are using [browserify](http://browserify.org/) or [webpack](http://webpack.github.io/).
 5. `power-assert` + `espower-cli` or `grunt-espower` or `gulp-espower` : Generate instrumented code so works anywhere.
@@ -387,11 +388,11 @@ If you are writing Node.js app/module in TypeScript, you can instrument Power As
 see [espower-typescript README](https://github.com/power-assert-js/espower-typescript).
 
 
-### using `babel-plugin-espower`
+### using `babel-preset-power-assert` or `babel-plugin-espower`
 
-If you are writing your code in ES6, you can instrument Power Assert feature with Babel and babel-plugin-espower.
+If you are writing your code in ES6, you can instrument Power Assert feature with Babel and babel-preset-power-assert (or babel-plugin-espower).
 
-see [babel-plugin-espower README](https://github.com/power-assert-js/babel-plugin-espower).
+see [babel-plugin-espower README](https://github.com/power-assert-js/babel-plugin-espower) and [babel-preset-power-assert README](https://github.com/power-assert-js/babel-preset-power-assert)
 
 
 ### using `espower-traceur` or `espower-babel`
@@ -632,6 +633,7 @@ and instrumentors are,
 | [espower-loader](http://github.com/power-assert-js/espower-loader) | Node module loader to apply `espower` on the fly. |
 | [intelli-espower-loader](https://github.com/power-assert-js/intelli-espower-loader) | configure `espower-loader` with ease. |
 | [babel-plugin-espower](https://github.com/power-assert-js/babel-plugin-espower) | [Babel](https://babeljs.io/) plugin to instrument power-assert feature into target files. |
+| [babel-preset-power-assert](https://github.com/power-assert-js/babel-preset-power-assert) | [Babel](https://babeljs.io/) preset to instrument power-assert feature into target files. |
 | [espowerify](http://github.com/power-assert-js/espowerify) | [Browserify](http://browserify.org/) transform to apply `espower` to target files. |
 | [webpack-espower-loader](https://github.com/power-assert-js/webpack-espower-loader) | Power Assert instrumentor module for [webpack](http://webpack.github.io/). |
 | [grunt-espower](http://github.com/power-assert-js/grunt-espower) | Grunt task to apply `espower` to target files. |
