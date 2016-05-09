@@ -265,8 +265,9 @@
  * universal-deep-strict-equal:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Takuto Wada <takuto.wada@gmail.com>
+ *   contributors: azu
  *   homepage: https://github.com/twada/universal-deep-strict-equal
- *   version: 1.1.0
+ *   version: 1.2.1
  * 
  * util:
  *   license: MIT (http://opensource.org/licenses/MIT)
@@ -19578,7 +19579,7 @@ function typeName (val) {
 module.exports = typeName;
 
 },{}],67:[function(_dereq_,module,exports){
-// port of https://github.com/nodejs/node/blob/v6.0.0/lib/assert.js
+// port of https://github.com/nodejs/node/blob/v6.1.0/lib/assert.js#L146-L254
 
 // http://wiki.commonjs.org/wiki/Unit_Testing/1.0
 //
@@ -19606,6 +19607,7 @@ module.exports = typeName;
 
 var Buffer = _dereq_('buffer').Buffer;
 var compare = Buffer.compare;
+var indexOf = _dereq_('indexof');
 var filter = _dereq_('array-filter');
 var pSlice = Array.prototype.slice;
 var getPrototypeOf = Object.getPrototypeOf || function(obj) {
@@ -19638,9 +19640,22 @@ function isDate(d) {
 function isRegExp(re) {
   return isObject(re) && pToString(re) === '[object RegExp]';
 }
-function isArguments(object) {
-  return isObject(object) && pToString(object) == '[object Arguments]';
-}
+var isArguments = (function () {
+  function isArg(obj) {
+    return isObject(obj) && pToString(obj) == '[object Arguments]';
+  }
+  if (!isArg(arguments)) {
+    return function(obj) {
+      return isObject(obj) &&
+        typeof obj.length === 'number' &&
+        obj.length >= 0 &&
+        pToString(obj) !== '[object Array]' &&
+        pToString(obj.callee) === '[object Function]';
+    };
+  } else {
+    return isArg;
+  }
+})();
 function fromBufferSupport() {
   try {
     return typeof Buffer.from === 'function' && !!Buffer.from([0x62,0x75,0x66,0x66,0x65,0x72]);
@@ -19685,7 +19700,7 @@ var objectKeys = (function () {
         isEnumerable(obj, 'byteOffset') &&
         isEnumerable(obj, 'byteLength')) {
       return filter(keys(obj), function (k) {
-        return OLD_V8_ARRAY_BUFFER_ENUM.indexOf(k) === -1;
+        return indexOf(OLD_V8_ARRAY_BUFFER_ENUM, k) === -1;
       });
     } else {
       return keys(obj);
@@ -19693,7 +19708,7 @@ var objectKeys = (function () {
   };
 })();
 
-function _deepEqual(actual, expected, strict) {
+function _deepEqual(actual, expected, strict, memos) {
   // 7.1. All identical values are equivalent, as determined by ===.
   if (actual === expected) {
     return true;
@@ -19742,11 +19757,23 @@ function _deepEqual(actual, expected, strict) {
   // corresponding key, and an identical 'prototype' property. Note: this
   // accounts for both named and indexed properties on Arrays.
   } else {
-    return objEquiv(actual, expected, strict);
+    memos = memos || {actual: [], expected: []};
+
+    var actualIndex = indexOf(memos.actual, actual);
+    if (actualIndex !== -1) {
+      if (actualIndex === indexOf(memos.expected, expected)) {
+        return true;
+      }
+    }
+
+    memos.actual.push(actual);
+    memos.expected.push(expected);
+
+    return objEquiv(actual, expected, strict, memos);
   }
 }
 
-function objEquiv(a, b, strict) {
+function objEquiv(a, b, strict, actualVisitedObjects) {
   if (a === null || a === undefined || b === null || b === undefined)
     return false;
   // if one is a primitive, the other must be same
@@ -19782,14 +19809,15 @@ function objEquiv(a, b, strict) {
   //~~~possibly expensive deep test
   for (i = ka.length - 1; i >= 0; i--) {
     key = ka[i];
-    if (!_deepEqual(a[key], b[key], strict)) return false;
+    if (!_deepEqual(a[key], b[key], strict, actualVisitedObjects))
+      return false;
   }
   return true;
 }
 
 module.exports = _deepEqual;
 
-},{"array-filter":12,"buffer":2,"object-keys":42}],68:[function(_dereq_,module,exports){
+},{"array-filter":12,"buffer":2,"indexof":41,"object-keys":42}],68:[function(_dereq_,module,exports){
 module.exports = extend
 
 var hasOwnProperty = Object.prototype.hasOwnProperty;
