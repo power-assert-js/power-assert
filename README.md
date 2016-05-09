@@ -100,8 +100,8 @@ power-assert enhances these assert functions by [espower](https://github.com/pow
 * `assert.notStrictEqual(actual, expected, [message])`
 * `assert.deepEqual(actual, expected, [message])`
 * `assert.notDeepEqual(actual, expected, [message])`
-* `assert.deepStrictEqual(actual, expected, [message])` (io.js v1.2.0~, Node.js v4.0.0~)
-* `assert.notDeepStrictEqual(actual, expected, [message])` (io.js v1.2.0~, Node.js v4.0.0~)
+* `assert.deepStrictEqual(actual, expected, [message])`
+* `assert.notDeepStrictEqual(actual, expected, [message])`
 
 power-assert is fully compatible with [assert](http://nodejs.org/api/assert.html). So functions below are also available though they are not enhanced (does not produce descriptive message).
 
