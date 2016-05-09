@@ -1,6 +1,9 @@
 module.exports = function (config) {
     config.set({
         basePath: '',
+        client: {
+            useIframe: false
+        },
         frameworks: ['mocha', 'expect'],
         files: [
             { pattern: 'node_modules/requirejs/require.js', included: false },
