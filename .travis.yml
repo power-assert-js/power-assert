@@ -20,6 +20,5 @@ before_install:
   - "npm install -g browserify"
   - "npm install -g dereserve"
   - "npm install -g derequire"
-  - "npm install -g mocha"
 script:
   - "npm test"
