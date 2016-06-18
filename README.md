@@ -38,6 +38,7 @@ What is `power-assert`?
  * supports [TypeScript](https://github.com/power-assert-js/espower-typescript).
  * has [TypeScript type definition](https://github.com/borisyankov/DefinitelyTyped/blob/master/power-assert/power-assert.d.ts)
  * [AVA](https://github.com/avajs/ava), the futuristic test runner, now [comes with power-assert builtin](https://github.com/avajs/ava#enhanced-assertion-messages)
+ * has [Lab transformer](https://github.com/feugy/lab-espower-transformer) to enable power-assert on [Lab](https://github.com/hapijs/lab)
  * pull-requests, issue reports and patches are always welcomed.
 
 
@@ -667,6 +668,7 @@ SUPPORTED FRAMEWORKS
 * [QUnit](http://qunitjs.com/)
 * [nodeunit](https://github.com/caolan/nodeunit)
 * [buster-assertions](http://docs.busterjs.org/en/latest/modules/buster-assertions/)
+* [Lab](https://github.com/hapijs/lab)
 
 
 AUTHOR
