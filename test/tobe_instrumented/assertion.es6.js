@@ -65,12 +65,12 @@ describe('power-assert es6', function () {
                     [`${ name } greet`]: `Hello, I am ${ name }`
                 }, null);
             }, [
-                '  assert.deepEqual({name,[`${ name } greet`]: `Hello, I am ${ name }`}, null)',
-                '                   |      |   |               |               |              ',
-                '                   |      |   |               |               "bobby"        ',
-                '                   |      |   "bobby"         "Hello, I am bobby"            ',
-                '                   |      "bobby greet"                                      ',
-                '                   Object{name:"bobby","bobby greet":"Hello, I am bobby"}    '
+                '  assert.deepEqual({ name, [`${ name } greet`]: `Hello, I am ${ name }` }, null)',
+                '                   |        |   |               |               |               ',
+                '                   |        |   |               |               "bobby"         ',
+                '                   |        |   "bobby"         "Hello, I am bobby"             ',
+                '                   |        "bobby greet"                                       ',
+                '                   Object{name:"bobby","bobby greet":"Hello, I am bobby"}       '
             ]);
         });
     });

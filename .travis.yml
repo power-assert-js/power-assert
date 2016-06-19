@@ -18,8 +18,5 @@ before_install:
   - "export DISPLAY=:99.0"
   - "export CHROME_BIN=/usr/bin/google-chrome"
   - "sh -e /etc/init.d/xvfb start"
-  - "npm install -g browserify"
-  - "npm install -g dereserve"
-  - "npm install -g derequire"
 script:
   - "npm test"
