@@ -598,17 +598,17 @@ describe('power-assert message', function () {
         this.expectPowerAssertMessage(function () {
             assert([foo, bar].length === four);
         }, [
-            '  assert([foo,bar].length === four)',
-            '         ||   |    |      |   |    ',
-            '         ||   |    |      |   4    ',
-            '         ||   |    2      false    ',
-            '         ||   "fuga"               ',
-            '         |"hoge"                   ',
-            '         ["hoge","fuga"]           ',
+            '  assert([foo, bar].length === four)',
+            '         ||    |    |      |   |    ',
+            '         ||    |    |      |   4    ',
+            '         ||    |    2      false    ',
+            '         ||    "fuga"               ',
+            '         |"hoge"                    ',
+            '         ["hoge","fuga"]            ',
             '  ',
             '  [number] four',
             '  => 4',
-            '  [number] [foo,bar].length',
+            '  [number] [foo, bar].length',
             '  => 2'
         ]);
     });
@@ -620,19 +620,19 @@ describe('power-assert message', function () {
         this.expectPowerAssertMessage(function () {
             assert(typeof [[foo.bar, baz(moo)], + fourStr] === "number");
         }, [
-            '  assert(typeof [[foo.bar,baz(moo)],+fourStr] === "number")',
-            '         |      |||   |   |   |     ||        |            ',
-            '         |      |||   |   |   |     |"4"      false        ',
-            '         |      |||   |   |   "boo" 4                      ',
-            '         |      |||   |   null                             ',
-            '         |      |||   "fuga"                               ',
-            '         |      ||Object{bar:"fuga"}                       ',
-            '         |      |["fuga",null]                             ',
-            '         |      [#Array#,4]                                ',
-            '         "object"                                          ',
+            '  assert(typeof [[foo.bar, baz(moo)], +fourStr] === "number")',
+            '         |      |||   |    |   |      ||        |            ',
+            '         |      |||   |    |   |      |"4"      false        ',
+            '         |      |||   |    |   "boo"  4                      ',
+            '         |      |||   |    null                              ',
+            '         |      |||   "fuga"                                 ',
+            '         |      ||Object{bar:"fuga"}                         ',
+            '         |      |["fuga",null]                               ',
+            '         |      [#Array#,4]                                  ',
+            '         "object"                                            ',
             '  ',
             '  --- [string] "number"',
-            '  +++ [string] typeof [[foo.bar,baz(moo)],+fourStr]',
+            '  +++ [string] typeof [[foo.bar, baz(moo)], +fourStr]',
             '  @@ -1,6 +1,6 @@',
             '  -number',
             '  +object',
@@ -695,14 +695,14 @@ describe('power-assert message', function () {
         this.expectPowerAssertMessage(function () {
             assert(!({ foo: bar.baz, name: nameOf({firstName: first, lastName: last}) }));
         }, [
-            '  assert(!{foo: bar.baz,name: nameOf({firstName: first,lastName: last})})',
-            '         ||     |   |         |      |           |               |       ',
-            '         ||     |   |         |      |           "Brendan"       "Eich"  ',
-            '         ||     |   |         |      Object{firstName:"Brendan",lastName:"Eich"}',
-            '         ||     |   "BAZ"     "Brendan Eich"                             ',
-            '         ||     Object{baz:"BAZ"}                                        ',
-            '         |Object{foo:"BAZ",name:"Brendan Eich"}                          ',
-            '         false                                                           ',
+            '  assert(!{ foo: bar.baz, name: nameOf({ firstName: first, lastName: last }) })',
+            '         ||      |   |          |      |            |                |         ',
+            '         ||      |   |          |      |            "Brendan"        "Eich"    ',
+            '         ||      |   |          |      Object{firstName:"Brendan",lastName:"Eich"}',
+            '         ||      |   "BAZ"      "Brendan Eich"                                 ',
+            '         ||      Object{baz:"BAZ"}                                             ',
+            '         |Object{foo:"BAZ",name:"Brendan Eich"}                                ',
+            '         false                                                                 ',
         ]);
     });
 
@@ -738,14 +738,14 @@ describe('power-assert message', function () {
         this.expectPowerAssertMessage(function () {
             assert(baz === (function (a, b) { return a + b; })(foo, bar));
         }, [
-            '  assert(baz === function (a, b) {return a + b;}(foo, bar))',
-            '         |   |   |                               |    |    ',
-            '         |   |   |                               |    "bar"',
-            '         |   |   "foobar"                        "foo"     ',
-            '         |   false                                         ',
-            '         "baz"                                             ',
+            '  assert(baz === function (a, b) { return a + b; }(foo, bar))',
+            '         |   |   |                                 |    |    ',
+            '         |   |   |                                 |    "bar"',
+            '         |   |   "foobar"                          "foo"     ',
+            '         |   false                                           ',
+            '         "baz"                                               ',
             '  ',
-            '  --- [string] function (a, b) {return a + b;}(foo, bar)',
+            '  --- [string] function (a, b) { return a + b; }(foo, bar)',
             '  +++ [string] baz',
             '  @@ -1,6 +1,3 @@',
             '  -foo',
@@ -831,12 +831,12 @@ describe('power-assert message', function () {
         this.expectPowerAssertMessage(function () {
             assert.deepEqual(alice || bob, {name: kenName, age: four});
         },[
-            '  assert.deepEqual(alice || bob, {name: kenName,age: four})',
-            '                   |     |       |      |            |     ',
-            '                   |     |       |      "ken"        4     ',
-            '                   |     |       Object{name:"ken",age:4}  ',
-            '                   |     Person{name:"alice",age:3}        ',
-            '                   Person{name:"alice",age:3}              '
+            '  assert.deepEqual(alice || bob, { name: kenName, age: four })',
+            '                   |     |       |       |             |      ',
+            '                   |     |       |       "ken"         4      ',
+            '                   |     |       Object{name:"ken",age:4}     ',
+            '                   |     Person{name:"alice",age:3}           ',
+            '                   Person{name:"alice",age:3}                 '
         ]);
     });
 
@@ -846,16 +846,16 @@ describe('power-assert message', function () {
         this.expectPowerAssertMessage(function () {
             assert.notDeepEqual([foo, bar, baz], new Array(foo, bar, baz));
         },[
-            '  assert.notDeepEqual([foo,bar,baz], new Array(foo, bar, baz))',
-            '                      ||   |   |     |         |    |    |    ',
-            '                      ||   |   |     |         |    |    Object{name:"hoge"}',
-            '                      ||   |   |     |         |    ["toto","tata"]',
-            '                      ||   |   |     |         "foo"          ',
-            '                      ||   |   |     ["foo",#Array#,#Object#] ',
-            '                      ||   |   Object{name:"hoge"}            ',
-            '                      ||   ["toto","tata"]                    ',
-            '                      |"foo"                                  ',
-            '                      ["foo",#Array#,#Object#]                '
+            '  assert.notDeepEqual([foo, bar, baz], new Array(foo, bar, baz))',
+            '                      ||    |    |     |         |    |    |    ',
+            '                      ||    |    |     |         |    |    Object{name:"hoge"}',
+            '                      ||    |    |     |         |    ["toto","tata"]',
+            '                      ||    |    |     |         "foo"          ',
+            '                      ||    |    |     ["foo",#Array#,#Object#] ',
+            '                      ||    |    Object{name:"hoge"}            ',
+            '                      ||    ["toto","tata"]                     ',
+            '                      |"foo"                                    ',
+            '                      ["foo",#Array#,#Object#]                  '
         ]);
     });
 
