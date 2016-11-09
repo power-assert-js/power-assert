@@ -23,14 +23,14 @@ var empowerOptions = {
 if (typeof baseAssert.deepStrictEqual !== 'function') {
     baseAssert.deepStrictEqual = function deepStrictEqual (actual, expected, message) {
         if (!_deepEqual(actual, expected, true)) {
-            baseAssert.fail(actual, expected, message, 'deepStrictEqual', deepStrictEqual);
+            baseAssert.fail(actual, expected, message, 'deepStrictEqual');
         }
     };
 }
 if (typeof baseAssert.notDeepStrictEqual !== 'function') {
     baseAssert.notDeepStrictEqual = function notDeepStrictEqual (actual, expected, message) {
         if (_deepEqual(actual, expected, true)) {
-            baseAssert.fail(actual, expected, message, 'notDeepStrictEqual', notDeepStrictEqual);
+            baseAssert.fail(actual, expected, message, 'notDeepStrictEqual');
         }
     };
 }
