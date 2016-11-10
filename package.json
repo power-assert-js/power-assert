@@ -68,6 +68,7 @@
     "karma-phantomjs-launcher": "^1.0.0",
     "licensify": "^3.0.0",
     "mocha": "^2.4.5",
+    "package-json-filterify": "^1.0.4",
     "phantomjs-prebuilt": "^2.1.7",
     "qunit-tap": "^1.5.0",
     "qunitjs": "1.14.0",
@@ -98,7 +99,7 @@
     "url": "https://github.com/power-assert-js/power-assert.git"
   },
   "scripts": {
-    "build": "mkdir -p ./build && npm prune && npm dedupe && browserify -p licensify --standalone assert ./index.js | dereserve | derequire > build/power-assert.js",
+    "build": "mkdir -p ./build && npm prune && npm dedupe && browserify -p licensify --global-transform package-json-filterify --standalone assert ./index.js | dereserve | derequire > build/power-assert.js",
     "clean": "rm -rf ./espowered_tests && rm -rf ./build",
     "setup-dir": "mkdir -p ./build && mkdir -p ./espowered_tests/tobe_instrumented && cp -r test/not_tobe_instrumented/ ./espowered_tests/not_tobe_instrumented/",
     "setup-espower": "for i in $(find ./test/tobe_instrumented -name '*.js'); do babel $i > ./espowered_tests/tobe_instrumented/$(basename $i); done",
