@@ -1,3 +1,11 @@
+### [1.4.2](https://github.com/power-assert-js/power-assert/releases/tag/v1.4.2) (2016-11-11)
+
+
+#### Bug Fixes
+
+  * [Fix deepStrictEqual usage to run with old Node (v0.12)](https://github.com/power-assert-js/power-assert/pull/71)
+
+
 ### [1.4.1](https://github.com/power-assert-js/power-assert/releases/tag/v1.4.1) (2016-05-10)
 
   * update [universal-deep-strict-equal](https://github.com/twada/universal-deep-strict-equal) to 1.2.1 ([70bc3fb9](https://github.com/power-assert-js/power-assert/commit/70bc3fb91eaee7271d7be111b3461a7dc3638045))
