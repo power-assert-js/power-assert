@@ -7,7 +7,7 @@
  *   author: Takuto Wada <takuto.wada@gmail.com>
  *   contributors: azu, vvakame, yosuke-furukawa, teppeis, zoncoen, falsandtru, James Talmage, Lesha Koss
  *   homepage: https://github.com/power-assert-js/power-assert
- *   version: 1.4.1
+ *   version: 1.4.2
  *
  * acorn:
  *   license: MIT (http://opensource.org/licenses/MIT)
