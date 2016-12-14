@@ -20,6 +20,7 @@ What is `power-assert`?
  * __Stop memorizing tons of assertion APIs. Just create expressions that return a truthy value or not__ and power-assert will show it to your right on the screen as part of your failure message without you having to type in a message at all.
  * the core value of power-assert is absolute simplicity and stability. Especially, power-assert sticks to the simplest form of testing, `assert(any_expression)`.
  * see slides: ["power-assert, mechanism and philosophy"](https://www.slideshare.net/t_wada/power-assert-nodefest-2014) -- talk at NodeFest 2014.
+ * __[NEW] Now you don't need `require('power-assert')` any more. Keep using `require('assert')`, and power-assert enhances them transparently.__ See slides: [From Library to Tool - power-assert as a General Purpose Assertion Enhancement Tool](https://speakerdeck.com/twada/from-library-to-tool-power-assert-as-a-general-purpose-assertion-enhancement-tool)
  * to gain power-assert output, __you need to transform your test code__ to produce power-assert output (without transformation, power-assert works just as normal `assert` does).
  * fully compatible with [assert](https://nodejs.org/api/assert.html). So you can stop using power-assert and back to assert easily.
  * has [online demo site](https://azu.github.io/power-assert-demo/).
@@ -157,7 +158,7 @@ __Note:__ There is an [online demo site](https://azu.github.io/power-assert-demo
 ### Target test code (using Mocha in this example)
 
 ```javascript
-var assert = require('power-assert');
+var assert = require('assert');
 
 describe('Array', function(){
     beforeEach(function(){
@@ -349,23 +350,12 @@ First, install `power-assert` and `espower-loader` via npm.
 
     $ npm install --save-dev power-assert espower-loader
 
-Second, require `power-assert` in your test.
-
-    --- a/test/your_test.js
-    +++ b/test/your_test.js
-    @@ -1,4 +1,4 @@
-    -var assert = require('assert');
-    +var assert = require('power-assert');
-
-
-Third, put `enable-power-assert.js` somewhere in your project, where `pattern` matches to target test files.
+Second, put `enable-power-assert.js` somewhere in your project, where `pattern` matches to target test files.
 
 ```javascript
 require('espower-loader')({
-    // directory where match starts with
-    cwd: process.cwd(),
     // glob pattern using minimatch module
-    pattern: 'test/**/*.js'
+    pattern: '{src,test}/**/*.js'
 });
 ```
 
