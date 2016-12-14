@@ -17,7 +17,7 @@ What is `power-assert`?
  * is an implementation of "Power Assert" concept in JavaScript.
  * provides descriptive assertion messages through standard [assert](https://nodejs.org/api/assert.html) interface.
  * __No API is the best API__. With power-assert, __you don't need to learn many assertion library APIs__ (in most cases, all you need to remember is just an `assert(any_expression)` function)
- * __Stop memorizing an assertion API. Just create expressions that return a truthy value or not__ and power-assert will show it to your right on the screen as part of your failure message without you having to type in a message at all.
+ * __Stop memorizing tons of assertion APIs. Just create expressions that return a truthy value or not__ and power-assert will show it to your right on the screen as part of your failure message without you having to type in a message at all.
  * the core value of power-assert is absolute simplicity and stability. Especially, power-assert sticks to the simplest form of testing, `assert(any_expression)`.
  * see slides: ["power-assert, mechanism and philosophy"](https://www.slideshare.net/t_wada/power-assert-nodefest-2014) -- talk at NodeFest 2014.
  * to gain power-assert output, __you need to transform your test code__ to produce power-assert output (without transformation, power-assert works just as normal `assert` does).
