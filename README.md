@@ -74,6 +74,7 @@ FAQ
 - What is the ['Critical dependencies' warning shown by webpack](https://github.com/power-assert-js/babel-plugin-espower/issues/14#issuecomment-197272436) and how to [suppress warnings](https://github.com/power-assert-js/babel-plugin-espower/issues/14#issuecomment-197909419)?
 - [Causes `TypeError: assert._capt is not a function`](https://github.com/power-assert-js/power-assert/issues/42)
 - [How to deal with `assert` calls in production](https://github.com/power-assert-js/power-assert/issues/43#issuecomment-208851919)
+- [Support JSX tags?](https://github.com/power-assert-js/power-assert/issues/34#issuecomment-269848058)
 
 
 INSTALL
