@@ -664,6 +664,16 @@ SUPPORTED FRAMEWORKS
 * [Lab](https://github.com/hapijs/lab)
 
 
+OUR SUPPORT POLICY
+---------------------------------------
+
+For the Transpiler side, we support Node under maintenance. In other words, we stop supporting old Node version when [their maintenance ends](https://github.com/nodejs/LTS).
+
+For the Runtime side, we support [Node under maintenance](https://github.com/nodejs/LTS) and "modern enough" browsers such as Chrome, Firefox, Safari, Edge etc.
+
+Any other environments are not supported officially (means that we do not test against them on CI service). power-assert is known to work with old browsers, and trying to keep them working though.
+
+
 AUTHOR
 ---------------------------------------
 * [Takuto Wada](https://github.com/twada)
