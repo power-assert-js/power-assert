@@ -33,7 +33,7 @@ What is `power-assert`?
  * provides [grunt task](https://github.com/power-assert-js/grunt-espower) and [gulp plugin](https://github.com/power-assert-js/gulp-espower).
  * provides [command](https://github.com/power-assert-js/espower-cli).
  * provides [custom module loader](https://github.com/power-assert-js/espower-loader) and its [convenient config module](https://github.com/power-assert-js/intelli-espower-loader).
- * provides [karma preprocessor](https://github.com/power-assert-js/karma-espower-preprocessor).
+ * provides [Karma Adapter](https://github.com/power-assert-js/karma-power-assert) and [Karma Preprocessor](https://github.com/power-assert-js/karma-espower-preprocessor).
  * supports ES6+ through [babel plugin](https://github.com/power-assert-js/babel-plugin-espower).
  * supports [CoffeeScript](https://github.com/power-assert-js/espower-coffee).
  * supports [TypeScript](https://github.com/power-assert-js/espower-typescript).
@@ -577,6 +577,7 @@ CONTRIBUTORS
 * [falsandtru (falsandtru)](https://github.com/falsandtru)
 * [James Talmage (jamestalmage)](https://github.com/jamestalmage)
 * [LeshaKoss (Lesha Koss)](https://github.com/LeshaKoss)
+* [watilde (Daijirō Wachi)](https://github.com/watilde)
 
 
 LICENSE
