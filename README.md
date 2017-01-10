@@ -575,7 +575,7 @@ CONTRIBUTORS
 * [teppeis (Teppei Sato)](https://github.com/teppeis)
 * [zoncoen (Kenta Mori)](https://github.com/zoncoen)
 * [falsandtru (falsandtru)](https://github.com/falsandtru)
-* [James Talmage (jamestalmage)](https://github.com/jamestalmage)
+* [jamestalmage (James Talmage)](https://github.com/jamestalmage)
 * [LeshaKoss (Lesha Koss)](https://github.com/LeshaKoss)
 * [watilde (Daijirō Wachi)](https://github.com/watilde)
 

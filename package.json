@@ -16,19 +16,19 @@
       "url": "https://github.com/azu"
     },
     {
-      "name": "vvakame",
+      "name": "Masahiro Wakame",
       "url": "https://github.com/vvakame"
     },
     {
-      "name": "yosuke-furukawa",
+      "name": "Yosuke Furukawa",
       "url": "https://github.com/yosuke-furukawa"
     },
     {
-      "name": "teppeis",
+      "name": "Teppei Sato",
       "url": "https://github.com/teppeis"
     },
     {
-      "name": "zoncoen",
+      "name": "Kenta Mori",
       "url": "https://github.com/zoncoen"
     },
     {
@@ -41,11 +41,11 @@
     },
     {
       "name": "Lesha Koss",
-      "homepage": "https://github.com/LeshaKoss"
+      "url": "https://github.com/LeshaKoss"
     },
     {
       "name": "Daijirō Wachi",
-      "homepage": "https://github.com/watilde"
+      "url": "https://github.com/watilde"
     }
   ],
   "dependencies": {
