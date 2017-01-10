@@ -543,6 +543,8 @@ SUPPORTED FRAMEWORKS
 
 ### FRAMEWORKS KNOWN TO WORK
 
+* [Karma](https://karma-runner.github.io/) with Mocha
+* [testem](https://github.com/testem/testem) with Mocha
 * [QUnit](https://qunitjs.com/)
 * [nodeunit](https://github.com/caolan/nodeunit)
 * [buster-assertions](https://docs.busterjs.org/en/latest/modules/buster-assertions/)
