@@ -22,16 +22,16 @@ describe('power-assert es6', function () {
             expectPowerAssertMessage (() => {
                 assert(`${alice.name} and ${bob.name}` === `bob and alice`);
             }, [
-                '  assert(`${ alice.name } and ${ bob.name }` === `bob and alice`)',
-                '         |   |     |             |   |       |   |               ',
-                '         |   |     |             |   |       |   "bob and alice" ',
-                '         |   |     |             |   "bob"   false               ',
-                '         |   |     "alice"       Object{name:"bob"}              ',
-                '         |   Object{name:"alice"}                                ',
-                '         "alice and bob"                                         ',
+                '  assert(`${alice.name} and ${bob.name}` === `bob and alice`)',
+                '         |  |     |           |   |      |   |               ',
+                '         |  |     |           |   |      |   "bob and alice" ',
+                '         |  |     |           |   "bob"  false               ',
+                '         |  |     "alice"     Object{name:"bob"}             ',
+                '         |  Object{name:"alice"}                             ',
+                '         "alice and bob"                                     ',
                 '  ',
                 '  --- [string] `bob and alice`',
-                '  +++ [string] `${ alice.name } and ${ bob.name }`',
+                '  +++ [string] `${alice.name} and ${bob.name}`',
                 '  @@ -1,13 +1,13 @@',
                 '  -bob and alice',
                 '  +alice and bob',
@@ -65,12 +65,12 @@ describe('power-assert es6', function () {
                     [`${ name } greet`]: `Hello, I am ${ name }`
                 }, null);
             }, [
-                '  assert.deepEqual({ name, [`${ name } greet`]: `Hello, I am ${ name }` }, null)',
-                '                   |        |   |               |               |               ',
-                '                   |        |   |               |               "bobby"         ',
-                '                   |        |   "bobby"         "Hello, I am bobby"             ',
-                '                   |        "bobby greet"                                       ',
-                '                   Object{name:"bobby","bobby greet":"Hello, I am bobby"}       '
+                '  assert.deepEqual({ name, [`${name} greet`]: `Hello, I am ${name}` }, null)',
+                '                   |        |  |              |              |              ',
+                '                   |        |  |              |              "bobby"        ',
+                '                   |        |  "bobby"        "Hello, I am bobby"           ',
+                '                   |        "bobby greet"                                   ',
+                '                   Object{name:"bobby","bobby greet":"Hello, I am bobby"}   '
             ]);
         });
     });
