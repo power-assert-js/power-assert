@@ -27,6 +27,9 @@ addons:
       - google-chrome
     packages:
       - google-chrome-stable
+env:
+  global:
+    - PHANTOMJS_CDNURL="https://cnpmjs.org/downloads"
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CHROME_BIN=chromium-browser; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export DISPLAY=:99.0; fi
