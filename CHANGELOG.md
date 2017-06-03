@@ -1,3 +1,11 @@
+### [1.4.3](https://github.com/power-assert-js/power-assert/releases/tag/v1.4.3) (2017-06-04)
+
+
+#### Bug Fixes
+
+  * [Update empower to 1.2.2 for Node v8 support](https://github.com/power-assert-js/power-assert/pull/86)
+
+
 ### [1.4.2](https://github.com/power-assert-js/power-assert/releases/tag/v1.4.2) (2016-11-11)
 
 
