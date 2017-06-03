@@ -10,7 +10,7 @@ describe('power-assert client should work with not-instrumented code', function 
                 body();
                 expect().fail("AssertionError should be thrown");
             } catch (e) {
-                expect(e.name).to.be('AssertionError');
+                expect(e.name).to.match(/^AssertionError/);
                 expect(e.message).to.be('plain assertion message');
             }
         };
