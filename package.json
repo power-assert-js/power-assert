@@ -1,7 +1,7 @@
 {
   "name": "power-assert",
   "description": "Power Assert in JavaScript",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "author": {
     "name": "Takuto Wada",
     "email": "takuto.wada@gmail.com",
