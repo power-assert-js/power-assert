@@ -50,15 +50,15 @@ What is `power-assert`?
       1) Array #indexOf() should return index when the value is present:
          AssertionError: # path/to/test/mocha_node.js:10
     
-      assert(this.ary.indexOf(zero) === two)
-                  |   |       |     |   |
-                  |   |       |     |   2
-                  |   -1      0     false
-                  [1,2,3]
+      assert(ary.indexOf(zero) === two)
+             |   |       |     |   |
+             |   |       |     |   2
+             |   -1      0     false
+             [1,2,3]
     
       [number] two
       => 2
-      [number] this.ary.indexOf(zero)
+      [number] ary.indexOf(zero)
       => -1
 
 
@@ -127,17 +127,17 @@ Though power-assert is fully compatible with standard [assert](https://nodejs.or
 The core value of power-assert is absolute simplicity and stability. Especially, power-assert sticks to the simplest form of testing, `assert(any_expression)`.
 
 
-        assert(this.types[index].name === bob.name)
-                    |    ||      |    |   |   |
-                    |    ||      |    |   |   "bob"
-                    |    ||      |    |   Person{name:"bob",age:5}
-                    |    ||      |    false
-                    |    |11     "alice"
-                    |    Person{name:"alice",age:3}
-                    ["string",98.6,true,false,null,undefined,#Array#,#Object#,NaN,Infinity,/^not/,#Person#]
-        
+        assert(types[index].name === bob.name)
+               |    ||      |    |   |   |
+               |    ||      |    |   |   "bob"
+               |    ||      |    |   Person{name:"bob",age:5}
+               |    ||      |    false
+               |    |11     "alice"
+               |    Person{name:"alice",age:3}
+               ["string",98.6,true,false,null,undefined,#Array#,#Object#,NaN,Infinity,/^not/,#Person#]
+      
         --- [string] bob.name
-        +++ [string] this.types[index].name
+        +++ [string] types[index].name
         @@ -1,3 +1,5 @@
         -bob
         +alice
@@ -159,31 +159,37 @@ __Note:__ There is an [online demo site](https://azu.github.io/power-assert-demo
 ### Target test code (using Mocha in this example)
 
 ```javascript
-var assert = require('assert');
+'use strict';
+
+const assert = require('assert');
 
 describe('Array', function(){
-    beforeEach(function(){
-        this.ary = [1,2,3];
+    let ary;
+    beforeEach(() => {
+        ary = [1,2,3];
     });
-    describe('#indexOf()', function(){
-        it('should return index when the value is present', function(){
-            var zero = 0, two = 2;
-            assert(this.ary.indexOf(zero) === two);
+    describe('#indexOf()', () => {
+        it('should return index when the value is present', () => {
+            const zero = 0, two = 2;
+            assert(ary.indexOf(zero) === two);
         });
-        it('should return -1 when the value is not present', function(){
-            var minusOne = -1, two = 2;
-            assert.ok(this.ary.indexOf(two) === minusOne, 'THIS IS AN ASSERTION MESSAGE');
+        it('should return -1 when the value is not present', () => {
+            const minusOne = -1, two = 2;
+            assert.ok(ary.indexOf(two) === minusOne, 'THIS IS AN ASSERTION MESSAGE');
         });
     });
 });
 
-describe('various types', function(){
-    function Person(name, age) {
-        this.name = name;
-        this.age = age;
+describe('various types', () => {
+    let types;
+    class Person {
+        constructor(name, age) {
+            this.name = name;
+            this.age = age;
+        }
     }
-    beforeEach(function(){
-        this.types = [
+    beforeEach(() => {
+        types = [
             'string', 98.6, true, false, null, undefined,
             ['nested', 'array'],
             {object: true},
@@ -192,10 +198,10 @@ describe('various types', function(){
             new Person('alice', 3)
         ];
     });
-    it('demo', function(){
-        var index = this.types.length -1,
+    it('demo', () => {
+        const index = types.length -1,
             bob = new Person('bob', 5);
-        assert(this.types[index].name === bob.name);
+        assert(types[index].name === bob.name);
     });
 });
 ```
@@ -248,17 +254,17 @@ Put tests into `test` directory then run. You will see the power-assert output a
     
       1) Array #indexOf() should return index when the value is present:
     
-          AssertionError:   # test/mocha_node.js:10
+          AssertionError:   # test/example2.js:13
     
-      assert(this.ary.indexOf(zero) === two)
-                  |   |       |     |   |
-                  |   |       |     |   2
-                  |   -1      0     false
-                  [1,2,3]
+      assert(ary.indexOf(zero) === two)
+             |   |       |     |   |
+             |   |       |     |   2
+             |   -1      0     false
+             [1,2,3]
     
       [number] two
       => 2
-      [number] this.ary.indexOf(zero)
+      [number] ary.indexOf(zero)
       => -1
     
           + expected - actual
@@ -266,21 +272,21 @@ Put tests into `test` directory then run. You will see the power-assert output a
           -false
           +true
     
-          at Context.<anonymous> (test/mocha_node.js:10:13)
+          at Context.it (test/example2.js:13:13)
     
       2) Array #indexOf() should return -1 when the value is not present:
     
-          AssertionError: THIS IS AN ASSERTION MESSAGE   # test/mocha_node.js:14
+          AssertionError: THIS IS AN ASSERTION MESSAGE   # test/example2.js:17
     
-      assert.ok(this.ary.indexOf(two) === minusOne, 'THIS IS AN ASSERTION MESSAGE')
-                     |   |       |    |   |
-                     |   |       |    |   -1
-                     |   1       2    false
-                     [1,2,3]
+      assert.ok(ary.indexOf(two) === minusOne, 'THIS IS AN ASSERTION MESSAGE')
+                |   |       |    |   |
+                |   |       |    |   -1
+                |   1       2    false
+                [1,2,3]
     
       [number] minusOne
       => -1
-      [number] this.ary.indexOf(two)
+      [number] ary.indexOf(two)
       => 1
     
           + expected - actual
@@ -288,23 +294,23 @@ Put tests into `test` directory then run. You will see the power-assert output a
           -false
           +true
     
-          at Context.<anonymous> (test/mocha_node.js:14:20)
+          at Context.it (test/example2.js:17:20)
     
       3) various types demo:
     
-          AssertionError:   # test/mocha_node.js:37
+          AssertionError:   # test/example2.js:43
     
-      assert(this.types[index].name === bob.name)
-                  |    ||      |    |   |   |
-                  |    ||      |    |   |   "bob"
-                  |    ||      |    |   Person{name:"bob",age:5}
-                  |    ||      |    false
-                  |    |11     "alice"
-                  |    Person{name:"alice",age:3}
-                  ["string",98.6,true,false,null,undefined,#Array#,#Object#,NaN,Infinity,/^not/,#Person#]
+      assert(types[index].name === bob.name)
+             |    ||      |    |   |   |
+             |    ||      |    |   |   "bob"
+             |    ||      |    |   Person{name:"bob",age:5}
+             |    ||      |    false
+             |    |11     "alice"
+             |    Person{name:"alice",age:3}
+             ["string",98.6,true,false,null,undefined,#Array#,#Object#,NaN,Infinity,/^not/,#Person#]
     
       --- [string] bob.name
-      +++ [string] this.types[index].name
+      +++ [string] types[index].name
       @@ -1,3 +1,5 @@
       -bob
       +alice
@@ -315,7 +321,8 @@ Put tests into `test` directory then run. You will see the power-assert output a
           -false
           +true
     
-          at Context.<anonymous> (test/mocha_node.js:37:9)
+          at Context.it (test/example2.js:43:9)
+
 
 
 SEED PROJECTS
