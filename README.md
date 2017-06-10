@@ -38,6 +38,7 @@ What is `power-assert`?
  * supports [CoffeeScript](https://github.com/power-assert-js/espower-coffee).
  * supports [TypeScript](https://github.com/power-assert-js/espower-typescript).
  * has [TypeScript type definition](https://github.com/borisyankov/DefinitelyTyped/blob/master/power-assert/power-assert.d.ts)
+ * has code migration tool that transforms existing code from [chai](https://github.com/twada/chai-to-assert), [should.js](https://github.com/node-modules/should2assert) and [expect.js](https://github.com/twada/expect-js-to-assert) to assert.
  * [AVA](https://github.com/avajs/ava), the futuristic test runner, now [comes with power-assert builtin](https://github.com/avajs/ava#enhanced-assertion-messages)
  * has [Lab transformer](https://github.com/feugy/lab-espower-transformer) to enable power-assert on [Lab](https://github.com/hapijs/lab)
  * has [module loader](https://github.com/tracecomms/espower-ts-node) to get [ts-node](https://github.com/TypeStrong/ts-node) working together with power-assert
@@ -75,6 +76,7 @@ FAQ
 - [Causes `TypeError: assert._capt is not a function`](https://github.com/power-assert-js/power-assert/issues/42)
 - [How to deal with `assert` calls in production](https://github.com/power-assert-js/power-assert/issues/43#issuecomment-208851919)
 - [Support JSX tags?](https://github.com/power-assert-js/power-assert/issues/34#issuecomment-269848058)
+- [Any tool to migrate `should/expect` code to `power-assert`?](https://github.com/power-assert-js/power-assert/issues/74)
 
 
 INSTALL
