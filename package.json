@@ -50,7 +50,7 @@
   ],
   "dependencies": {
     "define-properties": "^1.1.2",
-    "empower": "^1.2.2",
+    "empower": "^1.2.3",
     "power-assert-formatter": "^1.3.1",
     "universal-deep-strict-equal": "^1.2.1",
     "xtend": "^4.0.0"
