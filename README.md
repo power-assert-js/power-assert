@@ -21,7 +21,8 @@ What is `power-assert`?
  * the core value of power-assert is absolute simplicity and stability. Especially, power-assert sticks to the simplest form of testing, `assert(any_expression)`.
  * see slides: ["power-assert, mechanism and philosophy"](https://www.slideshare.net/t_wada/power-assert-nodefest-2014) -- talk at NodeFest 2014.
  * __[NEW] Now you don't need `require('power-assert')` any more. Keep using `require('assert')`, and power-assert enhances them transparently.__ See slides: [From Library to Tool - power-assert as a General Purpose Assertion Enhancement Tool](https://speakerdeck.com/twada/from-library-to-tool-power-assert-as-a-general-purpose-assertion-enhancement-tool)
- * to gain power-assert output, __you need to transform your test code__ to produce power-assert output (without transformation, power-assert works just as normal `assert` does).
+ * to gain power-assert output, __you need to transform your test code__ to produce power-assert output.
+ * `power-assert - power = assert`. Without code transpilation, power-assert works just as normal `assert` does.
  * fully compatible with [assert](https://nodejs.org/api/assert.html). So you can stop using power-assert and back to assert easily.
  * has [online demo site](https://azu.github.io/power-assert-demo/).
  * works both on server side and browser side.
