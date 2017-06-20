@@ -4,22 +4,22 @@ matrix:
     - os: linux
       dist: trusty
       sudo: required
-      node_js: "4"
+      node_js: "4" # to be removed 2018-04-01
     - os: linux
       dist: trusty
       sudo: required
-      node_js: "6"
+      node_js: "6" # to be removed 2019-04-01
     - os: osx
       osx_image: xcode8
-      node_js: "6"
+      node_js: "6" # to be removed 2019-04-01
     - os: linux
       dist: trusty
       sudo: required
-      node_js: "7"
+      node_js: "7" # to be removed 2017-06-30
     - os: linux
       dist: trusty
       sudo: required
-      node_js: "8"
+      node_js: "8" # to be removed 2020-01-01
 addons:
   firefox: latest
   apt:
