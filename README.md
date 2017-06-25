@@ -78,6 +78,7 @@ FAQ
 - [How to deal with `assert` calls in production](https://github.com/power-assert-js/power-assert/issues/43#issuecomment-208851919)
 - [Support JSX tags?](https://github.com/power-assert-js/power-assert/issues/34#issuecomment-269848058)
 - [Any tool to migrate `should/expect` code to `power-assert`?](https://github.com/power-assert-js/power-assert/issues/74)
+- [Conflicts with babel-plugin-istanbul?](https://github.com/power-assert-js/babel-preset-power-assert/issues/4)
 
 
 INSTALL
