@@ -6,6 +6,7 @@ describe('power-assert modules', function () {
     });
 
     it('amd', function (done) {
+        this.timeout(10 * 1e3);
         var iframe = document.createElement('iframe');
         iframe.src = '/base/test/fixture/amd.html';
         document.body.appendChild(iframe);
