@@ -9,9 +9,6 @@ matrix:
       dist: trusty
       sudo: required
       node_js: "6" # to be removed 2019-04-01
-    - os: osx
-      osx_image: xcode8
-      node_js: "6" # to be removed 2019-04-01
     - os: linux
       dist: trusty
       sudo: required
@@ -19,6 +16,9 @@ matrix:
     - os: linux
       dist: trusty
       sudo: required
+      node_js: "8" # to be removed 2020-01-01
+    - os: osx
+      osx_image: xcode8
       node_js: "8" # to be removed 2020-01-01
 addons:
   firefox: latest
