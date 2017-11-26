@@ -38,7 +38,7 @@ What is `power-assert`?
  * supports ES6+ through [babel plugin](https://github.com/power-assert-js/babel-plugin-espower).
  * supports [CoffeeScript](https://github.com/power-assert-js/espower-coffee).
  * supports [TypeScript](https://github.com/power-assert-js/espower-typescript).
- * has [TypeScript type definition](https://github.com/borisyankov/DefinitelyTyped/blob/master/power-assert/power-assert.d.ts)
+ * has [TypeScript type definition](https://www.npmjs.com/package/@types/power-assert)
  * has code migration tool that transforms existing code from [chai](https://github.com/twada/chai-to-assert), [should.js](https://github.com/node-modules/should2assert) and [expect.js](https://github.com/twada/expect-js-to-assert) to assert.
  * [AVA](https://github.com/avajs/ava), the futuristic test runner, now [comes with power-assert builtin](https://github.com/avajs/ava#enhanced-assertion-messages)
  * has [Lab transformer](https://github.com/feugy/lab-espower-transformer) to enable power-assert on [Lab](https://github.com/hapijs/lab)
