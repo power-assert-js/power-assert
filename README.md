@@ -102,23 +102,23 @@ API
 
 power-assert enhances these assert functions by [espower](https://github.com/power-assert-js/espower). Produces descriptive message when assertion is failed.
 
-* `assert(value, [message])`
-* `assert.ok(value, [message])`
-* `assert.equal(actual, expected, [message])`
-* `assert.notEqual(actual, expected, [message])`
-* `assert.strictEqual(actual, expected, [message])`
-* `assert.notStrictEqual(actual, expected, [message])`
-* `assert.deepEqual(actual, expected, [message])`
-* `assert.notDeepEqual(actual, expected, [message])`
-* `assert.deepStrictEqual(actual, expected, [message])`
-* `assert.notDeepStrictEqual(actual, expected, [message])`
+* [`assert(value, [message])`](https://nodejs.org/api/assert.html#assert_assert_value_message)
+* [`assert.ok(value, [message])`](https://nodejs.org/api/assert.html#assert_assert_ok_value_message)
+* [`assert.equal(actual, expected, [message])`](https://nodejs.org/api/assert.html#assert_assert_equal_actual_expected_message)
+* [`assert.notEqual(actual, expected, [message])`](https://nodejs.org/api/assert.html#assert_assert_notequal_actual_expected_message)
+* [`assert.strictEqual(actual, expected, [message])`](https://nodejs.org/api/assert.html#assert_assert_strictequal_actual_expected_message)
+* [`assert.notStrictEqual(actual, expected, [message])`](https://nodejs.org/api/assert.html#assert_assert_notstrictequal_actual_expected_message)
+* [`assert.deepEqual(actual, expected, [message])`](https://nodejs.org/api/assert.html#assert_assert_deepequal_actual_expected_message)
+* [`assert.notDeepEqual(actual, expected, [message])`](https://nodejs.org/api/assert.html#assert_assert_notdeepequal_actual_expected_message)
+* [`assert.deepStrictEqual(actual, expected, [message])`](https://nodejs.org/api/assert.html#assert_assert_deepstrictequal_actual_expected_message)
+* [`assert.notDeepStrictEqual(actual, expected, [message])`](https://nodejs.org/api/assert.html#assert_assert_notdeepstrictequal_actual_expected_message)
 
 power-assert is fully compatible with [assert](https://nodejs.org/api/assert.html). So functions below are also available though they are not enhanced (does not produce descriptive message).
 
-* `assert.fail(actual, expected, message, operator)`
-* `assert.throws(block, [error], [message])`
-* `assert.doesNotThrow(block, [message])`
-* `assert.ifError(value)`
+* [`assert.fail(actual, expected, message, operator)`](https://nodejs.org/api/assert.html#assert_assert_fail_actual_expected_message_operator_stackstartfunction)
+* [`assert.throws(block, [error], [message])`](https://nodejs.org/api/assert.html#assert_assert_throws_block_error_message)
+* [`assert.doesNotThrow(block, [message])`](https://nodejs.org/api/assert.html#assert_assert_doesnotthrow_block_error_message)
+* [`assert.ifError(value)`](https://nodejs.org/api/assert.html#assert_assert_iferror_value)
 
 power-assert provides an [API for customization](https://github.com/power-assert-js/power-assert#customization-api).
 
