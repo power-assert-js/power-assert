@@ -43,6 +43,12 @@ function customize (customOptions) {
         extend(empowerOptions, options.assertion)
     );
     poweredAssert.customize = customize;
+    poweredAssert.strict = extend(poweredAssert, {
+        equal: poweredAssert.strictEqual,
+        deepEqual: poweredAssert.deepStrictEqual,
+        notEqual: poweredAssert.notStrictEqual,
+        notDeepEqual: poweredAssert.notDeepStrictEqual
+    });
     return poweredAssert;
 }
 

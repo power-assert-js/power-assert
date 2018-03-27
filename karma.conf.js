@@ -12,6 +12,7 @@ module.exports = function (config) {
             { pattern: 'espowered_tests/tobe_instrumented/assertion.js', watched: true, served: true, included: true },
             { pattern: 'espowered_tests/tobe_instrumented/assertion.es6.js', watched: true, served: true, included: true },
             { pattern: 'espowered_tests/tobe_instrumented/customization.js', watched: true, served: true, included: true },
+            { pattern: 'espowered_tests/tobe_instrumented/strict_mode.js', watched: true, served: true, included: true },
             { pattern: 'espowered_tests/not_tobe_instrumented/not_instrumented.js', watched: true, served: true, included: true },
             { pattern: 'espowered_tests/tobe_instrumented/modules.js', watched: true, served: true, included: true }
         ],
