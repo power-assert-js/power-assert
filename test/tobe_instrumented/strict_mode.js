@@ -71,4 +71,13 @@ describe('strict mode support', function () {
             '                   Object{a:3}                     '
         ]);
     });
+
+    it('structural compatibility between strict mode and legacy mode', function () {
+        var legacyModeProps = Object.keys(legacyModeAssert);
+        expect(legacyModeProps.length).to.be.above(0);
+        legacyModeProps.every(function (name) {
+            expect(assert).to.have.property(name);
+            expect(typeof assert[name]).to.be.equal(typeof legacyModeAssert[name]);
+        });
+    });
 });
