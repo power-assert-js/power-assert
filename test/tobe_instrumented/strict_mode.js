@@ -26,6 +26,10 @@ describe('strict mode support', function () {
         }
     };
 
+    it('`strict` mode assert should also have `strict` property', function () {
+        expect(typeof assert.strict).to.equal('function');
+    });
+
     it('`strict` mode assert should also be a function', function () {
         var foo = 'foo', bar = 8;
         expectPowerAssertMessage(function () {

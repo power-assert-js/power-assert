@@ -54,7 +54,8 @@ function customize (customOptions) {
             equal: strict.strictEqual,
             deepEqual: strict.deepStrictEqual,
             notEqual: strict.notStrictEqual,
-            notDeepEqual: strict.notDeepStrictEqual
+            notDeepEqual: strict.notDeepStrictEqual,
+            strict: strict
         });
     }
     return poweredAssert;
