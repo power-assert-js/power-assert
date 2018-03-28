@@ -46,13 +46,17 @@ function customize (customOptions) {
     };
     var poweredAssert = applyEmpower(baseAssert);
     poweredAssert.customize = customize;
-    var strict = applyEmpower(baseAssert);
-    poweredAssert.strict = assign(strict, {
-        equal: strict.strictEqual,
-        deepEqual: strict.deepStrictEqual,
-        notEqual: strict.notStrictEqual,
-        notDeepEqual: strict.notDeepStrictEqual
-    });
+    if (typeof baseAssert.strict === 'function') {
+        poweredAssert.strict = applyEmpower(baseAssert.strict);
+    } else {
+        var strict = applyEmpower(baseAssert);
+        poweredAssert.strict = assign(strict, {
+            equal: strict.strictEqual,
+            deepEqual: strict.deepStrictEqual,
+            notEqual: strict.notStrictEqual,
+            notDeepEqual: strict.notDeepStrictEqual
+        });
+    }
     return poweredAssert;
 }
 
