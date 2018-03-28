@@ -26,6 +26,24 @@ describe('strict mode support', function () {
         }
     };
 
+    it('`strict` mode assert should also be a function', function () {
+        var foo = 'foo', bar = 8;
+        expectPowerAssertMessage(function () {
+            assert(foo === bar);
+        }, [
+            '  assert(foo === bar)',
+            '         |   |   |   ',
+            '         |   |   8   ',
+            '         |   false   ',
+            '         "foo"       ',
+            '  ',
+            '  [number] bar',
+            '  => 8',
+            '  [string] foo',
+            '  => "foo"'
+        ]);
+    });
+
     it('equal becomes strictEqual', function () {
         var three = 3, threeInStr = '3';
         expectPowerAssertMessage(function () {

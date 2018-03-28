@@ -13,7 +13,7 @@ var baseAssert = require('assert');
 var _deepEqual = require('universal-deep-strict-equal');
 var empower = require('empower');
 var formatter = require('power-assert-formatter');
-var extend = require('xtend');
+var assign = require('xtend/mutable');
 var define = require('define-properties');
 var empowerOptions = {
     modifyMessageOnRethrow: true,
@@ -37,17 +37,21 @@ if (typeof baseAssert.notDeepStrictEqual !== 'function') {
 
 function customize (customOptions) {
     var options = customOptions || {};
-    var poweredAssert = empower(
-        baseAssert,
-        formatter(options.output),
-        extend(empowerOptions, options.assertion)
-    );
+    var applyEmpower = function (fn) {
+        return empower(
+            fn,
+            formatter(options.output),
+            assign({}, empowerOptions, options.assertion)
+        );
+    };
+    var poweredAssert = applyEmpower(baseAssert);
     poweredAssert.customize = customize;
-    poweredAssert.strict = extend(poweredAssert, {
-        equal: poweredAssert.strictEqual,
-        deepEqual: poweredAssert.deepStrictEqual,
-        notEqual: poweredAssert.notStrictEqual,
-        notDeepEqual: poweredAssert.notDeepStrictEqual
+    var strict = applyEmpower(baseAssert);
+    poweredAssert.strict = assign(strict, {
+        equal: strict.strictEqual,
+        deepEqual: strict.deepStrictEqual,
+        notEqual: strict.notStrictEqual,
+        notDeepEqual: strict.notDeepStrictEqual
     });
     return poweredAssert;
 }
