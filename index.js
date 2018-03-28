@@ -54,10 +54,10 @@ function customize (customOptions) {
             equal: strict.strictEqual,
             deepEqual: strict.deepStrictEqual,
             notEqual: strict.notStrictEqual,
-            notDeepEqual: strict.notDeepStrictEqual,
-            strict: strict
+            notDeepEqual: strict.notDeepStrictEqual
         });
     }
+    poweredAssert.strict.strict = poweredAssert.strict;
     return poweredAssert;
 }
 

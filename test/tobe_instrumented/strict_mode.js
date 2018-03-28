@@ -30,6 +30,11 @@ describe('strict mode support', function () {
         expect(typeof assert.strict).to.equal('function');
     });
 
+    it('`strict` property of strict mode assert should also be an empowered one', function () {
+        // `_empowered` is a hidden property to determine whether target function is already empowered or not.
+        expect(assert.strict._empowered).to.equal(true);
+    });
+
     it('`strict` mode assert should also be a function', function () {
         var foo = 'foo', bar = 8;
         expectPowerAssertMessage(function () {
