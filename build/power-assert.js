@@ -7,11 +7,11 @@
  *   author: Takuto Wada <takuto.wada@gmail.com>
  *   contributors: azu, Masahiro Wakame, Yosuke Furukawa, Teppei Sato, Kenta Mori, falsandtru, James Talmage, Lesha Koss, Daijirō Wachi
  *   homepage: https://github.com/power-assert-js/power-assert
- *   version: 1.4.4
+ *   version: 1.5.0
  *
  * acorn:
  *   license: MIT (http://opensource.org/licenses/MIT)
- *   maintainers: marijn <marijnh@gmail.com>
+ *   maintainers: Marijn Haverbeke <marijnh@gmail.com>, Ingvar Stepanyan <me@rreverser.com>
  *   contributors: List of Acorn contributors. Updated before every release., Adrian Rakovsky, Alistair Braidwood, Amila Welihinda, Andres Suarez, Angelo, Aparajita Fishman, Arian Stolwijk, Artem Govorov, Brandon Mills, Charles Hughes, Conrad Irwin, Daniel Tschinder, David Bonnet, Domenico Matteo, Forbes Lindesay, Gilad Peleg, impinball, Ingvar Stepanyan, Jackson Ray Hamilton, Jesse McCarthy, Jiaxing Wang, Joel Kemp, Johannes Herr, Jordan Klassen, Jürg Lehni, Kai Cataldo, keeyipchan, Keheliya Gallaba, Kevin Irish, Kevin Kwok, krator, Marijn Haverbeke, Martin Carlberg, Mat Garcia, Mathias Bynens, Mathieu 'p01' Henri, Matthew Bastien, Max Schaefer, Max Zerzouri, Mihai Bazon, Mike Rennie, naoh, Nicholas C. Zakas, Nick Fitzgerald, Olivier Thomann, Oskar Schöldström, Paul Harper, Peter Rust, PlNG, Prayag Verma, ReadmeCritic, r-e-d, Richard Gibson, Rich Harris, Sebastian McKenzie, Simen Bekkhus, Timothy Gu, Toru Nagashima, Wexpo Lyu, zsjforcn
  *   homepage: https://github.com/ternjs/acorn
  *   version: 4.0.13
@@ -19,34 +19,29 @@
  * acorn-es7-plugin:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: matatbread
- *   maintainers: matatbread <npm@mailed.me.uk>
  *   homepage: https://github.com/MatAtBread/acorn-es7-plugin#readme
  *   version: 1.1.7
  *
  * array-filter:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Julian Gruber <mail@juliangruber.com>
- *   maintainers: juliangruber <julian@juliangruber.com>
  *   homepage: https://github.com/juliangruber/array-filter
  *   version: 1.0.0
  *
  * assert:
  *   license: MIT (http://opensource.org/licenses/MIT)
- *   maintainers: coolaj86 <coolaj86@gmail.com>, cwmma <calvin.metcalf@gmail.com>, defunctzombie <shtylman@gmail.com>
  *   homepage: https://github.com/defunctzombie/commonjs-assert
  *   version: 1.4.1
  *
  * base64-js:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: T. Jameson Little <t.jameson.little@gmail.com>
- *   maintainers: beatgammit <t.jameson.little@gmail.com>, feross <feross@feross.org>
  *   homepage: https://github.com/beatgammit/base64-js
- *   version: 1.2.0
+ *   version: 1.2.3
  *
  * buffer:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Feross Aboukhadijeh <feross@feross.org>
- *   maintainers: feross <feross@feross.org>
  *   contributors: Romain Beauxis <toots@rastageeks.org>, James Halliday <mail@substack.net>
  *   homepage: https://github.com/feross/buffer
  *   version: 4.9.1
@@ -54,40 +49,34 @@
  * call-signature:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: James Talmage <james@talmage.io>
- *   maintainers: jamestalmage <james@talmage.io>, twada <takuto.wada@gmail.com>
  *   homepage: https://github.com/jamestalmage/call-signature#readme
  *   version: 0.0.2
  *
  * core-js:
  *   license: MIT (http://opensource.org/licenses/MIT)
- *   maintainers: zloirock <zloirock@zloirock.ru>
  *   homepage: https://github.com/zloirock/core-js#readme
- *   version: 2.4.1
+ *   version: 2.5.4
  *
  * define-properties:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Jordan Harband
- *   maintainers: ljharb <ljharb@gmail.com>
  *   homepage: https://github.com/ljharb/define-properties#readme
  *   version: 1.1.2
  *
  * diff-match-patch:
  *   license: http://www.apache.org/licenses/LICENSE-2.0
- *   maintainers: forbeslindesay <forbes@lindeay.co.uk>
  *   homepage: https://github.com/ForbesLindesay/diff-match-patch#readme
  *   version: 1.0.0
  *
  * eastasianwidth:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Masaki Komagata
- *   maintainers: komagata <komagata@gmail.com>
  *   homepage: https://github.com/komagata/eastasianwidth#readme
  *   version: 0.1.1
  *
  * empower:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Takuto Wada <takuto.wada@gmail.com>
- *   maintainers: twada <takuto.wada@gmail.com>
  *   contributors: James Talmage
  *   homepage: https://github.com/power-assert-js/empower
  *   version: 1.2.3
@@ -95,7 +84,6 @@
  * empower-core:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Takuto Wada <takuto.wada@gmail.com>
- *   maintainers: twada <takuto.wada@gmail.com>
  *   contributors: James Talmage
  *   homepage: http://github.com/twada/empower-core
  *   version: 0.6.2
@@ -103,60 +91,52 @@
  * espurify:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Takuto Wada <takuto.wada@gmail.com>
- *   maintainers: twada <takuto.wada@gmail.com>
  *   homepage: https://github.com/estools/espurify
  *   version: 1.7.0
  *
  * estraverse:
  *   license: BSD-2-Clause (http://opensource.org/licenses/BSD-2-Clause)
- *   maintainers: constellation <utatane.tea@gmail.com>, michaelficarra <npm@michael.ficarra.me>, nzakas <nicholas@nczconsulting.com>
+ *   maintainers: Yusuke Suzuki <utatane.tea@gmail.com>
  *   homepage: https://github.com/estools/estraverse
  *   version: 4.2.0
  *
  * events:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Irakli Gozalishvili <rfobic@gmail.com>
- *   maintainers: gozala <rfobic@gmail.com>, defunctzombie <shtylman@gmail.com>
  *   homepage: https://github.com/Gozala/events#readme
  *   version: 1.1.1
  *
  * foreach:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Manuel Stofer <manuel@takimata.ch>
- *   maintainers: manuelstofer <manuel@takimata.ch>
  *   contributors: Manuel Stofer, Jordan Harband
- *   homepage: https://github.com/manuelstofer/foreach
+ *   homepage: https://github.com/manuelstofer/foreach#readme
  *   version: 2.0.5
  *
  * ieee754:
  *   license: BSD-3-Clause (http://opensource.org/licenses/BSD-3-Clause)
  *   author: Feross Aboukhadijeh <feross@feross.org>
- *   maintainers: feross <feross@feross.org>
  *   contributors: Romain Beauxis <toots@rastageeks.org>
  *   homepage: https://github.com/feross/ieee754#readme
- *   version: 1.1.8
+ *   version: 1.1.11
  *
  * indexof:
- *   maintainers: tjholowaychuk <tj@vision-media.ca>
  *   version: 0.0.1
  *
  * inherits:
  *   license: ISC (http://opensource.org/licenses/ISC)
- *   maintainers: isaacs <i@izs.me>
  *   homepage: https://github.com/isaacs/inherits#readme
  *   version: 2.0.1
  *
  * isarray:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Julian Gruber <mail@juliangruber.com>
- *   maintainers: juliangruber <julian@juliangruber.com>
  *   homepage: https://github.com/juliangruber/isarray
  *   version: 1.0.0
  *
  * object-keys:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Jordan Harband <ljharb@gmail.com>
- *   maintainers: ljharb <ljharb@gmail.com>
  *   contributors: Jordan Harband <ljharb@gmail.com>, Raynos <raynos2@gmail.com>, Nathan Rajlich <nathan@tootallnate.net>, Ivan Starkov <istarkov@gmail.com>, Gary Katsevman <git@gkatsev.com>
  *   homepage: https://github.com/ljharb/object-keys#readme
  *   version: 1.0.11
@@ -164,14 +144,12 @@
  * power-assert-context-formatter:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Takuto Wada <takuto.wada@gmail.com>
- *   maintainers: twada <takuto.wada@gmail.com>
  *   homepage: https://github.com/twada/power-assert-runtime
  *   version: 1.1.1
  *
  * power-assert-context-reducer-ast:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Takuto Wada <takuto.wada@gmail.com>
- *   maintainers: twada <takuto.wada@gmail.com>
  *   contributors: Haoliang Gao
  *   homepage: https://github.com/twada/power-assert-runtime
  *   version: 1.1.2
@@ -179,14 +157,12 @@
  * power-assert-context-traversal:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Takuto Wada <takuto.wada@gmail.com>
- *   maintainers: twada <takuto.wada@gmail.com>
  *   homepage: https://github.com/twada/power-assert-runtime
  *   version: 1.1.1
  *
  * power-assert-formatter:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Takuto Wada <takuto.wada@gmail.com>
- *   maintainers: twada <takuto.wada@gmail.com>
  *   contributors: James Talmage
  *   homepage: https://github.com/power-assert-js/power-assert-formatter
  *   version: 1.4.1
@@ -194,70 +170,60 @@
  * power-assert-renderer-assertion:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Takuto Wada <takuto.wada@gmail.com>
- *   maintainers: twada <takuto.wada@gmail.com>
  *   homepage: https://github.com/twada/power-assert-runtime
  *   version: 1.1.1
  *
  * power-assert-renderer-base:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Takuto Wada <takuto.wada@gmail.com>
- *   maintainers: twada <takuto.wada@gmail.com>
  *   homepage: https://github.com/twada/power-assert-runtime
  *   version: 1.1.1
  *
  * power-assert-renderer-comparison:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Takuto Wada <takuto.wada@gmail.com>
- *   maintainers: twada <takuto.wada@gmail.com>
  *   homepage: https://github.com/twada/power-assert-runtime
  *   version: 1.1.1
  *
  * power-assert-renderer-diagram:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Takuto Wada <takuto.wada@gmail.com>
- *   maintainers: twada <takuto.wada@gmail.com>
  *   homepage: https://github.com/twada/power-assert-runtime
  *   version: 1.1.2
  *
  * power-assert-renderer-file:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Takuto Wada <takuto.wada@gmail.com>
- *   maintainers: twada <takuto.wada@gmail.com>
  *   homepage: https://github.com/twada/power-assert-runtime
  *   version: 1.1.1
  *
  * power-assert-util-string-width:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Takuto Wada <takuto.wada@gmail.com>
- *   maintainers: twada <takuto.wada@gmail.com>
  *   homepage: https://github.com/twada/power-assert-runtime
  *   version: 1.1.1
  *
  * process:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Roman Shtylman <shtylman@gmail.com>
- *   maintainers: coolaj86 <coolaj86@gmail.com>, cwmma <calvin.metcalf@gmail.com>, defunctzombie <shtylman@gmail.com>
  *   homepage: https://github.com/shtylman/node-process#readme
  *   version: 0.11.10
  *
  * stringifier:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Takuto Wada <takuto.wada@gmail.com>
- *   maintainers: twada <takuto.wada@gmail.com>
  *   homepage: https://github.com/twada/stringifier
  *   version: 1.3.0
  *
  * traverse:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: James Halliday <mail@substack.net>
- *   maintainers: substack <mail@substack.net>
  *   homepage: https://github.com/substack/js-traverse
  *   version: 0.6.6
  *
  * type-name:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Takuto Wada <takuto.wada@gmail.com>
- *   maintainers: twada <takuto.wada@gmail.com>
  *   contributors: azu, Yosuke Furukawa, Athan, Andrew Moss
  *   homepage: https://github.com/twada/type-name
  *   version: 2.0.2
@@ -265,7 +231,6 @@
  * universal-deep-strict-equal:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Takuto Wada <takuto.wada@gmail.com>
- *   maintainers: twada <takuto.wada@gmail.com>
  *   contributors: azu
  *   homepage: https://github.com/twada/universal-deep-strict-equal
  *   version: 1.2.2
@@ -273,27 +238,25 @@
  * util:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Joyent
- *   maintainers: shtylman <shtylman@gmail.com>
  *   homepage: https://github.com/defunctzombie/node-util
  *   version: 0.10.3
  *
  * xtend:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Raynos <raynos2@gmail.com>
- *   maintainers: raynos <raynos2@gmail.com>
  *   contributors: Jake Verbaten, Matt Esch
  *   homepage: https://github.com/Raynos/xtend
  *   version: 4.0.1
  *
  * This header is generated by licensify (https://github.com/twada/licensify)
  */
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.assert = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw (f.code="MODULE_NOT_FOUND", f)}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.assert = f()}})(function(){var define,module,exports;return (function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw (f.code="MODULE_NOT_FOUND", f)}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(_dereq_,module,exports){
 /**
  * power-assert.js - Power Assert in JavaScript.
  *
  * https://github.com/power-assert-js/power-assert
  *
- * Copyright (c) 2013-2017 Takuto Wada
+ * Copyright (c) 2013-2018 Takuto Wada
  * Licensed under the MIT license.
  *   https://github.com/power-assert-js/power-assert/blob/master/MIT-LICENSE.txt
  */
@@ -303,7 +266,7 @@ var baseAssert = _dereq_('assert');
 var _deepEqual = _dereq_('universal-deep-strict-equal');
 var empower = _dereq_('empower');
 var formatter = _dereq_('power-assert-formatter');
-var extend = _dereq_('xtend');
+var assign = _dereq_('xtend/mutable');
 var define = _dereq_('define-properties');
 var empowerOptions = {
     modifyMessageOnRethrow: true,
@@ -327,12 +290,27 @@ if (typeof baseAssert.notDeepStrictEqual !== 'function') {
 
 function customize (customOptions) {
     var options = customOptions || {};
-    var poweredAssert = empower(
-        baseAssert,
-        formatter(options.output),
-        extend(empowerOptions, options.assertion)
-    );
+    var applyEmpower = function (fn) {
+        return empower(
+            fn,
+            formatter(options.output),
+            assign({}, empowerOptions, options.assertion)
+        );
+    };
+    var poweredAssert = applyEmpower(baseAssert);
     poweredAssert.customize = customize;
+    if (typeof baseAssert.strict === 'function') {
+        poweredAssert.strict = applyEmpower(baseAssert.strict);
+    } else {
+        var strict = applyEmpower(baseAssert);
+        poweredAssert.strict = assign(strict, {
+            equal: strict.strictEqual,
+            deepEqual: strict.deepStrictEqual,
+            notEqual: strict.notStrictEqual,
+            notDeepEqual: strict.notDeepStrictEqual
+        });
+    }
+    poweredAssert.strict.strict = poweredAssert.strict;
     return poweredAssert;
 }
 
@@ -341,7 +319,7 @@ define(defaultAssert, { '__esModule': true });
 defaultAssert['default'] = defaultAssert;
 module.exports = defaultAssert;
 
-},{"assert":7,"define-properties":80,"empower":88,"power-assert-formatter":114,"universal-deep-strict-equal":131,"xtend":135}],2:[function(_dereq_,module,exports){
+},{"assert":7,"define-properties":80,"empower":88,"power-assert-formatter":114,"universal-deep-strict-equal":131,"xtend/mutable":135}],2:[function(_dereq_,module,exports){
 module.exports = function(acorn) {
     switch (parseInt(acorn.version)) {
     case 2:
@@ -4863,6 +4841,8 @@ for (var i = 0, len = code.length; i < len; ++i) {
   revLookup[code.charCodeAt(i)] = i
 }
 
+// Support decoding URL-safe base64 strings, as Node.js does.
+// See: https://en.wikipedia.org/wiki/Base64#URL_applications
 revLookup['-'.charCodeAt(0)] = 62
 revLookup['_'.charCodeAt(0)] = 63
 
@@ -4882,22 +4862,22 @@ function placeHoldersCount (b64) {
 
 function byteLength (b64) {
   // base64 is 4/3 + up to two characters of the original data
-  return b64.length * 3 / 4 - placeHoldersCount(b64)
+  return (b64.length * 3 / 4) - placeHoldersCount(b64)
 }
 
 function toByteArray (b64) {
-  var i, j, l, tmp, placeHolders, arr
+  var i, l, tmp, placeHolders, arr
   var len = b64.length
   placeHolders = placeHoldersCount(b64)
 
-  arr = new Arr(len * 3 / 4 - placeHolders)
+  arr = new Arr((len * 3 / 4) - placeHolders)
 
   // if there are placeholders, only get up to the last complete 4 chars
   l = placeHolders > 0 ? len - 4 : len
 
   var L = 0
 
-  for (i = 0, j = 0; i < l; i += 4, j += 3) {
+  for (i = 0; i < l; i += 4) {
     tmp = (revLookup[b64.charCodeAt(i)] << 18) | (revLookup[b64.charCodeAt(i + 1)] << 12) | (revLookup[b64.charCodeAt(i + 2)] << 6) | revLookup[b64.charCodeAt(i + 3)]
     arr[L++] = (tmp >> 16) & 0xFF
     arr[L++] = (tmp >> 8) & 0xFF
@@ -4924,7 +4904,7 @@ function encodeChunk (uint8, start, end) {
   var tmp
   var output = []
   for (var i = start; i < end; i += 3) {
-    tmp = (uint8[i] << 16) + (uint8[i + 1] << 8) + (uint8[i + 2])
+    tmp = ((uint8[i] << 16) & 0xFF0000) + ((uint8[i + 1] << 8) & 0xFF00) + (uint8[i + 2] & 0xFF)
     output.push(tripletToBase64(tmp))
   }
   return output.join('')
@@ -6843,79 +6823,96 @@ function generate(parsed) {
 },{}],11:[function(_dereq_,module,exports){
 _dereq_('../../modules/es6.array.filter');
 module.exports = _dereq_('../../modules/_core').Array.filter;
+
 },{"../../modules/_core":31,"../../modules/es6.array.filter":68}],12:[function(_dereq_,module,exports){
 _dereq_('../../modules/es6.array.for-each');
 module.exports = _dereq_('../../modules/_core').Array.forEach;
+
 },{"../../modules/_core":31,"../../modules/es6.array.for-each":69}],13:[function(_dereq_,module,exports){
 _dereq_('../../modules/es6.array.index-of');
 module.exports = _dereq_('../../modules/_core').Array.indexOf;
+
 },{"../../modules/_core":31,"../../modules/es6.array.index-of":70}],14:[function(_dereq_,module,exports){
 _dereq_('../../modules/es6.array.is-array');
 module.exports = _dereq_('../../modules/_core').Array.isArray;
+
 },{"../../modules/_core":31,"../../modules/es6.array.is-array":71}],15:[function(_dereq_,module,exports){
 _dereq_('../../modules/es6.array.map');
 module.exports = _dereq_('../../modules/_core').Array.map;
+
 },{"../../modules/_core":31,"../../modules/es6.array.map":72}],16:[function(_dereq_,module,exports){
 _dereq_('../../modules/es6.array.reduce-right');
 module.exports = _dereq_('../../modules/_core').Array.reduceRight;
+
 },{"../../modules/_core":31,"../../modules/es6.array.reduce-right":73}],17:[function(_dereq_,module,exports){
 _dereq_('../../modules/es6.array.reduce');
 module.exports = _dereq_('../../modules/_core').Array.reduce;
+
 },{"../../modules/_core":31,"../../modules/es6.array.reduce":74}],18:[function(_dereq_,module,exports){
 _dereq_('../../modules/es6.array.some');
 module.exports = _dereq_('../../modules/_core').Array.some;
+
 },{"../../modules/_core":31,"../../modules/es6.array.some":75}],19:[function(_dereq_,module,exports){
 _dereq_('../../modules/es6.object.assign');
 module.exports = _dereq_('../../modules/_core').Object.assign;
+
 },{"../../modules/_core":31,"../../modules/es6.object.assign":76}],20:[function(_dereq_,module,exports){
 _dereq_('../../modules/es6.object.create');
 var $Object = _dereq_('../../modules/_core').Object;
-module.exports = function create(P, D){
+module.exports = function create(P, D) {
   return $Object.create(P, D);
 };
+
 },{"../../modules/_core":31,"../../modules/es6.object.create":77}],21:[function(_dereq_,module,exports){
 _dereq_('../../modules/es6.object.define-property');
 var $Object = _dereq_('../../modules/_core').Object;
-module.exports = function defineProperty(it, key, desc){
+module.exports = function defineProperty(it, key, desc) {
   return $Object.defineProperty(it, key, desc);
 };
+
 },{"../../modules/_core":31,"../../modules/es6.object.define-property":78}],22:[function(_dereq_,module,exports){
 _dereq_('../../modules/es6.object.keys');
 module.exports = _dereq_('../../modules/_core').Object.keys;
+
 },{"../../modules/_core":31,"../../modules/es6.object.keys":79}],23:[function(_dereq_,module,exports){
-module.exports = function(it){
-  if(typeof it != 'function')throw TypeError(it + ' is not a function!');
+module.exports = function (it) {
+  if (typeof it != 'function') throw TypeError(it + ' is not a function!');
   return it;
 };
+
 },{}],24:[function(_dereq_,module,exports){
 var isObject = _dereq_('./_is-object');
-module.exports = function(it){
-  if(!isObject(it))throw TypeError(it + ' is not an object!');
+module.exports = function (it) {
+  if (!isObject(it)) throw TypeError(it + ' is not an object!');
   return it;
 };
+
 },{"./_is-object":46}],25:[function(_dereq_,module,exports){
 // false -> Array#indexOf
 // true  -> Array#includes
-var toIObject = _dereq_('./_to-iobject')
-  , toLength  = _dereq_('./_to-length')
-  , toIndex   = _dereq_('./_to-index');
-module.exports = function(IS_INCLUDES){
-  return function($this, el, fromIndex){
-    var O      = toIObject($this)
-      , length = toLength(O.length)
-      , index  = toIndex(fromIndex, length)
-      , value;
+var toIObject = _dereq_('./_to-iobject');
+var toLength = _dereq_('./_to-length');
+var toAbsoluteIndex = _dereq_('./_to-absolute-index');
+module.exports = function (IS_INCLUDES) {
+  return function ($this, el, fromIndex) {
+    var O = toIObject($this);
+    var length = toLength(O.length);
+    var index = toAbsoluteIndex(fromIndex, length);
+    var value;
     // Array#includes uses SameValueZero equality algorithm
-    if(IS_INCLUDES && el != el)while(length > index){
+    // eslint-disable-next-line no-self-compare
+    if (IS_INCLUDES && el != el) while (length > index) {
       value = O[index++];
-      if(value != value)return true;
-    // Array#toIndex ignores holes, Array#includes - not
-    } else for(;length > index; index++)if(IS_INCLUDES || index in O){
-      if(O[index] === el)return IS_INCLUDES || index || 0;
+      // eslint-disable-next-line no-self-compare
+      if (value != value) return true;
+    // Array#indexOf ignores holes, Array#includes - not
+    } else for (;length > index; index++) if (IS_INCLUDES || index in O) {
+      if (O[index] === el) return IS_INCLUDES || index || 0;
     } return !IS_INCLUDES && -1;
   };
 };
-},{"./_to-index":60,"./_to-iobject":62,"./_to-length":63}],26:[function(_dereq_,module,exports){
+
+},{"./_to-absolute-index":60,"./_to-iobject":62,"./_to-length":63}],26:[function(_dereq_,module,exports){
 // 0 -> Array#forEach
 // 1 -> Array#map
 // 2 -> Array#filter
@@ -6923,173 +6920,185 @@ module.exports = function(IS_INCLUDES){
 // 4 -> Array#every
 // 5 -> Array#find
 // 6 -> Array#findIndex
-var ctx      = _dereq_('./_ctx')
-  , IObject  = _dereq_('./_iobject')
-  , toObject = _dereq_('./_to-object')
-  , toLength = _dereq_('./_to-length')
-  , asc      = _dereq_('./_array-species-create');
-module.exports = function(TYPE, $create){
-  var IS_MAP        = TYPE == 1
-    , IS_FILTER     = TYPE == 2
-    , IS_SOME       = TYPE == 3
-    , IS_EVERY      = TYPE == 4
-    , IS_FIND_INDEX = TYPE == 6
-    , NO_HOLES      = TYPE == 5 || IS_FIND_INDEX
-    , create        = $create || asc;
-  return function($this, callbackfn, that){
-    var O      = toObject($this)
-      , self   = IObject(O)
-      , f      = ctx(callbackfn, that, 3)
-      , length = toLength(self.length)
-      , index  = 0
-      , result = IS_MAP ? create($this, length) : IS_FILTER ? create($this, 0) : undefined
-      , val, res;
-    for(;length > index; index++)if(NO_HOLES || index in self){
+var ctx = _dereq_('./_ctx');
+var IObject = _dereq_('./_iobject');
+var toObject = _dereq_('./_to-object');
+var toLength = _dereq_('./_to-length');
+var asc = _dereq_('./_array-species-create');
+module.exports = function (TYPE, $create) {
+  var IS_MAP = TYPE == 1;
+  var IS_FILTER = TYPE == 2;
+  var IS_SOME = TYPE == 3;
+  var IS_EVERY = TYPE == 4;
+  var IS_FIND_INDEX = TYPE == 6;
+  var NO_HOLES = TYPE == 5 || IS_FIND_INDEX;
+  var create = $create || asc;
+  return function ($this, callbackfn, that) {
+    var O = toObject($this);
+    var self = IObject(O);
+    var f = ctx(callbackfn, that, 3);
+    var length = toLength(self.length);
+    var index = 0;
+    var result = IS_MAP ? create($this, length) : IS_FILTER ? create($this, 0) : undefined;
+    var val, res;
+    for (;length > index; index++) if (NO_HOLES || index in self) {
       val = self[index];
       res = f(val, index, O);
-      if(TYPE){
-        if(IS_MAP)result[index] = res;            // map
-        else if(res)switch(TYPE){
-          case 3: return true;                    // some
-          case 5: return val;                     // find
-          case 6: return index;                   // findIndex
-          case 2: result.push(val);               // filter
-        } else if(IS_EVERY)return false;          // every
+      if (TYPE) {
+        if (IS_MAP) result[index] = res;   // map
+        else if (res) switch (TYPE) {
+          case 3: return true;             // some
+          case 5: return val;              // find
+          case 6: return index;            // findIndex
+          case 2: result.push(val);        // filter
+        } else if (IS_EVERY) return false; // every
       }
     }
     return IS_FIND_INDEX ? -1 : IS_SOME || IS_EVERY ? IS_EVERY : result;
   };
 };
-},{"./_array-species-create":29,"./_ctx":32,"./_iobject":44,"./_to-length":63,"./_to-object":64}],27:[function(_dereq_,module,exports){
-var aFunction = _dereq_('./_a-function')
-  , toObject  = _dereq_('./_to-object')
-  , IObject   = _dereq_('./_iobject')
-  , toLength  = _dereq_('./_to-length');
 
-module.exports = function(that, callbackfn, aLen, memo, isRight){
+},{"./_array-species-create":29,"./_ctx":32,"./_iobject":44,"./_to-length":63,"./_to-object":64}],27:[function(_dereq_,module,exports){
+var aFunction = _dereq_('./_a-function');
+var toObject = _dereq_('./_to-object');
+var IObject = _dereq_('./_iobject');
+var toLength = _dereq_('./_to-length');
+
+module.exports = function (that, callbackfn, aLen, memo, isRight) {
   aFunction(callbackfn);
-  var O      = toObject(that)
-    , self   = IObject(O)
-    , length = toLength(O.length)
-    , index  = isRight ? length - 1 : 0
-    , i      = isRight ? -1 : 1;
-  if(aLen < 2)for(;;){
-    if(index in self){
+  var O = toObject(that);
+  var self = IObject(O);
+  var length = toLength(O.length);
+  var index = isRight ? length - 1 : 0;
+  var i = isRight ? -1 : 1;
+  if (aLen < 2) for (;;) {
+    if (index in self) {
       memo = self[index];
       index += i;
       break;
     }
     index += i;
-    if(isRight ? index < 0 : length <= index){
+    if (isRight ? index < 0 : length <= index) {
       throw TypeError('Reduce of empty array with no initial value');
     }
   }
-  for(;isRight ? index >= 0 : length > index; index += i)if(index in self){
+  for (;isRight ? index >= 0 : length > index; index += i) if (index in self) {
     memo = callbackfn(memo, self[index], index, O);
   }
   return memo;
 };
-},{"./_a-function":23,"./_iobject":44,"./_to-length":63,"./_to-object":64}],28:[function(_dereq_,module,exports){
-var isObject = _dereq_('./_is-object')
-  , isArray  = _dereq_('./_is-array')
-  , SPECIES  = _dereq_('./_wks')('species');
 
-module.exports = function(original){
+},{"./_a-function":23,"./_iobject":44,"./_to-length":63,"./_to-object":64}],28:[function(_dereq_,module,exports){
+var isObject = _dereq_('./_is-object');
+var isArray = _dereq_('./_is-array');
+var SPECIES = _dereq_('./_wks')('species');
+
+module.exports = function (original) {
   var C;
-  if(isArray(original)){
+  if (isArray(original)) {
     C = original.constructor;
     // cross-realm fallback
-    if(typeof C == 'function' && (C === Array || isArray(C.prototype)))C = undefined;
-    if(isObject(C)){
+    if (typeof C == 'function' && (C === Array || isArray(C.prototype))) C = undefined;
+    if (isObject(C)) {
       C = C[SPECIES];
-      if(C === null)C = undefined;
+      if (C === null) C = undefined;
     }
   } return C === undefined ? Array : C;
 };
+
 },{"./_is-array":45,"./_is-object":46,"./_wks":67}],29:[function(_dereq_,module,exports){
 // 9.4.2.3 ArraySpeciesCreate(originalArray, length)
 var speciesConstructor = _dereq_('./_array-species-constructor');
 
-module.exports = function(original, length){
+module.exports = function (original, length) {
   return new (speciesConstructor(original))(length);
 };
+
 },{"./_array-species-constructor":28}],30:[function(_dereq_,module,exports){
 var toString = {}.toString;
 
-module.exports = function(it){
+module.exports = function (it) {
   return toString.call(it).slice(8, -1);
 };
+
 },{}],31:[function(_dereq_,module,exports){
-var core = module.exports = {version: '2.4.0'};
-if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
+var core = module.exports = { version: '2.5.4' };
+if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
+
 },{}],32:[function(_dereq_,module,exports){
 // optional / simple context binding
 var aFunction = _dereq_('./_a-function');
-module.exports = function(fn, that, length){
+module.exports = function (fn, that, length) {
   aFunction(fn);
-  if(that === undefined)return fn;
-  switch(length){
-    case 1: return function(a){
+  if (that === undefined) return fn;
+  switch (length) {
+    case 1: return function (a) {
       return fn.call(that, a);
     };
-    case 2: return function(a, b){
+    case 2: return function (a, b) {
       return fn.call(that, a, b);
     };
-    case 3: return function(a, b, c){
+    case 3: return function (a, b, c) {
       return fn.call(that, a, b, c);
     };
   }
-  return function(/* ...args */){
+  return function (/* ...args */) {
     return fn.apply(that, arguments);
   };
 };
+
 },{"./_a-function":23}],33:[function(_dereq_,module,exports){
 // 7.2.1 RequireObjectCoercible(argument)
-module.exports = function(it){
-  if(it == undefined)throw TypeError("Can't call method on  " + it);
+module.exports = function (it) {
+  if (it == undefined) throw TypeError("Can't call method on  " + it);
   return it;
 };
+
 },{}],34:[function(_dereq_,module,exports){
 // Thank's IE8 for his funny defineProperty
-module.exports = !_dereq_('./_fails')(function(){
-  return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
+module.exports = !_dereq_('./_fails')(function () {
+  return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
 });
+
 },{"./_fails":38}],35:[function(_dereq_,module,exports){
-var isObject = _dereq_('./_is-object')
-  , document = _dereq_('./_global').document
-  // in old IE typeof document.createElement is 'object'
-  , is = isObject(document) && isObject(document.createElement);
-module.exports = function(it){
+var isObject = _dereq_('./_is-object');
+var document = _dereq_('./_global').document;
+// typeof document.createElement is 'object' in old IE
+var is = isObject(document) && isObject(document.createElement);
+module.exports = function (it) {
   return is ? document.createElement(it) : {};
 };
+
 },{"./_global":39,"./_is-object":46}],36:[function(_dereq_,module,exports){
 // IE 8- don't enum bug keys
 module.exports = (
   'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
 ).split(',');
-},{}],37:[function(_dereq_,module,exports){
-var global    = _dereq_('./_global')
-  , core      = _dereq_('./_core')
-  , ctx       = _dereq_('./_ctx')
-  , hide      = _dereq_('./_hide')
-  , PROTOTYPE = 'prototype';
 
-var $export = function(type, name, source){
-  var IS_FORCED = type & $export.F
-    , IS_GLOBAL = type & $export.G
-    , IS_STATIC = type & $export.S
-    , IS_PROTO  = type & $export.P
-    , IS_BIND   = type & $export.B
-    , IS_WRAP   = type & $export.W
-    , exports   = IS_GLOBAL ? core : core[name] || (core[name] = {})
-    , expProto  = exports[PROTOTYPE]
-    , target    = IS_GLOBAL ? global : IS_STATIC ? global[name] : (global[name] || {})[PROTOTYPE]
-    , key, own, out;
-  if(IS_GLOBAL)source = name;
-  for(key in source){
+},{}],37:[function(_dereq_,module,exports){
+var global = _dereq_('./_global');
+var core = _dereq_('./_core');
+var ctx = _dereq_('./_ctx');
+var hide = _dereq_('./_hide');
+var has = _dereq_('./_has');
+var PROTOTYPE = 'prototype';
+
+var $export = function (type, name, source) {
+  var IS_FORCED = type & $export.F;
+  var IS_GLOBAL = type & $export.G;
+  var IS_STATIC = type & $export.S;
+  var IS_PROTO = type & $export.P;
+  var IS_BIND = type & $export.B;
+  var IS_WRAP = type & $export.W;
+  var exports = IS_GLOBAL ? core : core[name] || (core[name] = {});
+  var expProto = exports[PROTOTYPE];
+  var target = IS_GLOBAL ? global : IS_STATIC ? global[name] : (global[name] || {})[PROTOTYPE];
+  var key, own, out;
+  if (IS_GLOBAL) source = name;
+  for (key in source) {
     // contains in native
     own = !IS_FORCED && target && target[key] !== undefined;
-    if(own && key in exports)continue;
+    if (own && has(exports, key)) continue;
     // export native or passed
     out = own ? target[key] : source[key];
     // prevent global pollution for namespaces
@@ -7097,11 +7106,11 @@ var $export = function(type, name, source){
     // bind timers to global for call from export context
     : IS_BIND && own ? ctx(out, global)
     // wrap global constructors for prevent change them in library
-    : IS_WRAP && target[key] == out ? (function(C){
-      var F = function(a, b, c){
-        if(this instanceof C){
-          switch(arguments.length){
-            case 0: return new C;
+    : IS_WRAP && target[key] == out ? (function (C) {
+      var F = function (a, b, c) {
+        if (this instanceof C) {
+          switch (arguments.length) {
+            case 0: return new C();
             case 1: return new C(a);
             case 2: return new C(a, b);
           } return new C(a, b, c);
@@ -7112,10 +7121,10 @@ var $export = function(type, name, source){
     // make static versions for prototype methods
     })(out) : IS_PROTO && typeof out == 'function' ? ctx(Function.call, out) : out;
     // export proto methods to core.%CONSTRUCTOR%.methods.%NAME%
-    if(IS_PROTO){
+    if (IS_PROTO) {
       (exports.virtual || (exports.virtual = {}))[key] = out;
       // export proto methods to core.%CONSTRUCTOR%.prototype.%NAME%
-      if(type & $export.R && expProto && !expProto[key])hide(expProto, key, out);
+      if (type & $export.R && expProto && !expProto[key]) hide(expProto, key, out);
     }
   }
 };
@@ -7127,108 +7136,124 @@ $export.P = 8;   // proto
 $export.B = 16;  // bind
 $export.W = 32;  // wrap
 $export.U = 64;  // safe
-$export.R = 128; // real proto method for `library` 
+$export.R = 128; // real proto method for `library`
 module.exports = $export;
-},{"./_core":31,"./_ctx":32,"./_global":39,"./_hide":41}],38:[function(_dereq_,module,exports){
-module.exports = function(exec){
+
+},{"./_core":31,"./_ctx":32,"./_global":39,"./_has":40,"./_hide":41}],38:[function(_dereq_,module,exports){
+module.exports = function (exec) {
   try {
     return !!exec();
-  } catch(e){
+  } catch (e) {
     return true;
   }
 };
+
 },{}],39:[function(_dereq_,module,exports){
 // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
 var global = module.exports = typeof window != 'undefined' && window.Math == Math
-  ? window : typeof self != 'undefined' && self.Math == Math ? self : Function('return this')();
-if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
+  ? window : typeof self != 'undefined' && self.Math == Math ? self
+  // eslint-disable-next-line no-new-func
+  : Function('return this')();
+if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
+
 },{}],40:[function(_dereq_,module,exports){
 var hasOwnProperty = {}.hasOwnProperty;
-module.exports = function(it, key){
+module.exports = function (it, key) {
   return hasOwnProperty.call(it, key);
 };
+
 },{}],41:[function(_dereq_,module,exports){
-var dP         = _dereq_('./_object-dp')
-  , createDesc = _dereq_('./_property-desc');
-module.exports = _dereq_('./_descriptors') ? function(object, key, value){
+var dP = _dereq_('./_object-dp');
+var createDesc = _dereq_('./_property-desc');
+module.exports = _dereq_('./_descriptors') ? function (object, key, value) {
   return dP.f(object, key, createDesc(1, value));
-} : function(object, key, value){
+} : function (object, key, value) {
   object[key] = value;
   return object;
 };
+
 },{"./_descriptors":34,"./_object-dp":49,"./_property-desc":56}],42:[function(_dereq_,module,exports){
-module.exports = _dereq_('./_global').document && document.documentElement;
+var document = _dereq_('./_global').document;
+module.exports = document && document.documentElement;
+
 },{"./_global":39}],43:[function(_dereq_,module,exports){
-module.exports = !_dereq_('./_descriptors') && !_dereq_('./_fails')(function(){
-  return Object.defineProperty(_dereq_('./_dom-create')('div'), 'a', {get: function(){ return 7; }}).a != 7;
+module.exports = !_dereq_('./_descriptors') && !_dereq_('./_fails')(function () {
+  return Object.defineProperty(_dereq_('./_dom-create')('div'), 'a', { get: function () { return 7; } }).a != 7;
 });
+
 },{"./_descriptors":34,"./_dom-create":35,"./_fails":38}],44:[function(_dereq_,module,exports){
 // fallback for non-array-like ES3 and non-enumerable old V8 strings
 var cof = _dereq_('./_cof');
-module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
+// eslint-disable-next-line no-prototype-builtins
+module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
   return cof(it) == 'String' ? it.split('') : Object(it);
 };
+
 },{"./_cof":30}],45:[function(_dereq_,module,exports){
 // 7.2.2 IsArray(argument)
 var cof = _dereq_('./_cof');
-module.exports = Array.isArray || function isArray(arg){
+module.exports = Array.isArray || function isArray(arg) {
   return cof(arg) == 'Array';
 };
+
 },{"./_cof":30}],46:[function(_dereq_,module,exports){
-module.exports = function(it){
+module.exports = function (it) {
   return typeof it === 'object' ? it !== null : typeof it === 'function';
 };
+
 },{}],47:[function(_dereq_,module,exports){
 'use strict';
 // 19.1.2.1 Object.assign(target, source, ...)
-var getKeys  = _dereq_('./_object-keys')
-  , gOPS     = _dereq_('./_object-gops')
-  , pIE      = _dereq_('./_object-pie')
-  , toObject = _dereq_('./_to-object')
-  , IObject  = _dereq_('./_iobject')
-  , $assign  = Object.assign;
+var getKeys = _dereq_('./_object-keys');
+var gOPS = _dereq_('./_object-gops');
+var pIE = _dereq_('./_object-pie');
+var toObject = _dereq_('./_to-object');
+var IObject = _dereq_('./_iobject');
+var $assign = Object.assign;
 
 // should work with symbols and should have deterministic property order (V8 bug)
-module.exports = !$assign || _dereq_('./_fails')(function(){
-  var A = {}
-    , B = {}
-    , S = Symbol()
-    , K = 'abcdefghijklmnopqrst';
+module.exports = !$assign || _dereq_('./_fails')(function () {
+  var A = {};
+  var B = {};
+  // eslint-disable-next-line no-undef
+  var S = Symbol();
+  var K = 'abcdefghijklmnopqrst';
   A[S] = 7;
-  K.split('').forEach(function(k){ B[k] = k; });
+  K.split('').forEach(function (k) { B[k] = k; });
   return $assign({}, A)[S] != 7 || Object.keys($assign({}, B)).join('') != K;
-}) ? function assign(target, source){ // eslint-disable-line no-unused-vars
-  var T     = toObject(target)
-    , aLen  = arguments.length
-    , index = 1
-    , getSymbols = gOPS.f
-    , isEnum     = pIE.f;
-  while(aLen > index){
-    var S      = IObject(arguments[index++])
-      , keys   = getSymbols ? getKeys(S).concat(getSymbols(S)) : getKeys(S)
-      , length = keys.length
-      , j      = 0
-      , key;
-    while(length > j)if(isEnum.call(S, key = keys[j++]))T[key] = S[key];
+}) ? function assign(target, source) { // eslint-disable-line no-unused-vars
+  var T = toObject(target);
+  var aLen = arguments.length;
+  var index = 1;
+  var getSymbols = gOPS.f;
+  var isEnum = pIE.f;
+  while (aLen > index) {
+    var S = IObject(arguments[index++]);
+    var keys = getSymbols ? getKeys(S).concat(getSymbols(S)) : getKeys(S);
+    var length = keys.length;
+    var j = 0;
+    var key;
+    while (length > j) if (isEnum.call(S, key = keys[j++])) T[key] = S[key];
   } return T;
 } : $assign;
+
 },{"./_fails":38,"./_iobject":44,"./_object-gops":51,"./_object-keys":53,"./_object-pie":54,"./_to-object":64}],48:[function(_dereq_,module,exports){
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-var anObject    = _dereq_('./_an-object')
-  , dPs         = _dereq_('./_object-dps')
-  , enumBugKeys = _dereq_('./_enum-bug-keys')
-  , IE_PROTO    = _dereq_('./_shared-key')('IE_PROTO')
-  , Empty       = function(){ /* empty */ }
-  , PROTOTYPE   = 'prototype';
+var anObject = _dereq_('./_an-object');
+var dPs = _dereq_('./_object-dps');
+var enumBugKeys = _dereq_('./_enum-bug-keys');
+var IE_PROTO = _dereq_('./_shared-key')('IE_PROTO');
+var Empty = function () { /* empty */ };
+var PROTOTYPE = 'prototype';
 
 // Create object with fake `null` prototype: use iframe Object with cleared prototype
-var createDict = function(){
+var createDict = function () {
   // Thrash, waste and sodomy: IE GC bug
-  var iframe = _dereq_('./_dom-create')('iframe')
-    , i      = enumBugKeys.length
-    , lt     = '<'
-    , gt     = '>'
-    , iframeDocument;
+  var iframe = _dereq_('./_dom-create')('iframe');
+  var i = enumBugKeys.length;
+  var lt = '<';
+  var gt = '>';
+  var iframeDocument;
   iframe.style.display = 'none';
   _dereq_('./_html').appendChild(iframe);
   iframe.src = 'javascript:'; // eslint-disable-line no-script-url
@@ -7239,15 +7264,15 @@ var createDict = function(){
   iframeDocument.write(lt + 'script' + gt + 'document.F=Object' + lt + '/script' + gt);
   iframeDocument.close();
   createDict = iframeDocument.F;
-  while(i--)delete createDict[PROTOTYPE][enumBugKeys[i]];
+  while (i--) delete createDict[PROTOTYPE][enumBugKeys[i]];
   return createDict();
 };
 
-module.exports = Object.create || function create(O, Properties){
+module.exports = Object.create || function create(O, Properties) {
   var result;
-  if(O !== null){
+  if (O !== null) {
     Empty[PROTOTYPE] = anObject(O);
-    result = new Empty;
+    result = new Empty();
     Empty[PROTOTYPE] = null;
     // add "__proto__" for Object.getPrototypeOf polyfill
     result[IE_PROTO] = O;
@@ -7256,284 +7281,317 @@ module.exports = Object.create || function create(O, Properties){
 };
 
 },{"./_an-object":24,"./_dom-create":35,"./_enum-bug-keys":36,"./_html":42,"./_object-dps":50,"./_shared-key":57}],49:[function(_dereq_,module,exports){
-var anObject       = _dereq_('./_an-object')
-  , IE8_DOM_DEFINE = _dereq_('./_ie8-dom-define')
-  , toPrimitive    = _dereq_('./_to-primitive')
-  , dP             = Object.defineProperty;
+var anObject = _dereq_('./_an-object');
+var IE8_DOM_DEFINE = _dereq_('./_ie8-dom-define');
+var toPrimitive = _dereq_('./_to-primitive');
+var dP = Object.defineProperty;
 
-exports.f = _dereq_('./_descriptors') ? Object.defineProperty : function defineProperty(O, P, Attributes){
+exports.f = _dereq_('./_descriptors') ? Object.defineProperty : function defineProperty(O, P, Attributes) {
   anObject(O);
   P = toPrimitive(P, true);
   anObject(Attributes);
-  if(IE8_DOM_DEFINE)try {
+  if (IE8_DOM_DEFINE) try {
     return dP(O, P, Attributes);
-  } catch(e){ /* empty */ }
-  if('get' in Attributes || 'set' in Attributes)throw TypeError('Accessors not supported!');
-  if('value' in Attributes)O[P] = Attributes.value;
+  } catch (e) { /* empty */ }
+  if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported!');
+  if ('value' in Attributes) O[P] = Attributes.value;
   return O;
 };
-},{"./_an-object":24,"./_descriptors":34,"./_ie8-dom-define":43,"./_to-primitive":65}],50:[function(_dereq_,module,exports){
-var dP       = _dereq_('./_object-dp')
-  , anObject = _dereq_('./_an-object')
-  , getKeys  = _dereq_('./_object-keys');
 
-module.exports = _dereq_('./_descriptors') ? Object.defineProperties : function defineProperties(O, Properties){
+},{"./_an-object":24,"./_descriptors":34,"./_ie8-dom-define":43,"./_to-primitive":65}],50:[function(_dereq_,module,exports){
+var dP = _dereq_('./_object-dp');
+var anObject = _dereq_('./_an-object');
+var getKeys = _dereq_('./_object-keys');
+
+module.exports = _dereq_('./_descriptors') ? Object.defineProperties : function defineProperties(O, Properties) {
   anObject(O);
-  var keys   = getKeys(Properties)
-    , length = keys.length
-    , i = 0
-    , P;
-  while(length > i)dP.f(O, P = keys[i++], Properties[P]);
+  var keys = getKeys(Properties);
+  var length = keys.length;
+  var i = 0;
+  var P;
+  while (length > i) dP.f(O, P = keys[i++], Properties[P]);
   return O;
 };
+
 },{"./_an-object":24,"./_descriptors":34,"./_object-dp":49,"./_object-keys":53}],51:[function(_dereq_,module,exports){
 exports.f = Object.getOwnPropertySymbols;
-},{}],52:[function(_dereq_,module,exports){
-var has          = _dereq_('./_has')
-  , toIObject    = _dereq_('./_to-iobject')
-  , arrayIndexOf = _dereq_('./_array-includes')(false)
-  , IE_PROTO     = _dereq_('./_shared-key')('IE_PROTO');
 
-module.exports = function(object, names){
-  var O      = toIObject(object)
-    , i      = 0
-    , result = []
-    , key;
-  for(key in O)if(key != IE_PROTO)has(O, key) && result.push(key);
+},{}],52:[function(_dereq_,module,exports){
+var has = _dereq_('./_has');
+var toIObject = _dereq_('./_to-iobject');
+var arrayIndexOf = _dereq_('./_array-includes')(false);
+var IE_PROTO = _dereq_('./_shared-key')('IE_PROTO');
+
+module.exports = function (object, names) {
+  var O = toIObject(object);
+  var i = 0;
+  var result = [];
+  var key;
+  for (key in O) if (key != IE_PROTO) has(O, key) && result.push(key);
   // Don't enum bug & hidden keys
-  while(names.length > i)if(has(O, key = names[i++])){
+  while (names.length > i) if (has(O, key = names[i++])) {
     ~arrayIndexOf(result, key) || result.push(key);
   }
   return result;
 };
+
 },{"./_array-includes":25,"./_has":40,"./_shared-key":57,"./_to-iobject":62}],53:[function(_dereq_,module,exports){
 // 19.1.2.14 / 15.2.3.14 Object.keys(O)
-var $keys       = _dereq_('./_object-keys-internal')
-  , enumBugKeys = _dereq_('./_enum-bug-keys');
+var $keys = _dereq_('./_object-keys-internal');
+var enumBugKeys = _dereq_('./_enum-bug-keys');
 
-module.exports = Object.keys || function keys(O){
+module.exports = Object.keys || function keys(O) {
   return $keys(O, enumBugKeys);
 };
+
 },{"./_enum-bug-keys":36,"./_object-keys-internal":52}],54:[function(_dereq_,module,exports){
 exports.f = {}.propertyIsEnumerable;
+
 },{}],55:[function(_dereq_,module,exports){
 // most Object methods by ES6 should accept primitives
-var $export = _dereq_('./_export')
-  , core    = _dereq_('./_core')
-  , fails   = _dereq_('./_fails');
-module.exports = function(KEY, exec){
-  var fn  = (core.Object || {})[KEY] || Object[KEY]
-    , exp = {};
+var $export = _dereq_('./_export');
+var core = _dereq_('./_core');
+var fails = _dereq_('./_fails');
+module.exports = function (KEY, exec) {
+  var fn = (core.Object || {})[KEY] || Object[KEY];
+  var exp = {};
   exp[KEY] = exec(fn);
-  $export($export.S + $export.F * fails(function(){ fn(1); }), 'Object', exp);
+  $export($export.S + $export.F * fails(function () { fn(1); }), 'Object', exp);
 };
+
 },{"./_core":31,"./_export":37,"./_fails":38}],56:[function(_dereq_,module,exports){
-module.exports = function(bitmap, value){
+module.exports = function (bitmap, value) {
   return {
-    enumerable  : !(bitmap & 1),
+    enumerable: !(bitmap & 1),
     configurable: !(bitmap & 2),
-    writable    : !(bitmap & 4),
-    value       : value
+    writable: !(bitmap & 4),
+    value: value
   };
 };
+
 },{}],57:[function(_dereq_,module,exports){
-var shared = _dereq_('./_shared')('keys')
-  , uid    = _dereq_('./_uid');
-module.exports = function(key){
+var shared = _dereq_('./_shared')('keys');
+var uid = _dereq_('./_uid');
+module.exports = function (key) {
   return shared[key] || (shared[key] = uid(key));
 };
+
 },{"./_shared":58,"./_uid":66}],58:[function(_dereq_,module,exports){
-var global = _dereq_('./_global')
-  , SHARED = '__core-js_shared__'
-  , store  = global[SHARED] || (global[SHARED] = {});
-module.exports = function(key){
+var global = _dereq_('./_global');
+var SHARED = '__core-js_shared__';
+var store = global[SHARED] || (global[SHARED] = {});
+module.exports = function (key) {
   return store[key] || (store[key] = {});
 };
+
 },{"./_global":39}],59:[function(_dereq_,module,exports){
+'use strict';
 var fails = _dereq_('./_fails');
 
-module.exports = function(method, arg){
-  return !!method && fails(function(){
-    arg ? method.call(null, function(){}, 1) : method.call(null);
+module.exports = function (method, arg) {
+  return !!method && fails(function () {
+    // eslint-disable-next-line no-useless-call
+    arg ? method.call(null, function () { /* empty */ }, 1) : method.call(null);
   });
 };
+
 },{"./_fails":38}],60:[function(_dereq_,module,exports){
-var toInteger = _dereq_('./_to-integer')
-  , max       = Math.max
-  , min       = Math.min;
-module.exports = function(index, length){
+var toInteger = _dereq_('./_to-integer');
+var max = Math.max;
+var min = Math.min;
+module.exports = function (index, length) {
   index = toInteger(index);
   return index < 0 ? max(index + length, 0) : min(index, length);
 };
+
 },{"./_to-integer":61}],61:[function(_dereq_,module,exports){
 // 7.1.4 ToInteger
-var ceil  = Math.ceil
-  , floor = Math.floor;
-module.exports = function(it){
+var ceil = Math.ceil;
+var floor = Math.floor;
+module.exports = function (it) {
   return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
 };
+
 },{}],62:[function(_dereq_,module,exports){
 // to indexed object, toObject with fallback for non-array-like ES3 strings
-var IObject = _dereq_('./_iobject')
-  , defined = _dereq_('./_defined');
-module.exports = function(it){
+var IObject = _dereq_('./_iobject');
+var defined = _dereq_('./_defined');
+module.exports = function (it) {
   return IObject(defined(it));
 };
+
 },{"./_defined":33,"./_iobject":44}],63:[function(_dereq_,module,exports){
 // 7.1.15 ToLength
-var toInteger = _dereq_('./_to-integer')
-  , min       = Math.min;
-module.exports = function(it){
+var toInteger = _dereq_('./_to-integer');
+var min = Math.min;
+module.exports = function (it) {
   return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
 };
+
 },{"./_to-integer":61}],64:[function(_dereq_,module,exports){
 // 7.1.13 ToObject(argument)
 var defined = _dereq_('./_defined');
-module.exports = function(it){
+module.exports = function (it) {
   return Object(defined(it));
 };
+
 },{"./_defined":33}],65:[function(_dereq_,module,exports){
 // 7.1.1 ToPrimitive(input [, PreferredType])
 var isObject = _dereq_('./_is-object');
 // instead of the ES6 spec version, we didn't implement @@toPrimitive case
 // and the second argument - flag - preferred type is a string
-module.exports = function(it, S){
-  if(!isObject(it))return it;
+module.exports = function (it, S) {
+  if (!isObject(it)) return it;
   var fn, val;
-  if(S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it)))return val;
-  if(typeof (fn = it.valueOf) == 'function' && !isObject(val = fn.call(it)))return val;
-  if(!S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it)))return val;
+  if (S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it))) return val;
+  if (typeof (fn = it.valueOf) == 'function' && !isObject(val = fn.call(it))) return val;
+  if (!S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it))) return val;
   throw TypeError("Can't convert object to primitive value");
 };
+
 },{"./_is-object":46}],66:[function(_dereq_,module,exports){
-var id = 0
-  , px = Math.random();
-module.exports = function(key){
+var id = 0;
+var px = Math.random();
+module.exports = function (key) {
   return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
 };
-},{}],67:[function(_dereq_,module,exports){
-var store      = _dereq_('./_shared')('wks')
-  , uid        = _dereq_('./_uid')
-  , Symbol     = _dereq_('./_global').Symbol
-  , USE_SYMBOL = typeof Symbol == 'function';
 
-var $exports = module.exports = function(name){
+},{}],67:[function(_dereq_,module,exports){
+var store = _dereq_('./_shared')('wks');
+var uid = _dereq_('./_uid');
+var Symbol = _dereq_('./_global').Symbol;
+var USE_SYMBOL = typeof Symbol == 'function';
+
+var $exports = module.exports = function (name) {
   return store[name] || (store[name] =
     USE_SYMBOL && Symbol[name] || (USE_SYMBOL ? Symbol : uid)('Symbol.' + name));
 };
 
 $exports.store = store;
+
 },{"./_global":39,"./_shared":58,"./_uid":66}],68:[function(_dereq_,module,exports){
 'use strict';
-var $export = _dereq_('./_export')
-  , $filter = _dereq_('./_array-methods')(2);
+var $export = _dereq_('./_export');
+var $filter = _dereq_('./_array-methods')(2);
 
 $export($export.P + $export.F * !_dereq_('./_strict-method')([].filter, true), 'Array', {
   // 22.1.3.7 / 15.4.4.20 Array.prototype.filter(callbackfn [, thisArg])
-  filter: function filter(callbackfn /* , thisArg */){
+  filter: function filter(callbackfn /* , thisArg */) {
     return $filter(this, callbackfn, arguments[1]);
   }
 });
+
 },{"./_array-methods":26,"./_export":37,"./_strict-method":59}],69:[function(_dereq_,module,exports){
 'use strict';
-var $export  = _dereq_('./_export')
-  , $forEach = _dereq_('./_array-methods')(0)
-  , STRICT   = _dereq_('./_strict-method')([].forEach, true);
+var $export = _dereq_('./_export');
+var $forEach = _dereq_('./_array-methods')(0);
+var STRICT = _dereq_('./_strict-method')([].forEach, true);
 
 $export($export.P + $export.F * !STRICT, 'Array', {
   // 22.1.3.10 / 15.4.4.18 Array.prototype.forEach(callbackfn [, thisArg])
-  forEach: function forEach(callbackfn /* , thisArg */){
+  forEach: function forEach(callbackfn /* , thisArg */) {
     return $forEach(this, callbackfn, arguments[1]);
   }
 });
+
 },{"./_array-methods":26,"./_export":37,"./_strict-method":59}],70:[function(_dereq_,module,exports){
 'use strict';
-var $export       = _dereq_('./_export')
-  , $indexOf      = _dereq_('./_array-includes')(false)
-  , $native       = [].indexOf
-  , NEGATIVE_ZERO = !!$native && 1 / [1].indexOf(1, -0) < 0;
+var $export = _dereq_('./_export');
+var $indexOf = _dereq_('./_array-includes')(false);
+var $native = [].indexOf;
+var NEGATIVE_ZERO = !!$native && 1 / [1].indexOf(1, -0) < 0;
 
 $export($export.P + $export.F * (NEGATIVE_ZERO || !_dereq_('./_strict-method')($native)), 'Array', {
   // 22.1.3.11 / 15.4.4.14 Array.prototype.indexOf(searchElement [, fromIndex])
-  indexOf: function indexOf(searchElement /*, fromIndex = 0 */){
+  indexOf: function indexOf(searchElement /* , fromIndex = 0 */) {
     return NEGATIVE_ZERO
       // convert -0 to +0
       ? $native.apply(this, arguments) || 0
       : $indexOf(this, searchElement, arguments[1]);
   }
 });
+
 },{"./_array-includes":25,"./_export":37,"./_strict-method":59}],71:[function(_dereq_,module,exports){
 // 22.1.2.2 / 15.4.3.2 Array.isArray(arg)
 var $export = _dereq_('./_export');
 
-$export($export.S, 'Array', {isArray: _dereq_('./_is-array')});
+$export($export.S, 'Array', { isArray: _dereq_('./_is-array') });
+
 },{"./_export":37,"./_is-array":45}],72:[function(_dereq_,module,exports){
 'use strict';
-var $export = _dereq_('./_export')
-  , $map    = _dereq_('./_array-methods')(1);
+var $export = _dereq_('./_export');
+var $map = _dereq_('./_array-methods')(1);
 
 $export($export.P + $export.F * !_dereq_('./_strict-method')([].map, true), 'Array', {
   // 22.1.3.15 / 15.4.4.19 Array.prototype.map(callbackfn [, thisArg])
-  map: function map(callbackfn /* , thisArg */){
+  map: function map(callbackfn /* , thisArg */) {
     return $map(this, callbackfn, arguments[1]);
   }
 });
+
 },{"./_array-methods":26,"./_export":37,"./_strict-method":59}],73:[function(_dereq_,module,exports){
 'use strict';
-var $export = _dereq_('./_export')
-  , $reduce = _dereq_('./_array-reduce');
+var $export = _dereq_('./_export');
+var $reduce = _dereq_('./_array-reduce');
 
 $export($export.P + $export.F * !_dereq_('./_strict-method')([].reduceRight, true), 'Array', {
   // 22.1.3.19 / 15.4.4.22 Array.prototype.reduceRight(callbackfn [, initialValue])
-  reduceRight: function reduceRight(callbackfn /* , initialValue */){
+  reduceRight: function reduceRight(callbackfn /* , initialValue */) {
     return $reduce(this, callbackfn, arguments.length, arguments[1], true);
   }
 });
+
 },{"./_array-reduce":27,"./_export":37,"./_strict-method":59}],74:[function(_dereq_,module,exports){
 'use strict';
-var $export = _dereq_('./_export')
-  , $reduce = _dereq_('./_array-reduce');
+var $export = _dereq_('./_export');
+var $reduce = _dereq_('./_array-reduce');
 
 $export($export.P + $export.F * !_dereq_('./_strict-method')([].reduce, true), 'Array', {
   // 22.1.3.18 / 15.4.4.21 Array.prototype.reduce(callbackfn [, initialValue])
-  reduce: function reduce(callbackfn /* , initialValue */){
+  reduce: function reduce(callbackfn /* , initialValue */) {
     return $reduce(this, callbackfn, arguments.length, arguments[1], false);
   }
 });
+
 },{"./_array-reduce":27,"./_export":37,"./_strict-method":59}],75:[function(_dereq_,module,exports){
 'use strict';
-var $export = _dereq_('./_export')
-  , $some   = _dereq_('./_array-methods')(3);
+var $export = _dereq_('./_export');
+var $some = _dereq_('./_array-methods')(3);
 
 $export($export.P + $export.F * !_dereq_('./_strict-method')([].some, true), 'Array', {
   // 22.1.3.23 / 15.4.4.17 Array.prototype.some(callbackfn [, thisArg])
-  some: function some(callbackfn /* , thisArg */){
+  some: function some(callbackfn /* , thisArg */) {
     return $some(this, callbackfn, arguments[1]);
   }
 });
+
 },{"./_array-methods":26,"./_export":37,"./_strict-method":59}],76:[function(_dereq_,module,exports){
 // 19.1.3.1 Object.assign(target, source)
 var $export = _dereq_('./_export');
 
-$export($export.S + $export.F, 'Object', {assign: _dereq_('./_object-assign')});
+$export($export.S + $export.F, 'Object', { assign: _dereq_('./_object-assign') });
+
 },{"./_export":37,"./_object-assign":47}],77:[function(_dereq_,module,exports){
-var $export = _dereq_('./_export')
+var $export = _dereq_('./_export');
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-$export($export.S, 'Object', {create: _dereq_('./_object-create')});
+$export($export.S, 'Object', { create: _dereq_('./_object-create') });
+
 },{"./_export":37,"./_object-create":48}],78:[function(_dereq_,module,exports){
 var $export = _dereq_('./_export');
 // 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
-$export($export.S + $export.F * !_dereq_('./_descriptors'), 'Object', {defineProperty: _dereq_('./_object-dp').f});
+$export($export.S + $export.F * !_dereq_('./_descriptors'), 'Object', { defineProperty: _dereq_('./_object-dp').f });
+
 },{"./_descriptors":34,"./_export":37,"./_object-dp":49}],79:[function(_dereq_,module,exports){
 // 19.1.2.14 Object.keys(O)
-var toObject = _dereq_('./_to-object')
-  , $keys    = _dereq_('./_object-keys');
+var toObject = _dereq_('./_to-object');
+var $keys = _dereq_('./_object-keys');
 
-_dereq_('./_object-sap')('keys', function(){
-  return function keys(it){
+_dereq_('./_object-sap')('keys', function () {
+  return function keys(it) {
     return $keys(toObject(it));
   };
 });
+
 },{"./_object-keys":53,"./_object-sap":55,"./_to-object":64}],80:[function(_dereq_,module,exports){
 'use strict';
 
@@ -11968,7 +12026,7 @@ module.exports = function forEach (obj, fn, ctx) {
 },{}],100:[function(_dereq_,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
-  var eLen = nBytes * 8 - mLen - 1
+  var eLen = (nBytes * 8) - mLen - 1
   var eMax = (1 << eLen) - 1
   var eBias = eMax >> 1
   var nBits = -7
@@ -11981,12 +12039,12 @@ exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   e = s & ((1 << (-nBits)) - 1)
   s >>= (-nBits)
   nBits += eLen
-  for (; nBits > 0; e = e * 256 + buffer[offset + i], i += d, nBits -= 8) {}
+  for (; nBits > 0; e = (e * 256) + buffer[offset + i], i += d, nBits -= 8) {}
 
   m = e & ((1 << (-nBits)) - 1)
   e >>= (-nBits)
   nBits += mLen
-  for (; nBits > 0; m = m * 256 + buffer[offset + i], i += d, nBits -= 8) {}
+  for (; nBits > 0; m = (m * 256) + buffer[offset + i], i += d, nBits -= 8) {}
 
   if (e === 0) {
     e = 1 - eBias
@@ -12001,7 +12059,7 @@ exports.read = function (buffer, offset, isLE, mLen, nBytes) {
 
 exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   var e, m, c
-  var eLen = nBytes * 8 - mLen - 1
+  var eLen = (nBytes * 8) - mLen - 1
   var eMax = (1 << eLen) - 1
   var eBias = eMax >> 1
   var rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0)
@@ -12034,7 +12092,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
       m = 0
       e = eMax
     } else if (e + eBias >= 1) {
-      m = (value * c - 1) * Math.pow(2, mLen)
+      m = ((value * c) - 1) * Math.pow(2, mLen)
       e = e + eBias
     } else {
       m = value * Math.pow(2, eBias - 1) * Math.pow(2, mLen)
@@ -15153,10 +15211,8 @@ module.exports = extend
 
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 
-function extend() {
-    var target = {}
-
-    for (var i = 0; i < arguments.length; i++) {
+function extend(target) {
+    for (var i = 1; i < arguments.length; i++) {
         var source = arguments[i]
 
         for (var key in source) {
@@ -15171,3 +15227,4 @@ function extend() {
 
 },{}]},{},[1])(1)
 });
+
