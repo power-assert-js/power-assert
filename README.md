@@ -555,6 +555,7 @@ SUPPORTED FRAMEWORKS
 
 ### FRAMEWORKS KNOWN TO WORK
 
+* [Jest](https://facebook.github.io/jest/) with Babel
 * [Karma](https://karma-runner.github.io/) with Mocha
 * [testem](https://github.com/testem/testem) with Mocha
 * [QUnit](https://qunitjs.com/)
