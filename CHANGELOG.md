@@ -1,3 +1,11 @@
+## [1.5.0](https://github.com/power-assert-js/power-assert/releases/tag/v1.5.0) (2018-03-30)
+
+
+#### Features
+
+  * [support "Strict mode" introduced in Node9](https://github.com/power-assert-js/power-assert/pull/104)
+
+
 ### [1.4.4](https://github.com/power-assert-js/power-assert/releases/tag/v1.4.4) (2017-06-10)
 
 
