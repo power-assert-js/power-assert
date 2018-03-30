@@ -87,6 +87,8 @@ power-assert is fully compatible with [assert](https://nodejs.org/api/assert.htm
 * [`assert.doesNotThrow(block, [message])`](https://nodejs.org/api/assert.html#assert_assert_doesnotthrow_block_error_message)
 * [`assert.ifError(value)`](https://nodejs.org/api/assert.html#assert_assert_iferror_value)
 
+Since version 1.5.0, power-assert supports ["strict mode"](https://nodejs.org/api/assert.html#assert_strict_mode) as well.
+
 power-assert provides an [API for customization](https://github.com/power-assert-js/power-assert#customization-api).
 
 * `assert.customize(options)`
