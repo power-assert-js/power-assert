@@ -4,21 +4,25 @@ matrix:
     - os: linux
       dist: trusty
       sudo: required
-      node_js: "4" # to be removed 2018-04-30
+      node_js: "4" # to be removed on 2018-04-30
     - os: linux
       dist: trusty
       sudo: required
-      node_js: "6" # to be removed "April 2019"
+      node_js: "6" # to be removed on "April 2019"
     - os: linux
       dist: trusty
       sudo: required
-      node_js: "8" # to be removed "December 2019"
-    - os: linux
-      dist: trusty
-      sudo: required
-      node_js: "9" # to be removed "June 2018"
+      node_js: "8" # to be removed on "December 2019"
     - os: osx
-      node_js: "8" # to be removed "December 2019"
+      node_js: "8" # to be removed on "December 2019"
+    - os: linux
+      dist: trusty
+      sudo: required
+      node_js: "9" # to be removed on "June 2018"
+    - os: linux
+      dist: trusty
+      sudo: required
+      node_js: "10" # to be removed on "April 2021"
 addons:
   chrome: stable
   firefox: latest
