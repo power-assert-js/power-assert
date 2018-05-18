@@ -4,10 +4,6 @@ matrix:
     - os: linux
       dist: trusty
       sudo: required
-      node_js: "4" # to be removed on 2018-04-30
-    - os: linux
-      dist: trusty
-      sudo: required
       node_js: "6" # to be removed on "April 2019"
     - os: linux
       dist: trusty
