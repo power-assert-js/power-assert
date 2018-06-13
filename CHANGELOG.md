@@ -1,3 +1,11 @@
+## [1.6.0](https://github.com/power-assert-js/power-assert/releases/tag/v1.6.0) (2018-06-14)
+
+
+#### Features
+
+  * [Support ES2018 syntax](https://github.com/power-assert-js/power-assert/pull/109)
+
+
 ## [1.5.0](https://github.com/power-assert-js/power-assert/releases/tag/v1.5.0) (2018-03-30)
 
 
