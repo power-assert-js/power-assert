@@ -3,7 +3,7 @@ if (typeof window === 'undefined') {
     var assert = require('../..');
 }
 
-describe('power-assert es6', function () {
+describe('power-assert on ES20xx syntax', function () {
     'use strict';
 
     function expectPowerAssertMessage (body, expectedLines) {
@@ -15,8 +15,7 @@ describe('power-assert es6', function () {
         }
     }
 
-    describe('ES6 features', () => {
-
+    describe('ES2015', () => {
         it('Destructuring and TemplateLiteral', () => {
             let [alice, bob] = [ { name: 'alice' }, { name: 'bob' } ];
             expectPowerAssertMessage (() => {
@@ -75,7 +74,7 @@ describe('power-assert es6', function () {
         });
     });
 
-    describe('ES2018 features', () => {
+    describe('ES2018', () => {
         it('Object Rest/Spread', () => {
             expectPowerAssertMessage (() => {
                 var o = { a: 1, b: 2 };
