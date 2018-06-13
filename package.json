@@ -59,7 +59,7 @@
     "babel-cli": "^6.0.0",
     "babel-register": "^6.0.0",
     "babel-plugin-espower": "^2.2.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.0.0",
     "babel-preset-env": "^1.7.0",
     "browserify": "^13.0.1",
     "derequire": "^2.0.3",
@@ -75,7 +75,8 @@
     "package-json-filterify": "^1.0.4",
     "qunit-tap": "^1.5.0",
     "qunitjs": "1.14.0",
-    "requirejs": "^2.2.0"
+    "requirejs": "^2.2.0",
+    "semver": "^5.5.0"
   },
   "files": [
     "CHANGELOG.md",
