@@ -14,6 +14,7 @@ require('babel-register')({
     only: /test\/tobe_instrumented/,
     plugins: [
         'transform-object-rest-spread',
-        ['babel-plugin-espower', { embedAst: true }]
+        // set `embedAst` to `false` to test embedded parser
+        ['babel-plugin-espower', { embedAst: false }]
     ]
 });
