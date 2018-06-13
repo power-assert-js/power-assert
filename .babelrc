@@ -1,8 +1,18 @@
 {
   "presets": [
-    "es2015"
+    ["env", {
+      "targets": {
+        "node": "current",
+        "browsers": [
+          ">0.25%",
+          "not ie 11",
+          "not op_mini all"
+        ]
+      }
+    }]
   ],
   "plugins": [
+    "transform-object-rest-spread",
     ["babel-plugin-espower", { "embedAst": true }]
   ]
 }
