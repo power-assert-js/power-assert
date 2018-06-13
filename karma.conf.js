@@ -19,7 +19,7 @@ module.exports = function (config) {
         reporters: ['dots'],
         port: 9876,
         colors: true,
-        browsers: ['PhantomJS', 'Chrome', 'Firefox'],
+        browsers: ['Chrome', 'Firefox'],
         singleRun: true
     });
 };
