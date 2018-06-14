@@ -78,13 +78,12 @@ describe('power-assert on ES20xx syntax', function () {
         it('Object Rest/Spread', () => {
             expectPowerAssertMessage (() => {
                 var o = { a: 1, b: 2 };
-                var obj = { ...o, c: 5 };
-                assert.deepStrictEqual(obj, { a: 1, b: 2, c: 3 });
+                assert.deepStrictEqual({ ...o, c: 5 }, { a: 1, b: 2, c: 3 });
             }, [
-                '  assert.deepStrictEqual(obj, { a: 1, b: 2, c: 3 })',
-                '                         |    |                    ',
-                '                         |    Object{a:1,b:2,c:3}  ',
-                '                         Object{a:1,b:2,c:5}       '
+                '  assert.deepStrictEqual({ ...o, c: 5 }, { a: 1, b: 2, c: 3 })',
+                '                         |               |                    ',
+                '                         |               Object{a:1,b:2,c:3}  ',
+                '                         Object{a:1,b:2,c:5}                  '
             ]);
         });
     });
