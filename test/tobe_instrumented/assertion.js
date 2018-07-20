@@ -21,9 +21,9 @@ describe('power-assert message', function () {
     });
 
 
-    it('assert(false);', function () {
+    it('assert(false, "assertion message");', function () {
         this.expectPowerAssertMessage(function () {
-            assert(false);
+            assert(false, "assertion message");
         }, [
         ]);
     });
