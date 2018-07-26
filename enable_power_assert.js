@@ -24,7 +24,7 @@ var babelOptions = {
 if (semver.lt(process.version, '8.0.0')) {
     babelOptions.plugins = [
         'babel-plugin-transform-object-rest-spread'
-    ].concat(babelOptions.plugins);
+    ].concat(babelOptions.plugins || []);
 } else {
     babelOptions.parserOpts = {
         plugins: ['objectRestSpread']
