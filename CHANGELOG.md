@@ -1,3 +1,11 @@
+### [1.6.1](https://github.com/power-assert-js/power-assert/releases/tag/v1.6.1) (2018-09-08)
+
+
+#### Bug Fixes
+
+* update [empower to 1.3.1](https://github.com/power-assert-js/empower/pull/29) to work well with Jest 
+
+
 ## [1.6.0](https://github.com/power-assert-js/power-assert/releases/tag/v1.6.0) (2018-06-14)
 
 
