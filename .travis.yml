@@ -14,10 +14,6 @@ matrix:
     - os: linux
       dist: trusty
       sudo: required
-      node_js: "9" # to be removed on "June 2018"
-    - os: linux
-      dist: trusty
-      sudo: required
       node_js: "10" # to be removed on "April 2021"
 addons:
   chrome: stable
