@@ -65,18 +65,18 @@
     "derequire": "^2.0.3",
     "dereserve": "^1.0.0",
     "expect.js": "^0.3.1",
-    "karma": "^2.0.0",
+    "karma": "^4.0.0",
     "karma-chrome-launcher": "^2.0.0",
     "karma-expect": "^1.1.2",
     "karma-firefox-launcher": "^1.0.0",
     "karma-mocha": "^1.0.0",
     "licensify": "^3.0.0",
-    "mocha": "^5.0.0",
+    "mocha": "^6.0.0",
     "package-json-filterify": "^1.0.4",
     "qunit-tap": "^1.5.0",
     "qunitjs": "1.14.0",
     "requirejs": "^2.2.0",
-    "semver": "^5.5.0"
+    "semver": "^6.0.0"
   },
   "files": [
     "CHANGELOG.md",
