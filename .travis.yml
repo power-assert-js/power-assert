@@ -4,7 +4,7 @@ matrix:
     - os: linux
       dist: trusty
       sudo: required
-      node_js: "6" # to be removed on "April 2019"
+      node_js: "6" # to be removed on "April 30, 2019"
     - os: linux
       dist: trusty
       sudo: required
@@ -15,6 +15,10 @@ matrix:
       dist: trusty
       sudo: required
       node_js: "10" # to be removed on "April 2021"
+    - os: linux
+      dist: trusty
+      sudo: required
+      node_js: "12" # to be removed on "April 2022"
 addons:
   chrome: stable
   firefox: latest
