@@ -5,7 +5,6 @@ Power Assert in JavaScript. Provides descriptive assertion messages through stan
 [![Build Status][travis-image]][travis-url]
 [![NPM package][npm-image]][npm-url]
 [![Bower package][bower-image]][bower-url]
-[![Dependency Status][depstat-image]][depstat-url]
 [![License][license-image]][license-url]
 
 
@@ -978,9 +977,6 @@ Have fun!
 
 [travis-url]: https://travis-ci.org/power-assert-js/power-assert
 [travis-image]: https://secure.travis-ci.org/power-assert-js/power-assert.svg?branch=master
-
-[depstat-url]: https://gemnasium.com/power-assert-js/power-assert
-[depstat-image]: https://gemnasium.com/power-assert-js/power-assert.svg
 
 [license-url]: https://github.com/power-assert-js/power-assert/blob/master/MIT-LICENSE.txt
 [license-image]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat
