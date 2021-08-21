@@ -400,7 +400,7 @@ define(defaultAssert, { '__esModule': true });
 defaultAssert['default'] = defaultAssert;
 module.exports = defaultAssert;
 
-},{"assert":7,"define-properties":126,"empower":134,"power-assert-formatter":174,"universal-deep-strict-equal":191,"xtend/mutable":197}],2:[function(_dereq_,module,exports){
+},{"assert":7,"define-properties":126,"empower":134,"power-assert-formatter":174,"universal-deep-strict-equal":191,"xtend/mutable":196}],2:[function(_dereq_,module,exports){
 module.exports = function(acorn) {
     switch (parseInt(acorn.version)) {
     case 2:
@@ -9418,7 +9418,7 @@ function numberIsNaN (obj) {
 }
 
 }).call(this)}).call(this,_dereq_("buffer").Buffer)
-},{"base64-js":12,"buffer":13,"ieee754":154}],14:[function(_dereq_,module,exports){
+},{"base64-js":12,"buffer":13,"ieee754":155}],14:[function(_dereq_,module,exports){
 'use strict';
 
 var GetIntrinsic = _dereq_('get-intrinsic');
@@ -9435,7 +9435,7 @@ module.exports = function callBoundIntrinsic(name, allowMissing) {
 	return intrinsic;
 };
 
-},{"./":15,"get-intrinsic":148}],15:[function(_dereq_,module,exports){
+},{"./":15,"get-intrinsic":149}],15:[function(_dereq_,module,exports){
 'use strict';
 
 var bind = _dereq_('function-bind');
@@ -9484,7 +9484,7 @@ if ($defineProperty) {
 	module.exports.apply = applyBind;
 }
 
-},{"function-bind":147,"get-intrinsic":148}],16:[function(_dereq_,module,exports){
+},{"function-bind":148,"get-intrinsic":149}],16:[function(_dereq_,module,exports){
 'use strict';
 module.exports.parse = parse;
 module.exports.generate = generate;
@@ -14215,6 +14215,23 @@ module.exports = function defaultOptions () {
 },{"core-js/library/fn/object/assign":26,"empower-core":129}],137:[function(_dereq_,module,exports){
 arguments[4][133][0].apply(exports,arguments)
 },{"core-js/library/fn/array/for-each":18,"core-js/library/fn/object/define-property":28,"core-js/library/fn/object/keys":29,"dup":133}],138:[function(_dereq_,module,exports){
+'use strict';
+
+var GetIntrinsic = _dereq_('get-intrinsic');
+
+var $gOPD = GetIntrinsic('%Object.getOwnPropertyDescriptor%');
+if ($gOPD) {
+	try {
+		$gOPD([], 'length');
+	} catch (e) {
+		// IE 8 has a broken gOPD
+		$gOPD = null;
+	}
+}
+
+module.exports = $gOPD;
+
+},{"get-intrinsic":149}],139:[function(_dereq_,module,exports){
 /**
  * espurify - Clone new AST without extra properties
  *
@@ -14238,7 +14255,7 @@ espurify.customize = createCloneFunction;
 espurify.cloneWithWhitelist = cloneWithWhitelist;
 module.exports = espurify;
 
-},{"./lib/clone-ast":140,"./lib/create-whitelist":141}],139:[function(_dereq_,module,exports){
+},{"./lib/clone-ast":141,"./lib/create-whitelist":142}],140:[function(_dereq_,module,exports){
 module.exports = {
   ArrayExpression: ['type', 'elements'],
   ArrayPattern: ['type', 'elements'],
@@ -14308,7 +14325,7 @@ module.exports = {
   YieldExpression: ['type', 'argument', 'delegate']
 };
 
-},{}],140:[function(_dereq_,module,exports){
+},{}],141:[function(_dereq_,module,exports){
 'use strict';
 
 var isArray = _dereq_('core-js/library/fn/array/is-array');
@@ -14394,7 +14411,7 @@ module.exports = function cloneWithWhitelist (astWhiteList) {
   return cloneRoot;
 };
 
-},{"core-js/library/fn/array/index-of":19,"core-js/library/fn/array/is-array":20,"core-js/library/fn/array/reduce":23,"core-js/library/fn/map":25,"core-js/library/fn/object/keys":29}],141:[function(_dereq_,module,exports){
+},{"core-js/library/fn/array/index-of":19,"core-js/library/fn/array/is-array":20,"core-js/library/fn/array/reduce":23,"core-js/library/fn/map":25,"core-js/library/fn/object/keys":29}],142:[function(_dereq_,module,exports){
 'use strict';
 
 var defaultProps = _dereq_('./ast-properties');
@@ -14413,7 +14430,7 @@ module.exports = function createWhitelist (options) {
   return result;
 };
 
-},{"./ast-properties":139,"core-js/library/fn/object/assign":26,"core-js/library/fn/object/keys":29}],142:[function(_dereq_,module,exports){
+},{"./ast-properties":140,"core-js/library/fn/object/assign":26,"core-js/library/fn/object/keys":29}],143:[function(_dereq_,module,exports){
 /*
   Copyright (C) 2012-2013 Yusuke Suzuki <utatane.tea@gmail.com>
   Copyright (C) 2012 Ariya Hidayat <ariya.hidayat@gmail.com>
@@ -15264,9 +15281,9 @@ module.exports = function createWhitelist (options) {
 }(exports));
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-},{"./package.json":143}],143:[function(_dereq_,module,exports){
+},{"./package.json":144}],144:[function(_dereq_,module,exports){
 module.exports={"name":"estraverse","version":"4.2.0"}
-},{}],144:[function(_dereq_,module,exports){
+},{}],145:[function(_dereq_,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -15765,7 +15782,7 @@ function eventTargetAgnosticAddListener(emitter, name, listener, flags) {
   }
 }
 
-},{}],145:[function(_dereq_,module,exports){
+},{}],146:[function(_dereq_,module,exports){
 
 var hasOwn = Object.prototype.hasOwnProperty;
 var toString = Object.prototype.toString;
@@ -15789,7 +15806,7 @@ module.exports = function forEach (obj, fn, ctx) {
 };
 
 
-},{}],146:[function(_dereq_,module,exports){
+},{}],147:[function(_dereq_,module,exports){
 'use strict';
 
 /* eslint no-invalid-this: 1 */
@@ -15843,14 +15860,14 @@ module.exports = function bind(that) {
     return bound;
 };
 
-},{}],147:[function(_dereq_,module,exports){
+},{}],148:[function(_dereq_,module,exports){
 'use strict';
 
 var implementation = _dereq_('./implementation');
 
 module.exports = Function.prototype.bind || implementation;
 
-},{"./implementation":146}],148:[function(_dereq_,module,exports){
+},{"./implementation":147}],149:[function(_dereq_,module,exports){
 'use strict';
 
 var undefined;
@@ -16181,7 +16198,7 @@ module.exports = function GetIntrinsic(name, allowMissing) {
 	return value;
 };
 
-},{"function-bind":147,"has":153,"has-symbols":149}],149:[function(_dereq_,module,exports){
+},{"function-bind":148,"has":154,"has-symbols":150}],150:[function(_dereq_,module,exports){
 'use strict';
 
 var origSymbol = typeof Symbol !== 'undefined' && Symbol;
@@ -16196,7 +16213,7 @@ module.exports = function hasNativeSymbols() {
 	return hasSymbolSham();
 };
 
-},{"./shams":150}],150:[function(_dereq_,module,exports){
+},{"./shams":151}],151:[function(_dereq_,module,exports){
 'use strict';
 
 /* eslint complexity: [2, 18], max-statements: [2, 33] */
@@ -16240,9 +16257,9 @@ module.exports = function hasSymbols() {
 	return true;
 };
 
-},{}],151:[function(_dereq_,module,exports){
-arguments[4][150][0].apply(exports,arguments)
-},{"dup":150}],152:[function(_dereq_,module,exports){
+},{}],152:[function(_dereq_,module,exports){
+arguments[4][151][0].apply(exports,arguments)
+},{"dup":151}],153:[function(_dereq_,module,exports){
 'use strict';
 
 var hasSymbols = _dereq_('has-symbols/shams');
@@ -16251,14 +16268,14 @@ module.exports = function hasToStringTagShams() {
 	return hasSymbols() && !!Symbol.toStringTag;
 };
 
-},{"has-symbols/shams":151}],153:[function(_dereq_,module,exports){
+},{"has-symbols/shams":152}],154:[function(_dereq_,module,exports){
 'use strict';
 
 var bind = _dereq_('function-bind');
 
 module.exports = bind.call(Function.call, Object.prototype.hasOwnProperty);
 
-},{"function-bind":147}],154:[function(_dereq_,module,exports){
+},{"function-bind":148}],155:[function(_dereq_,module,exports){
 /*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
@@ -16345,7 +16362,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],155:[function(_dereq_,module,exports){
+},{}],156:[function(_dereq_,module,exports){
 
 var indexOf = [].indexOf;
 
@@ -16356,9 +16373,9 @@ module.exports = function(arr, obj){
   }
   return -1;
 };
-},{}],156:[function(_dereq_,module,exports){
+},{}],157:[function(_dereq_,module,exports){
 arguments[4][8][0].apply(exports,arguments)
-},{"dup":8}],157:[function(_dereq_,module,exports){
+},{"dup":8}],158:[function(_dereq_,module,exports){
 'use strict';
 
 var hasToStringTag = _dereq_('has-tostringtag/shams')();
@@ -16393,7 +16410,7 @@ isStandardArguments.isLegacyArguments = isLegacyArguments; // for tests
 
 module.exports = supportsStandardArguments ? isStandardArguments : isLegacyArguments;
 
-},{"call-bind/callBound":14,"has-tostringtag/shams":152}],158:[function(_dereq_,module,exports){
+},{"call-bind/callBound":14,"has-tostringtag/shams":153}],159:[function(_dereq_,module,exports){
 'use strict';
 
 var toStr = Object.prototype.toString;
@@ -16433,7 +16450,7 @@ module.exports = function isGeneratorFunction(fn) {
 	return getProto(fn) === GeneratorFunction;
 };
 
-},{"has-tostringtag/shams":152}],159:[function(_dereq_,module,exports){
+},{"has-tostringtag/shams":153}],160:[function(_dereq_,module,exports){
 (function (global){(function (){
 'use strict';
 
@@ -16496,24 +16513,7 @@ module.exports = function isTypedArray(value) {
 };
 
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"available-typed-arrays":11,"call-bind/callBound":14,"es-abstract/helpers/getOwnPropertyDescriptor":160,"foreach":145,"has-tostringtag/shams":152}],160:[function(_dereq_,module,exports){
-'use strict';
-
-var GetIntrinsic = _dereq_('get-intrinsic');
-
-var $gOPD = GetIntrinsic('%Object.getOwnPropertyDescriptor%');
-if ($gOPD) {
-	try {
-		$gOPD([], 'length');
-	} catch (e) {
-		// IE 8 has a broken gOPD
-		$gOPD = null;
-	}
-}
-
-module.exports = $gOPD;
-
-},{"get-intrinsic":148}],161:[function(_dereq_,module,exports){
+},{"available-typed-arrays":11,"call-bind/callBound":14,"es-abstract/helpers/getOwnPropertyDescriptor":138,"foreach":146,"has-tostringtag/shams":153}],161:[function(_dereq_,module,exports){
 /*
 object-assign
 (c) Sindre Sorhus
@@ -17042,7 +17042,7 @@ function offsetAndSlimDownTokens (tokens) {
     return result;
 }
 
-},{"acorn":5,"acorn-es7-plugin":2,"core-js/library/fn/object/assign":26,"espurify":138,"estraverse":142}],171:[function(_dereq_,module,exports){
+},{"acorn":5,"acorn-es7-plugin":2,"core-js/library/fn/object/assign":26,"espurify":139,"estraverse":143}],171:[function(_dereq_,module,exports){
 module.exports = _dereq_('./lib/context-traversal');
 
 },{"./lib/context-traversal":172}],172:[function(_dereq_,module,exports){
@@ -17124,7 +17124,7 @@ function createEsNode (path, currentNode, espathToValue, jsCode, tokens, parent)
 
 module.exports = ContextTraversal;
 
-},{"./location":173,"core-js/library/fn/array/for-each":18,"core-js/library/fn/array/reduce":23,"core-js/library/fn/object/assign":26,"estraverse":142,"events":144,"util":194}],173:[function(_dereq_,module,exports){
+},{"./location":173,"core-js/library/fn/array/for-each":18,"core-js/library/fn/array/reduce":23,"core-js/library/fn/object/assign":26,"estraverse":143,"events":145,"util":194}],173:[function(_dereq_,module,exports){
 'use strict';
 
 var syntax = _dereq_('estraverse').Syntax;
@@ -17206,7 +17206,7 @@ function searchToken(tokens, predicate) {
 
 module.exports = locationOf;
 
-},{"estraverse":142}],174:[function(_dereq_,module,exports){
+},{"estraverse":143}],174:[function(_dereq_,module,exports){
 /**
  * power-assert-formatter.js - Power Assert output formatter
  *
@@ -19083,7 +19083,7 @@ function objEquiv(a, b, strict, actualVisitedObjects) {
 
 module.exports = _deepEqual;
 
-},{"array-filter":6,"buffer":13,"indexof":155,"object-keys":163}],192:[function(_dereq_,module,exports){
+},{"array-filter":6,"buffer":13,"indexof":156,"object-keys":163}],192:[function(_dereq_,module,exports){
 arguments[4][9][0].apply(exports,arguments)
 },{"dup":9}],193:[function(_dereq_,module,exports){
 // Currently in sync with Node.js lib/internal/util/types.js
@@ -19420,7 +19420,7 @@ exports.isAnyArrayBuffer = isAnyArrayBuffer;
   });
 });
 
-},{"is-arguments":157,"is-generator-function":158,"is-typed-array":159,"which-typed-array":195}],194:[function(_dereq_,module,exports){
+},{"is-arguments":158,"is-generator-function":159,"is-typed-array":160,"which-typed-array":195}],194:[function(_dereq_,module,exports){
 (function (process){(function (){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -20139,7 +20139,7 @@ function callbackify(original) {
 exports.callbackify = callbackify;
 
 }).call(this)}).call(this,_dereq_('_process'))
-},{"./support/isBuffer":192,"./support/types":193,"_process":186,"inherits":156}],195:[function(_dereq_,module,exports){
+},{"./support/isBuffer":192,"./support/types":193,"_process":186,"inherits":157}],195:[function(_dereq_,module,exports){
 (function (global){(function (){
 'use strict';
 
@@ -20197,9 +20197,7 @@ module.exports = function whichTypedArray(value) {
 };
 
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"available-typed-arrays":11,"call-bind/callBound":14,"es-abstract/helpers/getOwnPropertyDescriptor":196,"foreach":145,"has-tostringtag/shams":152,"is-typed-array":159}],196:[function(_dereq_,module,exports){
-arguments[4][160][0].apply(exports,arguments)
-},{"dup":160,"get-intrinsic":148}],197:[function(_dereq_,module,exports){
+},{"available-typed-arrays":11,"call-bind/callBound":14,"es-abstract/helpers/getOwnPropertyDescriptor":138,"foreach":146,"has-tostringtag/shams":153,"is-typed-array":160}],196:[function(_dereq_,module,exports){
 module.exports = extend
 
 var hasOwnProperty = Object.prototype.hasOwnProperty;
