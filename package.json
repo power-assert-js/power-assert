@@ -56,11 +56,11 @@
     "xtend": "^4.0.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.0.0",
-    "babel-register": "^6.0.0",
-    "babel-plugin-espower": "^2.2.0",
-    "babel-plugin-transform-object-rest-spread": "^6.0.0",
-    "babel-preset-env": "^1.7.0",
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "@babel/register": "^7.15.3",
+    "babel-plugin-espower": "^3.0.1",
     "browserify": "^13.0.1",
     "derequire": "^2.0.3",
     "dereserve": "^1.0.0",
@@ -75,8 +75,7 @@
     "package-json-filterify": "^1.0.4",
     "qunit-tap": "^1.5.0",
     "qunitjs": "1.14.0",
-    "requirejs": "^2.2.0",
-    "semver": "^6.0.0"
+    "requirejs": "^2.2.0"
   },
   "files": [
     "CHANGELOG.md",

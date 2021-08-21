@@ -1,6 +1,6 @@
 {
   "presets": [
-    ["env", {
+    ["@babel/preset-env", {
       "targets": {
         "node": "current",
         "browsers": [
@@ -12,7 +12,6 @@
     }]
   ],
   "plugins": [
-    "transform-object-rest-spread",
     ["babel-plugin-espower", { "embedAst": true }]
   ]
 }

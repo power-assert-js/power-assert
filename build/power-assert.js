@@ -12,9 +12,9 @@
  * acorn:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   maintainers: Marijn Haverbeke <marijnh@gmail.com>, Ingvar Stepanyan <me@rreverser.com>, Adrian Heine <http://adrianheine.de>
- *   contributors: List of Acorn contributors. Updated before every release., Adrian Heine, Adrian Rakovsky, Alistair Braidwood, Amila Welihinda, Andres Suarez, Angelo, Aparajita Fishman, Arian Stolwijk, Artem Govorov, Boopesh Mahendran, Bradley Heinz, Brandon Mills, Charles Hughes, Charmander, Chris McKnight, Conrad Irwin, Daniel Tschinder, David Bonnet, Domenico Matteo, ehmicky, Eugene Obrezkov, Felix Maier, Forbes Lindesay, Gilad Peleg, impinball, Ingvar Stepanyan, Jackson Ray Hamilton, Jesse McCarthy, Jiaxing Wang, Joel Kemp, Johannes Herr, John-David Dalton, Jordan Klassen, Jürg Lehni, Kai Cataldo, keeyipchan, Keheliya Gallaba, Kevin Irish, Kevin Kwok, krator, laosb, Marek, Marijn Haverbeke, Martin Carlberg, Mat Garcia, Mathias Bynens, Mathieu 'p01' Henri, Matthew Bastien, Max Schaefer, Max Zerzouri, Mihai Bazon, Mike Rennie, naoh, Nicholas C. Zakas, Nick Fitzgerald, Olivier Thomann, Oskar Schöldström, Paul Harper, Peter Rust, PlNG, Prayag Verma, ReadmeCritic, r-e-d, Richard Gibson, Rich Harris, Sebastian McKenzie, Shahar Soel, Sheel Bedi, Simen Bekkhus, Teddy Katz, Timothy Gu, Toru Nagashima, Victor Homyakov, Wexpo Lyu, zsjforcn
+ *   contributors: List of Acorn contributors. Updated before every release., Adrian Heine, Adrian Rakovsky, Alistair Braidwood, Amila Welihinda, Andres Suarez, Angelo, Aparajita Fishman, Arian Stolwijk, Artem Govorov, Boopesh Mahendran, Bradley Heinz, Brandon Mills, Charles Hughes, Charmander, Chris McKnight, Conrad Irwin, Daniel Tschinder, David Bonnet, Domenico Matteo, ehmicky, Eugene Obrezkov, Felix Maier, Forbes Lindesay, Gilad Peleg, impinball, Ingvar Stepanyan, Jackson Ray Hamilton, Jesse McCarthy, Jiaxing Wang, Joel Kemp, Johannes Herr, John-David Dalton, Jordan Klassen, Jürg Lehni, Kai Cataldo, keeyipchan, Keheliya Gallaba, Kevin Irish, Kevin Kwok, krator, laosb, luckyzeng, Marek, Marijn Haverbeke, Martin Carlberg, Mat Garcia, Mathias Bynens, Mathieu 'p01' Henri, Matthew Bastien, Max Schaefer, Max Zerzouri, Mihai Bazon, Mike Rennie, naoh, Nicholas C. Zakas, Nick Fitzgerald, Olivier Thomann, Oskar Schöldström, Paul Harper, Peter Rust, PlNG, Prayag Verma, ReadmeCritic, r-e-d, Renée Kooi, Richard Gibson, Rich Harris, Sebastian McKenzie, Shahar Soel, Sheel Bedi, Simen Bekkhus, Teddy Katz, Timothy Gu, Toru Nagashima, Victor Homyakov, Wexpo Lyu, zsjforcn
  *   homepage: https://github.com/acornjs/acorn
- *   version: 5.7.2
+ *   version: 5.7.3
  *
  * acorn-es7-plugin:
  *   license: MIT (http://opensource.org/licenses/MIT)
@@ -55,7 +55,7 @@
  * core-js:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   homepage: https://github.com/zloirock/core-js#readme
- *   version: 2.5.7
+ *   version: 2.6.5
  *
  * define-properties:
  *   license: MIT (http://opensource.org/licenses/MIT)
@@ -111,7 +111,7 @@
  *   author: Feross Aboukhadijeh <feross@feross.org>
  *   contributors: Romain Beauxis <toots@rastageeks.org>
  *   homepage: https://github.com/feross/ieee754#readme
- *   version: 1.1.12
+ *   version: 1.1.13
  *
  * indexof:
  *   version: 0.0.1
@@ -132,7 +132,7 @@
  *   author: Jordan Harband <ljharb@gmail.com>
  *   contributors: Jordan Harband <ljharb@gmail.com>, Raynos <raynos2@gmail.com>, Nathan Rajlich <nathan@tootallnate.net>, Ivan Starkov <istarkov@gmail.com>, Gary Katsevman <git@gkatsev.com>
  *   homepage: https://github.com/ljharb/object-keys#readme
- *   version: 1.0.12
+ *   version: 1.1.1
  *
  * power-assert-context-formatter:
  *   license: MIT (http://opensource.org/licenses/MIT)
@@ -312,7 +312,7 @@ define(defaultAssert, { '__esModule': true });
 defaultAssert['default'] = defaultAssert;
 module.exports = defaultAssert;
 
-},{"assert":7,"define-properties":123,"empower":131,"power-assert-formatter":157,"universal-deep-strict-equal":174,"xtend/mutable":177}],2:[function(_dereq_,module,exports){
+},{"assert":7,"define-properties":123,"empower":131,"power-assert-formatter":158,"universal-deep-strict-equal":175,"xtend/mutable":178}],2:[function(_dereq_,module,exports){
 module.exports = function(acorn) {
     switch (parseInt(acorn.version)) {
     case 2:
@@ -3212,6 +3212,7 @@ pp$3.parseTemplate = function(ref) {
   var curElt = this.parseTemplateElement({isTagged: isTagged});
   node.quasis = [curElt];
   while (!curElt.tail) {
+    if (this$1.type === types.eof) { this$1.raise(this$1.pos, "Unterminated template literal"); }
     this$1.expect(types.dollarBraceL);
     node.expressions.push(this$1.parseExpression());
     this$1.expect(types.braceR);
@@ -3891,7 +3892,7 @@ types.star.updateContext = function(prevType) {
 
 types.name.updateContext = function(prevType) {
   var allowed = false;
-  if (this.options.ecmaVersion >= 6) {
+  if (this.options.ecmaVersion >= 6 && prevType !== types.dot) {
     if (this.value === "of" && !this.exprAllowed ||
         this.value === "yield" && this.inGeneratorContext())
       { allowed = true; }
@@ -6139,7 +6140,7 @@ pp$8.readWord = function() {
 // [dammit]: acorn_loose.js
 // [walk]: util/walk.js
 
-var version = "5.7.2";
+var version = "5.7.3";
 
 // The main exported interface (under `self.acorn` when in the
 // browser) is a `parse` function that takes a code string and
@@ -7351,7 +7352,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,_dereq_('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":9,"_process":169,"inherits":8}],11:[function(_dereq_,module,exports){
+},{"./support/isBuffer":9,"_process":170,"inherits":8}],11:[function(_dereq_,module,exports){
 'use strict'
 
 exports.byteLength = byteLength
@@ -7505,7 +7506,7 @@ function fromByteArray (uint8) {
 }
 
 },{}],12:[function(_dereq_,module,exports){
-(function (global){
+(function (global,Buffer){
 /*!
  * The buffer module from node.js, for the browser.
  *
@@ -9296,8 +9297,8 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"base64-js":11,"ieee754":142,"isarray":145}],13:[function(_dereq_,module,exports){
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},_dereq_("buffer").Buffer)
+},{"base64-js":11,"buffer":12,"ieee754":142,"isarray":145}],13:[function(_dereq_,module,exports){
 'use strict';
 module.exports.parse = parse;
 module.exports.generate = generate;
@@ -9860,7 +9861,7 @@ module.exports = function (NAME, wrapper, methods, common, IS_MAP, IS_WEAK) {
 };
 
 },{"./_an-instance":30,"./_array-methods":34,"./_descriptors":46,"./_export":49,"./_fails":51,"./_for-of":52,"./_global":53,"./_hide":55,"./_is-object":61,"./_meta":69,"./_object-dp":72,"./_redefine-all":81,"./_set-to-string-tag":86}],43:[function(_dereq_,module,exports){
-var core = module.exports = { version: '2.5.7' };
+var core = module.exports = { version: '2.6.5' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
 },{}],44:[function(_dereq_,module,exports){
@@ -10548,7 +10549,7 @@ var store = global[SHARED] || (global[SHARED] = {});
 })('versions', []).push({
   version: core.version,
   mode: _dereq_('./_library') ? 'pure' : 'global',
-  copyright: '© 2018 Denis Pushkarev (zloirock.ru)'
+  copyright: '© 2019 Denis Pushkarev (zloirock.ru)'
 });
 
 },{"./_core":43,"./_global":53,"./_library":68}],89:[function(_dereq_,module,exports){
@@ -11000,7 +11001,7 @@ defineProperties.supportsDescriptors = !!supportsDescriptors;
 
 module.exports = defineProperties;
 
-},{"object-keys":146}],124:[function(_dereq_,module,exports){
+},{"object-keys":147}],124:[function(_dereq_,module,exports){
 /**
  * Diff Match and Patch
  * Copyright 2018 The diff-match-patch Authors.
@@ -15492,136 +15493,151 @@ module.exports = Array.isArray || function (arr) {
 },{}],146:[function(_dereq_,module,exports){
 'use strict';
 
-// modified from https://github.com/es-shims/es5-shim
-var has = Object.prototype.hasOwnProperty;
-var toStr = Object.prototype.toString;
-var slice = Array.prototype.slice;
-var isArgs = _dereq_('./isArguments');
-var isEnumerable = Object.prototype.propertyIsEnumerable;
-var hasDontEnumBug = !isEnumerable.call({ toString: null }, 'toString');
-var hasProtoEnumBug = isEnumerable.call(function () {}, 'prototype');
-var dontEnums = [
-	'toString',
-	'toLocaleString',
-	'valueOf',
-	'hasOwnProperty',
-	'isPrototypeOf',
-	'propertyIsEnumerable',
-	'constructor'
-];
-var equalsConstructorPrototype = function (o) {
-	var ctor = o.constructor;
-	return ctor && ctor.prototype === o;
-};
-var excludedKeys = {
-	$applicationCache: true,
-	$console: true,
-	$external: true,
-	$frame: true,
-	$frameElement: true,
-	$frames: true,
-	$innerHeight: true,
-	$innerWidth: true,
-	$outerHeight: true,
-	$outerWidth: true,
-	$pageXOffset: true,
-	$pageYOffset: true,
-	$parent: true,
-	$scrollLeft: true,
-	$scrollTop: true,
-	$scrollX: true,
-	$scrollY: true,
-	$self: true,
-	$webkitIndexedDB: true,
-	$webkitStorageInfo: true,
-	$window: true
-};
-var hasAutomationEqualityBug = (function () {
-	/* global window */
-	if (typeof window === 'undefined') { return false; }
-	for (var k in window) {
+var keysShim;
+if (!Object.keys) {
+	// modified from https://github.com/es-shims/es5-shim
+	var has = Object.prototype.hasOwnProperty;
+	var toStr = Object.prototype.toString;
+	var isArgs = _dereq_('./isArguments'); // eslint-disable-line global-require
+	var isEnumerable = Object.prototype.propertyIsEnumerable;
+	var hasDontEnumBug = !isEnumerable.call({ toString: null }, 'toString');
+	var hasProtoEnumBug = isEnumerable.call(function () {}, 'prototype');
+	var dontEnums = [
+		'toString',
+		'toLocaleString',
+		'valueOf',
+		'hasOwnProperty',
+		'isPrototypeOf',
+		'propertyIsEnumerable',
+		'constructor'
+	];
+	var equalsConstructorPrototype = function (o) {
+		var ctor = o.constructor;
+		return ctor && ctor.prototype === o;
+	};
+	var excludedKeys = {
+		$applicationCache: true,
+		$console: true,
+		$external: true,
+		$frame: true,
+		$frameElement: true,
+		$frames: true,
+		$innerHeight: true,
+		$innerWidth: true,
+		$onmozfullscreenchange: true,
+		$onmozfullscreenerror: true,
+		$outerHeight: true,
+		$outerWidth: true,
+		$pageXOffset: true,
+		$pageYOffset: true,
+		$parent: true,
+		$scrollLeft: true,
+		$scrollTop: true,
+		$scrollX: true,
+		$scrollY: true,
+		$self: true,
+		$webkitIndexedDB: true,
+		$webkitStorageInfo: true,
+		$window: true
+	};
+	var hasAutomationEqualityBug = (function () {
+		/* global window */
+		if (typeof window === 'undefined') { return false; }
+		for (var k in window) {
+			try {
+				if (!excludedKeys['$' + k] && has.call(window, k) && window[k] !== null && typeof window[k] === 'object') {
+					try {
+						equalsConstructorPrototype(window[k]);
+					} catch (e) {
+						return true;
+					}
+				}
+			} catch (e) {
+				return true;
+			}
+		}
+		return false;
+	}());
+	var equalsConstructorPrototypeIfNotBuggy = function (o) {
+		/* global window */
+		if (typeof window === 'undefined' || !hasAutomationEqualityBug) {
+			return equalsConstructorPrototype(o);
+		}
 		try {
-			if (!excludedKeys['$' + k] && has.call(window, k) && window[k] !== null && typeof window[k] === 'object') {
-				try {
-					equalsConstructorPrototype(window[k]);
-				} catch (e) {
-					return true;
+			return equalsConstructorPrototype(o);
+		} catch (e) {
+			return false;
+		}
+	};
+
+	keysShim = function keys(object) {
+		var isObject = object !== null && typeof object === 'object';
+		var isFunction = toStr.call(object) === '[object Function]';
+		var isArguments = isArgs(object);
+		var isString = isObject && toStr.call(object) === '[object String]';
+		var theKeys = [];
+
+		if (!isObject && !isFunction && !isArguments) {
+			throw new TypeError('Object.keys called on a non-object');
+		}
+
+		var skipProto = hasProtoEnumBug && isFunction;
+		if (isString && object.length > 0 && !has.call(object, 0)) {
+			for (var i = 0; i < object.length; ++i) {
+				theKeys.push(String(i));
+			}
+		}
+
+		if (isArguments && object.length > 0) {
+			for (var j = 0; j < object.length; ++j) {
+				theKeys.push(String(j));
+			}
+		} else {
+			for (var name in object) {
+				if (!(skipProto && name === 'prototype') && has.call(object, name)) {
+					theKeys.push(String(name));
 				}
 			}
-		} catch (e) {
-			return true;
 		}
-	}
-	return false;
-}());
-var equalsConstructorPrototypeIfNotBuggy = function (o) {
-	/* global window */
-	if (typeof window === 'undefined' || !hasAutomationEqualityBug) {
-		return equalsConstructorPrototype(o);
-	}
-	try {
-		return equalsConstructorPrototype(o);
-	} catch (e) {
-		return false;
-	}
-};
 
-var keysShim = function keys(object) {
-	var isObject = object !== null && typeof object === 'object';
-	var isFunction = toStr.call(object) === '[object Function]';
-	var isArguments = isArgs(object);
-	var isString = isObject && toStr.call(object) === '[object String]';
-	var theKeys = [];
+		if (hasDontEnumBug) {
+			var skipConstructor = equalsConstructorPrototypeIfNotBuggy(object);
 
-	if (!isObject && !isFunction && !isArguments) {
-		throw new TypeError('Object.keys called on a non-object');
-	}
-
-	var skipProto = hasProtoEnumBug && isFunction;
-	if (isString && object.length > 0 && !has.call(object, 0)) {
-		for (var i = 0; i < object.length; ++i) {
-			theKeys.push(String(i));
-		}
-	}
-
-	if (isArguments && object.length > 0) {
-		for (var j = 0; j < object.length; ++j) {
-			theKeys.push(String(j));
-		}
-	} else {
-		for (var name in object) {
-			if (!(skipProto && name === 'prototype') && has.call(object, name)) {
-				theKeys.push(String(name));
+			for (var k = 0; k < dontEnums.length; ++k) {
+				if (!(skipConstructor && dontEnums[k] === 'constructor') && has.call(object, dontEnums[k])) {
+					theKeys.push(dontEnums[k]);
+				}
 			}
 		}
-	}
+		return theKeys;
+	};
+}
+module.exports = keysShim;
 
-	if (hasDontEnumBug) {
-		var skipConstructor = equalsConstructorPrototypeIfNotBuggy(object);
+},{"./isArguments":148}],147:[function(_dereq_,module,exports){
+'use strict';
 
-		for (var k = 0; k < dontEnums.length; ++k) {
-			if (!(skipConstructor && dontEnums[k] === 'constructor') && has.call(object, dontEnums[k])) {
-				theKeys.push(dontEnums[k]);
-			}
-		}
-	}
-	return theKeys;
-};
+var slice = Array.prototype.slice;
+var isArgs = _dereq_('./isArguments');
+
+var origKeys = Object.keys;
+var keysShim = origKeys ? function keys(o) { return origKeys(o); } : _dereq_('./implementation');
+
+var originalKeys = Object.keys;
 
 keysShim.shim = function shimObjectKeys() {
 	if (Object.keys) {
 		var keysWorksWithArguments = (function () {
 			// Safari 5.0 bug
-			return (Object.keys(arguments) || '').length === 2;
+			var args = Object.keys(arguments);
+			return args && args.length === arguments.length;
 		}(1, 2));
 		if (!keysWorksWithArguments) {
-			var originalKeys = Object.keys;
 			Object.keys = function keys(object) { // eslint-disable-line func-name-matching
 				if (isArgs(object)) {
 					return originalKeys(slice.call(object));
-				} else {
-					return originalKeys(object);
 				}
+				return originalKeys(object);
 			};
 		}
 	} else {
@@ -15632,7 +15648,7 @@ keysShim.shim = function shimObjectKeys() {
 
 module.exports = keysShim;
 
-},{"./isArguments":147}],147:[function(_dereq_,module,exports){
+},{"./implementation":146,"./isArguments":148}],148:[function(_dereq_,module,exports){
 'use strict';
 
 var toStr = Object.prototype.toString;
@@ -15651,10 +15667,10 @@ module.exports = function isArguments(value) {
 	return isArgs;
 };
 
-},{}],148:[function(_dereq_,module,exports){
+},{}],149:[function(_dereq_,module,exports){
 module.exports = _dereq_('./lib/create-formatter');
 
-},{"./lib/create-formatter":149}],149:[function(_dereq_,module,exports){
+},{"./lib/create-formatter":150}],150:[function(_dereq_,module,exports){
 'use strict';
 
 var assign = _dereq_('core-js/library/fn/object/assign');
@@ -15714,7 +15730,7 @@ function createFormatter (options) {
 createFormatter.StringWriter = StringWriter;
 module.exports = createFormatter;
 
-},{"./default-options":150,"./legacy-context-traversal":151,"./string-writer":152,"core-js/library/fn/array/reduce":20,"core-js/library/fn/object/assign":23,"power-assert-context-traversal":154}],150:[function(_dereq_,module,exports){
+},{"./default-options":151,"./legacy-context-traversal":152,"./string-writer":153,"core-js/library/fn/array/reduce":20,"core-js/library/fn/object/assign":23,"power-assert-context-traversal":155}],151:[function(_dereq_,module,exports){
 'use strict';
 
 module.exports = function defaultOptions () {
@@ -15727,7 +15743,7 @@ module.exports = function defaultOptions () {
     };
 };
 
-},{}],151:[function(_dereq_,module,exports){
+},{}],152:[function(_dereq_,module,exports){
 'use strict';
 
 var ContextTraversal = _dereq_('power-assert-context-traversal');
@@ -15761,7 +15777,7 @@ LegacyContextTraversal.prototype.emit = function () {
 
 module.exports = LegacyContextTraversal;
 
-},{"power-assert-context-traversal":154,"util":176}],152:[function(_dereq_,module,exports){
+},{"power-assert-context-traversal":155,"util":177}],153:[function(_dereq_,module,exports){
 'use strict';
 
 function spacerStr (len) {
@@ -15791,7 +15807,7 @@ StringWriter.prototype.toString = function () {
 
 module.exports = StringWriter;
 
-},{}],153:[function(_dereq_,module,exports){
+},{}],154:[function(_dereq_,module,exports){
 'use strict';
 
 var parser = _dereq_('acorn');
@@ -15911,10 +15927,10 @@ function offsetAndSlimDownTokens (tokens) {
     return result;
 }
 
-},{"acorn":5,"acorn-es7-plugin":2,"core-js/library/fn/object/assign":23,"espurify":135,"estraverse":139}],154:[function(_dereq_,module,exports){
+},{"acorn":5,"acorn-es7-plugin":2,"core-js/library/fn/object/assign":23,"espurify":135,"estraverse":139}],155:[function(_dereq_,module,exports){
 module.exports = _dereq_('./lib/context-traversal');
 
-},{"./lib/context-traversal":155}],155:[function(_dereq_,module,exports){
+},{"./lib/context-traversal":156}],156:[function(_dereq_,module,exports){
 'use strict';
 
 var EventEmitter = _dereq_('events').EventEmitter;
@@ -15993,7 +16009,7 @@ function createEsNode (path, currentNode, espathToValue, jsCode, tokens, parent)
 
 module.exports = ContextTraversal;
 
-},{"./location":156,"core-js/library/fn/array/for-each":15,"core-js/library/fn/array/reduce":20,"core-js/library/fn/object/assign":23,"estraverse":139,"events":141,"util":176}],156:[function(_dereq_,module,exports){
+},{"./location":157,"core-js/library/fn/array/for-each":15,"core-js/library/fn/array/reduce":20,"core-js/library/fn/object/assign":23,"estraverse":139,"events":141,"util":177}],157:[function(_dereq_,module,exports){
 'use strict';
 
 var syntax = _dereq_('estraverse').Syntax;
@@ -16075,7 +16091,7 @@ function searchToken(tokens, predicate) {
 
 module.exports = locationOf;
 
-},{"estraverse":139}],157:[function(_dereq_,module,exports){
+},{"estraverse":139}],158:[function(_dereq_,module,exports){
 /**
  * power-assert-formatter.js - Power Assert output formatter
  *
@@ -16089,7 +16105,7 @@ module.exports = locationOf;
 
 module.exports = _dereq_('./lib/create');
 
-},{"./lib/create":158}],158:[function(_dereq_,module,exports){
+},{"./lib/create":159}],159:[function(_dereq_,module,exports){
 'use strict';
 
 var createFormatter = _dereq_('power-assert-context-formatter');
@@ -16149,7 +16165,7 @@ create.renderers = {
 create.defaultOptions = defaultOptions;
 module.exports = create;
 
-},{"./default-options":159,"core-js/library/fn/array/map":18,"core-js/library/fn/object/assign":23,"power-assert-context-formatter":148,"power-assert-context-reducer-ast":153,"power-assert-renderer-assertion":160,"power-assert-renderer-comparison":162,"power-assert-renderer-diagram":165,"power-assert-renderer-file":167}],159:[function(_dereq_,module,exports){
+},{"./default-options":160,"core-js/library/fn/array/map":18,"core-js/library/fn/object/assign":23,"power-assert-context-formatter":149,"power-assert-context-reducer-ast":154,"power-assert-renderer-assertion":161,"power-assert-renderer-comparison":163,"power-assert-renderer-diagram":166,"power-assert-renderer-file":168}],160:[function(_dereq_,module,exports){
 'use strict';
 
 module.exports = function defaultOptions () {
@@ -16170,7 +16186,7 @@ module.exports = function defaultOptions () {
     };
 };
 
-},{}],160:[function(_dereq_,module,exports){
+},{}],161:[function(_dereq_,module,exports){
 'use strict';
 
 var BaseRenderer = _dereq_('power-assert-renderer-base');
@@ -16229,7 +16245,7 @@ function createRow (numCols, initial) {
 
 module.exports = AssertionRenderer;
 
-},{"power-assert-renderer-base":161,"power-assert-util-string-width":168,"util":176}],161:[function(_dereq_,module,exports){
+},{"power-assert-renderer-base":162,"power-assert-util-string-width":169,"util":177}],162:[function(_dereq_,module,exports){
 'use strict';
 
 function BaseRenderer () {
@@ -16271,7 +16287,7 @@ BaseRenderer.prototype.write = function (str) {
 
 module.exports = BaseRenderer;
 
-},{}],162:[function(_dereq_,module,exports){
+},{}],163:[function(_dereq_,module,exports){
 'use strict';
 
 var BaseRenderer = _dereq_('power-assert-renderer-base');
@@ -16388,7 +16404,7 @@ function isStringDiffTarget(pair) {
 ComparisonRenderer.udiff = udiff;
 module.exports = ComparisonRenderer;
 
-},{"./lib/default-options":163,"./lib/udiff":164,"core-js/library/fn/array/for-each":15,"core-js/library/fn/object/assign":23,"core-js/library/fn/object/keys":26,"power-assert-renderer-base":161,"stringifier":170,"type-name":173,"util":176}],163:[function(_dereq_,module,exports){
+},{"./lib/default-options":164,"./lib/udiff":165,"core-js/library/fn/array/for-each":15,"core-js/library/fn/object/assign":23,"core-js/library/fn/object/keys":26,"power-assert-renderer-base":162,"stringifier":171,"type-name":174,"util":177}],164:[function(_dereq_,module,exports){
 'use strict';
 
 module.exports = function defaultOptions () {
@@ -16403,7 +16419,7 @@ module.exports = function defaultOptions () {
     };
 };
 
-},{}],164:[function(_dereq_,module,exports){
+},{}],165:[function(_dereq_,module,exports){
 'use strict';
 
 var DiffMatchPatch = _dereq_('diff-match-patch');
@@ -16443,7 +16459,7 @@ function udiffChars (text1, text2) {
 
 module.exports = udiff;
 
-},{"diff-match-patch":124}],165:[function(_dereq_,module,exports){
+},{"diff-match-patch":124}],166:[function(_dereq_,module,exports){
 'use strict';
 
 var BaseRenderer = _dereq_('power-assert-renderer-base');
@@ -16572,7 +16588,7 @@ function rightToLeft (a, b) {
 
 module.exports = DiagramRenderer;
 
-},{"./lib/default-options":166,"core-js/library/fn/array/for-each":15,"core-js/library/fn/object/assign":23,"power-assert-renderer-base":161,"power-assert-util-string-width":168,"stringifier":170,"util":176}],166:[function(_dereq_,module,exports){
+},{"./lib/default-options":167,"core-js/library/fn/array/for-each":15,"core-js/library/fn/object/assign":23,"power-assert-renderer-base":162,"power-assert-util-string-width":169,"stringifier":171,"util":177}],167:[function(_dereq_,module,exports){
 'use strict';
 
 module.exports = function defaultOptions () {
@@ -16587,7 +16603,7 @@ module.exports = function defaultOptions () {
     };
 };
 
-},{}],167:[function(_dereq_,module,exports){
+},{}],168:[function(_dereq_,module,exports){
 'use strict';
 
 var BaseRenderer = _dereq_('power-assert-renderer-base');
@@ -16613,7 +16629,7 @@ FileRenderer.prototype.onEnd = function () {
 
 module.exports = FileRenderer;
 
-},{"power-assert-renderer-base":161,"util":176}],168:[function(_dereq_,module,exports){
+},{"power-assert-renderer-base":162,"util":177}],169:[function(_dereq_,module,exports){
 'use strict';
 
 var eaw = _dereq_('eastasianwidth');
@@ -16645,7 +16661,7 @@ function stringWidth (ambiguousCharWidth) {
 module.exports = stringWidth(2);
 module.exports.narrow = stringWidth(1);
 
-},{"eastasianwidth":125}],169:[function(_dereq_,module,exports){
+},{"eastasianwidth":125}],170:[function(_dereq_,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -16831,7 +16847,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],170:[function(_dereq_,module,exports){
+},{}],171:[function(_dereq_,module,exports){
 /**
  * stringifier
  * 
@@ -16945,7 +16961,7 @@ stringifier.defaultOptions = defaultOptions;
 stringifier.defaultHandlers = defaultHandlers;
 module.exports = stringifier;
 
-},{"./strategies":171,"core-js/library/fn/object/assign":23,"core-js/library/fn/string/ends-with":27,"traverse":172,"type-name":173}],171:[function(_dereq_,module,exports){
+},{"./strategies":172,"core-js/library/fn/object/assign":23,"core-js/library/fn/string/ends-with":27,"traverse":173,"type-name":174}],172:[function(_dereq_,module,exports){
 'use strict';
 
 var typeName = _dereq_('type-name');
@@ -17360,7 +17376,7 @@ module.exports = {
     }
 };
 
-},{"core-js/library/fn/array/filter":14,"core-js/library/fn/array/for-each":15,"core-js/library/fn/array/index-of":16,"core-js/library/fn/array/reduce-right":19,"type-name":173}],172:[function(_dereq_,module,exports){
+},{"core-js/library/fn/array/filter":14,"core-js/library/fn/array/for-each":15,"core-js/library/fn/array/index-of":16,"core-js/library/fn/array/reduce-right":19,"type-name":174}],173:[function(_dereq_,module,exports){
 var traverse = module.exports = function (obj) {
     return new Traverse(obj);
 };
@@ -17676,7 +17692,7 @@ var hasOwnProperty = Object.hasOwnProperty || function (obj, key) {
     return key in obj;
 };
 
-},{}],173:[function(_dereq_,module,exports){
+},{}],174:[function(_dereq_,module,exports){
 /**
  * type-name - Just a reasonable typeof
  *
@@ -17720,7 +17736,7 @@ function typeName (val) {
 
 module.exports = typeName;
 
-},{}],174:[function(_dereq_,module,exports){
+},{}],175:[function(_dereq_,module,exports){
 // port of https://github.com/nodejs/node/blob/v6.3.0/lib/assert.js#L145-L248
 
 // http://wiki.commonjs.org/wiki/Unit_Testing/1.0
@@ -17952,11 +17968,11 @@ function objEquiv(a, b, strict, actualVisitedObjects) {
 
 module.exports = _deepEqual;
 
-},{"array-filter":6,"buffer":12,"indexof":143,"object-keys":146}],175:[function(_dereq_,module,exports){
+},{"array-filter":6,"buffer":12,"indexof":143,"object-keys":147}],176:[function(_dereq_,module,exports){
 arguments[4][9][0].apply(exports,arguments)
-},{"dup":9}],176:[function(_dereq_,module,exports){
+},{"dup":9}],177:[function(_dereq_,module,exports){
 arguments[4][10][0].apply(exports,arguments)
-},{"./support/isBuffer":175,"_process":169,"dup":10,"inherits":144}],177:[function(_dereq_,module,exports){
+},{"./support/isBuffer":176,"_process":170,"dup":10,"inherits":144}],178:[function(_dereq_,module,exports){
 module.exports = extend
 
 var hasOwnProperty = Object.prototype.hasOwnProperty;
