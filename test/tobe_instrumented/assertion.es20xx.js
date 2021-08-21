@@ -81,8 +81,9 @@ describe('power-assert on ES20xx syntax', function () {
                 assert.deepStrictEqual({ ...o, c: 5 }, { a: 1, b: 2, c: 3 });
             }, [
                 '  assert.deepStrictEqual({ ...o, c: 5 }, { a: 1, b: 2, c: 3 })',
-                '                         |               |                    ',
-                '                         |               Object{a:1,b:2,c:3}  ',
+                '                         |    |          |                    ',
+                '                         |    |          Object{a:1,b:2,c:3}  ',
+                '                         |    Object{a:1,b:2}                 ',
                 '                         Object{a:1,b:2,c:5}                  '
             ]);
         });

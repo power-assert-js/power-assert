@@ -1,9 +1,8 @@
-var semver = require('semver');
 var babelOptions = {
     babelrc: false,
     cache: false,
     presets: [
-        ['env', {
+        ['@babel/preset-env', {
             targets: {
                 node: "current",
                 browsers: [
@@ -11,24 +10,14 @@ var babelOptions = {
                     "not ie 11",
                     "not op_mini all"
                 ]
-            }
+            },
         }]
     ],
-    only: /test\/tobe_instrumented/,
+    only: [/test\/tobe_instrumented/],
     plugins: [
         // set `embedAst` to `false` to test embedded parser
         ['babel-plugin-espower', { embedAst: false }]
     ]
 };
 
-if (semver.lt(process.version, '8.0.0')) {
-    babelOptions.plugins = [
-        'babel-plugin-transform-object-rest-spread'
-    ].concat(babelOptions.plugins || []);
-} else {
-    babelOptions.parserOpts = {
-        plugins: ['objectRestSpread']
-    };
-}
-
-require('babel-register')(babelOptions);
+require('@babel/register')(babelOptions);
