@@ -74,8 +74,8 @@ power-assert enhances these assert functions by [espower](https://github.com/pow
 * [`assert.notEqual(actual, expected, [message])`](https://nodejs.org/api/assert.html#assert_assert_notequal_actual_expected_message)
 * [`assert.strictEqual(actual, expected, [message])`](https://nodejs.org/api/assert.html#assert_assert_strictequal_actual_expected_message)
 * [`assert.notStrictEqual(actual, expected, [message])`](https://nodejs.org/api/assert.html#assert_assert_notstrictequal_actual_expected_message)
-* [`assert.deepEqual(actual, expected, [message])`](https://nodejs.org/api/assert.html#assert_assert_deepequal_actual_expected_message)
-* [`assert.notDeepEqual(actual, expected, [message])`](https://nodejs.org/api/assert.html#assert_assert_notdeepequal_actual_expected_message)
+* [`assert.deepEqual(actual, expected, [message])`](https://nodejs.org/api/assert.html#assertdeepequalactual-expected-message)
+* [`assert.notDeepEqual(actual, expected, [message])`](https://nodejs.org/api/assert.html#assertnotdeepequalactual-expected-message)
 * [`assert.deepStrictEqual(actual, expected, [message])`](https://nodejs.org/api/assert.html#assert_assert_deepstrictequal_actual_expected_message)
 * [`assert.notDeepStrictEqual(actual, expected, [message])`](https://nodejs.org/api/assert.html#assert_assert_notdeepstrictequal_actual_expected_message)
 
